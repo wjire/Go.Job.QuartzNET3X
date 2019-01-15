@@ -1,8 +1,7 @@
-﻿using System;
+﻿using System.Collections.Specialized;
+using System.Threading.Tasks;
 using Quartz;
 using Quartz.Impl;
-using System.Collections.Specialized;
-using System.Threading.Tasks;
 
 namespace Go.Job.Service
 {
@@ -23,6 +22,7 @@ namespace Go.Job.Service
 
         public async Task CreateSchedulerAndStart()
         {
+
             if (_properties == null)
             {
                 JobPoolManager.Scheduler = await new StdSchedulerFactory().GetScheduler();

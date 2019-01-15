@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using Go.Job.Model;
 using SqlSugar;
-using System.Collections.Generic;
 
 namespace Go.Job.Db
 {
