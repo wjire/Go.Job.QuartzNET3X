@@ -1,10 +1,10 @@
-﻿using Go.Job.Model;
-using Job.Service.Model;
-using Quartz;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
+using Go.Job.Model;
+using Job.Service.Model;
+using Quartz;
 
 namespace Go.Job.Service
 {
@@ -68,13 +68,15 @@ namespace Go.Job.Service
 
                     if (!string.IsNullOrWhiteSpace(jobRuntimeInfo.JobInfo.Cron))
                     {
-                        tiggerBuilder.WithCronSchedule(jobRuntimeInfo.JobInfo.Cron);
+                        //错过的不管了,剩下的按正常执行
+                        tiggerBuilder.WithCronSchedule(jobRuntimeInfo.JobInfo.Cron, c => c.WithMisfireHandlingInstructionDoNothing());
                     }
                     else
                     {
                         tiggerBuilder.WithSimpleSchedule(simple =>
                             {
-                                simple.WithIntervalInSeconds(jobRuntimeInfo.JobInfo.Second).RepeatForever();
+                                //立刻执行一次,使用总次数
+                                simple.WithIntervalInSeconds(jobRuntimeInfo.JobInfo.Second).RepeatForever().WithMisfireHandlingInstructionNowWithExistingCount();
                             });
                     }
 
@@ -109,10 +111,6 @@ namespace Go.Job.Service
         /// <returns></returns>
         internal JobRuntimeInfo GetJobFromPool(int jobId)
         {
-            if (!JobRuntimePool.ContainsKey(jobId))
-            {
-                return null;
-            }
             lock (_lock)
             {
                 if (!JobRuntimePool.ContainsKey(jobId))
@@ -155,11 +153,6 @@ namespace Go.Job.Service
         /// <param name="jobId"></param>
         public bool Pause(int jobId)
         {
-            if (!JobRuntimePool.ContainsKey(jobId))
-            {
-                return false;
-            }
-
             lock (_lock)
             {
                 if (!JobRuntimePool.ContainsKey(jobId))
@@ -184,11 +177,6 @@ namespace Go.Job.Service
         /// <param name="jobId"></param>
         public bool Resume(int jobId)
         {
-            if (!JobRuntimePool.ContainsKey(jobId))
-            {
-                return false;
-            }
-
             lock (_lock)
             {
                 if (!JobRuntimePool.ContainsKey(jobId))
@@ -223,32 +211,31 @@ namespace Go.Job.Service
         /// <returns></returns>
         public bool Remove(int jobId)
         {
-            if (!JobRuntimePool.ContainsKey(jobId))
-            {
-                return false;
-            }
-
             lock (_lock)
             {
-                if (!JobRuntimePool.ContainsKey(jobId))
+                try
                 {
-                    return false;
+                    if (JobRuntimePool.ContainsKey(jobId))
+                    {
+                        JobRuntimePool.TryGetValue(jobId, out JobRuntimeInfo jobRuntimeInfo);
+                        if (jobRuntimeInfo != null)
+                        {
+                            TriggerKey triggerKey = new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
+                            Scheduler.PauseTrigger(triggerKey).Wait();
+                            Scheduler.UnscheduleJob(triggerKey).Wait();
+                            Scheduler.DeleteJob(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName));
+                            JobRuntimePool.TryRemove(jobId, out jobRuntimeInfo);
+                            AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
+                            return true;
+                        }
+                        //TODO:记录日志
+                    }
                 }
-
-                JobRuntimePool.TryGetValue(jobId, out JobRuntimeInfo jobRuntimeInfo);
-                if (jobRuntimeInfo == null)
+                catch (Exception e)
                 {
-                    return false;
+                    Console.WriteLine(e);
                 }
-
-                TriggerKey tiggerKey = new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
-                Scheduler.PauseTrigger(tiggerKey);
-                Scheduler.UnscheduleJob(tiggerKey);
-                Scheduler.DeleteJob(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName));
-                JobRuntimePool.TryRemove(jobId, out jobRuntimeInfo);
-                AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
-                //TODO:记录日志
-                return true;
+                return false;
             }
         }
 
@@ -259,15 +246,9 @@ namespace Go.Job.Service
         /// <param name="jobInfo"></param>
         internal JobInfo AddJobRuntimeInfo(JobInfo jobInfo)
         {
-            JobRuntimeInfo jobRuntimeInfo = null;
-            if (JobRuntimePool.ContainsKey(jobInfo.Id))
-            {
-                jobRuntimeInfo = GetJobFromPool(jobInfo.Id);
-                return jobRuntimeInfo.JobInfo;
-            }
-
             lock (_lock)
             {
+                JobRuntimeInfo jobRuntimeInfo = null;
                 if (JobRuntimePool.ContainsKey(jobInfo.Id))
                 {
                     jobRuntimeInfo = GetJobFromPool(jobInfo.Id);
@@ -281,7 +262,7 @@ namespace Go.Job.Service
                     Job = job,
                     AppDomain = app,
                 };
-                var res = Instance.Add(jobInfo.Id, jobRuntimeInfo);
+                bool res = Instance.Add(jobInfo.Id, jobRuntimeInfo);
                 if (res == true)
                 {
                     jobInfo.State = 1;
