@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Go.Job.Db;
+﻿using Go.Job.Db;
 using Go.Job.Model;
 using Quartz;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Go.Job.Service
 {
@@ -31,8 +33,17 @@ namespace Go.Job.Service
                         //如果job池中有该job
                         else if (JobPoolManager.JobRuntimePool.ContainsKey(jobInfo.Id))
                         {
-                            //如果状态== 0 和 1 不管它,反正它都在job池了,肯定会执行.
-
+                            //如果状态== 0 和 1 .
+                            if (jobInfo.State == 0 || jobInfo.State == 1)
+                            {
+                                JobPoolManager.JobRuntimePool.TryRemove(jobInfo.Id, out var jobRuntimeInfo);
+                                if (jobRuntimeInfo != null)
+                                {
+                                    AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
+                                    JobInfo info = JobPoolManager.Instance.AddJobRuntimeInfo(jobInfo);
+                                    JobInfoDb.UpdateJobState(info);
+                                }
+                            }
                             if (jobInfo.State == 2)
                             {
                                 JobPoolManager.Instance.Pause(jobInfo.Id);
@@ -49,7 +60,12 @@ namespace Go.Job.Service
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
+                string path1 = @"C:\Users\gongwei.LONG\Desktop\exception.txt";
+                using (FileStream fs = new FileStream(path1, FileMode.Append, FileAccess.Write))
+                {
+                    byte[] bytes = Encoding.Default.GetBytes(e + Environment.NewLine);
+                    fs.Write(bytes, 0, bytes.Length);
+                }
             }
             return Task.FromResult(0);
         }

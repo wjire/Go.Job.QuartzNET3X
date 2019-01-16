@@ -37,8 +37,8 @@ namespace Go.Job.Web.Helper
                 if (dbRes > 0)
                 {
                     Scheduler.ResumeJob(new JobKey("ScanJob", "ScanJob"));
+                    runRes = true;
                 }
-                runRes = true;
             }
             catch (Exception e)
             {
@@ -72,8 +72,12 @@ namespace Go.Job.Web.Helper
                     {
                         //TODO:数据库修改失败,记录日志
                     }
+                    else
+                    {
+                        pauseRes = true;
+                    }
                 }
-                pauseRes = true;
+               
             }
             catch (Exception e)
             {
@@ -104,8 +108,12 @@ namespace Go.Job.Web.Helper
                     {
                         //TODO:数据库修改失败,记录日志
                     }
+                    else
+                    {
+                        resumeRes = true;
+                    }
                 }
-                resumeRes = true;
+
             }
             catch (Exception e)
             {
@@ -135,7 +143,6 @@ namespace Go.Job.Web.Helper
                     Scheduler.PauseTrigger(triggerKey);
                     Scheduler.UnscheduleJob(triggerKey);
                     Scheduler.DeleteJob(jobKey);
-
                     jobInfo.State = 3;
                     //修改数据库
                     var dbRes = JobInfoDb.UpdateJobState(jobInfo);
@@ -143,8 +150,11 @@ namespace Go.Job.Web.Helper
                     {
                         //TODO:数据库修改失败,记录日志
                     }
+                    else
+                    {
+                        removeRes = true;
+                    }
                 }
-                removeRes = true;
             }
             catch (Exception e)
             {
@@ -157,7 +167,33 @@ namespace Go.Job.Web.Helper
 
         public static bool Update(JobInfo jobInfo)
         {
-            return true;
+            var updateRes = false;
+            try
+            {
+                if (jobInfo.State != 3)
+                {
+                    var removeRes = Remove(jobInfo.Id);
+                    if (removeRes == false)
+                    {
+                        return false;
+                    }
+                }
+
+                var dbRes = JobInfoDb.UpdateJobInfo(jobInfo);
+                if (dbRes == 0)
+                {
+                    //TODO:数据库修改失败,记录日志
+                }
+                else
+                {
+                    updateRes = true;
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return updateRes;
         }
     }
 }

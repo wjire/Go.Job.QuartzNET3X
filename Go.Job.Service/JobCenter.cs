@@ -1,7 +1,7 @@
-﻿using Quartz;
+﻿using Job.Service.Model;
+using Quartz;
 using System;
 using System.Threading.Tasks;
-using Job.Service.Model;
 
 namespace Go.Job.Service
 {
@@ -16,7 +16,7 @@ namespace Go.Job.Service
                 JobRuntimeInfo jobRuntimeInfo = JobPoolManager.Instance.GetJobFromPool(jobId);
                 try
                 {
-                    jobRuntimeInfo.Job.Run();
+                    jobRuntimeInfo?.Job.Run();
                 }
                 catch (Exception ex)
                 {

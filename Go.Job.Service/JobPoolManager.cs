@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Go.Job.Model;
+using Job.Service.Model;
+using Quartz;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
-using Go.Job.Model;
-using Job.Service.Model;
-using Quartz;
 
 namespace Go.Job.Service
 {
@@ -54,6 +54,11 @@ namespace Go.Job.Service
                         return false;
                     }
 
+                    var existsedJobDetail = Scheduler.GetJobDetail(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName)).Result;
+                    if (existsedJobDetail != null)
+                    {
+                        return false;
+                    }
                     IDictionary<string, object> data = new Dictionary<string, object>()
                     {
                         ["JobId"] = jobId
@@ -90,6 +95,7 @@ namespace Go.Job.Service
                     }
 
                     ITrigger trigger = tiggerBuilder.Build();
+
                     Scheduler.ScheduleJob(jobDetail, trigger).Wait();
 
                     //TODO:记录日志
@@ -234,6 +240,7 @@ namespace Go.Job.Service
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+
                 }
                 return false;
             }

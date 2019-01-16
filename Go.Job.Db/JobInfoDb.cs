@@ -57,6 +57,25 @@ namespace Go.Job.Db
 
         }
 
+
+        public static int UpdateJobInfo(JobInfo jobInfo)
+        {
+            var res = 0;
+            try
+            {
+                using (SqlSugarClient db = new SqlSugarClient(config))
+                {
+                    res = db.Updateable(jobInfo).ExecuteCommand();
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return res;
+        }
+
+
         public static int UpdateJobState(JobInfo jobInfo)
         {
             var res = 0;
