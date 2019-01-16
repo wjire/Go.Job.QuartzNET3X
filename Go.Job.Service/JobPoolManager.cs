@@ -57,6 +57,7 @@ namespace Go.Job.Service
                     var existsedJobDetail = Scheduler.GetJobDetail(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName)).Result;
                     if (existsedJobDetail != null)
                     {
+                        //Scheduler.RescheduleJob(new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName));
                         return false;
                     }
                     IDictionary<string, object> data = new Dictionary<string, object>()
