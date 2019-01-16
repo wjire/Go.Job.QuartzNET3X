@@ -1,6 +1,6 @@
 ﻿using Go.Job.Db;
 using Go.Job.Model;
-using System;
+using Go.Job.Web.Helper;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -23,19 +23,19 @@ namespace Go.Job.Web.Controllers
 
         public ActionResult Run(int id)
         {
-            JobInfoDb.UpdateJobState(new JobInfo { Id = id, StartTime = DateTime.Now, State = 0 });
+            JobHelper.Run(id);
             return RedirectToAction("Index", "Job");
         }
 
         public ActionResult Pause(int id)
         {
-            JobInfoDb.UpdateJobState(new JobInfo { Id = id, State = 2 });
+            JobHelper.Pause(id);
             return RedirectToAction("Index", "Job");
         }
 
         public ActionResult Resume(int id)
         {
-            JobInfoDb.UpdateJobState(new JobInfo { Id = id, State = 1 });
+            JobHelper.Resume(id);
             return RedirectToAction("Index", "Job");
         }
 
@@ -49,14 +49,14 @@ namespace Go.Job.Web.Controllers
 
         public ActionResult UpdateJob(JobInfo jobInfo)
         {
-            JobInfoDb.UpdateJobState(jobInfo);
+            JobHelper.Update(jobInfo);
             return RedirectToAction("Index", "Job");
         }
 
 
         public ActionResult Remove(int id)
         {
-            JobInfoDb.UpdateJobState(new JobInfo { Id = id, State = 5 });
+            JobHelper.Remove(id);
             return RedirectToAction("Index", "Job");
         }
     }

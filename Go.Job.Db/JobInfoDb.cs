@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Go.Job.Model;
+﻿using Go.Job.Model;
 using SqlSugar;
+using System;
+using System.Collections.Generic;
 
 namespace Go.Job.Db
 {
@@ -35,11 +35,17 @@ namespace Go.Job.Db
 
         public static JobInfo GetJobInfo(int id)
         {
-            using (SqlSugarClient db = new SqlSugarClient(config))
+            try
             {
-                return db.Queryable<JobInfo>().Where(w => w.Id == id).First();
+                using (SqlSugarClient db = new SqlSugarClient(config))
+                {
+                    return db.Queryable<JobInfo>().Where(w => w.Id == id).First();
+                }
             }
-
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public static int AddJobInfo(JobInfo jobInfo)
@@ -53,12 +59,20 @@ namespace Go.Job.Db
 
         public static int UpdateJobState(JobInfo jobInfo)
         {
-            Console.WriteLine(jobInfo.Id);
-            using (SqlSugarClient db = new SqlSugarClient(config))
+            var res = 0;
+            try
             {
-                return db.Updateable(jobInfo).UpdateColumns(s => new { s.State, s.Id })
-                     .WhereColumns(w => new { w.Id }).ExecuteCommand();
+                using (SqlSugarClient db = new SqlSugarClient(config))
+                {
+                    res = db.Updateable(jobInfo).UpdateColumns(s => new { s.State, s.Id })
+                        .WhereColumns(w => new { w.Id }).ExecuteCommand();
+                }
             }
+            catch (Exception e)
+            {
+
+            }
+            return res;
         }
     }
 }

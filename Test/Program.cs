@@ -10,10 +10,10 @@ namespace Test
         {
             NameValueCollection properties = new NameValueCollection();
 
-            properties["quartz.scheduler.instanceName"] = "调度作业监控系统";
+            //properties["quartz.scheduler.instanceName"] = "调度作业监控系统";
 
             //设置线程池
-            properties["quartz.threadPool.type"] = "Quartz.Simpl.SimpleThreadPool, Quartz";
+            properties["quartz.threadPool.type"] = "Quartz.Simpl.DefaultThreadPool, Quartz";
             properties["quartz.threadPool.threadCount"] = "5";
             properties["quartz.threadPool.threadPriority"] = "Normal";
             //设置配置

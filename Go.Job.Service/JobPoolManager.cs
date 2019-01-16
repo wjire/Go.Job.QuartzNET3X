@@ -221,8 +221,8 @@ namespace Go.Job.Service
                         if (jobRuntimeInfo != null)
                         {
                             TriggerKey triggerKey = new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
-                            Scheduler.PauseTrigger(triggerKey).Wait();
-                            Scheduler.UnscheduleJob(triggerKey).Wait();
+                            Scheduler.PauseTrigger(triggerKey);
+                            Scheduler.UnscheduleJob(triggerKey);
                             Scheduler.DeleteJob(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName));
                             JobRuntimePool.TryRemove(jobId, out jobRuntimeInfo);
                             AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);

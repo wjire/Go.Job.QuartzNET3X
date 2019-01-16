@@ -142,8 +142,8 @@
             <th>作业名称</th>
             <th>执行计划</th>
             <th>执行间隔时间</th>
-            <th>程序集</th>
-            <th>实体类型</th>
+            <th>程序集物理路径</th>
+            <th>完全限定名</th>
             <th>开始时间</th>
             <th>状态</th>
             <th>操作</th>
@@ -152,35 +152,63 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.JobName</td>
-                <td>@item.Cron</td>
-                <td>@item.Second</td>
-                <td>@item.AssemblyPath</td>
-                <td>@item.ClassTypePath</td>
-                <td>@item.StartTime</td>
-                <td>@item.State</td>
-                <td>
-                    @{
-                        if (item.State == 3)
-                        {
-                            <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">启动</a>
-                        }
-                    }
-                    <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">执行</a>
-                    <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
-                    <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
-                    <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
-                    @{
-                        if (item.State != 3)
-                        {
-                            <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">停止</a>
-                        }
-                    }
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.JobName</td>
+            <td>@item.Cron</td>
+            <td>@item.Second</td>
+            <td>@item.AssemblyPath</td>
+            <td>@item.ClassTypePath</td>
+            <td>@item.StartTime</td>
 
-                </td>
-            </tr>
+            @{
+                switch (item.State)
+                {
+                    case 0:
+                        <td>准备中</td>
+                        break;
+                    case 1:
+                        <td>执行中</td>
+                        break;
+                    case 2:
+                        <td>暂停</td>
+                        break;
+                    case 3:
+                        <td>删除</td>
+                        break;
+                }
+            }
+
+            <td>
+                @*@{
+
+            }*@
+                @{
+                    if (item.State == 3)
+                    {
+                        <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">启动</a>
+                    }
+                    if (item.State == 1)
+                    {
+                        <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
+                    }
+                    if (item.State == 2)
+                    {
+                        <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
+                    }
+                    if (item.State != 0 && item.State != 3)
+                    {
+                        <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">删除</a>
+                    }
+                    if (item.State == 3)
+                    {
+                        <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
+                    }
+                }
+
+
+            </td>
+        </tr>
         }
     </tbody>
 </table>
@@ -252,5 +280,18 @@
 
     function closeUpdate() {
         $("#divUpdate").hide();
+    }
+
+    function ConvertState(state) {
+        switch (state) {
+            case 0:
+                return "准备中";
+            case 1:
+                return "执行中";
+            case 2:
+                return "暂停";
+            case 3:
+                return "删除";
+        }
     }
 </script>

@@ -1,7 +1,9 @@
-﻿using System.Collections.Specialized;
-using System.Threading.Tasks;
-using Quartz;
+﻿using Quartz;
 using Quartz.Impl;
+using Quartz.Impl.Matchers;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
 
 namespace Go.Job.Service
 {
@@ -33,11 +35,20 @@ namespace Go.Job.Service
             }
             await JobPoolManager.Scheduler.Start();
 
+            JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport(), KeyMatcher<JobKey>.KeyEquals(new JobKey("ScanJob", "ScanJob")));
+
             //创建扫描Job
-            IJobDetail jobDetail = JobBuilder.Create<ScanJob>().WithIdentity("ScanJob", "ScanJob").Build();
+            IJobDetail jobDetail = JobBuilder.Create<ScanJob>()
+                .SetJobData(new JobDataMap(new Dictionary<string, string>
+                {
+                    {"name","ScanJob" }
+                }))
+                .WithIdentity("ScanJob", "ScanJob").Build();
             ITrigger trigger = TriggerBuilder.Create()
                 .WithIdentity("ScanJob", "ScanJob")
-                .WithSimpleSchedule(s => s.WithIntervalInSeconds(10).RepeatForever())
+                .WithSimpleSchedule(s => s.WithIntervalInSeconds(10).RepeatForever().WithMisfireHandlingInstructionFireNow())
+                //.WithSimpleSchedule(s => s.WithIntervalInMinutes(1).RepeatForever().WithMisfireHandlingInstructionNowWithExistingCount())
+                //.WithSimpleSchedule(s => s.WithIntervalInSeconds(10).WithRepeatCount(1))
                 .StartNow()
                 //.StartAt(new DateTimeOffset(DateTime.Now.AddSeconds(5)))
                 .Build();
