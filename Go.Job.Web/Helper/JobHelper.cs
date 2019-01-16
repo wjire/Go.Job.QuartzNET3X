@@ -34,7 +34,7 @@ namespace Go.Job.Web.Helper
             bool runRes = false;
             try
             {
-                int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 0, Id = id });
+                int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
                 if (dbRes > 0)
                 {
                     Scheduler.ResumeJob(new JobKey("ScanJob", "ScanJob"));
@@ -45,9 +45,7 @@ namespace Go.Job.Web.Helper
             {
 
             }
-
             return runRes;
-
         }
 
         /// <summary>

@@ -184,9 +184,10 @@
 
             }*@
                 @{
-                    if (item.State == 3)
+                    if (item.State == 0 || item.State == 3)
                     {
                         <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">启动</a>
+                        <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
                     }
                     if (item.State == 1)
                     {
@@ -195,14 +196,7 @@
                     if (item.State == 2)
                     {
                         <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
-                    }
-                    if (item.State != 0 && item.State != 3)
-                    {
                         <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">删除</a>
-                    }
-                    if (item.State == 3)
-                    {
-                        <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
                     }
                 }
 

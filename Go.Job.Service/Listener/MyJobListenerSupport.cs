@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Quartz;
 using Quartz.Listener;
 
-namespace Go.Job.Service
+namespace Go.Job.Service.Listener
 {
     public class MyJobListenerSupport : JobListenerSupport
     {

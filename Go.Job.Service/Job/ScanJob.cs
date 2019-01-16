@@ -18,7 +18,7 @@ namespace Go.Job.Service.Job
         {
             try
             {
-                IList<JobInfo> jobInfoList = JobInfoDb.GetJobInfoList();
+                IList<JobInfo> jobInfoList = JobInfoDb.GetJobInfoList();//TODO:再封装
                 if (jobInfoList?.Count > 0)
                 {
                     //TODO:所有JOB的状态以数据库为准!

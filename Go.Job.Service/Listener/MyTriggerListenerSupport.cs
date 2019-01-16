@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Quartz;
 using Quartz.Listener;
 
-namespace Go.Job.Service
+namespace Go.Job.Service.Listener
 {
-    public class MyTriggerListenerSupport: TriggerListenerSupport
+    public class MyTriggerListenerSupport : TriggerListenerSupport
     {
         public override string Name { get; }
 

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Go.Job.Service.Config;
 using Go.Job.Service.Helper;
+using Go.Job.Service.Listener;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Matchers;
