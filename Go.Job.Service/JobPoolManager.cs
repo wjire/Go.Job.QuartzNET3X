@@ -1,10 +1,11 @@
-﻿using Go.Job.Model;
-using Job.Service.Model;
-using Quartz;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
+using Go.Job.BaseJob;
+using Go.Job.Model;
+using Go.Job.Service.Job;
+using Quartz;
 
 namespace Go.Job.Service
 {
@@ -42,19 +43,14 @@ namespace Go.Job.Service
             {
                 try
                 {
-                    ////再检查一次,如果job线程池中已经有这个job实例了,直接返回,避免重复添加
-                    //if (JobRuntimePool.ContainsKey(jobId))
-                    //{
-                    //    return false;
-                    //}
-
                     //如果该job实例添加失败,直接返回.
                     if (!JobRuntimePool.TryAdd(jobId, jobRuntimeInfo))
                     {
+                        AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                         return false;
                     }
 
-                    var existsedJobDetail = Scheduler.GetJobDetail(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName)).Result;
+                    IJobDetail existsedJobDetail = Scheduler.GetJobDetail(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName)).Result;
                     if (existsedJobDetail != null)
                     {
                         //Scheduler.RescheduleJob(new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName));
@@ -249,6 +245,35 @@ namespace Go.Job.Service
 
 
         /// <summary>
+        /// 创建新的应用程序域,返回运行时的Job数据
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        internal JobRuntimeInfo CreateJobRuntimeInfo(JobInfo jobInfo)
+        {
+            lock (_lock)
+            {
+                JobRuntimeInfo jobRuntimeInfo = null;
+                if (JobRuntimePool.ContainsKey(jobInfo.Id))
+                {
+                    jobRuntimeInfo = GetJobFromPool(jobInfo.Id);
+                    return jobRuntimeInfo;
+                }
+                AppDomain app = Thread.GetDomain();
+                MarshalByRefJob job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
+                jobRuntimeInfo = new JobRuntimeInfo
+                {
+                    JobInfo = jobInfo,
+                    Job = job,
+                    AppDomain = app,
+                };
+                //TODO:日志记录
+                return jobRuntimeInfo;
+            }
+        }
+
+
+
+        /// <summary>
         /// 创建新的应用程序域,并开始执行job
         /// </summary>
         /// <param name="jobInfo"></param>
@@ -263,7 +288,7 @@ namespace Go.Job.Service
                     return jobRuntimeInfo.JobInfo;
                 }
                 AppDomain app = Thread.GetDomain();
-                BaseJob.BaseJob job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
+                MarshalByRefJob job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
                 jobRuntimeInfo = new JobRuntimeInfo
                 {
                     JobInfo = jobInfo,

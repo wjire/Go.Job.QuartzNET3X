@@ -1,8 +1,8 @@
-﻿using Quartz;
-using Quartz.Listener;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Quartz;
+using Quartz.Listener;
 
 namespace Go.Job.Service
 {
@@ -17,8 +17,8 @@ namespace Go.Job.Service
 
         public override async Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var name = context.JobDetail.Key.Name;
-            Console.WriteLine($"{DateTime.Now} : name is : " + name);
+            string name = context.JobDetail.Key.Name;
+            Console.WriteLine($"{DateTime.Now} : {name} is Executed");
             if (Name == "ScanJob")
             {
                 Console.WriteLine($"{DateTime.Now} : ScanJob is JobWasExecuted ");
@@ -36,8 +36,8 @@ namespace Go.Job.Service
 
         public override Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var name = context.JobDetail.Key.Name;
-            Console.WriteLine($"{DateTime.Now} : name is : " + name);
+            string name = context.JobDetail.Key.Name;
+            Console.WriteLine($"{DateTime.Now} : {name} tobeExecuting ");
             return base.JobToBeExecuted(context, cancellationToken);
         }
     }

@@ -1,15 +1,16 @@
-﻿using Go.Job.BaseJob;
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
+using Quartz;
 
-namespace TestJob2
+namespace TestJob3
 {
-    public class Job2 : MarshalByRefJob
+    public class Job3 : IJob
     {
-        public override void Run()
+        public Task Execute(IJobExecutionContext context)
         {
-            string path1 = @"C:\Users\Administrator\Desktop\Job.txt";
+            string path1 = @"C:\Users\Administrator\Desktop\Job3.txt";
             //string path1 = @"C:\Users\gongwei.LONG\Desktop\Job2.txt";
             using (FileStream fs = new FileStream(path1, FileMode.Append, FileAccess.Write))
             {
@@ -17,8 +18,7 @@ namespace TestJob2
                 fs.Write(bytes, 0, bytes.Length);
             }
 
-            //string name = Thread.GetDomain().FriendlyName;
-            //Tools.FileHelper.WriteString(name);
+            return Task.FromResult(0);
         }
     }
 }

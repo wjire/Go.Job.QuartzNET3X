@@ -1,27 +1,53 @@
-﻿using Quartz;
+﻿using System.Collections.Specialized;
+using System.Threading.Tasks;
+using Go.Job.Service.Config;
+using Go.Job.Service.Helper;
+using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Matchers;
-using System.Collections.Specialized;
-using System.Threading.Tasks;
 
 namespace Go.Job.Service
 {
     public sealed class SchedulerFactory
     {
-        private readonly NameValueCollection _properties;
-
+        private readonly NameValueCollection _properties = new NameValueCollection();
 
         public SchedulerFactory() : this(null)
         {
-
         }
 
-        public SchedulerFactory(NameValueCollection properties)
+        public SchedulerFactory(SchedulerThreadPoolConfig threadPoolConfig) : this(threadPoolConfig, null)
         {
-            _properties = properties;
+        }
+
+        public SchedulerFactory(SchedulerThreadPoolConfig threadPoolConfig, SchedulerRemoteExporterConfig remoteExporterConfig) : this(threadPoolConfig, remoteExporterConfig, null)
+        {
+        }
+
+        public SchedulerFactory(SchedulerThreadPoolConfig threadPoolConfig, SchedulerRemoteExporterConfig remoteExporterConfig, SchedulerJobStoreConfig jobStoreConfig)
+        {
+            if (threadPoolConfig != null)
+            {
+                _properties.Add(threadPoolConfig.Properties);
+            }
+
+            if (remoteExporterConfig != null)
+            {
+                _properties.Add(remoteExporterConfig.Properties);
+            }
+
+            if (jobStoreConfig != null)
+            {
+                _properties.Add(jobStoreConfig.Properties);
+            }
         }
 
         public async Task CreateSchedulerAndStart()
+        {
+            await CreateSchedulerAndStart(new ScanJobConfig());
+        }
+
+        public async Task CreateSchedulerAndStart(ScanJobConfig scanJobConfig)
         {
 
             if (_properties == null)
@@ -38,17 +64,7 @@ namespace Go.Job.Service
             JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
             JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job2"), GroupMatcher<JobKey>.GroupEquals("Job2"));
 
-            //创建扫描Job
-            IJobDetail jobDetail = JobBuilder.Create<ScanJob>().WithIdentity("ScanJob", "ScanJob").Build();
-            ITrigger trigger = TriggerBuilder.Create()
-                .WithIdentity("ScanJob", "ScanJob")
-                .WithSimpleSchedule(s => s.WithIntervalInSeconds(5).RepeatForever().WithMisfireHandlingInstructionFireNow())
-                //.WithSimpleSchedule(s => s.WithIntervalInMinutes(1).RepeatForever().WithMisfireHandlingInstructionNowWithExistingCount())
-                //.WithSimpleSchedule(s => s.WithIntervalInSeconds(10).WithRepeatCount(1))
-                .StartNow()
-                //.StartAt(new DateTimeOffset(DateTime.Now.AddSeconds(5)))
-                .Build();
-            await JobPoolManager.Scheduler.ScheduleJob(jobDetail, trigger);
+            await ScanJobStartUp.StartScanJob(scanJobConfig);
         }
     }
 }

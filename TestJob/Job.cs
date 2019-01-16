@@ -1,19 +1,16 @@
-﻿using Go.Job.BaseJob;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Go.Job.BaseJob;
 
 namespace TestJob
 {
-    public class Job : BaseJob
+    public class Job : MarshalByRefJob
     {
         public override void Run()
         {
-            //string path1 = @"C:\Users\Administrator\Desktop\Job.txt";
-            string path1 = @"C:\Users\gongwei.LONG\Desktop\Job.txt";
+            string path1 = @"C:\Users\Administrator\Desktop\Job.txt";
+            //string path1 = @"C:\Users\gongwei.LONG\Desktop\Job.txt";
             using (FileStream fs = new FileStream(path1, FileMode.Append, FileAccess.Write))
             {
                 byte[] bytes = Encoding.Default.GetBytes(DateTime.Now + Environment.NewLine);

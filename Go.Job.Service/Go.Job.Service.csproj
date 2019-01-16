@@ -53,16 +53,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDomainLoader.cs" />
+    <Compile Include="Config\SchedulerConfig.cs" />
+    <Compile Include="Lib\JobString.cs" />
+    <Compile Include="Config\ScanJobConfig.cs" />
+    <Compile Include="Helper\ScanJobStartUp.cs" />
     <Compile Include="Listener\MyJobListenerSupport.cs" />
-    <Compile Include="Listener\MyTriggerListener.cs" />
-    <Compile Include="JobCenter.cs" />
+    <Compile Include="Job\JobCenter.cs" />
     <Compile Include="JobPoolManager.cs" />
     <Compile Include="JobServicesContainer.cs" />
-    <Compile Include="Listener\MyJobListener.cs" />
     <Compile Include="Listener\MyTriggerListenerSupport.cs" />
+    <Compile Include="Lib\JobEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScanJob.cs" />
+    <Compile Include="Job\ScanJob.cs" />
     <Compile Include="SchedulerFactory.cs" />
+    <Compile Include="ServiceProvider\IDbProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -77,17 +81,9 @@
       <Project>{2E5B47B7-ABF3-4080-BCEB-B56124D890B5}</Project>
       <Name>Go.Job.Db</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Go.Job.IProvider\Go.Job.IProvider.csproj">
-      <Project>{e85db0d8-f1cb-4085-a2ea-da665817cfea}</Project>
-      <Name>Go.Job.IProvider</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Go.Job.Model\Go.Job.Model.csproj">
       <Project>{d47524c9-3f63-40c6-b368-72e3e8d0332d}</Project>
       <Name>Go.Job.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Go.Job.Provider\Go.Job.Provider.csproj">
-      <Project>{22106d21-c29b-4308-9247-51a775522d1e}</Project>
-      <Name>Go.Job.Provider</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

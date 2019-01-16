@@ -1,6 +1,4 @@
-﻿using Go.Job.IProvider;
-using Go.Job.Provider;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Go.Job.Service
@@ -13,7 +11,7 @@ namespace Go.Job.Service
 
         private JobServicesContainer()
         {
-            SetService<IJobInfoProvider>(new DefaultJobInfoProvider());
+            //SetService<IJobInfoProvider>(new DefaultJobInfoProvider());
         }
 
         static JobServicesContainer()

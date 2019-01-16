@@ -5,12 +5,13 @@ namespace Go.Job.BaseJob
     /// <summary>
     /// 基Job
     /// </summary>
-    public abstract class BaseJob : MarshalByRefObject, IDisposable
+    public abstract class MarshalByRefJob : MarshalByRefObject
     {
         public abstract void Run();
-        public void Dispose()
-        {
 
+        public override object InitializeLifetimeService()
+        {
+            return null;
         }
     }
 }

@@ -29,6 +29,7 @@ namespace Go.Job.Db
             using (SqlSugarClient db = new SqlSugarClient(config))
             {
                 list = db.Queryable<JobInfo>().ToList();
+                //list = db.Queryable().ToList();
             }
             return list;
         }
@@ -54,7 +55,6 @@ namespace Go.Job.Db
             {
                 return db.Insertable(jobInfo).ExecuteCommand();
             }
-
         }
 
 

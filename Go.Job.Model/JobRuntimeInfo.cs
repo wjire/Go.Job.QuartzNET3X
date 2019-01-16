@@ -2,13 +2,13 @@
 using Go.Job.Model;
 using System;
 
-namespace Job.Service.Model
+namespace Go.Job.Model
 {
     public class JobRuntimeInfo
     {
         public AppDomain AppDomain;
 
-        public BaseJob Job { get; set; }
+        public MarshalByRefJob Job { get; set; }
 
         public JobInfo JobInfo { get; set; }
     }
