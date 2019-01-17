@@ -51,7 +51,6 @@ namespace Go.Job.Service
 
         public async Task CreateSchedulerAndStart(ScanJobConfig scanJobConfig)
         {
-
             if (_properties == null)
             {
                 JobPoolManager.Scheduler = await new StdSchedulerFactory().GetScheduler();
@@ -60,11 +59,13 @@ namespace Go.Job.Service
             {
                 JobPoolManager.Scheduler = await new StdSchedulerFactory(_properties).GetScheduler();
             }
-            await JobPoolManager.Scheduler.Start();
 
-          
-            JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
-            JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job2"), GroupMatcher<JobKey>.GroupEquals("Job2"));
+            if (!JobPoolManager.Scheduler.IsStarted)
+            {
+               await JobPoolManager.Scheduler.Start();
+            }
+            
+            //JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
 
             if (scanJobConfig != null)
             {

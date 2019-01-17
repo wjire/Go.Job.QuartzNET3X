@@ -26,10 +26,10 @@ namespace Go.Job.Db
         public static List<JobInfo> GetJobInfoList()
         {
             List<JobInfo> list = null;
+            var sql = " select  ";
             using (SqlSugarClient db = new SqlSugarClient(config))
             {
                 list = db.Queryable<JobInfo>().ToList();
-                //list = db.Queryable().ToList();
             }
             return list;
         }

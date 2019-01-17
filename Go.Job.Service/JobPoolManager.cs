@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Go.Job.Model;
+using Go.Job.Service.Job;
+using Quartz;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
-using Go.Job.BaseJob;
-using Go.Job.Model;
-using Go.Job.Service.Job;
-using Quartz;
 
 namespace Go.Job.Service
 {
@@ -17,8 +16,9 @@ namespace Go.Job.Service
 
         private static readonly JobPoolManager _jobPoolManager;
 
-        private static readonly object _lock = new object();
+        private bool flag = false;
 
+        private static readonly object _lock = new object();
         private JobPoolManager()
         {
         }
@@ -78,7 +78,7 @@ namespace Go.Job.Service
                         tiggerBuilder.WithSimpleSchedule(simple =>
                             {
                                 //立刻执行一次,使用总次数
-                                simple.WithIntervalInSeconds(jobRuntimeInfo.JobInfo.Second).RepeatForever().WithMisfireHandlingInstructionNowWithExistingCount();
+                                simple.WithIntervalInSeconds(jobRuntimeInfo.JobInfo.Second).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires();
                             });
                     }
 
@@ -92,6 +92,7 @@ namespace Go.Job.Service
                     }
 
                     ITrigger trigger = tiggerBuilder.Build();
+
 
                     Scheduler.ScheduleJob(jobDetail, trigger).Wait();
 
@@ -114,6 +115,10 @@ namespace Go.Job.Service
         /// <returns></returns>
         internal JobRuntimeInfo GetJobFromPool(int jobId)
         {
+            if (!JobRuntimePool.ContainsKey(jobId))
+            {
+                return null;
+            }
             lock (_lock)
             {
                 if (!JobRuntimePool.ContainsKey(jobId))
@@ -272,7 +277,6 @@ namespace Go.Job.Service
         }
 
 
-
         /// <summary>
         /// 创建新的应用程序域,并开始执行job
         /// </summary>
@@ -305,5 +309,25 @@ namespace Go.Job.Service
                 return jobInfo;
             }
         }
+
+
+        public bool RemoveJobRuntimeInfoAndReAdd(JobRuntimeInfo jobRuntimeInfo)
+        {
+            if (flag)
+            {
+                return true;
+            }
+
+            lock (_lock)
+            {
+                AppDomain app = Thread.GetDomain();
+                jobRuntimeInfo.Job = AppDomainLoader.Load(jobRuntimeInfo.JobInfo.AssemblyPath, jobRuntimeInfo.JobInfo.ClassTypePath, out app);
+                jobRuntimeInfo.AppDomain = app;
+                JobRuntimePool[jobRuntimeInfo.JobInfo.Id] = jobRuntimeInfo;
+                flag = true;
+                return flag;
+            }
+        }
     }
 }
+

@@ -20,7 +20,7 @@ namespace Go.Job.Model
         public DateTime StartTime { get; set; }
 
         /// <summary>
-        /// 任务状态  1:准备中 2:已启动 2:暂停 3:停止
+        /// 任务状态  0:准备中 1:已启动 2:暂停 3:删除
         /// </summary>
         public int State { get; set; }
 

@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Go.Job.Service.Job
 {
+
+    //TODO:暂时不用
     /// <summary>
     /// 扫描job的job
     /// </summary>

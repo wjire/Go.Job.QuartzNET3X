@@ -1,14 +1,24 @@
 ﻿using Go.Job.Db;
-using Go.Job.Model;
+using System;
 
 namespace Go.Job.Service.Factory
 {
     public static class JobFactory
     {
-        public  static void AddJob(int id)
+        public static bool AddJob(int id)
         {
-            var jobInfo = JobInfoDb.GetJobInfo(id);
-            var jobRuntimeInfo = JobPoolManager.Instance.AddJob(jobInfo);
+            var res = false;
+            try
+            {
+                var jobInfo = JobInfoDb.GetJobInfo(id);
+                var jobRuntimeInfo = JobPoolManager.Instance.CreateJobRuntimeInfo(jobInfo);
+                res = JobPoolManager.Instance.Add(id, jobRuntimeInfo);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return res;
         }
     }
 }

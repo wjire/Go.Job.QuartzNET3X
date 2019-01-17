@@ -35,16 +35,46 @@ namespace Go.Job.Web.Helper
         /// 启动
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="name"></param>
         /// <returns></returns>
-        public static bool Run(int id)
+        public static bool Run(int id, string name)
         {
-            bool runRes = false;
             try
             {
-                //测试 webapi
+                if (id == 0)
+                {
+                    return false;
+                }
 
-                var path = @"http://localhost:25250/api/job/"+id;
-                HttpClientHelper.GetString(path);
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    return false;
+                }
+
+                var job = Scheduler.GetJobDetail(new JobKey(name, name));
+                if (job != null)
+                {
+                    int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
+                    if (dbRes > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+
+                var path = @"http://localhost:25250/api/job/?id=" + id + "&name=" + name;
+                var code = HttpClientHelper.GetString(path);
+                if (Convert.ToInt32(code) == 200)
+                {
+                    int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
+                    if (dbRes > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+
+                return false;
 
                 //int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
                 //if (dbRes > 0)
@@ -54,11 +84,10 @@ namespace Go.Job.Web.Helper
                 //    runRes = true;
                 //}
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                return false;
             }
-            return runRes;
         }
 
         /// <summary>
@@ -182,15 +211,6 @@ namespace Go.Job.Web.Helper
             bool updateRes = false;
             try
             {
-                if (jobInfo.State != 3)
-                {
-                    bool removeRes = Remove(jobInfo.Id);
-                    if (removeRes == false)
-                    {
-                        return false;
-                    }
-                }
-
                 int dbRes = JobInfoDb.UpdateJobInfo(jobInfo);
                 if (dbRes == 0)
                 {
@@ -198,6 +218,22 @@ namespace Go.Job.Web.Helper
                 }
                 else
                 {
+                    var triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
+
+                    TriggerBuilder tiggerBuilder = TriggerBuilder.Create().WithIdentity(jobInfo.JobName, jobInfo.JobName);
+
+
+                    tiggerBuilder.WithSimpleSchedule(simple =>
+                    {
+                            //立刻执行一次,使用总次数
+                            simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires();
+                    });
+
+                    tiggerBuilder.StartNow();
+
+                    ITrigger trigger = tiggerBuilder.Build();
+                    
+                    Scheduler.RescheduleJob(triggerKey, trigger);
                     updateRes = true;
                 }
             }

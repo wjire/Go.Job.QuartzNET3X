@@ -11,14 +11,8 @@ namespace Go.Job.Service.Helper
     {
         public static async Task StartScanJob(ScanJobConfig scanJobConfig)
         {
-            IDictionary<string, object> data = new Dictionary<string, object>()
-            {
-                ["JobId"] = 0
-            };
-
             //创建扫描Job
             IJobDetail jobDetail = JobBuilder.Create<ScanJob>()
-                .SetJobData(new JobDataMap(data))
                 .WithIdentity(JobString.ScanJob, JobString.ScanJob)
                 .Build();
             TriggerBuilder triggerBuilder = TriggerBuilder.Create()
