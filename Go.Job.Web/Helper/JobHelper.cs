@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Specialized;
-using Go.Job.Db;
+﻿using Go.Job.Db;
 using Go.Job.Model;
 using Quartz;
 using Quartz.Simpl;
+using System;
+using System.Collections.Specialized;
 
 namespace Go.Job.Web.Helper
 {
@@ -24,22 +24,35 @@ namespace Go.Job.Web.Helper
                     Address = "tcp://127.0.0.1:555/QuartzScheduler"
                 };
                 Scheduler = proxyFactory.GetProxy();
+                if (Scheduler.IsShutdown)
+                {
+                    Scheduler.Start();
+                }
             }
         }
 
-
+        /// <summary>
+        /// 启动
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static bool Run(int id)
         {
-
             bool runRes = false;
             try
             {
-                int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
-                if (dbRes > 0)
-                {
-                    Scheduler.ResumeJob(new JobKey("ScanJob", "ScanJob"));
-                    runRes = true; 
-                }
+                //测试 webapi
+
+                var path = @"http://localhost:25250/api/job/"+id;
+                HttpClientHelper.GetString(path);
+
+                //int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
+                //if (dbRes > 0)
+                //{
+                //    var jobKey = new JobKey("ScanJob", "ScanJob");
+                //    Scheduler.ResumeJob(jobKey);
+                //    runRes = true;
+                //}
             }
             catch (Exception e)
             {

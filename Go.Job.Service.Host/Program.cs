@@ -1,7 +1,6 @@
 ﻿using Go.Job.Service.Config;
+using Microsoft.Owin.Hosting;
 using System;
-using System.IO;
-using System.Text;
 
 namespace Go.Job.Service.Host
 {
@@ -24,7 +23,7 @@ namespace Go.Job.Service.Host
                     }
 
                     //TODO:signalR 用不起,脑壳痛
-                    //string url = "http://localhost:25111";//設定 SignalR Hub Server 對外的接口
+                    //string url = "http://localhost:25111";
                     ////WebApp.Start(url); //啟動 SignalR Hub Server
 
                     ////WebApp.Start<Startup>(url);
@@ -33,6 +32,17 @@ namespace Go.Job.Service.Host
                     //    Console.WriteLine("Server running on {0}", url);
                     //    Console.ReadLine();
                     //}
+
+                    //TODO:麻蛋,signalr 不行 用 webapi
+                    {
+                        string baseAddress = "http://localhost:25250/";
+                        using (WebApp.Start(url: baseAddress))
+                        {
+                            Console.WriteLine("请开始您的表演");
+                            Console.ReadLine();
+                        }
+                    }
+                    
                     userCommand = Console.ReadLine();
                 }
             }

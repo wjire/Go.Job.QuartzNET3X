@@ -146,7 +146,7 @@ namespace Go.Job.Service
         /// <param name="jobInfo"></param>
         public void Run(JobInfo jobInfo)
         {
-            AddJobRuntimeInfo(jobInfo);
+            AddJob(jobInfo);
         }
 
 
@@ -277,7 +277,7 @@ namespace Go.Job.Service
         /// 创建新的应用程序域,并开始执行job
         /// </summary>
         /// <param name="jobInfo"></param>
-        internal JobInfo AddJobRuntimeInfo(JobInfo jobInfo)
+        internal JobInfo AddJob(JobInfo jobInfo)
         {
             lock (_lock)
             {

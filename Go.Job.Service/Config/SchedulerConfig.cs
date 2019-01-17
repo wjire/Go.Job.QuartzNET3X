@@ -56,7 +56,7 @@ namespace Go.Job.Service.Config
             //数据源名称
             Properties["quartz.jobStore.dataSource"] = "myDS";
             //连接字符串
-            Properties["quartz.dataSource.myDS.connectionString"] = "server=localhost;database=test;user=root;pwd=admin";
+            Properties["quartz.dataSource.myDS.connectionString"] = "server=localhost;database=myquartz;user=root;pwd=admin";
             //server版本
             Properties["quartz.dataSource.myDS.provider"] = "MySql";
 

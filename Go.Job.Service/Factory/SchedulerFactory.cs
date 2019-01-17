@@ -46,7 +46,7 @@ namespace Go.Job.Service
 
         public async Task CreateSchedulerAndStart()
         {
-            await CreateSchedulerAndStart(new ScanJobConfig());
+            await CreateSchedulerAndStart(null);
         }
 
         public async Task CreateSchedulerAndStart(ScanJobConfig scanJobConfig)
@@ -62,15 +62,18 @@ namespace Go.Job.Service
             }
             await JobPoolManager.Scheduler.Start();
 
-            JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("ScanJob"), KeyMatcher<JobKey>.KeyEquals(new JobKey("ScanJob", "ScanJob")));
+          
             JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
             JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job2"), GroupMatcher<JobKey>.GroupEquals("Job2"));
 
-            var scanJobDetail = await JobPoolManager.Scheduler.GetJobDetail(new JobKey(JobString.ScanJob, JobString.ScanJob));
-
-            if (scanJobDetail == null)
+            if (scanJobConfig != null)
             {
-                await ScanJobStartUp.StartScanJob(scanJobConfig);
+                var scanJobDetail = await JobPoolManager.Scheduler.GetJobDetail(new JobKey(JobString.ScanJob, JobString.ScanJob));
+                if (scanJobDetail == null)
+                {
+                    JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("ScanJob"), KeyMatcher<JobKey>.KeyEquals(new JobKey("ScanJob", "ScanJob")));
+                    await ScanJobStartUp.StartScanJob(scanJobConfig);
+                }
             }
         }
     }
