@@ -6,7 +6,7 @@ using System.Text;
 
 namespace TestWCF
 {
-    public class TestWCF : MarshalByRefJob
+    public class TestWCF : BaseJob
     {
         public override void Run()
         {

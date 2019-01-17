@@ -3,7 +3,7 @@ using Go.Job.BaseJob;
 
 namespace TestJob
 {
-    public class Job : MarshalByRefJob
+    public class Job : BaseJob
     {
         public override void Run()
         {

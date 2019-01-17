@@ -45,6 +45,7 @@ namespace Go.Job.Service.Config
             //===持久化=== 有问题,勿用
 
             Properties["quartz.serializer.type"] = "binary";
+            //Properties["quartz.serializer.type"] = "json";
 
             //存储类型
             Properties["quartz.jobStore.type"] = "Quartz.Impl.AdoJobStore.JobStoreTX, Quartz";
@@ -56,12 +57,14 @@ namespace Go.Job.Service.Config
             Properties["quartz.jobStore.dataSource"] = "myDS";
             //连接字符串
             Properties["quartz.dataSource.myDS.connectionString"] = "server=localhost;database=test;user=root;pwd=admin";
-            //sqlserver版本
+            //server版本
             Properties["quartz.dataSource.myDS.provider"] = "MySql";
 
+            Properties["quartz.scheduler.instanceId"] = "AUTO";
 
+
+            //集群配置
             Properties["quartz.jobStore.clustered"] = "true";
-            //Properties["quartz.scheduler.instanceId"] = "AUTO";
         }
     }
 }

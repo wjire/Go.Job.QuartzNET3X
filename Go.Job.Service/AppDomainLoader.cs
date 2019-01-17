@@ -15,7 +15,7 @@ namespace Go.Job.Service
         /// <param name="classPath">作业实例的完全限定名,含命名空间</param>
         /// <param name="appDomain"></param>
         /// <returns></returns>
-        public static MarshalByRefJob Load(string dllPath, string classPath, out AppDomain appDomain)
+        public static BaseJob.BaseJob Load(string dllPath, string classPath, out AppDomain appDomain)
         {
             AppDomainSetup setup = new AppDomainSetup();
             if (System.IO.File.Exists($"{dllPath}.config"))
@@ -27,7 +27,7 @@ namespace Go.Job.Service
             string appDomainName = System.IO.Path.GetFileName(dllPath);
             appDomain = AppDomain.CreateDomain(appDomainName, null, setup);
             AppDomain.MonitoringIsEnabled = true;
-            MarshalByRefJob obj = (MarshalByRefJob)appDomain.CreateInstanceFromAndUnwrap(dllPath, classPath);
+            BaseJob.BaseJob obj = (BaseJob.BaseJob)appDomain.CreateInstanceFromAndUnwrap(dllPath, classPath);
             return obj;
         }
 

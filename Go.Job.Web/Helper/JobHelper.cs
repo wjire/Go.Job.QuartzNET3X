@@ -38,7 +38,7 @@ namespace Go.Job.Web.Helper
                 if (dbRes > 0)
                 {
                     Scheduler.ResumeJob(new JobKey("ScanJob", "ScanJob"));
-                    runRes = true;
+                    runRes = true; 
                 }
             }
             catch (Exception e)

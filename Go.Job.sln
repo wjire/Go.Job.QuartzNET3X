@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.Job.Service.Host", "Go.J
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWCF", "TestWCF\TestWCF.csproj", "{33100B16-0DAB-4AEF-AB49-79413C8E8A5F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{B2645E6A-8D4D-4DDF-ACC3-D2C0C222B224}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{33100B16-0DAB-4AEF-AB49-79413C8E8A5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33100B16-0DAB-4AEF-AB49-79413C8E8A5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33100B16-0DAB-4AEF-AB49-79413C8E8A5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2645E6A-8D4D-4DDF-ACC3-D2C0C222B224}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2645E6A-8D4D-4DDF-ACC3-D2C0C222B224}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2645E6A-8D4D-4DDF-ACC3-D2C0C222B224}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2645E6A-8D4D-4DDF-ACC3-D2C0C222B224}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

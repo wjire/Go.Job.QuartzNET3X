@@ -3,7 +3,7 @@
 namespace Go.Job.Model
 {
 
-    public class JobInfo : BaseJobInfo
+    public class JobInfo
     {
         public int Id { get; set; }
 

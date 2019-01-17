@@ -143,8 +143,8 @@
             <th>执行计划</th>
             <th>执行间隔时间</th>
             <th>程序集物理路径</th>
-            <th>完全限定名</th>
-            <th>开始时间</th>
+            @*<th>完全限定名</th>*@
+            @*<th>开始时间</th>*@
             <th>状态</th>
             <th>操作</th>
         </tr>
@@ -152,63 +152,83 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@item.Id</td>
-            <td>@item.JobName</td>
-            <td>@item.Cron</td>
-            <td>@item.Second</td>
-            <td>@item.AssemblyPath</td>
-            <td>@item.ClassTypePath</td>
-            <td>@item.StartTime</td>
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.JobName</td>
+                <td>@item.Cron</td>
+                <td>@item.Second</td>
+                <td>@item.AssemblyPath</td>
+                @*<td>@item.ClassTypePath</td>*@
+                @*<td>@item.StartTime</td>*@
 
-            @{
-                switch (item.State)
-                {
-                    case 0:
-                        <td>准备中</td>
-                        break;
-                    case 1:
-                        <td>执行中</td>
-                        break;
-                    case 2:
-                        <td>暂停</td>
-                        break;
-                    case 3:
-                        <td>删除</td>
-                        break;
-                }
-            }
-
-            <td>
-                @*@{
-
-            }*@
                 @{
-                    if (item.State == 0 || item.State == 3)
+                    switch (item.State)
                     {
-                        <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">启动</a>
-                        <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
-                    }
-                    if (item.State == 1)
-                    {
-                        <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
-                    }
-                    if (item.State == 2)
-                    {
-                        <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
-                        <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">删除</a>
+                        case 0:
+                            <td>准备中</td>
+                            break;
+                        case 1:
+                            <td>执行中</td>
+                            break;
+                        case 2:
+                            <td>暂停</td>
+                            break;
+                        case 3:
+                            <td>删除</td>
+                            break;
                     }
                 }
 
+                <td>
+                    @*@{
 
-            </td>
-        </tr>
+                        }*@
+                    @{
+                        if (item.State == 0 || item.State == 3)
+                        {
+                            <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">启动</a>
+                            <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
+                        }
+                        if (item.State == 1)
+                        {
+                            <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
+                        }
+                        if (item.State == 2)
+                        {
+                            <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
+                            <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">删除</a>
+                        }
+                    }
+
+
+                </td>
+            </tr>
         }
     </tbody>
 </table>
 
+
+@*<script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+<script src="http://localhost:25230/signalr/hubs"></script>*@
 <script type="text/javascript">
     $(function () {
+
+        //TODO:Signalr 用不起
+        //$.connection.hub.url = "http://localhost:25230/signalr";
+        //var msgHub = $.connection.ChatHub;
+        //msgHub.client.GetMessage = function (msg) {
+        //    alert(msg);
+        //};
+        //$.connection.hub.start({ xdomain: true });
+        //$.connection.hub.start().done(function () {
+        //    msgHub.server.GetMessage().done(function (msg) {
+        //        if (msg || msg !== "") {
+        //            console.log(msg);
+        //        }
+        //    });
+        //});
+
+
         //点击模板展开收缩
         $("#actionType").click(function () {
             if ($("#collapseOne").hasClass("collShow")) {

@@ -259,7 +259,7 @@ namespace Go.Job.Service
                     return jobRuntimeInfo;
                 }
                 AppDomain app = Thread.GetDomain();
-                MarshalByRefJob job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
+                BaseJob.BaseJob job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
                 jobRuntimeInfo = new JobRuntimeInfo
                 {
                     JobInfo = jobInfo,
@@ -288,7 +288,7 @@ namespace Go.Job.Service
                     return jobRuntimeInfo.JobInfo;
                 }
                 AppDomain app = Thread.GetDomain();
-                MarshalByRefJob job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
+                BaseJob.BaseJob job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
                 jobRuntimeInfo = new JobRuntimeInfo
                 {
                     JobInfo = jobInfo,

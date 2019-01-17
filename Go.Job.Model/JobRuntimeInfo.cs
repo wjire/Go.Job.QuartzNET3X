@@ -8,7 +8,7 @@ namespace Go.Job.Model
     {
         public AppDomain AppDomain;
 
-        public MarshalByRefJob Job { get; set; }
+        public BaseJob.BaseJob Job { get; set; }
 
         public JobInfo JobInfo { get; set; }
     }

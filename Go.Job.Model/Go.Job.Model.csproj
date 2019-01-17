@@ -41,8 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseJobInfo.cs" />
-    <Compile Include="BaseJobLog.cs" />
     <Compile Include="JobRuntimeInfo.cs" />
     <Compile Include="JobInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

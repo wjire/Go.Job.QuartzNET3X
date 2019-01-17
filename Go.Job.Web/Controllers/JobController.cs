@@ -42,7 +42,7 @@ namespace Go.Job.Web.Controllers
         [HttpGet]
         public ActionResult Update(int id)
         {
-            BaseJobInfo jobInfo = JobInfoDb.GetJobInfo(id);
+            JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
             return Json(jobInfo, JsonRequestBehavior.AllowGet);
         }
 

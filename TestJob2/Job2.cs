@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TestJob2
 {
-    public class Job2 : MarshalByRefJob
+    public class Job2 : BaseJob
     {
         public override void Run()
         {
