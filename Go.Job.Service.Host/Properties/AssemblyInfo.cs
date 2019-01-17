@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Test")]
+[assembly: AssemblyTitle("Go.Job.Service.Host")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sky123.Org")]
-[assembly: AssemblyProduct("Test")]
+[assembly: AssemblyProduct("Go.Job.Service.Host")]
 [assembly: AssemblyCopyright("Copyright © Sky123.Org 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("d89aa9dd-51f0-4587-8dc5-39971cc4ed26")]
+[assembly: Guid("74e9ce7d-33d2-4692-8e75-ebaec8238e6d")]
 
 // 程序集的版本信息由下列四个值组成: 
 //
