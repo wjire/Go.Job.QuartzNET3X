@@ -20,8 +20,6 @@ namespace Go.Job.Service
 
         private bool flag = false;
 
-        private bool isCreated = false;
-
         private static readonly object _lock = new object();
 
         private JobPoolManager()
