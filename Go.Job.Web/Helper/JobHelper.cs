@@ -1,9 +1,9 @@
-﻿using Go.Job.Db;
+﻿using System;
+using System.Collections.Specialized;
+using Go.Job.Db;
 using Go.Job.Model;
 using Quartz;
 using Quartz.Simpl;
-using System;
-using System.Collections.Specialized;
 
 namespace Go.Job.Web.Helper
 {
@@ -46,24 +46,8 @@ namespace Go.Job.Web.Helper
                     return false;
                 }
 
-                if (string.IsNullOrWhiteSpace(name))
-                {
-                    return false;
-                }
-
-                var job = Scheduler.GetJobDetail(new JobKey(name, name));
-                if (job != null)
-                {
-                    int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
-                    if (dbRes > 0)
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-
-                var path = @"http://localhost:25250/api/job/?id=" + id + "&name=" + name;
-                var code = HttpClientHelper.GetString(path);
+                string path = @"http://localhost:25250/api/job/add?id=" + id;
+                string code = HttpClientHelper.GetString(path);
                 if (Convert.ToInt32(code) == 200)
                 {
                     int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
@@ -71,23 +55,14 @@ namespace Go.Job.Web.Helper
                     {
                         return true;
                     }
-                    return false;
                 }
 
-                return false;
-
-                //int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
-                //if (dbRes > 0)
-                //{
-                //    var jobKey = new JobKey("ScanJob", "ScanJob");
-                //    Scheduler.ResumeJob(jobKey);
-                //    runRes = true;
-                //}
             }
             catch (Exception ex)
             {
-                return false;
             }
+            return false;
+
         }
 
         /// <summary>
@@ -97,34 +72,29 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static bool Pause(int id)
         {
-            bool pauseRes = false;
             try
             {
-                //查询数据库库
-                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
-
-                if (jobInfo?.Id > 0)
+                if (id == 0)
                 {
-                    Scheduler.PauseJob(new JobKey(jobInfo.JobName, jobInfo.JobName));
-                    jobInfo.State = 2;
-                    //修改数据库
-                    int dbRes = JobInfoDb.UpdateJobState(jobInfo);
-                    if (dbRes == 0)
-                    {
-                        //TODO:数据库修改失败,记录日志
-                    }
-                    else
-                    {
-                        pauseRes = true;
-                    }
+                    return false;
                 }
 
+                string path = @"http://localhost:25250/api/job/pause?id=" + id;
+                string code = HttpClientHelper.GetString(path);
+                if (Convert.ToInt32(code) == 200)
+                {
+                    int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 2, Id = id });
+                    if (dbRes > 0)
+                    {
+                        return true;
+                    }
+                }
             }
             catch (Exception e)
             {
             }
 
-            return pauseRes;
+            return false;
         }
 
         /// <summary>
@@ -134,33 +104,29 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static bool Resume(int id)
         {
-            bool resumeRes = false;
             try
             {
-                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
-
-                if (jobInfo?.Id > 0)
+                if (id == 0)
                 {
-                    Scheduler.ResumeJob(new JobKey(jobInfo.JobName, jobInfo.JobName));
-                    jobInfo.State = 1;
-                    //修改数据库
-                    int dbRes = JobInfoDb.UpdateJobState(jobInfo);
-                    if (dbRes == 0)
-                    {
-                        //TODO:数据库修改失败,记录日志
-                    }
-                    else
-                    {
-                        resumeRes = true;
-                    }
+                    return false;
                 }
 
+                string path = @"http://localhost:25250/api/job/resume?id=" + id;
+                string code = HttpClientHelper.GetString(path);
+                if (Convert.ToInt32(code) == 200)
+                {
+                    int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
+                    if (dbRes > 0)
+                    {
+                        return true;
+                    }
+                }
             }
             catch (Exception e)
             {
             }
 
-            return resumeRes;
+            return false;
         }
 
 
@@ -172,28 +138,21 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static bool Remove(int id)
         {
-            bool removeRes = false;
             try
             {
-                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
-                if (jobInfo?.Id > 0)
+                if (id == 0)
                 {
-                    JobKey jobKey = new JobKey(jobInfo.JobName, jobInfo.JobName);
-                    TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
+                    return false;
+                }
 
-                    Scheduler.PauseTrigger(triggerKey);
-                    Scheduler.UnscheduleJob(triggerKey);
-                    Scheduler.DeleteJob(jobKey);
-                    jobInfo.State = 3;
-                    //修改数据库
-                    int dbRes = JobInfoDb.UpdateJobState(jobInfo);
-                    if (dbRes == 0)
+                string path = @"http://localhost:25250/api/job/remove?id=" + id;
+                string code = HttpClientHelper.GetString(path);
+                if (Convert.ToInt32(code) == 200)
+                {
+                    int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 3, Id = id });
+                    if (dbRes > 0)
                     {
-                        //TODO:数据库修改失败,记录日志
-                    }
-                    else
-                    {
-                        removeRes = true;
+                        return true;
                     }
                 }
             }
@@ -201,7 +160,7 @@ namespace Go.Job.Web.Helper
             {
             }
 
-            return removeRes;
+            return false;
         }
 
 
@@ -218,21 +177,21 @@ namespace Go.Job.Web.Helper
                 }
                 else
                 {
-                    var triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
+                    TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
 
                     TriggerBuilder tiggerBuilder = TriggerBuilder.Create().WithIdentity(jobInfo.JobName, jobInfo.JobName);
 
 
                     tiggerBuilder.WithSimpleSchedule(simple =>
                     {
-                            //立刻执行一次,使用总次数
-                            simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires();
+                        //立刻执行一次,使用总次数
+                        simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires();
                     });
 
                     tiggerBuilder.StartNow();
 
                     ITrigger trigger = tiggerBuilder.Build();
-                    
+
                     Scheduler.RescheduleJob(triggerKey, trigger);
                     updateRes = true;
                 }

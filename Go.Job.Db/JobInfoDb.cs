@@ -89,7 +89,7 @@ namespace Go.Job.Db
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e);
             }
             return res;
         }

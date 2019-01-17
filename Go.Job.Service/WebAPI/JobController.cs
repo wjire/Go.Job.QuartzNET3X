@@ -1,14 +1,67 @@
-﻿using Go.Job.Service.Factory;
+﻿using System;
 using System.Web.Http;
 
 namespace Go.Job.Service.WebAPI
 {
+
     public class JobController : ApiController
     {
         [HttpGet]
-        public int Run(int id)
+        public int Add(int id, string name)
         {
-            return JobFactory.AddJob(id) ? 200 : 400;
+            try
+            {
+                return JobPoolManager.Instance.CreateJob(id) ? 200 : 400;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 400;
+            }
+        }
+
+        [HttpGet]
+        public int Pause(int id)
+        {
+            try
+            {
+                return JobPoolManager.Instance.Pause(id) ? 200 : 400;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 400;
+            }
+        }
+
+
+        [HttpGet]
+        public int Resume(int id)
+        {
+            try
+            {
+                return JobPoolManager.Instance.Resume(id) ? 200 : 400;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 400;
+            }
+        }
+
+
+        [HttpGet]
+        public int Remove(int id)
+        {
+            try
+            {
+                return JobPoolManager.Instance.Remove(id) ? 200 : 400;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 400;
+            }
         }
     }
 }

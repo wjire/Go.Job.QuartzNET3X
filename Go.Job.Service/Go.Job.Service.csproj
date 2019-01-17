@@ -76,7 +76,6 @@
   <ItemGroup>
     <Compile Include="AppDomainLoader.cs" />
     <Compile Include="Config\SchedulerConfig.cs" />
-    <Compile Include="Factory\JobFactory.cs" />
     <Compile Include="Lib\JobString.cs" />
     <Compile Include="Config\ScanJobConfig.cs" />
     <Compile Include="Helper\ScanJobStartUp.cs" />

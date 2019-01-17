@@ -15,7 +15,7 @@ namespace Go.Job.Service.WebAPI
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{Controller}/{id}",
+                routeTemplate: "api/{Controller}/{action}/{id}",
                 defaults: new
                 {
                     id = RouteParameter.Optional

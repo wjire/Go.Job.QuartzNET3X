@@ -30,7 +30,7 @@
                     <label for="LoginName" class="col-sm-2 control-label">执行计划</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="Cron" id="Cron"
-                               placeholder="请输入执行计划" />
+                               placeholder="请输入执行计划" readonly/>
                     </div>
                 </div>
 
@@ -187,6 +187,7 @@
                         if (item.State == 0 || item.State == 3)
                         {
                             <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id,'@item.JobName')">启动</a>
+                            @*<a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id,'@item.JobName')">启动</a>*@
                             <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
                         }
                         if (item.State == 1)
@@ -242,9 +243,29 @@
         });
     });
 
-    function Run(id, name) {
-        console.log(id);
+    function Run(id,name) {
+      
         if (id == undefined || id == null || id == "") return;
+
+        //$.ajax({
+        //    url: "/Home/Update/" + id,
+        //    type: "Get",
+        //    dataType: 'json',
+        //    success: function (result) {
+        //        console.log(result);
+        //        $("#collapseOneUpdate .Id").val(result.Id);
+        //        $("#collapseOneUpdate .JobName").val(result.JobName);
+        //        $("#collapseOneUpdate .Cron").val(result.Cron);
+        //        $("#collapseOneUpdate .Second").val(result.Second);
+        //        $("#collapseOneUpdate .AssemblyPath").val(result.AssemblyPath);
+        //        $("#collapseOneUpdate .ClassTypePath").val(result.ClassTypePath);
+        //        $("#divUpdate").show();
+        //    },
+        //    error: function (e) {
+        //        alert(e);
+        //    }
+        //});
+        
         location.href = "/Home/Run?id=" + id+"&name="+name;
     }
 

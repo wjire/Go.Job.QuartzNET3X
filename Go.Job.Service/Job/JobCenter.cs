@@ -27,21 +27,15 @@ namespace Go.Job.Service.Job
                         catch (AppDomainUnloadedException ex)
                         {
                             Console.WriteLine("AppDomain 已经卸载");
-                            Console.WriteLine("从job池删除该job");
-                            JobPoolManager.Instance.RemoveJobRuntimeInfoAndReAdd(jobRuntimeInfo);
+                            Console.WriteLine("重新创建jobRuntimeInfo,替换job池中的jobRuntimeInfo");
+                            JobPoolManager.Instance.UpdateJobRuntimeInfo(jobRuntimeInfo);
                         }
                     }
-                    //如果没有 ,创建
+                    //如果job池没有该job
+                    //TODO:注意,虽然job池没有该job,但是触发器和jobDetail是有的
                     else
                     {
-                        var jobInfo = JobInfoDb.GetJobInfo(jobId);
-                        if (jobInfo == null || jobInfo.Id == 0)
-                        {
-                            throw new Exception($"获取JobInfo失败, id = {jobId}");
-                        }
-
-                        jobRuntimeInfo = JobPoolManager.Instance.CreateJobRuntimeInfo(jobInfo);
-                        JobPoolManager.Instance.Add(jobId, jobRuntimeInfo);
+                       JobPoolManager.Instance.CreateJob(jobId);
                     }
 
                 }
