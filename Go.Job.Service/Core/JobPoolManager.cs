@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Threading;
-using Go.Job.Db;
+﻿using Go.Job.Db;
 using Go.Job.Model;
 using Go.Job.Service.Job;
 using Quartz;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Go.Job.Service
 {
     public class JobPoolManager : IDisposable
     {
-        internal static ConcurrentDictionary<int, JobRuntimeInfo> JobRuntimePool =
-            new ConcurrentDictionary<int, JobRuntimeInfo>();
+        internal static ConcurrentDictionary<int, JobRuntimeInfo> JobRuntimePool = new ConcurrentDictionary<int, JobRuntimeInfo>();
 
         internal static IScheduler Scheduler;
 
@@ -156,18 +155,7 @@ namespace Go.Job.Service
                 Scheduler.Shutdown();
             }
         }
-
-
-        /// <summary>
-        /// 执行某个job,将job添加到job池.
-        /// </summary>
-        /// <param name="jobInfo"></param>
-        public void Run(JobInfo jobInfo)
-        {
-            AddJob(jobInfo);
-        }
-
-
+        
         /// <summary>
         /// 暂停job
         /// </summary>
@@ -241,12 +229,47 @@ namespace Go.Job.Service
         /// 编辑 job. 该操作 = Remove + Run 
         /// </summary>
         /// <param name="jobInfo"></param>
-        public void Update(JobInfo jobInfo)
+        public bool Update(JobInfo jobInfo)
         {
-            Remove(jobInfo.Id);
-            Run(jobInfo);
-            //TODO:记录日志
+            lock (_lock)
+            {
+                TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
+
+                TriggerBuilder tiggerBuilder = TriggerBuilder.Create().WithIdentity(jobInfo.JobName, jobInfo.JobName);
+
+                if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
+                {
+                    //错过的不管了,剩下的按正常执行
+                    tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionDoNothing());
+                }
+                else
+                {
+                    tiggerBuilder.WithSimpleSchedule(simple =>
+                    {
+                        //立刻执行一次,使用总次数
+                        simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever()
+                            .WithMisfireHandlingInstructionIgnoreMisfires();
+                    });
+                }
+
+                if (jobInfo.StartTime > DateTime.Now)
+                {
+                    tiggerBuilder.StartAt(jobInfo.StartTime);
+                }
+                else
+                {
+                    tiggerBuilder.StartNow();
+                }
+
+                ITrigger trigger = tiggerBuilder.Build();
+
+                Scheduler.RescheduleJob(triggerKey, trigger);
+                return true;
+            }
         }
+
+
+
 
 
         /// <summary>

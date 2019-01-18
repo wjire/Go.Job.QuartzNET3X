@@ -26,7 +26,6 @@ namespace Go.Job.Db
         public static List<JobInfo> GetJobInfoList()
         {
             List<JobInfo> list = null;
-            var sql = " select  ";
             using (SqlSugarClient db = new SqlSugarClient(config))
             {
                 list = db.Queryable<JobInfo>().ToList();
@@ -51,6 +50,7 @@ namespace Go.Job.Db
 
         public static int AddJobInfo(JobInfo jobInfo)
         {
+            jobInfo.CreateTime = DateTime.Now;
             using (SqlSugarClient db = new SqlSugarClient(config))
             {
                 return db.Insertable(jobInfo).ExecuteCommand();
@@ -65,7 +65,7 @@ namespace Go.Job.Db
             {
                 using (SqlSugarClient db = new SqlSugarClient(config))
                 {
-                    res = db.Updateable(jobInfo).ExecuteCommand();
+                    res = db.Updateable(jobInfo).WhereColumns(w=>new { jobInfo.Id}).ExecuteCommand();
                 }
             }
             catch (Exception e)

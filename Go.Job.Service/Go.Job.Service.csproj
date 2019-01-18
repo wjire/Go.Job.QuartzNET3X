@@ -74,18 +74,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppDomainLoader.cs" />
+    <Compile Include="Core\AppDomainLoader.cs" />
     <Compile Include="Config\SchedulerConfig.cs" />
     <Compile Include="Lib\JobString.cs" />
     <Compile Include="Config\ScanJobConfig.cs" />
-    <Compile Include="Helper\ScanJobStartUp.cs" />
+    <Compile Include="Deleted\ScanJobStartUp.cs" />
     <Compile Include="Listener\MyJobListenerSupport.cs" />
     <Compile Include="Job\JobCenter.cs" />
-    <Compile Include="JobPoolManager.cs" />
-    <Compile Include="JobServicesContainer.cs" />
+    <Compile Include="Core\JobPoolManager.cs" />
+    <Compile Include="Deleted\JobServicesContainer.cs" />
     <Compile Include="Lib\JobEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Job\ScanJob.cs" />
+    <Compile Include="Deleted\ScanJob.cs" />
     <Compile Include="Factory\SchedulerFactory.cs" />
     <Compile Include="ServiceProvider\IDbProvider.cs" />
     <Compile Include="WebAPI\JobController.cs" />
@@ -109,6 +109,9 @@
       <Project>{d47524c9-3f63-40c6-b368-72e3e8d0332d}</Project>
       <Name>Go.Job.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helper\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

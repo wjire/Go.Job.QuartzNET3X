@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Go.Job.Service.Job
 {
+    [DisallowConcurrentExecution]
     public class JobCenter : IJob
     {
         public Task Execute(IJobExecutionContext context)

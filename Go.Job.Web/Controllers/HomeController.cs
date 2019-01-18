@@ -21,9 +21,9 @@ namespace Go.Job.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Run(int id, string name)
+        public ActionResult Run(int id)
         {
-            JobHelper.Run(id, name);
+            JobHelper.Run(id);
             return RedirectToAction("Index", "Home");
         }
 
