@@ -18,7 +18,7 @@ namespace Go.Job.Db
                 ConnectionString = _connStr,
                 DbType = DbType.MySql,
                 IsAutoCloseConnection = true,
-                InitKeyType = InitKeyType.Attribute //从实体特性中读取主键自增列信息
+                //InitKeyType = InitKeyType.Attribute //从实体特性中读取主键自增列信息
             };
         }
 
@@ -65,7 +65,7 @@ namespace Go.Job.Db
             {
                 using (SqlSugarClient db = new SqlSugarClient(config))
                 {
-                    res = db.Updateable(jobInfo).WhereColumns(w=>new { jobInfo.Id}).ExecuteCommand();
+                    res = db.Updateable(jobInfo).ExecuteCommand();
                 }
             }
             catch (Exception e)

@@ -155,7 +155,7 @@ namespace Go.Job.Service
                 Scheduler.Shutdown();
             }
         }
-        
+
         /// <summary>
         /// 暂停job
         /// </summary>
@@ -226,7 +226,7 @@ namespace Go.Job.Service
 
 
         /// <summary>
-        /// 编辑 job. 该操作 = Remove + Run 
+        /// 编辑 job. 更新触发器
         /// </summary>
         /// <param name="jobInfo"></param>
         public bool Update(JobInfo jobInfo)
@@ -234,7 +234,6 @@ namespace Go.Job.Service
             lock (_lock)
             {
                 TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
-
                 TriggerBuilder tiggerBuilder = TriggerBuilder.Create().WithIdentity(jobInfo.JobName, jobInfo.JobName);
 
                 if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
@@ -246,9 +245,7 @@ namespace Go.Job.Service
                 {
                     tiggerBuilder.WithSimpleSchedule(simple =>
                     {
-                        //立刻执行一次,使用总次数
-                        simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever()
-                            .WithMisfireHandlingInstructionIgnoreMisfires();
+                        simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires();
                     });
                 }
 
@@ -262,15 +259,11 @@ namespace Go.Job.Service
                 }
 
                 ITrigger trigger = tiggerBuilder.Build();
-
                 Scheduler.RescheduleJob(triggerKey, trigger);
                 return true;
             }
         }
-
-
-
-
+        
 
         /// <summary>
         /// 从job池中移除某个job,同时卸载该job所在的AppDomain

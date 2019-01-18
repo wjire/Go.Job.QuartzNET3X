@@ -75,7 +75,6 @@ namespace Go.Job.Service.WebAPI
             }
             catch (Exception e)
             {
-
                 Console.WriteLine(e);
                 return 400;
             }
