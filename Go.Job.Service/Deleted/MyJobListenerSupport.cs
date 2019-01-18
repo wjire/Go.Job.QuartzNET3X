@@ -1,8 +1,9 @@
-﻿using Quartz;
-using Quartz.Listener;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Go.Job.Model;
+using Quartz;
+using Quartz.Listener;
 
 namespace Go.Job.Service.Listener
 {
@@ -17,7 +18,10 @@ namespace Go.Job.Service.Listener
 
         public override async Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken = default(CancellationToken))
         {
-            Console.WriteLine($"{DateTime.Now} : {Name} is JobWasExecuted ");
+            JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo ?? new JobInfo();
+            var app = JobPoolManager.Instance.GetJobFromPool(jobInfo.Id).AppDomain;
+            var times = app.MonitoringTotalProcessorTime;
+            Console.WriteLine($"{DateTime.Now} . times : {times.TotalSeconds}");
             await base.JobWasExecuted(context, jobException, cancellationToken);
         }
 

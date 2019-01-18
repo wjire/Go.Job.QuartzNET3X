@@ -1,7 +1,10 @@
 ﻿using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Go.Job.Service.Config;
+using Go.Job.Service.Listener;
+using Quartz;
 using Quartz.Impl;
+using Quartz.Impl.Matchers;
 
 namespace Go.Job.Service
 {
@@ -50,6 +53,7 @@ namespace Go.Job.Service
                 JobPoolManager.Scheduler = await new StdSchedulerFactory(_properties).GetScheduler();
             }
 
+            JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
             if (!JobPoolManager.Scheduler.IsStarted)
             {
                 await JobPoolManager.Scheduler.Start();

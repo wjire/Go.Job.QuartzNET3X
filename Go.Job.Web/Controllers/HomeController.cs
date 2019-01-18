@@ -62,5 +62,19 @@ namespace Go.Job.Web.Controllers
             JobHelper.Remove(id);
             return RedirectToAction("Index", "Home");
         }
+
+
+        [HttpGet]
+        public ActionResult Upgrade(int id)
+        {
+            JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
+            return Json(jobInfo, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult UpgradeJob(JobInfo jobInfo)
+        {
+            JobHelper.Upgrade(jobInfo);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

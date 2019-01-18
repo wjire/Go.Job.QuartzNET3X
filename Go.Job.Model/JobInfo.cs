@@ -2,7 +2,7 @@
 
 namespace Go.Job.Model
 {
-
+    [Serializable]
     public class JobInfo
     {
         public int Id { get; set; }

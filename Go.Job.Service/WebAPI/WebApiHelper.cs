@@ -7,10 +7,9 @@ namespace Go.Job.Service.WebAPI
     {
         public static void Start(string address)
         {
-            string baseAddress = "http://localhost:25250/";
-            using (WebApp.Start(url: baseAddress))
+            using (WebApp.Start(url: address))
             {
-                Console.WriteLine("webapi监听地址已启动");
+                Console.WriteLine($"webapi监听已启动, address : {address}");
                 Console.ReadLine();
             }
         }

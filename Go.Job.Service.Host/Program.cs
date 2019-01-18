@@ -12,7 +12,7 @@ namespace Go.Job.Service.Host
             {
                 //new SchedulerFactory(new SchedulerThreadPoolConfig(), new SchedulerRemoteExporterConfig()).CreateSchedulerAndStart().Wait();
 
-                new SchedulerFactory(new SchedulerThreadPoolConfig(), new SchedulerRemoteExporterConfig(), new SchedulerJobStoreConfig()).CreateSchedulerAndStart().Wait();
+                new SchedulerFactory(new SchedulerThreadPoolConfig(), null, new SchedulerJobStoreConfig()).CreateSchedulerAndStart().Wait();
                 Console.WriteLine("作业调度服务已启动!");
                 string userCommand = string.Empty;
                 while (userCommand != "exit")
@@ -21,9 +21,8 @@ namespace Go.Job.Service.Host
                     {
                         Console.WriteLine("     非退出指令,自动忽略...");
                     }
-
-
-                    string address = "http://localhost:25250/";
+                    
+                    string address = "http://localhost:25251/";
                     WebApiHelper.Start(address);
                     userCommand = Console.ReadLine();
                 }

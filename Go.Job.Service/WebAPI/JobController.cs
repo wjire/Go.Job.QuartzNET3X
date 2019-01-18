@@ -50,7 +50,6 @@ namespace Go.Job.Service.WebAPI
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>
-        [HttpGet]
         public int Resume(JobInfo jobInfo)
         {
             try
