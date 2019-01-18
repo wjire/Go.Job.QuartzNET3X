@@ -22,7 +22,7 @@ namespace Go.Job.Service.Host
                         Console.WriteLine("     非退出指令,自动忽略...");
                     }
                     
-                    string address = "http://localhost:25251/";
+                    string address = "http://localhost:25250/";
                     WebApiHelper.Start(address);
                     userCommand = Console.ReadLine();
                 }
