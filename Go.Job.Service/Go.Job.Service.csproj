@@ -81,8 +81,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\JobStoreConfig.cs" />
+    <Compile Include="Config\RemoteConfig.cs" />
+    <Compile Include="Config\SchedulerConfigExtensions.cs" />
     <Compile Include="Core\AppDomainLoader.cs" />
-    <Compile Include="Config\SchedulerConfig.cs" />
+    <Compile Include="Config\ThreadPoolConfig.cs" />
     <Compile Include="Lib\JobString.cs" />
     <Compile Include="Deleted\ScanJobConfig.cs" />
     <Compile Include="Deleted\ScanJobStartUp.cs" />

@@ -10,9 +10,9 @@ namespace Go.Job.Service.Host
         {
             try
             {
-                //new SchedulerFactory(new SchedulerThreadPoolConfig(), new SchedulerRemoteExporterConfig()).CreateSchedulerAndStart().Wait();
 
-                new SchedulerFactory(new SchedulerThreadPoolConfig(), null, new SchedulerJobStoreConfig()).CreateSchedulerAndStart().Wait();
+                new SchedulerFactory().AddThreadPoolConfig().AddRemoteConfig().AddJobStoreConfig().Run().Wait();
+
                 Console.WriteLine("作业调度服务已启动!");
                 string userCommand = string.Empty;
                 while (userCommand != "exit")

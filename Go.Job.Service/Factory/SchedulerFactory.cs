@@ -10,56 +10,9 @@ namespace Go.Job.Service
 {
     public sealed class SchedulerFactory
     {
-        private readonly NameValueCollection _properties = new NameValueCollection();
-
-        public SchedulerFactory() : this(null)
-        {
-        }
-
-        public SchedulerFactory(SchedulerThreadPoolConfig threadPoolConfig) : this(threadPoolConfig, null)
-        {
-        }
-
-        public SchedulerFactory(SchedulerThreadPoolConfig threadPoolConfig, SchedulerRemoteExporterConfig remoteExporterConfig) : this(threadPoolConfig, remoteExporterConfig, null)
-        {
-        }
-
-        public SchedulerFactory(SchedulerThreadPoolConfig threadPoolConfig, SchedulerRemoteExporterConfig remoteExporterConfig, SchedulerJobStoreConfig jobStoreConfig)
-        {
-            if (threadPoolConfig != null)
-            {
-                _properties.Add(threadPoolConfig.Properties);
-            }
-
-            if (remoteExporterConfig != null)
-            {
-                _properties.Add(remoteExporterConfig.Properties);
-            }
-
-            if (jobStoreConfig != null)
-            {
-                _properties.Add(jobStoreConfig.Properties);
-            }
-        }
-
-        public async Task CreateSchedulerAndStart()
-        {
-            if (_properties == null)
-            {
-                JobPoolManager.Scheduler = await new StdSchedulerFactory().GetScheduler();
-            }
-            else
-            {
-                JobPoolManager.Scheduler = await new StdSchedulerFactory(_properties).GetScheduler();
-            }
-
-            JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
-            if (!JobPoolManager.Scheduler.IsStarted)
-            {
-                await JobPoolManager.Scheduler.Start();
-            }
-        }
-
+        public readonly NameValueCollection _properties = new NameValueCollection();
+        
+        
         //public async Task CreateSchedulerAndStart()
         //{
         //JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
@@ -75,5 +28,27 @@ namespace Go.Job.Service
         //    }
         //}
         //}
+
+
+
+        public async Task Run()
+        {
+            if (_properties == null)
+            {
+                JobPoolManager.Scheduler = await new StdSchedulerFactory().GetScheduler();
+            }
+            else
+            {
+                JobPoolManager.Scheduler = await new StdSchedulerFactory(_properties).GetScheduler();
+            }
+            
+            //设置监听器代码
+            JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
+
+            if (!JobPoolManager.Scheduler.IsStarted)
+            {
+                await JobPoolManager.Scheduler.Start();
+            }
+        }
     }
 }

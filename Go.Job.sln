@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWCF", "TestWCF\TestWCF.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestQuartz", "TestQuartz\TestQuartz.csproj", "{D4082AFB-101E-43FA-A5E7-E533BE976404}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{FAB4BC37-D111-400E-8C0D-D25579F620E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{D4082AFB-101E-43FA-A5E7-E533BE976404}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4082AFB-101E-43FA-A5E7-E533BE976404}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4082AFB-101E-43FA-A5E7-E533BE976404}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAB4BC37-D111-400E-8C0D-D25579F620E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAB4BC37-D111-400E-8C0D-D25579F620E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAB4BC37-D111-400E-8C0D-D25579F620E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAB4BC37-D111-400E-8C0D-D25579F620E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
