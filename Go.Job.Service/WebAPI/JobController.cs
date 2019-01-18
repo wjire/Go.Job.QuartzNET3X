@@ -1,18 +1,23 @@
-﻿using Go.Job.Model;
-using System;
+﻿using System;
 using System.Web.Http;
+using Go.Job.Model;
 
 namespace Go.Job.Service.WebAPI
 {
 
     public class JobController : ApiController
     {
-        [HttpGet]
-        public int Run(int id)
+        /// <summary>
+        /// 启动
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public int Run(JobInfo jobInfo)
         {
             try
             {
-                return JobPoolManager.Instance.CreateJob(id) ? 200 : 400;
+                return JobPoolManager.Instance.CreateJob(jobInfo) ? 200 : 400;
             }
             catch (Exception e)
             {
@@ -21,12 +26,16 @@ namespace Go.Job.Service.WebAPI
             }
         }
 
+        /// <summary>
+        /// 暂停
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public int Pause(int id)
         {
             try
             {
-                //return JobPoolManager.Instance.Remove(id) ? 200 : 400;
                 return JobPoolManager.Instance.Pause(id) ? 200 : 400;
             }
             catch (Exception e)
@@ -36,14 +45,17 @@ namespace Go.Job.Service.WebAPI
             }
         }
 
-
+        /// <summary>
+        /// 恢复
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <returns></returns>
         [HttpGet]
-        public int Resume(int id)
+        public int Resume(JobInfo jobInfo)
         {
             try
             {
-                //return JobPoolManager.Instance.CreateJob(id) ? 200 : 400;
-                return JobPoolManager.Instance.Resume(id) ? 200 : 400;
+                return JobPoolManager.Instance.Resume(jobInfo) ? 200 : 400;
             }
             catch (Exception e)
             {
@@ -52,7 +64,11 @@ namespace Go.Job.Service.WebAPI
             }
         }
 
-
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public int Remove(int id)
         {
@@ -67,13 +83,36 @@ namespace Go.Job.Service.WebAPI
             }
         }
 
-
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <returns></returns>
         [HttpPost]
         public int Update(JobInfo jobInfo)
         {
             try
             {
                 return JobPoolManager.Instance.Update(jobInfo) ? 200 : 400;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 400;
+            }
+        }
+
+        /// <summary>
+        /// 更换版本
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public int Upgrade(JobInfo jobInfo)
+        {
+            try
+            {
+                return JobPoolManager.Instance.Upgrade(jobInfo) ? 200 : 400;
             }
             catch (Exception e)
             {

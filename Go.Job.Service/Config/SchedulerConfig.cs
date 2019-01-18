@@ -41,9 +41,7 @@ namespace Go.Job.Service.Config
 
         public SchedulerJobStoreConfig()
         {
-
-            //===持久化=== 有问题,勿用
-
+            //===持久化=== 
             Properties["quartz.serializer.type"] = "binary";
             //Properties["quartz.serializer.type"] = "json";
 
@@ -56,12 +54,14 @@ namespace Go.Job.Service.Config
             //数据源名称
             Properties["quartz.jobStore.dataSource"] = "myDS";
             //连接字符串
-            Properties["quartz.dataSource.myDS.connectionString"] = "server=localhost;database=myquartz;user=root;pwd=admin";
+            //Properties["quartz.dataSource.myDS.connectionString"] = "server=localhost;database=myquartz;user=root;pwd=admin";
+            Properties["quartz.dataSource.myDS.connectionString"] = "server=localhost;database=myquartz;user=root";
             //server版本
             Properties["quartz.dataSource.myDS.provider"] = "MySql";
 
             Properties["quartz.scheduler.instanceId"] = "AUTO";
 
+            //哑火忍耐事件 
             Properties["quartz.jobStore.misfireThreshold"] = "2000";
 
             //集群配置

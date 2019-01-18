@@ -1,11 +1,7 @@
 ﻿using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Go.Job.Service.Config;
-using Go.Job.Service.Lib;
-using Go.Job.Service.Listener;
-using Quartz;
 using Quartz.Impl;
-using Quartz.Impl.Matchers;
 
 namespace Go.Job.Service
 {
@@ -45,11 +41,6 @@ namespace Go.Job.Service
 
         public async Task CreateSchedulerAndStart()
         {
-            await CreateSchedulerAndStart(null);
-        }
-
-        public async Task CreateSchedulerAndStart(ScanJobConfig scanJobConfig)
-        {
             if (_properties == null)
             {
                 JobPoolManager.Scheduler = await new StdSchedulerFactory().GetScheduler();
@@ -63,19 +54,22 @@ namespace Go.Job.Service
             {
                 await JobPoolManager.Scheduler.Start();
             }
-
-            //JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
-
-            //暂时注释掉 扫描job 代码
-            //if (scanJobConfig != null)
-            //{
-            //    IJobDetail scanJobDetail = await JobPoolManager.Scheduler.GetJobDetail(new JobKey(JobString.ScanJob, JobString.ScanJob));
-            //    if (scanJobDetail == null)
-            //    {
-            //        JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("ScanJob"), KeyMatcher<JobKey>.KeyEquals(new JobKey("ScanJob", "ScanJob")));
-            //        await ScanJobStartUp.StartScanJob(scanJobConfig);
-            //    }
-            //}
         }
+
+        //public async Task CreateSchedulerAndStart()
+        //{
+        //JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
+
+        //暂时注释掉 扫描job 代码
+        //if (scanJobConfig != null)
+        //{
+        //    IJobDetail scanJobDetail = await JobPoolManager.Scheduler.GetJobDetail(new JobKey(JobString.ScanJob, JobString.ScanJob));
+        //    if (scanJobDetail == null)
+        //    {
+        //        JobPoolManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("ScanJob"), KeyMatcher<JobKey>.KeyEquals(new JobKey("ScanJob", "ScanJob")));
+        //        await ScanJobStartUp.StartScanJob(scanJobConfig);
+        //    }
+        //}
+        //}
     }
 }

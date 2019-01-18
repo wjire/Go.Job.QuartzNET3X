@@ -1,8 +1,7 @@
-﻿using Go.Job.Db;
+﻿using System;
+using System.Threading.Tasks;
 using Go.Job.Model;
 using Quartz;
-using System;
-using System.Threading.Tasks;
 
 namespace Go.Job.Service.Job
 {
@@ -13,9 +12,9 @@ namespace Go.Job.Service.Job
         {
             try
             {
-                int jobId = context.JobDetail.JobDataMap.GetInt("JobId");
+                JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo ?? new JobInfo();
                 //从作业调度容器里查找，如果找到，则运行
-                JobRuntimeInfo jobRuntimeInfo = JobPoolManager.Instance.GetJobFromPool(jobId);
+                JobRuntimeInfo jobRuntimeInfo = JobPoolManager.Instance.GetJobFromPool(jobInfo.Id);
 
                 try
                 {
@@ -27,16 +26,16 @@ namespace Go.Job.Service.Job
                         }
                         catch (AppDomainUnloadedException ex)
                         {
-                            Console.WriteLine("AppDomain 已经卸载");
+                            Console.WriteLine(ex);
                             Console.WriteLine("重新创建jobRuntimeInfo,替换job池中的jobRuntimeInfo");
                             JobPoolManager.Instance.UpdateJobRuntimeInfo(jobRuntimeInfo);
                         }
                     }
                     //如果job池没有该job
-                    //TODO:注意,虽然job池没有该job,但是触发器和jobDetail是有的
+                    //TODO:注意,虽然job池没有该job,但是触发器和jobDetail是有的,不然也不会进到这个job的 execute 方法
                     else
                     {
-                       JobPoolManager.Instance.CreateJob(jobId);
+                        JobPoolManager.Instance.CreateJob(jobInfo);
                     }
 
                 }

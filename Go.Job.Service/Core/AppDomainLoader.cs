@@ -1,5 +1,4 @@
 ﻿using System;
-using Go.Job.BaseJob;
 
 namespace Go.Job.Service
 {
@@ -11,23 +10,23 @@ namespace Go.Job.Service
         /// <summary>
         /// 加载应用程序，获取作业实例
         /// </summary>
-        /// <param name="dllPath">作业实例程序集的物理路径,含扩展名</param>
-        /// <param name="classPath">作业实例的完全限定名,含命名空间</param>
+        /// <param name="assemblyPath">作业实例程序集的物理路径,含扩展名</param>
+        /// <param name="classType">作业实例的完全限定名,含命名空间</param>
         /// <param name="appDomain"></param>
         /// <returns></returns>
-        public static BaseJob.BaseJob Load(string dllPath, string classPath, out AppDomain appDomain)
+        public static BaseJob.BaseJob Load(string assemblyPath, string classType, out AppDomain appDomain)
         {
             AppDomainSetup setup = new AppDomainSetup();
-            if (System.IO.File.Exists($"{dllPath}.config"))
+            if (System.IO.File.Exists($"{assemblyPath}.config"))
             {
-                setup.ConfigurationFile = $"{dllPath}.config";
+                setup.ConfigurationFile = $"{assemblyPath}.config";
             }
             setup.ShadowCopyFiles = "true";
-            setup.ApplicationBase = System.IO.Path.GetDirectoryName(dllPath);
-            string appDomainName = System.IO.Path.GetFileName(dllPath);
+            setup.ApplicationBase = System.IO.Path.GetDirectoryName(assemblyPath);
+            string appDomainName = System.IO.Path.GetFileName(assemblyPath);
             appDomain = AppDomain.CreateDomain(appDomainName, null, setup);
             AppDomain.MonitoringIsEnabled = true;
-            BaseJob.BaseJob obj = (BaseJob.BaseJob)appDomain.CreateInstanceFromAndUnwrap(dllPath, classPath);
+            BaseJob.BaseJob obj = (BaseJob.BaseJob)appDomain.CreateInstanceFromAndUnwrap(assemblyPath, classType);
             return obj;
         }
 

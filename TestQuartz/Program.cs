@@ -18,22 +18,21 @@ namespace TestQuartz
 
             try
             {
-
                 NewMethod(sche, "job1", "job1Ass", "job1Class");
 
-                NewMethod(sche, "job2", "job2Ass", "job2Class");
+                //NewMethod(sche, "job2", "job2Ass", "job2Class");
 
 
-                Thread.Sleep(5000);
-                var triKey = new TriggerKey("job2", "job2");
-                var jobKey = new JobKey("job2", "job2");
-                sche.PauseJob(jobKey);
-                //sche.PauseTrigger(triKey);
+                //Thread.Sleep(5000);
+                //var triKey = new TriggerKey("job2", "job2");
+                //var jobKey = new JobKey("job2", "job2");
+                //sche.PauseJob(jobKey);
+                ////sche.PauseTrigger(triKey);
 
-                Update(sche, "job2", "newjob2", "newjob2");
+                //Update(sche, "job2", "newjob2", "newjob2");
 
-                var count = sche.GetJobKeys(Quartz.Impl.Matchers.GroupMatcher<JobKey>.GroupEquals(HelloJob)).Result.Count;
-                Console.WriteLine(count);
+                //var count = sche.GetJobKeys(Quartz.Impl.Matchers.GroupMatcher<JobKey>.GroupEquals(HelloJob)).Result.Count;
+                //Console.WriteLine(count);
             }
             catch (Exception e)
             {
@@ -52,6 +51,7 @@ namespace TestQuartz
                 ["name"] = name,
                 ["assemblyPath"] = assemblyPath,
                 ["classTypePath"] = classTypePath,
+                ["person"] = new Person()
             };
 
             //创建扫描Job
@@ -119,12 +119,19 @@ namespace TestQuartz
         public Task Execute(IJobExecutionContext context)
         {
             var map = context.JobDetail.JobDataMap;
-            //map = context.Trigger.JobDataMap;
-            Console.WriteLine($"{DateTime.Now}  {map["name"]} : {map["assemblyPath"]} ,{map["classTypePath"]}");
+            Console.WriteLine($"{DateTime.Now}  {map["name"]} : {map["assemblyPath"]} ,{map["classTypePath"]} ");
+            Console.WriteLine($"{DateTime.Now}  {((Person)map["person"]).Id} ,{((Person)map["person"]).Name}");
             return Task.FromResult(0);
         }
     }
 
 
+    class Person
+    {
+        public int Id { get; set; } = 1;
+
+        public string Name { get; set; } = "wjire";
+
+    }
 
 }

@@ -79,15 +79,15 @@
     <Compile Include="Lib\JobString.cs" />
     <Compile Include="Deleted\ScanJobConfig.cs" />
     <Compile Include="Deleted\ScanJobStartUp.cs" />
-    <Compile Include="Listener\MyJobListenerSupport.cs" />
-    <Compile Include="Job\JobCenter.cs" />
+    <Compile Include="Deleted\MyJobListenerSupport.cs" />
+    <Compile Include="Core\JobCenter.cs" />
     <Compile Include="Core\JobPoolManager.cs" />
     <Compile Include="Deleted\JobServicesContainer.cs" />
     <Compile Include="Lib\JobEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Deleted\ScanJob.cs" />
     <Compile Include="Factory\SchedulerFactory.cs" />
-    <Compile Include="ServiceProvider\IDbProvider.cs" />
+    <Compile Include="Deleted\IDbProvider.cs" />
     <Compile Include="WebAPI\JobController.cs" />
     <Compile Include="WebAPI\Startup.cs" />
     <Compile Include="WebAPI\WebApiHelper.cs" />
@@ -101,17 +101,11 @@
       <Project>{e587a17a-a8f3-45d9-8274-57655c7881d5}</Project>
       <Name>Go.Job.BaseJob</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Go.Job.Db\Go.Job.Db.csproj">
-      <Project>{2E5B47B7-ABF3-4080-BCEB-B56124D890B5}</Project>
-      <Name>Go.Job.Db</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Go.Job.Model\Go.Job.Model.csproj">
       <Project>{d47524c9-3f63-40c6-b368-72e3e8d0332d}</Project>
       <Name>Go.Job.Model</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helper\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

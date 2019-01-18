@@ -1,8 +1,8 @@
-﻿using Go.Job.Db;
+﻿using System;
+using System.Collections.Specialized;
+using Go.Job.Db;
 using Go.Job.Model;
 using Quartz.Simpl;
-using System;
-using System.Collections.Specialized;
 
 namespace Go.Job.Web.Helper
 {
@@ -44,11 +44,14 @@ namespace Go.Job.Web.Helper
                     return false;
                 }
 
-                var jobInfo = JobInfoDb.GetJobInfo(id);
+                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 0)
                 {
-                    string path = @"http://localhost:25250/api/job/run?id=" + id;
-                    string code = HttpClientHelper.GetString(path);
+                    //string path = @"http://localhost:25250/api/job/run?id=" + id;
+                    //string code = HttpClientHelper.GetString(path);
+
+                    string path = @"http://localhost:25250/api/job/run";
+                    string code = HttpClientHelper.PostJson(path, jobInfo);
                     if (Convert.ToInt32(code) == 200)
                     {
                         int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
@@ -80,7 +83,7 @@ namespace Go.Job.Web.Helper
                     return false;
                 }
 
-                var jobInfo = JobInfoDb.GetJobInfo(id);
+                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 1)
                 {
                     string path = @"http://localhost:25250/api/job/pause?id=" + id;
@@ -116,11 +119,15 @@ namespace Go.Job.Web.Helper
                     return false;
                 }
 
-                var jobInfo = JobInfoDb.GetJobInfo(id);
+                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 2)
                 {
-                    string path = @"http://localhost:25250/api/job/resume?id=" + id;
-                    string code = HttpClientHelper.GetString(path);
+                    //string path = @"http://localhost:25250/api/job/resume?id=" + id;
+                    //string code = HttpClientHelper.GetString(path);
+
+                    string path = @"http://localhost:25250/api/job/resume";
+                    string code = HttpClientHelper.PostJson(path, jobInfo);
+
                     if (Convert.ToInt32(code) == 200)
                     {
                         int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
@@ -154,7 +161,7 @@ namespace Go.Job.Web.Helper
                     return false;
                 }
 
-                var jobInfo = JobInfoDb.GetJobInfo(id);
+                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 if (jobInfo != null && jobInfo.Id == id && jobInfo.State != 3)
                 {
                     string path = @"http://localhost:25250/api/job/remove?id=" + id;
@@ -189,7 +196,7 @@ namespace Go.Job.Web.Helper
                 if (jobInfo != null && jobInfo.Id > 0 && jobInfo.State != 1)
                 {
                     string path = @"http://localhost:25250/api/job/update";
-                    var code = HttpClientHelper.PostJson(path, jobInfo);
+                    string code = HttpClientHelper.PostJson(path, jobInfo);
                     if (Convert.ToInt32(code) == 200)
                     {
                         //更新成功后,状态改回来
@@ -201,8 +208,40 @@ namespace Go.Job.Web.Helper
                         }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return false;
+        }
 
 
+
+        /// <summary>
+        /// 更换版本
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <returns></returns>
+        public static bool Upgrade(JobInfo jobInfo)
+        {
+            try
+            {
+                if (jobInfo != null && jobInfo.Id > 0 && jobInfo.State == 3)
+                {
+                    string path = @"http://localhost:25250/api/job/upgrade";
+                    string code = HttpClientHelper.PostJson(path, jobInfo);
+                    if (Convert.ToInt32(code) == 200)
+                    {
+                        //更新成功后,状态改回来
+                        jobInfo.State = 1;
+                        int dbRes = JobInfoDb.UpdateJobInfo(jobInfo);
+                        if (dbRes > 0)
+                        {
+                            return true;
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {
