@@ -62,6 +62,7 @@ namespace Go.Job.Service.Config
 
             Properties["quartz.scheduler.instanceId"] = "AUTO";
 
+            Properties["quartz.jobStore.misfireThreshold"] = "2000";
 
             //集群配置
             Properties["quartz.jobStore.clustered"] = "true";

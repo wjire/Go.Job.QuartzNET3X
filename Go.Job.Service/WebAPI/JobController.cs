@@ -26,6 +26,7 @@ namespace Go.Job.Service.WebAPI
         {
             try
             {
+                //return JobPoolManager.Instance.Remove(id) ? 200 : 400;
                 return JobPoolManager.Instance.Pause(id) ? 200 : 400;
             }
             catch (Exception e)
@@ -41,6 +42,7 @@ namespace Go.Job.Service.WebAPI
         {
             try
             {
+                //return JobPoolManager.Instance.CreateJob(id) ? 200 : 400;
                 return JobPoolManager.Instance.Resume(id) ? 200 : 400;
             }
             catch (Exception e)

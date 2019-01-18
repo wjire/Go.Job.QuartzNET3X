@@ -77,7 +77,7 @@
     <Compile Include="Core\AppDomainLoader.cs" />
     <Compile Include="Config\SchedulerConfig.cs" />
     <Compile Include="Lib\JobString.cs" />
-    <Compile Include="Config\ScanJobConfig.cs" />
+    <Compile Include="Deleted\ScanJobConfig.cs" />
     <Compile Include="Deleted\ScanJobStartUp.cs" />
     <Compile Include="Listener\MyJobListenerSupport.cs" />
     <Compile Include="Job\JobCenter.cs" />

@@ -17,7 +17,10 @@ namespace Go.Job.Web.Controllers
 
         public ActionResult Add(JobInfo jobInfo)
         {
-            JobInfoDb.AddJobInfo(jobInfo);
+            if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
+            {
+                JobInfoDb.AddJobInfo(jobInfo);
+            }
             return RedirectToAction("Index", "Home");
         }
 

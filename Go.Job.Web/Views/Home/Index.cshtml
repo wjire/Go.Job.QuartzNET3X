@@ -30,7 +30,7 @@
                     <label for="LoginName" class="col-sm-2 control-label">执行计划</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="Cron" id="Cron"
-                               placeholder="请输入执行计划" readonly/>
+                               placeholder="请输入执行计划" />
                     </div>
                 </div>
 
@@ -38,7 +38,7 @@
                     <label for="Password" class="col-sm-2 control-label">执行间隔时间</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="Second" id="Second"
-                               placeholder="请输入执行间隔时间" />
+                               placeholder="请输入执行间隔时间" disabled/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -86,7 +86,7 @@
                 <div class="form-group">
                     <label for="Id" class="col-sm-2 control-label">作业编号</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control Id" name="Id" id="Id" />
+                        <input type="text" class="form-control Id" name="Id" id="Id" readonly/>
                     </div>
                 </div>
 
@@ -100,14 +100,14 @@
                 <div class="form-group">
                     <label for="Cron" class="col-sm-2 control-label ">执行计划</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control Cron" name="Cron" id="Cron" readonly/>
+                        <input type="text" class="form-control Cron" name="Cron" id="Cron" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="Second" class="col-sm-2 control-label ">执行间隔时间(秒)</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control Second" name="Second" id="Second" />
+                        <input type="text" class="form-control Second" name="Second" id="Second" disabled/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -141,7 +141,7 @@
             <th>编号</th>
             <th>作业名称</th>
             <th>执行计划</th>
-            <th>执行间隔时间</th>
+            @*<th>执行间隔时间</th>*@
             <th>程序集物理路径</th>
             @*<th>完全限定名</th>*@
             @*<th>开始时间</th>*@
@@ -156,7 +156,7 @@
                 <td>@item.Id</td>
                 <td>@item.JobName</td>
                 <td>@item.Cron</td>
-                <td>@item.Second</td>
+                @*<td>@item.Second</td>*@
                 <td>@item.AssemblyPath</td>
                 @*<td>@item.ClassTypePath</td>*@
                 @*<td>@item.StartTime</td>*@

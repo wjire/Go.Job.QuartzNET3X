@@ -17,7 +17,7 @@ namespace Go.Job.Service
 
         private static readonly JobPoolManager _jobPoolManager;
 
-        private bool flag = false;
+        private bool _flag = false;
 
         private static readonly object _lock = new object();
 
@@ -76,15 +76,13 @@ namespace Go.Job.Service
 
                     if (!string.IsNullOrWhiteSpace(jobRuntimeInfo.JobInfo.Cron))
                     {
-                        //错过的不管了,剩下的按正常执行
                         tiggerBuilder.WithCronSchedule(jobRuntimeInfo.JobInfo.Cron,
-                            c => c.WithMisfireHandlingInstructionDoNothing());
+                            c => c.WithMisfireHandlingInstructionFireAndProceed());
                     }
                     else
                     {
                         tiggerBuilder.WithSimpleSchedule(simple =>
                         {
-                            //立刻执行一次,使用总次数
                             simple.WithIntervalInSeconds(jobRuntimeInfo.JobInfo.Second).RepeatForever()
                                 .WithMisfireHandlingInstructionIgnoreMisfires();
                         });
@@ -100,8 +98,7 @@ namespace Go.Job.Service
                     }
 
                     ITrigger trigger = tiggerBuilder.Build();
-
-
+                    
                     Scheduler.ScheduleJob(jobDetail, trigger).Wait();
 
                     //TODO:记录日志
@@ -238,8 +235,7 @@ namespace Go.Job.Service
 
                 if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
                 {
-                    //错过的不管了,剩下的按正常执行
-                    tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionDoNothing());
+                    tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionFireAndProceed());
                 }
                 else
                 {
@@ -413,19 +409,23 @@ namespace Go.Job.Service
         /// <returns></returns>
         public bool UpdateJobRuntimeInfo(JobRuntimeInfo jobRuntimeInfo)
         {
-            if (flag)
+            if (_flag)
             {
                 return true;
             }
 
             lock (_lock)
             {
+                if (_flag)
+                {
+                    return true;
+                }
                 AppDomain app = Thread.GetDomain();
                 jobRuntimeInfo.Job = AppDomainLoader.Load(jobRuntimeInfo.JobInfo.AssemblyPath, jobRuntimeInfo.JobInfo.ClassTypePath, out app);
                 jobRuntimeInfo.AppDomain = app;
                 JobRuntimePool[jobRuntimeInfo.JobInfo.Id] = jobRuntimeInfo;
-                flag = true;
-                return flag;
+                _flag = true;
+                return _flag;
             }
         }
     }
