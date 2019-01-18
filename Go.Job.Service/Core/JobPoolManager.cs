@@ -53,9 +53,7 @@ namespace Go.Job.Service
                     }
 
                     //如果已经调度任务中已经有该jobDetail,则直接返回
-                    IJobDetail isExistsedJobDetail = Scheduler
-                        .GetJobDetail(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName))
-                        .Result;
+                    IJobDetail isExistsedJobDetail = Scheduler.GetJobDetail(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName)).Result;
                     if (isExistsedJobDetail != null)
                     {
                         return false;
@@ -164,17 +162,38 @@ namespace Go.Job.Service
         /// <param name="jobId"></param>
         public bool Resume(int jobId)
         {
+            //TODO:这个逻辑还要梳理
             if (!JobRuntimePool.ContainsKey(jobId))
             {
+                JobInfo jobInfo = JobInfoDb.GetJobInfo(jobId);
+                //如果已经调度任务中已经有该jobDetail,则直接返回
+                var isExistsedJobDetail = Scheduler.GetJobDetail(new JobKey(jobInfo.JobName, jobInfo.JobName)).Result;
+                if (isExistsedJobDetail != null)
+                {
+                    var jobRuntimeInfo = new JobRuntimeInfo();
+                    AppDomain app = Thread.GetDomain();
+                    jobRuntimeInfo.Job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
+                    jobRuntimeInfo.AppDomain = app;
+                    jobRuntimeInfo.JobInfo = jobInfo;
+                    //如果该job实例添加失败,直接返回.
+                    if (!JobRuntimePool.TryAdd(jobId, jobRuntimeInfo))
+                    {
+                        AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
+                        return false;
+                    }
+                    TriggerKey triggerKey = new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
+                    Scheduler.ResumeTrigger(triggerKey).Wait();
+                    return true;
+                }
                 return false;
             }
 
             lock (_lock)
             {
-                if (!JobRuntimePool.ContainsKey(jobId))
-                {
-                    return false;
-                }
+                //if (!JobRuntimePool.ContainsKey(jobId))
+                //{
+                //    return false;
+                //}
 
                 JobRuntimeInfo jobRuntimeInfo = GetJobFromPool(jobId);
                 TriggerKey triggerKey = new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
@@ -392,6 +411,7 @@ namespace Go.Job.Service
         /// <returns></returns>
         public bool UpdateJobRuntimeInfo(JobRuntimeInfo jobRuntimeInfo)
         {
+            //TODO:有BUG,没有地方还原 _flag 的值
             if (_flag)
             {
                 return true;

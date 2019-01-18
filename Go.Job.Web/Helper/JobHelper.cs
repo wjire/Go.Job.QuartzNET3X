@@ -155,7 +155,7 @@ namespace Go.Job.Web.Helper
                 }
 
                 var jobInfo = JobInfoDb.GetJobInfo(id);
-                if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 3)
+                if (jobInfo != null && jobInfo.Id == id && jobInfo.State != 3)
                 {
                     string path = @"http://localhost:25250/api/job/remove?id=" + id;
                     string code = HttpClientHelper.GetString(path);
