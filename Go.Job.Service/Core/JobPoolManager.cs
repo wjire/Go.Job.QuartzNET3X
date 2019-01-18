@@ -71,36 +71,8 @@ namespace Go.Job.Service
                         .SetJobData(new JobDataMap(data))
                         .Build();
 
-                    TriggerBuilder tiggerBuilder = TriggerBuilder.Create()
-                        .WithIdentity(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
-
-                    if (!string.IsNullOrWhiteSpace(jobRuntimeInfo.JobInfo.Cron))
-                    {
-                        tiggerBuilder.WithCronSchedule(jobRuntimeInfo.JobInfo.Cron,
-                            c => c.WithMisfireHandlingInstructionFireAndProceed());
-                    }
-                    else
-                    {
-                        tiggerBuilder.WithSimpleSchedule(simple =>
-                        {
-                            simple.WithIntervalInSeconds(jobRuntimeInfo.JobInfo.Second).RepeatForever()
-                                .WithMisfireHandlingInstructionIgnoreMisfires();
-                        });
-                    }
-
-                    if (jobRuntimeInfo.JobInfo.StartTime > DateTime.Now)
-                    {
-                        tiggerBuilder.StartAt(jobRuntimeInfo.JobInfo.StartTime);
-                    }
-                    else
-                    {
-                        tiggerBuilder.StartNow();
-                    }
-
-                    ITrigger trigger = tiggerBuilder.Build();
-                    
+                    ITrigger trigger = CreateTrigger(jobRuntimeInfo.JobInfo);
                     Scheduler.ScheduleJob(jobDetail, trigger).Wait();
-
                     //TODO:记录日志
                     return true;
                 }
@@ -231,35 +203,46 @@ namespace Go.Job.Service
             lock (_lock)
             {
                 TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
-                TriggerBuilder tiggerBuilder = TriggerBuilder.Create().WithIdentity(jobInfo.JobName, jobInfo.JobName);
-
-                if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
-                {
-                    tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionFireAndProceed());
-                }
-                else
-                {
-                    tiggerBuilder.WithSimpleSchedule(simple =>
-                    {
-                        simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires();
-                    });
-                }
-
-                if (jobInfo.StartTime > DateTime.Now)
-                {
-                    tiggerBuilder.StartAt(jobInfo.StartTime);
-                }
-                else
-                {
-                    tiggerBuilder.StartNow();
-                }
-
-                ITrigger trigger = tiggerBuilder.Build();
+                ITrigger trigger = CreateTrigger(jobInfo);
                 Scheduler.RescheduleJob(triggerKey, trigger);
                 return true;
             }
         }
-        
+
+        /// <summary>
+        /// 创建触发器
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <returns></returns>
+        private ITrigger CreateTrigger(JobInfo jobInfo)
+        {
+            TriggerBuilder tiggerBuilder = TriggerBuilder.Create().WithIdentity(jobInfo.JobName, jobInfo.JobName);
+
+            if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
+            {
+                tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionFireAndProceed());
+            }
+            else
+            {
+                tiggerBuilder.WithSimpleSchedule(simple =>
+                {
+                    simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires();
+                });
+            }
+
+            if (jobInfo.StartTime > DateTime.Now)
+            {
+                tiggerBuilder.StartAt(jobInfo.StartTime);
+            }
+            else
+            {
+                tiggerBuilder.StartNow();
+            }
+
+            ITrigger trigger = tiggerBuilder.Build();
+            return trigger;
+        }
+
 
         /// <summary>
         /// 从job池中移除某个job,同时卸载该job所在的AppDomain
