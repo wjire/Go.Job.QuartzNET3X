@@ -1,13 +1,15 @@
 ﻿using System;
+using System.IO;
 using Go.Job.Db;
 using Go.Job.Model;
+using Go.Job.Web.Helper;
 
-namespace Go.Job.Web.Helper
+namespace Go.Job.Web.Logic
 {
-    internal static class JobHelper
+    internal class JobLogic
     {
 
-        //TODO:不用代理
+        //TODO:暂时不用远程代理的方式.
         //public static readonly IRemotableQuartzScheduler Scheduler;
 
         //static JobHelper()
@@ -35,7 +37,7 @@ namespace Go.Job.Web.Helper
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static bool Run(int id)
+        public bool Run(int id)
         {
             try
             {
@@ -47,18 +49,19 @@ namespace Go.Job.Web.Helper
                 JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 0)
                 {
-                    //string path = @"http://localhost:25250/api/job/run?id=" + id;
-                    //string code = HttpClientHelper.GetString(path);
-
-                    string path = @"http://localhost:25250/api/job/run";
-                    string code = HttpClientHelper.PostJson(path, jobInfo);
-                    if (Convert.ToInt32(code) == 200)
+                    string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/run";
+                    Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
+                    if (result.Code == 200)
                     {
                         int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
                         if (dbRes > 0)
                         {
                             return true;
                         }
+                    }
+                    else
+                    {
+                        throw new Exception(result.Msg);
                     }
                 }
             }
@@ -74,7 +77,7 @@ namespace Go.Job.Web.Helper
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static bool Pause(int id)
+        public bool Pause(int id)
         {
             try
             {
@@ -86,15 +89,19 @@ namespace Go.Job.Web.Helper
                 JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 1)
                 {
-                    string path = @"http://localhost:25250/api/job/pause?id=" + id;
-                    string code = HttpClientHelper.GetString(path);
-                    if (Convert.ToInt32(code) == 200)
+                    string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/pause";
+                    Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
+                    if (result.Code == 200)
                     {
                         int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 2, Id = id });
                         if (dbRes > 0)
                         {
                             return true;
                         }
+                    }
+                    else
+                    {
+                        throw new Exception(result.Msg);
                     }
                 }
             }
@@ -110,7 +117,7 @@ namespace Go.Job.Web.Helper
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static bool Resume(int id)
+        public bool Resume(int id)
         {
             try
             {
@@ -122,19 +129,21 @@ namespace Go.Job.Web.Helper
                 JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 2)
                 {
-                    //string path = @"http://localhost:25250/api/job/resume?id=" + id;
-                    //string code = HttpClientHelper.GetString(path);
 
-                    string path = @"http://localhost:25250/api/job/resume";
-                    string code = HttpClientHelper.PostJson(path, jobInfo);
+                    string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/resume";
+                    Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
 
-                    if (Convert.ToInt32(code) == 200)
+                    if (result.Code == 200)
                     {
                         int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
                         if (dbRes > 0)
                         {
                             return true;
                         }
+                    }
+                    else
+                    {
+                        throw new Exception(result.Msg);
                     }
                 }
             }
@@ -152,7 +161,7 @@ namespace Go.Job.Web.Helper
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static bool Remove(int id)
+        public bool Remove(int id)
         {
             try
             {
@@ -164,15 +173,19 @@ namespace Go.Job.Web.Helper
                 JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 2)
                 {
-                    string path = @"http://localhost:25250/api/job/remove?id=" + id;
-                    string code = HttpClientHelper.GetString(path);
-                    if (Convert.ToInt32(code) == 200)
+                    string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/remove";
+                    Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
+                    if (result.Code == 200)
                     {
                         int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 3, Id = id });
                         if (dbRes > 0)
                         {
                             return true;
                         }
+                    }
+                    else
+                    {
+                        throw new Exception(result.Msg);
                     }
                 }
             }
@@ -189,15 +202,15 @@ namespace Go.Job.Web.Helper
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>
-        public static bool Update(JobInfo jobInfo)
+        public bool Update(JobInfo jobInfo)
         {
             try
             {
                 if (jobInfo != null && jobInfo.Id > 0 && jobInfo.State == 2)
                 {
-                    string path = @"http://localhost:25250/api/job/update";
-                    string code = HttpClientHelper.PostJson(path, jobInfo);
-                    if (Convert.ToInt32(code) == 200)
+                    string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/update";
+                    Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
+                    if (result.Code == 200)
                     {
                         //更新成功后,状态改回来
                         jobInfo.State = 1;
@@ -206,6 +219,10 @@ namespace Go.Job.Web.Helper
                         {
                             return true;
                         }
+                    }
+                    else
+                    {
+                        throw new Exception(result.Msg);
                     }
                 }
             }
@@ -223,15 +240,15 @@ namespace Go.Job.Web.Helper
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>
-        public static bool Upgrade(JobInfo jobInfo)
+        public bool Upgrade(JobInfo jobInfo)
         {
             try
             {
-                if (jobInfo != null && jobInfo.Id > 0 && (jobInfo.State == 0||jobInfo.State == 3))
+                if (jobInfo != null && jobInfo.Id > 0 && (jobInfo.State == 0 || jobInfo.State == 3))
                 {
-                    string path = @"http://localhost:25250/api/job/upgrade";
-                    string code = HttpClientHelper.PostJson(path, jobInfo);
-                    if (Convert.ToInt32(code) == 200)
+                    string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/upgrade";
+                    Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
+                    if (result.Code == 200)
                     {
                         //更新成功后,状态改回来
                         jobInfo.State = 1;
@@ -240,6 +257,10 @@ namespace Go.Job.Web.Helper
                         {
                             return true;
                         }
+                    }
+                    else
+                    {
+                        throw new Exception(result.Msg);
                     }
                 }
             }

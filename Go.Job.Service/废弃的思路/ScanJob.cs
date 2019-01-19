@@ -30,8 +30,8 @@
 //                        //只有job池中没有该job,并且该job的状态是 准备中,才将该job添加到job池.
 //                        if (!SchedulerManager1.JobPool.ContainsKey(jobInfo.Id) && jobInfo.State == 1)
 //                        {
-//                            JobRuntimeInfo jobRuntimeJob = SchedulerManager1.Instance.CreateJobRuntimeInfo(jobInfo);
-//                            SchedulerManager1.Instance.Add(jobInfo.Id, jobRuntimeJob);
+//                            JobRuntimeInfo jobRuntimeJob = SchedulerManager1.Singleton.CreateJobRuntimeInfo(jobInfo);
+//                            SchedulerManager1.Singleton.Add(jobInfo.Id, jobRuntimeJob);
 //                        }
 //                        //如果job池中有该job
 //                        else if (SchedulerManager1.JobPool.ContainsKey(jobInfo.Id))
@@ -50,17 +50,17 @@
 //                                    {
 //                                        Console.WriteLine(e.Message);
 //                                    }
-//                                    JobInfo info = SchedulerManager1.Instance.AddJob(jobInfo);
+//                                    JobInfo info = SchedulerManager1.Singleton.AddJob(jobInfo);
 //                                    JobInfoDb.UpdateJobState(info);
 //                                }
 //                            }
 //                            if (jobInfo.State == 2)
 //                            {
-//                                SchedulerManager1.Instance.Pause(jobInfo.Id);
+//                                SchedulerManager1.Singleton.Pause(jobInfo.Id);
 //                            }
 //                            else if (jobInfo.State == 3)
 //                            {
-//                                SchedulerManager1.Instance.Remove(jobInfo.Id);
+//                                SchedulerManager1.Singleton.Remove(jobInfo.Id);
 //                            }
 //                        }
 //                    }

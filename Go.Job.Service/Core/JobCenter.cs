@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Go.Job.Model;
+using Go.Job.Service.Lib;
 using Quartz;
 
 namespace Go.Job.Service.Job
@@ -17,7 +18,7 @@ namespace Go.Job.Service.Job
             {
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo ?? new JobInfo();
                 //从作业调度容器里查找，如果找到，则运行
-                JobRuntimeInfo jobRuntimeInfo = SchedulerManager.Instance.GetJobFromPool(jobInfo.Id);
+                JobRuntimeInfo jobRuntimeInfo = SchedulerManager.Singleton.GetJobFromPool(jobInfo.Id);
 
                 try
                 {
@@ -31,14 +32,14 @@ namespace Go.Job.Service.Job
                         {
                             Console.WriteLine(ex);
                             Console.WriteLine("重新创建jobRuntimeInfo,替换job池中的jobRuntimeInfo");
-                            SchedulerManager.Instance.UpdateJobRuntimeInfo(jobRuntimeInfo);
+                            SchedulerManager.Singleton.UpdateJobRuntimeInfo(jobRuntimeInfo);
                         }
                     }
                     //如果job池没有该job
                     //TODO:注意,虽然job池没有该job,但是触发器和jobDetail是有的,不然也不会进到这个job的 execute 方法
                     else
                     {
-                        SchedulerManager.Instance.CreateJob(jobInfo);
+                        SchedulerManager.Singleton.CreateJob(jobInfo);
                     }
 
                 }

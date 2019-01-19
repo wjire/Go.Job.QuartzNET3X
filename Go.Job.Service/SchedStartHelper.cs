@@ -30,7 +30,9 @@ namespace Go.Job.Service
         //}
         //}
 
-        private static readonly string SchedName = System.Configuration.ConfigurationManager.AppSettings["SchedName"];
+        private static readonly string SchedName = AppSettingsConfig.SchedName;
+
+        private static readonly string ApiAddress = AppSettingsConfig.ApiAddress;
 
         /// <summary>
         /// 启动调度器
@@ -40,7 +42,17 @@ namespace Go.Job.Service
         {
             if (string.IsNullOrWhiteSpace(SchedName))
             {
-                throw new ArgumentNullException("SchedName 不能为空,请在配置文件<appSettings>节点中设置 key=\"SchedName\" 的值,或者调用该方法的重载版本");
+                throw new ArgumentNullException("SchedName 不能为空,请在配置文件<appSettings>节点中设置 key=\"SchedName\" 的值");
+            }
+
+            if (string.IsNullOrWhiteSpace(ApiAddress))
+            {
+                throw new ArgumentNullException("ApiAddress 不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值");
+            }
+            
+            if (JobApiStartHelper.PortInUse(ApiAddress))
+            {
+                throw new ArgumentNullException($"{ApiAddress} 已被占用,请在配置文件<appSettings>节点中修改 key=\"ApiAddress\" 的值");
             }
 
             StartSched(SchedName, null, null);
@@ -54,13 +66,8 @@ namespace Go.Job.Service
         /// <param name="poolConfig">线程池配置</param>
         /// <param name="storeConfig">持久化配置 </param>
         /// <returns></returns>
-        public static void StartSched(string schedName, ThreadPoolConfig poolConfig = null, JobStoreConfig storeConfig = null)
+        private static void StartSched(string schedName, ThreadPoolConfig poolConfig = null, JobStoreConfig storeConfig = null)
         {
-            if (string.IsNullOrWhiteSpace(schedName))
-            {
-                throw new ArgumentNullException("schedName 不能为空");
-            }
-
             if (storeConfig == null)
             {
                 storeConfig = new JobStoreConfig();
@@ -112,6 +119,7 @@ namespace Go.Job.Service
                 throw;
             }
         }
+
 
         /// <summary>
         /// 启动调度器

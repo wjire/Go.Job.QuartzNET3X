@@ -63,7 +63,7 @@ namespace Go.Job.Model
 
 
         /// <summary>
-        /// 调度组
+        /// 调度任务名称
         /// </summary>
         public string SchedName { get; set; } = string.Empty;
     }

@@ -19,6 +19,14 @@
                 @Html.AntiForgeryToken()
 
                 <div class="form-group">
+                    <label for="SchedName" class="col-sm-2 control-label">调度任务名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="SchedName" id="SchedName"
+                               placeholder="请输入调度任务名称" />
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="JobName" class="col-sm-2 control-label">作业名称</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="JobName" id="JobName"
@@ -34,12 +42,12 @@
                     </div>
                 </div>
 
-                <div class="form-group" style="display:none">
+                @*<div class="form-group" style="display:none">
                     <label for="Second" class="col-sm-2 control-label">执行间隔时间</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="Second" id="Second" placeholder="请输入执行间隔时间"/>
                     </div>
-                </div>
+                </div>*@
                 <div class="form-group">
                     <label for="AssemblyPath" class="col-sm-2 control-label">程序集</label>
                     <div class="col-sm-10">
@@ -48,9 +56,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="ClassTypePath" class="col-sm-2 control-label">实体类型</label>
+                    <label for="ClassType" class="col-sm-2 control-label">实体类型</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="ClassTypePath" id="ClassTypePath"
+                        <input type="text" class="form-control" name="ClassType" id="ClassType"
                                placeholder="请输入实体类型的完全限定名" />
                     </div>
                 </div>
@@ -85,7 +93,14 @@
                 <div class="form-group">
                     <label for="Id" class="col-sm-2 control-label">作业编号</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control Id" name="Id" id="Id" readonly/>
+                        <input type="text" class="form-control Id" name="Id" id="Id" readonly />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="SchedName" class="col-sm-2 control-label">调度任务名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control SchedName" name="SchedName" id="SchedName" readonly/>
                     </div>
                 </div>
 
@@ -117,9 +132,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="ClassTypePath" class="col-sm-2 control-label ">实体类型完全限定名</label>
+                    <label for="ClassType" class="col-sm-2 control-label ">实体类型完全限定名</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control ClassTypePath" name="ClassTypePath" id="ClassTypePath" readonly/>
+                        <input type="text" class="form-control ClassType" name="ClassType" id="ClassType" readonly />
                     </div>
                 </div>
 
@@ -165,6 +180,14 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="SchedName" class="col-sm-2 control-label">调度任务名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control SchedName" name="SchedName" id="SchedName" readonly/>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
                     <label for="JobName" class="col-sm-2 control-label ">作业名称</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control JobName" name="JobName" id="JobName" readonly />
@@ -192,9 +215,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="ClassTypePath" class="col-sm-2 control-label ">实体类型完全限定名</label>
+                    <label for="ClassType" class="col-sm-2 control-label ">实体类型完全限定名</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control ClassTypePath" name="ClassTypePath" id="ClassTypePath" />
+                        <input type="text" class="form-control ClassType" name="ClassType" id="ClassType" />
                     </div>
                 </div>
 
@@ -221,6 +244,7 @@
     <thead>
         <tr>
             <th>编号</th>
+            <th>调度任务名称</th>
             <th>作业名称</th>
             <th>执行计划</th>
             @*<th>执行间隔时间</th>*@
@@ -236,6 +260,7 @@
         {
             <tr>
                 <td>@item.Id</td>
+                <td>@item.SchedName</td>
                 <td>@item.JobName</td>
                 <td>@item.Cron</td>
                 @*<td>@item.Second</td>*@
@@ -330,26 +355,6 @@
     function Run(id) {
       
         if (id == undefined || id == null || id == "") return;
-
-        //$.ajax({
-        //    url: "/Home/Update/" + id,
-        //    type: "Get",
-        //    dataType: 'json',
-        //    success: function (result) {
-        //        console.log(result);
-        //        $("#collapseOneUpdate .Id").val(result.Id);
-        //        $("#collapseOneUpdate .JobName").val(result.JobName);
-        //        $("#collapseOneUpdate .Cron").val(result.Cron);
-        //        $("#collapseOneUpdate .Second").val(result.Second);
-        //        $("#collapseOneUpdate .AssemblyPath").val(result.AssemblyPath);
-        //        $("#collapseOneUpdate .ClassTypePath").val(result.ClassTypePath);
-        //        $("#divUpdate").show();
-        //    },
-        //    error: function (e) {
-        //        alert(e);
-        //    }
-        //});
-
         location.href = "/Home/Run/" + id;
     }
 
@@ -377,8 +382,9 @@
                 $("#collapseOneUpdate .Cron").val(result.Cron);
                 $("#collapseOneUpdate .Second").val(result.Second);
                 $("#collapseOneUpdate .AssemblyPath").val(result.AssemblyPath);
-                $("#collapseOneUpdate .ClassTypePath").val(result.ClassTypePath);
+                $("#collapseOneUpdate .ClassType").val(result.ClassType);
                 $("#collapseOneUpdate .State").val(result.State);
+                $("#collapseOneUpdate .SchedName").val(result.SchedName);
                 $("#divUpdate").show();
             },
             error: function (e) {
@@ -402,8 +408,9 @@
                 $("#collapseOneUpgrade .Cron").val(result.Cron);
                 $("#collapseOneUpgrade .Second").val(result.Second);
                 $("#collapseOneUpgrade .AssemblyPath").val(result.AssemblyPath);
-                $("#collapseOneUpgrade .ClassTypePath").val(result.ClassTypePath);
+                $("#collapseOneUpgrade .ClassType").val(result.ClassType);
                 $("#collapseOneUpgrade .State").val(result.State);
+                $("#collapseOneUpgrade .SchedName").val(result.SchedName);
                 $("#divUpgrade").show();
             },
             error: function (e) {

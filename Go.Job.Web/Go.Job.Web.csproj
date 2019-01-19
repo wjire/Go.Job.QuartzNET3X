@@ -149,8 +149,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ApiAddressHelper.cs" />
+    <Compile Include="Helper\CacheHelper.cs" />
     <Compile Include="Helper\HttpClientHelper.cs" />
-    <Compile Include="Helper\JobHelper.cs" />
+    <Compile Include="Logic\JobLogic.cs" />
+    <Compile Include="Models\QuartzApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,7 +196,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

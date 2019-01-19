@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using Go.Job.Model;
+using Go.Job.Service.Config;
 
 namespace Go.Job.Service.api
 {
@@ -9,41 +10,46 @@ namespace Go.Job.Service.api
     /// </summary>
     public class JobController : ApiController
     {
+
+        private static readonly string SchedName = AppSettingsConfig.SchedName;
+
         /// <summary>
         /// 启动
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>
         [HttpPost]
-        public int Run(JobInfo jobInfo)
+        public Result Run(JobInfo jobInfo)
         {
             try
             {
-                return SchedulerManager.Instance.CreateJob(jobInfo) ? 200 : 400;
+                bool res = SchedulerManager.Singleton.CreateJob(jobInfo);
+                return GetResult(res);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return 400;
+                return GetResult(e.Message);
             }
         }
 
         /// <summary>
         /// 暂停
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="jobInfo"></param>
         /// <returns></returns>
-        [HttpGet]
-        public int Pause(int id)
+        [HttpPost]
+        public Result Pause(JobInfo jobInfo)
         {
             try
             {
-                return SchedulerManager.Instance.Pause(id) ? 200 : 400;
+                bool res = SchedulerManager.Singleton.Pause(jobInfo);
+                return GetResult(res);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return 400;
+                return GetResult(e.Message);
             }
         }
 
@@ -52,37 +58,42 @@ namespace Go.Job.Service.api
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>
-        public int Resume(JobInfo jobInfo)
+        [HttpPost]
+        public Result Resume(JobInfo jobInfo)
         {
             try
             {
-                return SchedulerManager.Instance.Resume(jobInfo) ? 200 : 400;
+                bool res = SchedulerManager.Singleton.Resume(jobInfo);
+                return GetResult(res);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return 400;
+                return GetResult(e.Message);
             }
         }
 
         /// <summary>
         /// 删除
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="jobInfo"></param>
         /// <returns></returns>
-        [HttpGet]
-        public int Remove(int id)
+        [HttpPost]
+
+        public Result Remove(JobInfo jobInfo)
         {
             try
             {
-                return SchedulerManager.Instance.Remove(id) ? 200 : 400;
+                bool res = SchedulerManager.Singleton.Remove(jobInfo);
+                return GetResult(res);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return 400;
+                return GetResult(e.Message);
             }
         }
+
 
         /// <summary>
         /// 更新
@@ -90,16 +101,17 @@ namespace Go.Job.Service.api
         /// <param name="jobInfo"></param>
         /// <returns></returns>
         [HttpPost]
-        public int Update(JobInfo jobInfo)
+        public Result Update(JobInfo jobInfo)
         {
             try
             {
-                return SchedulerManager.Instance.Update(jobInfo) ? 200 : 400;
+                bool res = SchedulerManager.Singleton.Update(jobInfo);
+                return GetResult(res);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return 400;
+                return GetResult(e.Message);
             }
         }
 
@@ -109,17 +121,38 @@ namespace Go.Job.Service.api
         /// <param name="jobInfo"></param>
         /// <returns></returns>
         [HttpPost]
-        public int Upgrade(JobInfo jobInfo)
+        public Result Upgrade(JobInfo jobInfo)
         {
             try
             {
-                return SchedulerManager.Instance.Upgrade(jobInfo) ? 200 : 400;
+                bool res = SchedulerManager.Singleton.Upgrade(jobInfo);
+                return GetResult(res);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return 400;
+                return GetResult(e.Message);
             }
+        }
+
+
+        private Result GetResult(bool res)
+        {
+            return new Result
+            {
+                Code = res ? 200 : 400,
+                Data = AppSettingsConfig.SchedName,
+            };
+        }
+
+        private Result GetResult(string exception)
+        {
+            return new Result
+            {
+                Code = 200,
+                Data = AppSettingsConfig.SchedName,
+                Msg = exception
+            };
         }
     }
 }

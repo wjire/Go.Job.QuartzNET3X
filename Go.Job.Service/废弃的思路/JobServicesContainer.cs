@@ -19,7 +19,7 @@
 //            _jobServicesContainer = new JobServicesContainer();
 //        }
 
-//        public static JobServicesContainer Instance => _jobServicesContainer;
+//        public static JobServicesContainer Singleton => _jobServicesContainer;
 
 //        public object GetService(Type serviceType)
 //        {

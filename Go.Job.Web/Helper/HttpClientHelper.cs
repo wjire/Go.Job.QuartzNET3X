@@ -1,8 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿using System.IO;
 using System.Net.Http;
-using System.Text;
 using Newtonsoft.Json;
 
 
@@ -20,9 +17,10 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static T GetModel<T>(string url)
         {
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
-                var res = client.GetStringAsync(url).Result;
+                client.DefaultRequestHeaders.Add("Accept", "application/json");
+                string res = client.GetStringAsync(url).Result;
                 return JsonConvert.DeserializeObject<T>(res);
             }
         }
@@ -34,7 +32,7 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static string GetString(string url)
         {
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
                 return client.GetStringAsync(url).Result;
             }
@@ -52,7 +50,7 @@ namespace Go.Job.Web.Helper
                 return new byte[0];
             }
             url = url.Replace("\\", "/");
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
                 return client.GetByteArrayAsync(url).Result;
             }
@@ -70,7 +68,7 @@ namespace Go.Job.Web.Helper
             {
                 return null;
             }
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
                 return client.GetStreamAsync(url).Result;
             }
@@ -85,9 +83,9 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static byte[] GetByteArrayByPost(string url, object value)
         {
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
-                var response = client.PostAsJsonAsync(url, value).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync(url, value).Result;
                 return response.Content.ReadAsByteArrayAsync().Result;
             }
         }
@@ -102,9 +100,9 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static Stream GetStreamByPost(string url, object value)
         {
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
-                var response = client.PostAsJsonAsync(url, value).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync(url, value).Result;
                 return response.Content.ReadAsStreamAsync().Result;
             }
         }
@@ -119,10 +117,10 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static T PostJson<T>(string url, object value)
         {
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
-                var response = client.PostAsJsonAsync(url, value).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync(url, value).Result;
                 return response.Content.ReadAsAsync<T>().Result;
             }
         }
@@ -136,10 +134,10 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static string PostJson(string url, object value)
         {
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("Accept", "application/json");
-                var response = client.PostAsJsonAsync(url, value).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync(url, value).Result;
                 return response.Content.ReadAsStringAsync().Result;
             }
         }
@@ -153,9 +151,9 @@ namespace Go.Job.Web.Helper
         /// <returns></returns>
         public static string PostString(string url, string value)
         {
-            using (var client = new HttpClient())
+            using (HttpClient client = new HttpClient())
             {
-                var response = client.PostAsync(url, new StringContent(value)).Result;
+                HttpResponseMessage response = client.PostAsync(url, new StringContent(value)).Result;
                 return response.Content.ReadAsStringAsync().Result;
             }
         }

@@ -1,42 +1,33 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
-using Go.Job.Service.Config;
-using Microsoft.Owin.Hosting;
+using System.Web.Caching;
 
-namespace Go.Job.Service.api
+namespace Go.Job.Web.Helper
 {
     /// <summary>
-    /// jobApi启动类
+    /// api地址帮助类
     /// </summary>
-    internal class JobApiStartHelper
+    public static class ApiAddressHelper
     {
-        private static readonly string ApiAddress = AppSettingsConfig.ApiAddress;
 
-        internal static void Start()
+        /// <summary>
+        /// 获取可用的 api 地址
+        /// </summary>
+        /// <param name="schedName">调度组名称</param>
+        /// <returns></returns>
+        public static string GetApiAddress(string schedName)
         {
-            if (string.IsNullOrWhiteSpace(ApiAddress))
+            string addressStr = GetCache(schedName);
+            if (string.IsNullOrWhiteSpace(addressStr))
             {
-                throw new ArgumentNullException("ApiAddress 地址不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值,或者调用该方法的重载版本");
+                return null;
             }
 
-            Start(ApiAddress);
-        }
-
-
-        internal static void Start(string address)
-        {
-            if (string.IsNullOrWhiteSpace(address))
-            {
-                throw new ArgumentNullException("address 不能为空");
-            }
-
-            using (WebApp.Start(address))
-            {
-                Console.WriteLine($"webapi监听已启动, address : {address}");
-                Console.ReadLine();
-            }
+            string[] arr = addressStr.Split(',');
+            return arr.Length <= 0 ? null : arr.FirstOrDefault(address => PortInUse(address));
         }
 
 
@@ -45,7 +36,7 @@ namespace Go.Job.Service.api
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        internal static bool PortInUse(string address)
+        private static bool PortInUse(string address)
         {
             int port = GetPort(address);
             return PortInUse(port);
@@ -85,6 +76,27 @@ namespace Go.Job.Service.api
             }
 
             throw new InvalidCastException("端口号含有非法字符");
+        }
+
+
+
+        /// <summary>
+        /// 从缓存中获取地址
+        /// </summary>
+        /// <param name="schedName"></param>
+        /// <returns></returns>
+        private static string GetCache(string schedName)
+        {
+            string apiAddress = CacheHelper.GetCache<string>(schedName);
+            if (!string.IsNullOrWhiteSpace(apiAddress))
+            {
+                return apiAddress;
+            }
+
+            apiAddress = System.Configuration.ConfigurationManager.AppSettings[schedName];
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "Web.Config");
+            CacheHelper.SetCache(schedName, apiAddress, new CacheDependency(path));
+            return apiAddress;
         }
     }
 }

@@ -2,7 +2,7 @@
 using Go.Job.Model;
 using System;
 
-namespace Go.Job.Model
+namespace Go.Job.Service.Lib
 {
     public class JobRuntimeInfo
     {

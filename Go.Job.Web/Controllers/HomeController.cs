@@ -3,6 +3,7 @@ using Go.Job.Model;
 using Go.Job.Web.Helper;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Go.Job.Web.Logic;
 
 namespace Go.Job.Web.Controllers
 {
@@ -26,19 +27,19 @@ namespace Go.Job.Web.Controllers
 
         public ActionResult Run(int id)
         {
-            JobHelper.Run(id);
+            new JobLogic().Run(id);
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Pause(int id)
         {
-            JobHelper.Pause(id);
+            new JobLogic().Pause(id);
             return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Resume(int id)
         {
-            JobHelper.Resume(id);
+            new JobLogic().Resume(id);
             return RedirectToAction("Index", "Home");
         }
 
@@ -52,14 +53,14 @@ namespace Go.Job.Web.Controllers
 
         public ActionResult UpdateJob(JobInfo jobInfo)
         {
-            JobHelper.Update(jobInfo);
+            new JobLogic().Update(jobInfo);
             return RedirectToAction("Index", "Home");
         }
 
 
         public ActionResult Remove(int id)
         {
-            JobHelper.Remove(id);
+            new JobLogic().Remove(id);
             return RedirectToAction("Index", "Home");
         }
 
@@ -73,7 +74,7 @@ namespace Go.Job.Web.Controllers
 
         public ActionResult UpgradeJob(JobInfo jobInfo)
         {
-            JobHelper.Upgrade(jobInfo);
+            new JobLogic().Upgrade(jobInfo);
             return RedirectToAction("Index", "Home");
         }
     }

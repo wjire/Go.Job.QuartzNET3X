@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Threading;
-using System.Threading.Tasks;
 using Go.Job.Model;
-using Go.Job.Service.Config;
 using Go.Job.Service.Job;
+using Go.Job.Service.Lib;
 using Quartz;
-using Quartz.Impl;
 
 namespace Go.Job.Service
 {
@@ -31,12 +28,12 @@ namespace Go.Job.Service
         /// <summary>
         /// 单例
         /// </summary>
-        internal static SchedulerManager Instance { get; }
+        internal static SchedulerManager Singleton { get; }
 
         /// <summary>
         /// 锁
         /// </summary>
-        private static readonly object _lock = new object();
+        private static readonly object Locker = new object();
 
         /// <summary>
         /// 私有化构造函数
@@ -47,24 +44,8 @@ namespace Go.Job.Service
 
         static SchedulerManager()
         {
-            Instance = new SchedulerManager();
+            Singleton = new SchedulerManager();
         }
-        
-
-        ///// <summary>
-        ///// 创建新的应用程序域,job,并开始调度
-        ///// </summary>
-        ///// <param name="jobInfo"></param>
-        //private JobRuntimeInfo CreateJobRuntimeInfo(JobInfo jobInfo)
-        //{
-        //    JobRuntimeInfo jobRuntimeInfo = new JobRuntimeInfo();
-        //    AppDomain app = Thread.GetDomain();
-        //    jobRuntimeInfo.Job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassType, out app);
-        //    jobRuntimeInfo.JobInfo = jobInfo;
-        //    jobRuntimeInfo.AppDomain = app;
-        //    //TODO:日志记录
-        //    return jobRuntimeInfo;
-        //}
 
 
         /// <summary>
@@ -73,7 +54,7 @@ namespace Go.Job.Service
         /// <param name="jobInfo"></param>
         internal JobRuntimeInfo CreateJobRuntimeInfo(JobInfo jobInfo)
         {
-            lock (_lock)
+            lock (Locker)
             {
                 //JobRuntimeInfo jobRuntimeInfo = null;
                 //if (JobPool.ContainsKey(jobInfo.Id))
@@ -102,7 +83,7 @@ namespace Go.Job.Service
         /// <returns></returns>
         internal bool Add(JobRuntimeInfo jobRuntimeInfo)
         {
-            lock (_lock)
+            lock (Locker)
             {
                 try
                 {
@@ -131,7 +112,12 @@ namespace Go.Job.Service
                 {
                     Console.WriteLine(e);
                     //异常了,直接从job池移除该job,不再考虑移除失败的情况.考虑不到那么多了
-                    JobPool.TryRemove(jobRuntimeInfo.JobInfo.Id, out JobRuntimeInfo jri);
+                    if (JobPool.TryRemove(jobRuntimeInfo.JobInfo.Id, out JobRuntimeInfo jri))
+                    {
+                        //成功移除后,再卸载掉应用程序域,失败则不移除,保留.
+                        AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
+                    }
+                    
                     return false;
                 }
             }
@@ -150,7 +136,7 @@ namespace Go.Job.Service
                 return null;
             }
 
-            lock (_lock)
+            lock (Locker)
             {
                 if (!JobPool.ContainsKey(jobId))
                 {
@@ -176,13 +162,13 @@ namespace Go.Job.Service
             }
             if (JobPool.ContainsKey(jobInfo.Id))
             {
-                return true;
+                return false;
             }
-            lock (_lock)
+            lock (Locker)
             {
                 if (JobPool.ContainsKey(jobInfo.Id))
                 {
-                    return true;
+                    return false;
                 }
 
                 JobRuntimeInfo jobRuntimeInfo = CreateJobRuntimeInfo(jobInfo);
@@ -202,31 +188,28 @@ namespace Go.Job.Service
         /// <summary>
         /// 暂停job
         /// </summary>
-        /// <param name="jobId"></param>
-        internal bool Pause(int jobId)
+        /// <param name="jobInfo"></param>
+        internal bool Pause(JobInfo jobInfo)
         {
-            if (!JobPool.ContainsKey(jobId))
+            if (!JobPool.ContainsKey(jobInfo.Id))
             {
-                return true;
+                return false;
             }
 
-            lock (_lock)
+            lock (Locker)
             {
-                if (!JobPool.ContainsKey(jobId))
+                if (!JobPool.ContainsKey(jobInfo.Id))
                 {
-                    return true;
+                    return false;
                 }
 
-                JobRuntimeInfo jobRuntimeInfo = GetJobFromPool(jobId);
-                TriggerKey triggerKey = new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
+                TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
                 ITrigger isExistsedTriggerKey = Scheduler.GetTrigger(triggerKey).Result;
-                if (isExistsedTriggerKey != null)
-                {
-                    Scheduler.PauseTrigger(triggerKey).Wait();
-                }
+                if (isExistsedTriggerKey == null) return false;
+                Scheduler.PauseTrigger(triggerKey).Wait();
+                return true;
 
                 //TODO:记录日志
-                return true;
             }
         }
 
@@ -244,7 +227,7 @@ namespace Go.Job.Service
              *
              */
 
-            lock (_lock)
+            lock (Locker)
             {
                 JobRuntimeInfo jobRuntimeInfo = null;
                 if (!JobPool.ContainsKey(jobInfo.Id))
@@ -290,7 +273,7 @@ namespace Go.Job.Service
         /// <param name="jobInfo"></param>
         internal bool Update(JobInfo jobInfo)
         {
-            lock (_lock)
+            lock (Locker)
             {
                 TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
                 ITrigger trigger = CreateTrigger(jobInfo);
@@ -303,28 +286,22 @@ namespace Go.Job.Service
         /// <summary>
         /// 从job池中移除某个job,同时卸载该job所在的AppDomain
         /// </summary>
-        /// <param name="jobId"></param>
+        /// <param name="jobInfo"></param>
         /// <returns></returns>
-        internal bool Remove(int jobId)
+        internal bool Remove(JobInfo jobInfo)
         {
-            if (!JobPool.ContainsKey(jobId))
+            if (!JobPool.ContainsKey(jobInfo.Id))
             {
                 return false;
             }
-            lock (_lock)
+            lock (Locker)
             {
-                if (!JobPool.ContainsKey(jobId))
+                if (!JobPool.ContainsKey(jobInfo.Id))
                 {
                     return false;
                 }
-
-                JobPool.TryGetValue(jobId, out JobRuntimeInfo jobRuntimeInfo);
-                if (jobRuntimeInfo == null)
-                {
-                    return false;
-                }
-
-                TriggerKey triggerKey = new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
+                
+                TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
                 ITrigger isExistsedTriggerKey = Scheduler.GetTrigger(triggerKey).Result;
                 if (isExistsedTriggerKey == null)
                 {
@@ -333,8 +310,8 @@ namespace Go.Job.Service
 
                 Scheduler.PauseTrigger(triggerKey);
                 Scheduler.UnscheduleJob(triggerKey);
-                Scheduler.DeleteJob(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName));
-                JobPool.TryRemove(jobId, out jobRuntimeInfo);
+                Scheduler.DeleteJob(new JobKey(jobInfo.JobName, jobInfo.JobName));
+                JobPool.TryRemove(jobInfo.Id, out var jobRuntimeInfo);
                 AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                 return true;
                 //TODO:记录日志
@@ -355,7 +332,7 @@ namespace Go.Job.Service
             //    return true;
             //}
 
-            lock (_lock)
+            lock (Locker)
             {
                 //if (_flag)
                 //{
@@ -379,9 +356,9 @@ namespace Go.Job.Service
         /// <returns></returns>
         internal bool Upgrade(JobInfo jobInfo)
         {
-            lock (_lock)
+            lock (Locker)
             {
-                Remove(jobInfo.Id);
+                Remove(jobInfo);
                 JobRuntimeInfo jobRuntimeInfo = CreateJobRuntimeInfo(jobInfo);
                 return Add(jobRuntimeInfo);
             }
