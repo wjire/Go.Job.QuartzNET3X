@@ -4,7 +4,11 @@ using System.Threading.Tasks;
 using Go.Job.Service.api;
 using Go.Job.Service.Config;
 using Go.Job.Service.Core;
+using Go.Job.Service.Listener;
+using Quartz;
 using Quartz.Impl;
+using Quartz.Impl.Matchers;
+using Quartz.Listener;
 
 namespace Go.Job.Service
 {
@@ -113,6 +117,7 @@ namespace Go.Job.Service
         {
             NameValueCollection properties = new NameValueCollection { poolConfig, storeConfig };
             SchedulerManager.Scheduler = await new StdSchedulerFactory(properties).GetScheduler();
+            SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport(SchedName), GroupMatcher<JobKey>.GroupEquals(SchedName));
             try
             {
                 if (!SchedulerManager.Scheduler.IsStarted)
@@ -135,8 +140,8 @@ namespace Go.Job.Service
         private static async Task Run()
         {
             //设置监听器代码
-            //SchedulerManager1.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
-            //SchedulerManager1.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job2"), GroupMatcher<JobKey>.GroupEquals("Job2"));
+            //SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
+            //SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job2"), GroupMatcher<JobKey>.GroupEquals("Job2"));
         }
     }
 }

@@ -14,7 +14,13 @@ namespace Go.Job.Model
         /// job名称
         /// </summary>
         public string JobName { get; set; }
-        
+
+
+        /// <summary>
+        /// job组
+        /// </summary>
+        public string JobGroup { get; set; }
+
 
         /// <summary>
         /// 时间表达式

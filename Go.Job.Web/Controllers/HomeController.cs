@@ -20,6 +20,7 @@ namespace Go.Job.Web.Controllers
         {
             if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
             {
+                jobInfo.JobGroup = jobInfo.SchedName;
                 JobInfoDb.AddJobInfo(jobInfo);
             }
             return RedirectToAction("Index", "Home");

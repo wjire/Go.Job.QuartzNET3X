@@ -18,10 +18,8 @@ namespace Go.Job.Service.Listener
 
         public override async Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken = default(CancellationToken))
         {
-            //JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo ?? new JobInfo();
-            //var app = SchedulerManager1.Singleton.GetJobFromPool(jobInfo.Id).AppDomain;
-            //var times = app.MonitoringTotalProcessorTime;
-            //Console.WriteLine($"{DateTime.Now} . times : {times.TotalSeconds}");
+            JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo ?? new JobInfo();
+            Console.WriteLine($"{DateTime.Now} . {jobInfo.SchedName} : {jobInfo.JobName}");
             await base.JobWasExecuted(context, jobException, cancellationToken);
         }
 

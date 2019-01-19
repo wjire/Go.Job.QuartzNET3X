@@ -94,14 +94,13 @@ namespace Go.Job.Service.Core
                     }
 
                     //如果已经调度任务中已经有该jobDetail,则直接删掉
-                    JobKey jobKey = new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
-                    IJobDetail isExistsedJobDetail = Scheduler.GetJobDetail(jobKey).Result;
-                    if (isExistsedJobDetail != null)
+                    IJobDetail jobDetail = GetJobDetail(jobRuntimeInfo.JobInfo, out JobKey jobKey);
+                    if (jobDetail != null)
                     {
                         Scheduler.DeleteJob(jobKey).Wait();
                     }
 
-                    IJobDetail jobDetail = CreateJobDetail(jobRuntimeInfo.JobInfo);
+                    jobDetail = CreateJobDetail(jobRuntimeInfo.JobInfo);
                     ITrigger trigger = CreateTrigger(jobRuntimeInfo.JobInfo);
                     Scheduler.ScheduleJob(jobDetail, trigger).Wait();
                     //TODO:记录日志
@@ -121,6 +120,7 @@ namespace Go.Job.Service.Core
                 }
             }
         }
+
 
 
         /// <summary>
@@ -202,9 +202,8 @@ namespace Go.Job.Service.Core
                     return false;
                 }
 
-                TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
-                ITrigger isExistsedTriggerKey = Scheduler.GetTrigger(triggerKey).Result;
-                if (isExistsedTriggerKey == null)
+                ITrigger trigger = GetTrigger(jobInfo, out TriggerKey triggerKey);
+                if (trigger == null)
                 {
                     return false;
                 }
@@ -232,12 +231,13 @@ namespace Go.Job.Service.Core
 
             lock (Locker)
             {
+                //这是第2种情况,job池没有job,属于暂停后,宕机
                 JobRuntimeInfo jobRuntimeInfo = null;
                 if (!JobPool.ContainsKey(jobInfo.Id))
                 {
-                    //如果已经调度任务中没有该jobDetail,则直接返回
-                    IJobDetail isExistsedJobDetail = Scheduler.GetJobDetail(new JobKey(jobInfo.JobName, jobInfo.JobName)).Result;
-                    if (isExistsedJobDetail == null)
+                    //如果调度任务中没有该jobDetail,那么直接返回
+                    IJobDetail jobDetail = GetJobDetail(jobInfo, out JobKey jobKey);
+                    if (jobDetail == null)
                     {
                         return false;
                     }
@@ -249,20 +249,21 @@ namespace Go.Job.Service.Core
                         AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                         return false;
                     }
-                }
-                else
-                {
-                    jobRuntimeInfo = GetJobFromPool(jobInfo.Id);
+                    else
+                    {
+                        //添加成功后,和下面那种情况一起操作了.
+                    }
                 }
 
-                TriggerKey triggerKey = new TriggerKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName);
-                ITrigger isExistsedTriggerKey = Scheduler.GetTrigger(triggerKey).Result;
-                if (isExistsedTriggerKey == null)
+                //job池有job,这属于正常恢复,走下面的逻辑.
+                //如果调度任务中没有该jobDetail 的 trigger,那么直接返回
+                ITrigger trigger = GetTrigger(jobInfo, out TriggerKey triKey);
+                if (trigger == null)
                 {
                     return false;
                 }
 
-                Scheduler.ResumeTrigger(triggerKey).Wait();
+                Scheduler.ResumeTrigger(triKey).Wait();
                 return true;
 
                 //TODO:记录日志
@@ -278,7 +279,7 @@ namespace Go.Job.Service.Core
         {
             lock (Locker)
             {
-                TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
+                TriggerKey triggerKey = GetTriggerKey(jobInfo);
                 ITrigger trigger = CreateTrigger(jobInfo);
                 Scheduler.RescheduleJob(triggerKey, trigger);
                 return true;
@@ -304,16 +305,15 @@ namespace Go.Job.Service.Core
                     return false;
                 }
 
-                TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
-                ITrigger isExistsedTriggerKey = Scheduler.GetTrigger(triggerKey).Result;
-                if (isExistsedTriggerKey == null)
+                ITrigger trigger = GetTrigger(jobInfo, out TriggerKey triKey);
+                if (trigger == null)
                 {
                     return false;
                 }
 
-                Scheduler.PauseTrigger(triggerKey);
-                Scheduler.UnscheduleJob(triggerKey);
-                Scheduler.DeleteJob(new JobKey(jobInfo.JobName, jobInfo.JobName));
+                Scheduler.PauseTrigger(triKey);
+                Scheduler.UnscheduleJob(triKey);
+                Scheduler.DeleteJob(GetJobKey(jobInfo));
                 JobPool.TryRemove(jobInfo.Id, out JobRuntimeInfo jobRuntimeInfo);
                 AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                 return true;
@@ -368,6 +368,18 @@ namespace Go.Job.Service.Core
         }
 
 
+        /// <summary>
+        /// 获取 jobDetail
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <param name="jobKey"></param>
+        /// <returns></returns>
+        private IJobDetail GetJobDetail(JobInfo jobInfo, out JobKey jobKey)
+        {
+            jobKey = GetJobKey(jobInfo);
+            return Scheduler.GetJobDetail(jobKey).Result;
+        }
+
 
         /// <summary>
         /// 创建 JobDetail
@@ -383,10 +395,23 @@ namespace Go.Job.Service.Core
             };
 
             IJobDetail jobDetail = JobBuilder.Create<JobCenter>()
-                .WithIdentity(jobInfo.JobName, jobInfo.JobName)
+                .WithIdentity(jobInfo.JobName, jobInfo.JobGroup)
                 .SetJobData(new JobDataMap(data))
                 .Build();
             return jobDetail;
+        }
+
+
+        /// <summary>
+        /// 获取 Trigger
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <param name="triKey"></param>
+        /// <returns></returns>
+        private ITrigger GetTrigger(JobInfo jobInfo, out TriggerKey triKey)
+        {
+            triKey = GetTriggerKey(jobInfo);
+            return Scheduler.GetTrigger(triKey).Result;
         }
 
 
@@ -397,7 +422,7 @@ namespace Go.Job.Service.Core
         /// <returns></returns>
         private ITrigger CreateTrigger(JobInfo jobInfo)
         {
-            TriggerBuilder tiggerBuilder = TriggerBuilder.Create().WithIdentity(jobInfo.JobName, jobInfo.JobName);
+            TriggerBuilder tiggerBuilder = TriggerBuilder.Create().WithIdentity(jobInfo.JobName, jobInfo.JobGroup);
 
             if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
             {
@@ -422,6 +447,17 @@ namespace Go.Job.Service.Core
 
             ITrigger trigger = tiggerBuilder.Build();
             return trigger;
+        }
+
+
+        private JobKey GetJobKey(JobInfo jobInfo)
+        {
+            return new JobKey(jobInfo.JobName, jobInfo.JobGroup);
+        }
+
+        private TriggerKey GetTriggerKey(JobInfo jobInfo)
+        {
+            return new TriggerKey(jobInfo.JobName, jobInfo.JobGroup);
         }
     }
 }

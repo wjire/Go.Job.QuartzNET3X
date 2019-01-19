@@ -88,14 +88,14 @@
     <Compile Include="废弃的思路\SchedulerConfigExtensions.cs" />
     <Compile Include="Core\AppDomainLoader.cs" />
     <Compile Include="Config\ThreadPoolConfig.cs" />
-    <Compile Include="Lib\JobString.cs" />
+    <Compile Include="废弃的思路\JobString.cs" />
     <Compile Include="废弃的思路\ScanJobConfig.cs" />
     <Compile Include="废弃的思路\ScanJobStartUp.cs" />
     <Compile Include="Listener\MyJobListenerSupport.cs" />
     <Compile Include="Core\JobCenter.cs" />
     <Compile Include="Core\SchedulerManager.cs" />
     <Compile Include="废弃的思路\JobServicesContainer.cs" />
-    <Compile Include="Lib\JobEnum.cs" />
+    <Compile Include="废弃的思路\JobEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="废弃的思路\ScanJob.cs" />
     <Compile Include="SchedStartHelper.cs" />
