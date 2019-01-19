@@ -1,454 +1,507 @@
-﻿@{
-    ViewBag.Title = "Index";
-}
+﻿@using Newtonsoft.Json
 @model  List<Go.Job.Model.JobInfo>
 
-<br />
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a id="actionType">
-                新增作业
-            </a>
-        </h4>
-    </div>
-    <div id="collapseOne" class="collShow" style="display:none">
-        <div class="panel-body">
-            @using (Html.BeginForm("Add", "Home", null, FormMethod.Post, new { @id = "formHome", @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a id="actionType">
+                    新增作业
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOne" class="collShow" style="display:none">
+            <div class="panel-body">
+                @using (Html.BeginForm("Add", "Home", null, FormMethod.Post, new { @id = "formHome", @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="form-group">
-                    <label for="SchedName" class="col-sm-2 control-label">调度任务名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="SchedName" id="SchedName"
-                               placeholder="请输入调度任务名称" />
+                    <div class="form-group">
+                        <label for="SchedName" class="col-sm-2 control-label">调度任务名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="SchedName" id="SchedName"
+                                   placeholder="请输入调度任务名称" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="JobName" class="col-sm-2 control-label">作业名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="JobName" id="JobName"
-                               placeholder="请输入作业名称" />
+                    <div class="form-group">
+                        <label for="JobName" class="col-sm-2 control-label">作业名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="JobName" id="JobName"
+                                   placeholder="请输入作业名称" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Cron" class="col-sm-2 control-label">执行计划</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Cron" id="Cron"
-                               placeholder="请输入执行计划" />
+                    <div class="form-group">
+                        <label for="Cron" class="col-sm-2 control-label">执行计划</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Cron" id="Cron"
+                                   placeholder="请输入执行计划" />
+                        </div>
                     </div>
-                </div>
 
-                @*<div class="form-group" style="display:none">
-                    <label for="Second" class="col-sm-2 control-label">执行间隔时间</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="Second" id="Second" placeholder="请输入执行间隔时间"/>
+                    @*<div class="form-group" style="display:none">
+                            <label for="Second" class="col-sm-2 control-label">执行间隔时间</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="Second" id="Second" placeholder="请输入执行间隔时间"/>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <label for="AssemblyPath" class="col-sm-2 control-label">程序集</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="AssemblyPath" id="AssemblyPath"
+                                   placeholder="请输入程序集的物理路径(含文件名)" />
+                        </div>
                     </div>
-                </div>*@
-                <div class="form-group">
-                    <label for="AssemblyPath" class="col-sm-2 control-label">程序集</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="AssemblyPath" id="AssemblyPath"
-                               placeholder="请输入程序集的物理路径(含文件名)" />
+                    <div class="form-group">
+                        <label for="ClassType" class="col-sm-2 control-label">实体类型</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="ClassType" id="ClassType"
+                                   placeholder="请输入实体类型的完全限定名" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="ClassType" class="col-sm-2 control-label">实体类型</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="ClassType" id="ClassType"
-                               placeholder="请输入实体类型的完全限定名" />
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="hidden" name="Id" id="Id" />
+                            <button type="submit" class="btn btn-default">提交</button>
+                            <button type="button" class="btn btn-default" onclick="closeAdd()">关闭</button>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <input type="hidden" name="Id" id="Id" />
-                        <button type="submit" class="btn btn-default">提交</button>
-                        <button type="button" class="btn btn-default" onclick="closeAdd()">关闭</button>
-                    </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
-</div>
 
 
-<div class="panel panel-default" style="display:none" id="divUpdate">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a id="actionTypeUpdate">
-                修改作业
-            </a>
-        </h4>
-    </div>
-    <div id="collapseOneUpdate" class="collShow">
-        <div class="panel-body">
-            @using (Html.BeginForm("UpdateJob", "Home", null, FormMethod.Post, new { @id = "formHome", @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
+    <div class="panel panel-default" style="display:none" id="divUpdate">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a id="actionTypeUpdate">
+                    修改作业
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOneUpdate" class="collShow">
+            <div class="panel-body">
+                @using (Html.BeginForm("UpdateJob", "Home", null, FormMethod.Post, new { @id = "formHome", @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="form-group">
-                    <label for="Id" class="col-sm-2 control-label">作业编号</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control Id" name="Id" id="Id" readonly />
+                    <div class="form-group">
+                        <label for="Id" class="col-sm-2 control-label">作业编号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control Id" name="Id" id="Id" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="SchedName" class="col-sm-2 control-label">调度任务名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control SchedName" name="SchedName" id="SchedName" readonly/>
+                    <div class="form-group">
+                        <label for="SchedName" class="col-sm-2 control-label">调度任务名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control SchedName" name="SchedName" id="SchedName" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="JobName" class="col-sm-2 control-label ">作业名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control JobName" name="JobName" id="JobName" readonly />
+                    <div class="form-group">
+                        <label for="JobName" class="col-sm-2 control-label ">作业名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control JobName" name="JobName" id="JobName" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Cron" class="col-sm-2 control-label ">执行计划</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control Cron" name="Cron" id="Cron" />
+                    <div class="form-group">
+                        <label for="Cron" class="col-sm-2 control-label ">执行计划</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control Cron" name="Cron" id="Cron" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group" style="display:none">
-                    <label for="Second" class="col-sm-2 control-label ">执行间隔时间(秒)</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control Second" name="Second" id="Second" />
+                    <div class="form-group" style="display:none">
+                        <label for="Second" class="col-sm-2 control-label ">执行间隔时间(秒)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control Second" name="Second" id="Second" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="AssemblyPath" class="col-sm-2 control-label ">程序集物理路径(含文件名)</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control AssemblyPath" name="AssemblyPath" id="AssemblyPath" readonly />
+                    <div class="form-group">
+                        <label for="AssemblyPath" class="col-sm-2 control-label ">程序集物理路径(含文件名)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control AssemblyPath" name="AssemblyPath" id="AssemblyPath" readonly />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="ClassType" class="col-sm-2 control-label ">实体类型完全限定名</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control ClassType" name="ClassType" id="ClassType" readonly />
+                    <div class="form-group">
+                        <label for="ClassType" class="col-sm-2 control-label ">实体类型完全限定名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control ClassType" name="ClassType" id="ClassType" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group" style="display:none">
-                    <label for="State" class="col-sm-2 control-label ">状态</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control State" name="State" id="State" />
+                    <div class="form-group" style="display:none">
+                        <label for="State" class="col-sm-2 control-label ">状态</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control State" name="State" id="State" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">提交</button>
-                        <button type="button" class="btn btn-default" onclick="closeUpdate()">关闭</button>
+                    <div class="form-group" style="display:none">
+                        <label for="JobGroup" class="col-sm-2 control-label ">作业组</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control JobGroup" name="JobGroup" id="JobGroup" />
+                        </div>
                     </div>
-                </div>
-            }
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">提交</button>
+                            <button type="button" class="btn btn-default" onclick="closeUpdate()">关闭</button>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-</div>
 
 
 
-<div class="panel panel-default" style="display:none" id="divUpgrade">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a id="actionTypeUpgrade">
-                更换版本
-            </a>
-        </h4>
-    </div>
-    <div id="collapseOneUpgrade" class="collShow">
-        <div class="panel-body">
-            @using (Html.BeginForm("UpgradeJob", "Home", null, FormMethod.Post, new { @id = "formHome", @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
+    <div class="panel panel-default" style="display:none" id="divUpgrade">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a id="actionTypeUpgrade">
+                    更换版本
+                </a>
+            </h4>
+        </div>
+        <div id="collapseOneUpgrade" class="collShow">
+            <div class="panel-body">
+                @using (Html.BeginForm("UpgradeJob", "Home", null, FormMethod.Post, new { @id = "formHome", @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="form-group">
-                    <label for="Id" class="col-sm-2 control-label">作业编号</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control Id" name="Id" id="Id" readonly />
+                    <div class="form-group">
+                        <label for="Id" class="col-sm-2 control-label">作业编号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control Id" name="Id" id="Id" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="SchedName" class="col-sm-2 control-label">调度任务名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control SchedName" name="SchedName" id="SchedName" readonly/>
+                    <div class="form-group">
+                        <label for="SchedName" class="col-sm-2 control-label">调度任务名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control SchedName" name="SchedName" id="SchedName" readonly />
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="form-group">
-                    <label for="JobName" class="col-sm-2 control-label ">作业名称</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control JobName" name="JobName" id="JobName" readonly />
+                    <div class="form-group">
+                        <label for="JobName" class="col-sm-2 control-label ">作业名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control JobName" name="JobName" id="JobName" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Cron" class="col-sm-2 control-label ">执行计划</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control Cron" name="Cron" id="Cron" />
+                    <div class="form-group">
+                        <label for="Cron" class="col-sm-2 control-label ">执行计划</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control Cron" name="Cron" id="Cron" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group" style="display:none">
-                    <label for="Second" class="col-sm-2 control-label ">执行间隔时间(秒)</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control Second" name="Second" id="Second" />
+                    <div class="form-group" style="display:none">
+                        <label for="Second" class="col-sm-2 control-label ">执行间隔时间(秒)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control Second" name="Second" id="Second" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="AssemblyPath" class="col-sm-2 control-label ">程序集物理路径(含文件名)</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control AssemblyPath" name="AssemblyPath" id="AssemblyPath" />
+                    <div class="form-group">
+                        <label for="AssemblyPath" class="col-sm-2 control-label ">程序集物理路径(含文件名)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control AssemblyPath" name="AssemblyPath" id="AssemblyPath" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="ClassType" class="col-sm-2 control-label ">实体类型完全限定名</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control ClassType" name="ClassType" id="ClassType" />
+                    <div class="form-group">
+                        <label for="ClassType" class="col-sm-2 control-label ">实体类型完全限定名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control ClassType" name="ClassType" id="ClassType" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group" style="display:none" >
-                    <label for="State" class="col-sm-2 control-label ">状态</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control State" name="State" id="State" />
+                    <div class="form-group" style="display:none">
+                        <label for="State" class="col-sm-2 control-label ">状态</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control State" name="State" id="State" />
+                        </div>
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">提交</button>
-                        <button type="button" class="btn btn-default" onclick="closeUpgrade()">关闭</button>
+
+                    <div class="form-group" style="display:none">
+                        <label for="JobGroup" class="col-sm-2 control-label ">作业组</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control JobGroup" name="JobGroup" id="JobGroup" />
+                        </div>
                     </div>
-                </div>
-            }
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">提交</button>
+                            <button type="button" class="btn btn-default" onclick="closeUpgrade()">关闭</button>
+                        </div>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-</div>
 
 
-<table id="list" class="table table-striped table-bordered table-hover table-condensed">
-    <thead>
-        <tr>
-            <th>编号</th>
-            <th>调度任务名称</th>
-            <th>作业名称</th>
-            <th>执行计划</th>
-            @*<th>执行间隔时间</th>*@
-            <th>程序集物理路径</th>
-            @*<th>完全限定名</th>*@
-            @*<th>开始时间</th>*@
-            <th>状态</th>
-            <th>操作</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table id="list" class="table table-striped table-bordered table-hover table-condensed">
+        <thead>
             <tr>
-                <td>@item.Id</td>
-                <td>@item.SchedName</td>
-                <td>@item.JobName</td>
-                <td>@item.Cron</td>
-                @*<td>@item.Second</td>*@
-                <td>@item.AssemblyPath</td>
-                @*<td>@item.ClassType</td>*@
-                @*<td>@item.StartTime</td>*@
+                <th>编号</th>
+                <th>调度任务名称</th>
+                <th>作业名称</th>
+                <th>执行计划</th>
+                @*<th>执行间隔时间</th>*@
+                <th>程序集物理路径</th>
+                @*<th>完全限定名</th>*@
+                @*<th>开始时间</th>*@
+                <th>状态</th>
+                <th>持久化状态</th>
+                <th>START_TIME</th>
+                <th>PREV_FIRE_TIME</th>
+                <th>NEXT_FIRE_TIME</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.SchedName</td>
+                    <td>@item.JobName</td>
+                    <td>@item.Cron</td>
+                    @*<td>@item.Second</td>*@
+                    <td>@item.AssemblyPath</td>
+                    @*<td>@item.ClassType</td>*@
+                    @*<td>@item.StartTime</td>*@
+                    @{
+                        switch (item.State)
+                        {
+                            case 0:
+                                <td>准备中</td>
+                                break;
+                            case 1:
+                                <td>执行中</td>
+                                break;
+                            case 2:
+                                <td>暂停</td>
+                                break;
+                            case 3:
+                                <td>删除</td>
+                                break;
+                        }
+                    }
+                    <td>@item.TRIGGER_STATE</td>
+                    <td>@item.START_TIME</td>
+                    <td>@item.PREV_FIRE_TIME</td>
+                    <td>@item.NEXT_FIRE_TIME</td>
+                    <td>
+         @{
+                            if (item.State == 0)
+                            {
+                                <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">启动</a>
+                                <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
+                            }
+                            if (item.State == 1)
+                            {
+                                <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
+                            }
+                            if (item.State == 2)
+                            {
+                                <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
+                                <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
+                                <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">删除</a>
+                            }
+                            if (item.State == 3)
+                            {
+                                <a id="btnUpgrade" class="btn btn-default" href="#" role="button" onclick="Upgrade(@item.Id)">更换版本</a>
+                            }
+                            @*<input type="text" id="@item.Id" value="@{JsonConvert.SerializeObject(item)}" />*@
+                            @*<input type="text" id="@item.Id" value="1" />*@
+                        }
+                    </td>
 
-                @{
-                    switch (item.State)
-                    {
-                        case 0:
-                            <td>准备中</td>
-                            break;
-                        case 1:
-                            <td>执行中</td>
-                            break;
-                        case 2:
-                            <td>暂停</td>
-                            break;
-                        case 3:
-                            <td>删除</td>
-                            break;
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    @*<script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+        <script src="http://localhost:25230/signalr/hubs"></script>*@
+    <script type="text/javascript">
+        $(function () {
+
+            //TODO:SignalR 用不起,脑壳痛
+            //$.connection.hub.url = "http://localhost:25230/signalr";
+            //var msgHub = $.connection.ChatHub;
+            //msgHub.client.GetMessage = function (msg) {
+            //    alert(msg);
+            //};
+            //$.connection.hub.start({ xdomain: true });
+            //$.connection.hub.start().done(function () {
+            //    msgHub.server.GetMessage().done(function (msg) {
+            //        if (msg || msg !== "") {
+            //            console.log(msg);
+            //        }
+            //    });
+            //});
+
+
+            //点击模板展开收缩
+            $("#actionType").click(function () {
+                if ($("#collapseOne").hasClass("collShow")) {
+                    $("#collapseOne").show();
+                    $("#collapseOne").removeClass("collShow");
+
+                } else {
+                    $("#collapseOne").hide();
+                    $("#collapseOne").addClass("collShow");
+                }
+            });
+        });
+
+        function Run(id) {
+
+            if (id == undefined || id == null || id == "") return;
+            location.href = "/Home/Run/" + id;
+        }
+
+        function Pause(id) {
+            if (id == undefined || id == null || id == "") return;
+            location.href = "/Home/Pause/" + id;
+        }
+
+        function Resume(id) {
+            if (id == undefined || id == null || id == "") return;
+            //var data = {};
+            //var s = $("#list #" + id).val;
+            //console.log(s);
+
+            //data.Id,
+            //    data.JobName,
+            location.href = "/Home/Resume/" + id;
+        }
+
+        function Update(id) {
+            if (id == undefined || id == null || id == "") return;
+            console.log(id);
+            $.ajax({
+                url: "/Home/Update/" + id,
+                type: "Get",
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+                    $("#collapseOneUpdate .Id").val(result.Id);
+                    $("#collapseOneUpdate .JobName").val(result.JobName);
+                    $("#collapseOneUpdate .Cron").val(result.Cron);
+                    $("#collapseOneUpdate .Second").val(result.Second);
+                    $("#collapseOneUpdate .AssemblyPath").val(result.AssemblyPath);
+                    $("#collapseOneUpdate .ClassType").val(result.ClassType);
+                    $("#collapseOneUpdate .State").val(result.State);
+                    $("#collapseOneUpdate .SchedName").val(result.SchedName);
+                    $("#collapseOneUpdate .JobGroup").val(result.JobGroup);
+                    $("#divUpdate").show();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+
+
+        function Upgrade(id) {
+            if (id == undefined || id == null || id == "") return;
+            console.log(id);
+            $.ajax({
+                url: "/Home/Upgrade/" + id,
+                type: "Get",
+                dataType: 'json',
+                success: function (result) {
+                    console.log(result);
+                    $("#collapseOneUpgrade .Id").val(result.Id);
+                    $("#collapseOneUpgrade .JobName").val(result.JobName);
+                    $("#collapseOneUpgrade .Cron").val(result.Cron);
+                    $("#collapseOneUpgrade .Second").val(result.Second);
+                    $("#collapseOneUpgrade .AssemblyPath").val(result.AssemblyPath);
+                    $("#collapseOneUpgrade .ClassType").val(result.ClassType);
+                    $("#collapseOneUpgrade .State").val(result.State);
+                    $("#collapseOneUpgrade .SchedName").val(result.SchedName);
+                    $("#collapseOneUpgrade .JobGroup").val(result.JobGroup);
+                    $("#divUpgrade").show();
+                },
+                error: function (e) {
+                    alert(e);
+                }
+            });
+        }
+
+
+        function Remove(id) {
+            if (id == undefined || id == null || id == "") return;
+            location.href = "/Home/Remove/" + id;
+        }
+
+        function closeAdd() {
+            $("#collapseOne").hide();
+            $("#collapseOne").addClass("collShow");
+        }
+
+        function closeUpdate() {
+            $("#divUpdate").hide();
+        }
+
+        function closeUpgrade() {
+            $("#divUpgrade").hide();
+        }
+
+        function ConvertState(state) {
+            switch (state) {
+                case 0:
+                    return "准备中";
+                case 1:
+                    return "执行中";
+                case 2:
+                    return "暂停";
+                case 3:
+                    return "删除";
+            }
+        }
+
+        function Post(url, data) {
+            $.ajax({
+                type: "post",
+                url: url,
+                dataType: "json",
+                data: data,
+                success: function (data) {
+                    if (data.IsSucceed == true) {
+                        alert("操作成功");
+                    } else {
+                        alert("操作失败");
                     }
                 }
-
-                <td>
-                    @*@{
-
-                        }*@
-                    @{
-                        if (item.State == 0)
-                        {
-                            <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">启动</a>
-                            <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
-                        }
-                        if (item.State == 1)
-                        {
-                            <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
-                        }
-                        if (item.State == 2)
-                        {
-                            <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
-                            <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
-                            <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">删除</a>
-                        }
-                        if (item.State == 3)
-                        {
-                            <a id="btnUpgrade" class="btn btn-default" href="#" role="button" onclick="Upgrade(@item.Id)">更换版本</a>
-                        }
-                    }
-                </td>
-            </tr>
+            });
         }
-    </tbody>
-</table>
-
-
-@*<script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
-    <script src="http://localhost:25230/signalr/hubs"></script>*@
-<script type="text/javascript">
-    $(function () {
-
-        //TODO:SignalR 用不起,脑壳痛
-        //$.connection.hub.url = "http://localhost:25230/signalr";
-        //var msgHub = $.connection.ChatHub;
-        //msgHub.client.GetMessage = function (msg) {
-        //    alert(msg);
-        //};
-        //$.connection.hub.start({ xdomain: true });
-        //$.connection.hub.start().done(function () {
-        //    msgHub.server.GetMessage().done(function (msg) {
-        //        if (msg || msg !== "") {
-        //            console.log(msg);
-        //        }
-        //    });
-        //});
-
-
-        //点击模板展开收缩
-        $("#actionType").click(function () {
-            if ($("#collapseOne").hasClass("collShow")) {
-                $("#collapseOne").show();
-                $("#collapseOne").removeClass("collShow");
-
-            } else {
-                $("#collapseOne").hide();
-                $("#collapseOne").addClass("collShow");
-            }
-        });
-    });
-
-    function Run(id) {
-      
-        if (id == undefined || id == null || id == "") return;
-        location.href = "/Home/Run/" + id;
-    }
-
-    function Pause(id) {
-        if (id == undefined || id == null || id == "") return;
-        location.href = "/Home/Pause/" + id;
-    }
-
-    function Resume(id) {
-        if (id == undefined || id == null || id == "") return;
-        location.href = "/Home/Resume/" + id;
-    }
-
-    function Update(id) {
-        if (id == undefined || id == null || id == "") return;
-        console.log(id);
-        $.ajax({
-            url: "/Home/Update/" + id,
-            type: "Get",
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-                $("#collapseOneUpdate .Id").val(result.Id);
-                $("#collapseOneUpdate .JobName").val(result.JobName);
-                $("#collapseOneUpdate .Cron").val(result.Cron);
-                $("#collapseOneUpdate .Second").val(result.Second);
-                $("#collapseOneUpdate .AssemblyPath").val(result.AssemblyPath);
-                $("#collapseOneUpdate .ClassType").val(result.ClassType);
-                $("#collapseOneUpdate .State").val(result.State);
-                $("#collapseOneUpdate .SchedName").val(result.SchedName);
-                $("#divUpdate").show();
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
-    }
-
-
-    function Upgrade(id) {
-        if (id == undefined || id == null || id == "") return;
-        console.log(id);
-        $.ajax({
-            url: "/Home/Upgrade/" + id,
-            type: "Get",
-            dataType: 'json',
-            success: function (result) {
-                console.log(result);
-                $("#collapseOneUpgrade .Id").val(result.Id);
-                $("#collapseOneUpgrade .JobName").val(result.JobName);
-                $("#collapseOneUpgrade .Cron").val(result.Cron);
-                $("#collapseOneUpgrade .Second").val(result.Second);
-                $("#collapseOneUpgrade .AssemblyPath").val(result.AssemblyPath);
-                $("#collapseOneUpgrade .ClassType").val(result.ClassType);
-                $("#collapseOneUpgrade .State").val(result.State);
-                $("#collapseOneUpgrade .SchedName").val(result.SchedName);
-                $("#divUpgrade").show();
-            },
-            error: function (e) {
-                alert(e);
-            }
-        });
-    }
-
-
-
-    function Remove(id) {
-        if (id == undefined || id == null || id == "") return;
-        location.href = "/Home/Remove/" + id;
-    }
-
-    function closeAdd() {
-        $("#collapseOne").hide();
-        $("#collapseOne").addClass("collShow");
-    }
-
-    function closeUpdate() {
-        $("#divUpdate").hide();
-    }
-
-    function closeUpgrade() {
-        $("#divUpgrade").hide();
-    }
-
-    function ConvertState(state) {
-        switch (state) {
-            case 0:
-                return "准备中";
-            case 1:
-                return "执行中";
-            case 2:
-                return "暂停";
-            case 3:
-                return "删除";
-        }
-    }
-</script>
+    </script>
+</body>
+</html>

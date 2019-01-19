@@ -10,6 +10,7 @@ namespace Go.Job.Model
         /// </summary>
         public int Id { get; set; }
 
+
         /// <summary>
         /// job名称
         /// </summary>
@@ -75,5 +76,13 @@ namespace Go.Job.Model
 
 
         public string TRIGGER_STATE { get; set; }
+
+        public string NEXT_FIRE_TIME { get; set; }
+
+        public string PREV_FIRE_TIME { get; set; }
+
+        public string START_TIME { get; set; }
+
+        //public string END_TIME { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Go.Job.Db;
+﻿using System;
+using Go.Job.Db;
 using Go.Job.Model;
 using Go.Job.Web.Helper;
 using System.Collections.Generic;
@@ -12,6 +13,12 @@ namespace Go.Job.Web.Controllers
         public ActionResult Index()
         {
             List<JobInfo> list = JobInfoDb.GetJobInfoList();
+            list.ForEach(f =>
+                {
+                    f.NEXT_FIRE_TIME = new DateTime(Convert.ToInt64(f.NEXT_FIRE_TIME)).AddHours(8).ToString();
+                    f.PREV_FIRE_TIME = new DateTime(Convert.ToInt64(f.PREV_FIRE_TIME)).AddHours(8).ToString();
+                    f.START_TIME = new DateTime(Convert.ToInt64(f.START_TIME)).AddHours(8).ToString();
+                });
             return View(list);
         }
 

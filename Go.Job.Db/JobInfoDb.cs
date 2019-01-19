@@ -11,6 +11,8 @@ namespace Go.Job.Db
 
         private static readonly ConnectionConfig Config;
 
+        private static string columns = " a.Id,a.JobName,a.JobGroup,a.Cron,a.AssemblyPath,a.ClassType,a.State,a.SchedName,b.TRIGGER_STATE,b.NEXT_FIRE_TIME,b.PREV_FIRE_TIME,b.START_TIME ";
+
         static JobInfoDb()
         {
             Config = new ConnectionConfig
@@ -27,7 +29,7 @@ namespace Go.Job.Db
         {
 
             List<JobInfo> list = null;
-            string columns = " a.Id,a.JobName,a.JobGroup,a.Cron,a.AssemblyPath,a.ClassType,a.State,a.SchedName,b.TRIGGER_STATE ";
+
             using (SqlSugarClient db = new SqlSugarClient(Config))
             {
                 //list = db.Queryable<JobInfo>().ToList();
@@ -43,7 +45,10 @@ namespace Go.Job.Db
             {
                 using (SqlSugarClient db = new SqlSugarClient(Config))
                 {
-                    return db.Queryable<JobInfo>().Where(w => w.Id == id).First();
+                   return db.SqlQueryable<JobInfo>(
+                            $"select {columns} from jobinfo as a left join qrtz_triggers as b on a.SchedName=b.SCHED_NAME where a.Id = {id}")
+                        .Single();
+                    //return db.Queryable<JobInfo>().Where(w => w.Id == id).First();
                 }
             }
             catch (Exception e)

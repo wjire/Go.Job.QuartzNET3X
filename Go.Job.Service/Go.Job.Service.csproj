@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\HttpClientHelper.cs" />
     <Compile Include="Config\AppSettingsConfig.cs" />
     <Compile Include="Config\JobStoreConfig.cs" />
     <Compile Include="Config\RemoteConfig.cs" />
