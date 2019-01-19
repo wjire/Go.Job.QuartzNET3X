@@ -31,8 +31,14 @@ namespace Go.Job.Service
         //}
         //}
 
+        /// <summary>
+        /// 调度任务名称
+        /// </summary>
         private static readonly string SchedName = AppSettingsConfig.SchedName;
 
+        /// <summary>
+        /// 调度任务监听地址
+        /// </summary>
         private static readonly string ApiAddress = AppSettingsConfig.ApiAddress;
 
         /// <summary>
@@ -82,7 +88,7 @@ namespace Go.Job.Service
             storeConfig.InstanceName = schedName;
             StartSched(poolConfig, storeConfig).Wait();
 
-            Console.WriteLine("作业调度服务已启动!");
+            Console.WriteLine($"作业调度服务已启动! 当前调度任务 : {schedName}");
             string userCommand = string.Empty;
             while (userCommand != "exit")
             {

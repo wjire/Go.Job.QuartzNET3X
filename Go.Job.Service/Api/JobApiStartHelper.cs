@@ -18,7 +18,7 @@ namespace Go.Job.Service.api
         {
             if (string.IsNullOrWhiteSpace(ApiAddress))
             {
-                throw new ArgumentNullException("ApiAddress 地址不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值,或者调用该方法的重载版本");
+                throw new ArgumentNullException("监听地址不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值,或者调用该方法的重载版本");
             }
 
             Start(ApiAddress);
@@ -29,12 +29,12 @@ namespace Go.Job.Service.api
         {
             if (string.IsNullOrWhiteSpace(address))
             {
-                throw new ArgumentNullException("address 不能为空");
+                throw new ArgumentNullException("监听地址不能为空");
             }
 
             using (WebApp.Start(address))
             {
-                Console.WriteLine($"webapi监听已启动, address : {address}");
+                Console.WriteLine($"调度任务监听已启动! 当前监听地址 : {address}");
                 Console.ReadLine();
             }
         }
