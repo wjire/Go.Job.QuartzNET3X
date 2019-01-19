@@ -5,6 +5,9 @@ using Quartz;
 
 namespace Go.Job.Service.Job
 {
+    /// <summary>
+    /// job中心,所有的job都是从这里开始执行
+    /// </summary>
     [DisallowConcurrentExecution]
     public class JobCenter : IJob
     {

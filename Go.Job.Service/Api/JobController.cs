@@ -2,9 +2,11 @@
 using System.Web.Http;
 using Go.Job.Model;
 
-namespace Go.Job.Service.WebAPI
+namespace Go.Job.Service.api
 {
-
+    /// <summary>
+    /// job控制器
+    /// </summary>
     public class JobController : ApiController
     {
         /// <summary>

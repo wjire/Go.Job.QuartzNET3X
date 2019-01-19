@@ -4,9 +4,9 @@ using System.Web.Http;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Go.Job.Service.WebAPI.Startup))]
+[assembly: OwinStartup(typeof(Go.Job.Service.api.Startup))]
 
-namespace Go.Job.Service.WebAPI
+namespace Go.Job.Service.api
 {
     public class Startup
     {

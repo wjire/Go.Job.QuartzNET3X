@@ -81,8 +81,8 @@ namespace Go.Job.Service.Config
                 [$"quartz.dataSource.{config.DataSource}.provider"] = config.Provider,
                 ["quartz.jobStore.misfireThreshold"] = config.MisfireThreshold,
                 ["quartz.jobStore.clustered"] = config.Clustered,
-                ["quartz.scheduler.instanceName"] = config.InstanceName,
                 ["quartz.scheduler.instanceId"] = config.InstanceId,
+                ["quartz.scheduler.instanceName"] = config.InstanceName,
             };
             return properties;
         }

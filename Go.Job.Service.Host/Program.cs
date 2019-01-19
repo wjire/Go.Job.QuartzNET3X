@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.NetworkInformation;
-using Go.Job.Service.Config;
-using Go.Job.Service.WebAPI;
+using Go.Job.Service.api;
 
 namespace Go.Job.Service.Host
 {
@@ -12,12 +11,7 @@ namespace Go.Job.Service.Host
         {
             try
             {
-
-                //Console.WriteLine("Port: 555 status: " + (PortInUse(25250) ? "in use" : "not in use"));
-                //Console.ReadKey();
-                //new SchedFactory().AddThreadPoolConfig().AddRemoteConfig().AddJobStoreConfig().Run().Wait();
-
-                SchedulerStartup.StartSched("wechat").Wait();
+                SchedStartHelper.StartSched();
 
                 Console.WriteLine("作业调度服务已启动!");
                 string userCommand = string.Empty;
@@ -28,8 +22,7 @@ namespace Go.Job.Service.Host
                         Console.WriteLine("     非退出指令,自动忽略...");
                     }
 
-                    string address = "http://localhost:25251/";
-                    WebApiHelper.Start(address);
+                    JobApiStartHelper.Start();
                     userCommand = Console.ReadLine();
                 }
             }

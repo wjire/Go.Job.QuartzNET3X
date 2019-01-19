@@ -96,11 +96,11 @@
     <Compile Include="Lib\JobEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="废弃的思路\ScanJob.cs" />
-    <Compile Include="Factory\SchedFactory.cs" />
+    <Compile Include="SchedStartHelper.cs" />
     <Compile Include="废弃的思路\IDbProvider.cs" />
     <Compile Include="Api\JobController.cs" />
     <Compile Include="Api\Startup.cs" />
-    <Compile Include="Api\WebApiHelper.cs" />
+    <Compile Include="Api\JobApiStartHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
