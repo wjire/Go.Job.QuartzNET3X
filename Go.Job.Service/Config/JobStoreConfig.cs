@@ -53,7 +53,7 @@ namespace Go.Job.Service.Config
         /// <summary>
         /// 调度器名称
         /// </summary>
-        public string InstanceName { get; set; } = "MyQuartz";
+        public string InstanceName { get; set; }
 
 
         /// <summary>

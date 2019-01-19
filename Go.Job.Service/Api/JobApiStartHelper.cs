@@ -6,11 +6,11 @@ namespace Go.Job.Service.api
     /// <summary>
     /// jobApi启动类
     /// </summary>
-    public class JobApiStartHelper
+    internal class JobApiStartHelper
     {
         private static readonly string ApiAddress = System.Configuration.ConfigurationManager.AppSettings["ApiAddress"];
 
-        public static void Start()
+        internal static void Start()
         {
             if (string.IsNullOrWhiteSpace(ApiAddress))
             {
@@ -21,7 +21,7 @@ namespace Go.Job.Service.api
         }
 
 
-        public static void Start(string address)
+        internal static void Start(string address)
         {
             if (string.IsNullOrWhiteSpace(address))
             {

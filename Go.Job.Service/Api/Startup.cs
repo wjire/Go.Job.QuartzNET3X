@@ -8,7 +8,7 @@ using Owin;
 
 namespace Go.Job.Service.api
 {
-    public class Startup
+    internal class Startup
     {
         public void Configuration(IAppBuilder app)
         {
