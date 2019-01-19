@@ -3,11 +3,10 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using Go.Job.Model;
-using Go.Job.Service.Job;
 using Go.Job.Service.Lib;
 using Quartz;
 
-namespace Go.Job.Service
+namespace Go.Job.Service.Core
 {
     /// <summary>
     /// 调度器管理者
@@ -117,7 +116,7 @@ namespace Go.Job.Service
                         //成功移除后,再卸载掉应用程序域,失败则不移除,保留.
                         AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                     }
-                    
+
                     return false;
                 }
             }
@@ -205,7 +204,11 @@ namespace Go.Job.Service
 
                 TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
                 ITrigger isExistsedTriggerKey = Scheduler.GetTrigger(triggerKey).Result;
-                if (isExistsedTriggerKey == null) return false;
+                if (isExistsedTriggerKey == null)
+                {
+                    return false;
+                }
+
                 Scheduler.PauseTrigger(triggerKey).Wait();
                 return true;
 
@@ -300,7 +303,7 @@ namespace Go.Job.Service
                 {
                     return false;
                 }
-                
+
                 TriggerKey triggerKey = new TriggerKey(jobInfo.JobName, jobInfo.JobName);
                 ITrigger isExistsedTriggerKey = Scheduler.GetTrigger(triggerKey).Result;
                 if (isExistsedTriggerKey == null)
@@ -311,7 +314,7 @@ namespace Go.Job.Service
                 Scheduler.PauseTrigger(triggerKey);
                 Scheduler.UnscheduleJob(triggerKey);
                 Scheduler.DeleteJob(new JobKey(jobInfo.JobName, jobInfo.JobName));
-                JobPool.TryRemove(jobInfo.Id, out var jobRuntimeInfo);
+                JobPool.TryRemove(jobInfo.Id, out JobRuntimeInfo jobRuntimeInfo);
                 AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                 return true;
                 //TODO:记录日志

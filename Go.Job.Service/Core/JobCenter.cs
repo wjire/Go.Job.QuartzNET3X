@@ -4,7 +4,7 @@ using Go.Job.Model;
 using Go.Job.Service.Lib;
 using Quartz;
 
-namespace Go.Job.Service.Job
+namespace Go.Job.Service.Core
 {
     /// <summary>
     /// job中心,所有的job都是从这里开始执行

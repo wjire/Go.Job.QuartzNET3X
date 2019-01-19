@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Go.Job.Service.api;
 using Go.Job.Service.Config;
+using Go.Job.Service.Core;
 using Quartz.Impl;
 
 namespace Go.Job.Service
@@ -49,7 +50,7 @@ namespace Go.Job.Service
             {
                 throw new ArgumentNullException("ApiAddress 不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值");
             }
-            
+
             if (JobApiStartHelper.PortInUse(ApiAddress))
             {
                 throw new ArgumentNullException($"{ApiAddress} 已被占用,请在配置文件<appSettings>节点中修改 key=\"ApiAddress\" 的值");

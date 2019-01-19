@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Go.Job.Service
+namespace Go.Job.Service.Core
 {
     /// <summary>
     /// 这是一个核心类,非常核心
@@ -10,8 +10,8 @@ namespace Go.Job.Service
         /// <summary>
         /// 加载应用程序，获取作业实例
         /// </summary>
-        /// <param name="assemblyPath">作业实例程序集的物理路径,含扩展名</param>
-        /// <param name="classType">作业实例的完全限定名,含命名空间</param>
+        /// <param name="assemblyPath">作业实例程序集的物理路径</param>
+        /// <param name="classType">作业实例的完全限定名</param>
         /// <param name="appDomain"></param>
         /// <returns></returns>
         public static BaseJob.BaseJob Load(string assemblyPath, string classType, out AppDomain appDomain)

@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Go.Job.Model;
 using Go.Job.Service.Config;
+using Go.Job.Service.Core;
 
 namespace Go.Job.Service.api
 {
@@ -10,7 +11,9 @@ namespace Go.Job.Service.api
     /// </summary>
     public class JobController : ApiController
     {
-
+        /// <summary>
+        /// 调度任务名称
+        /// </summary>
         private static readonly string SchedName = AppSettingsConfig.SchedName;
 
         /// <summary>
@@ -141,7 +144,6 @@ namespace Go.Job.Service.api
             return new Result
             {
                 Code = res ? 200 : 400,
-                Data = AppSettingsConfig.SchedName,
             };
         }
 
@@ -150,7 +152,6 @@ namespace Go.Job.Service.api
             return new Result
             {
                 Code = 200,
-                Data = AppSettingsConfig.SchedName,
                 Msg = exception
             };
         }
