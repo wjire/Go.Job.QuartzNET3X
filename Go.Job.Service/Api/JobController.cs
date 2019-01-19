@@ -17,7 +17,7 @@ namespace Go.Job.Service.WebAPI
         {
             try
             {
-                return JobPoolManager.Instance.CreateJob(jobInfo) ? 200 : 400;
+                return SchedulerManager.Instance.CreateJob(jobInfo) ? 200 : 400;
             }
             catch (Exception e)
             {
@@ -36,7 +36,7 @@ namespace Go.Job.Service.WebAPI
         {
             try
             {
-                return JobPoolManager.Instance.Pause(id) ? 200 : 400;
+                return SchedulerManager.Instance.Pause(id) ? 200 : 400;
             }
             catch (Exception e)
             {
@@ -54,7 +54,7 @@ namespace Go.Job.Service.WebAPI
         {
             try
             {
-                return JobPoolManager.Instance.Resume(jobInfo) ? 200 : 400;
+                return SchedulerManager.Instance.Resume(jobInfo) ? 200 : 400;
             }
             catch (Exception e)
             {
@@ -73,7 +73,7 @@ namespace Go.Job.Service.WebAPI
         {
             try
             {
-                return JobPoolManager.Instance.Remove(id) ? 200 : 400;
+                return SchedulerManager.Instance.Remove(id) ? 200 : 400;
             }
             catch (Exception e)
             {
@@ -92,7 +92,7 @@ namespace Go.Job.Service.WebAPI
         {
             try
             {
-                return JobPoolManager.Instance.Update(jobInfo) ? 200 : 400;
+                return SchedulerManager.Instance.Update(jobInfo) ? 200 : 400;
             }
             catch (Exception e)
             {
@@ -111,7 +111,7 @@ namespace Go.Job.Service.WebAPI
         {
             try
             {
-                return JobPoolManager.Instance.Upgrade(jobInfo) ? 200 : 400;
+                return SchedulerManager.Instance.Upgrade(jobInfo) ? 200 : 400;
             }
             catch (Exception e)
             {

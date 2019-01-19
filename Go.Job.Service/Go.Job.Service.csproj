@@ -83,24 +83,24 @@
   <ItemGroup>
     <Compile Include="Config\JobStoreConfig.cs" />
     <Compile Include="Config\RemoteConfig.cs" />
-    <Compile Include="Config\SchedulerConfigExtensions.cs" />
+    <Compile Include="废弃的思路\SchedulerConfigExtensions.cs" />
     <Compile Include="Core\AppDomainLoader.cs" />
     <Compile Include="Config\ThreadPoolConfig.cs" />
     <Compile Include="Lib\JobString.cs" />
-    <Compile Include="Deleted\ScanJobConfig.cs" />
-    <Compile Include="Deleted\ScanJobStartUp.cs" />
-    <Compile Include="Deleted\MyJobListenerSupport.cs" />
+    <Compile Include="废弃的思路\ScanJobConfig.cs" />
+    <Compile Include="废弃的思路\ScanJobStartUp.cs" />
+    <Compile Include="Listener\MyJobListenerSupport.cs" />
     <Compile Include="Core\JobCenter.cs" />
-    <Compile Include="Core\JobPoolManager.cs" />
-    <Compile Include="Deleted\JobServicesContainer.cs" />
+    <Compile Include="Core\SchedulerManager.cs" />
+    <Compile Include="废弃的思路\JobServicesContainer.cs" />
     <Compile Include="Lib\JobEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Deleted\ScanJob.cs" />
-    <Compile Include="Factory\SchedulerFactory.cs" />
-    <Compile Include="Deleted\IDbProvider.cs" />
-    <Compile Include="WebAPI\JobController.cs" />
-    <Compile Include="WebAPI\Startup.cs" />
-    <Compile Include="WebAPI\WebApiHelper.cs" />
+    <Compile Include="废弃的思路\ScanJob.cs" />
+    <Compile Include="Factory\SchedFactory.cs" />
+    <Compile Include="废弃的思路\IDbProvider.cs" />
+    <Compile Include="Api\JobController.cs" />
+    <Compile Include="Api\Startup.cs" />
+    <Compile Include="Api\WebApiHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

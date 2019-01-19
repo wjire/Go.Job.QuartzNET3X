@@ -29,7 +29,7 @@ namespace Go.Job.Service.Config
             {
                 ["quartz.threadPool.type"] = config.Type,
                 ["quartz.threadPool.threadCount"] = config.ThreadCount,
-                ["quartz.threadPool.threadPriority"] = config.ThreadPriority
+                ["quartz.threadPool.threadPriority"] = config.ThreadPriority,
             };
             return properties;
         }

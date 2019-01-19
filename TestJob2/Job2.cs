@@ -20,7 +20,7 @@ namespace TestJob2
             //string name = Thread.GetDomain().FriendlyName;
             //Tools.FileHelper.WriteString(name);
 
-            Console.WriteLine($"{DateTime.Now} : Job21231 Run......");
+            Console.WriteLine($"{DateTime.Now} : Job2 Run......");
         }
     }
 }

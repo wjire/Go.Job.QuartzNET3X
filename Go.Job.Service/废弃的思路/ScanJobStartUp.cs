@@ -33,7 +33,7 @@
 //            }
 
 //            ITrigger trigger = triggerBuilder.Build();
-//            await JobPoolManager.Scheduler.ScheduleJob(jobDetail, trigger);
+//            await SchedulerManager1.Scheduler.ScheduleJob(jobDetail, trigger);
 //        }
 //    }
 //}

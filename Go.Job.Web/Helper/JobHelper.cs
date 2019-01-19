@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Specialized;
 using Go.Job.Db;
 using Go.Job.Model;
-using Quartz.Simpl;
 
 namespace Go.Job.Web.Helper
 {
@@ -164,7 +162,7 @@ namespace Go.Job.Web.Helper
                 }
 
                 JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
-                if (jobInfo != null && jobInfo.Id == id && jobInfo.State != 3)
+                if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 2)
                 {
                     string path = @"http://localhost:25250/api/job/remove?id=" + id;
                     string code = HttpClientHelper.GetString(path);
@@ -195,7 +193,7 @@ namespace Go.Job.Web.Helper
         {
             try
             {
-                if (jobInfo != null && jobInfo.Id > 0 && jobInfo.State != 1)
+                if (jobInfo != null && jobInfo.Id > 0 && jobInfo.State == 2)
                 {
                     string path = @"http://localhost:25250/api/job/update";
                     string code = HttpClientHelper.PostJson(path, jobInfo);
@@ -229,7 +227,7 @@ namespace Go.Job.Web.Helper
         {
             try
             {
-                if (jobInfo != null && jobInfo.Id > 0 && jobInfo.State == 3)
+                if (jobInfo != null && jobInfo.Id > 0 && (jobInfo.State == 0||jobInfo.State == 3))
                 {
                     string path = @"http://localhost:25250/api/job/upgrade";
                     string code = HttpClientHelper.PostJson(path, jobInfo);

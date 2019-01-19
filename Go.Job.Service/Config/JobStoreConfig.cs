@@ -45,20 +45,28 @@ namespace Go.Job.Service.Config
         public string Provider { get; set; } = "MySql";
 
         /// <summary>
-        /// 实例Id是否自动配置
+        /// 调度器Id是否自动配置
         /// </summary>
         public string InstanceId { get; set; } = "AUTO";
+
+
+        /// <summary>
+        /// 调度器名称
+        /// </summary>
+        public string InstanceName { get; set; } = "MyQuartz";
+
 
         /// <summary>
         /// 哑火忍耐时间,单位:毫秒
         /// </summary>
         public string MisfireThreshold { get; set; } = "2000";
 
+
         /// <summary>
         /// 是否配置集群
         /// </summary>
         public string Clustered { get; set; } = "true";
-        
+
 
         public static implicit operator NameValueCollection(JobStoreConfig config)
         {
@@ -71,9 +79,10 @@ namespace Go.Job.Service.Config
                 ["quartz.jobStore.dataSource"] = config.DataSource,
                 [$"quartz.dataSource.{config.DataSource}.connectionString"] = config.ConnectionString,
                 [$"quartz.dataSource.{config.DataSource}.provider"] = config.Provider,
-                ["quartz.scheduler.instanceId"] = config.InstanceId,
                 ["quartz.jobStore.misfireThreshold"] = config.MisfireThreshold,
-                ["quartz.jobStore.clustered"] = config.Clustered
+                ["quartz.jobStore.clustered"] = config.Clustered,
+                ["quartz.scheduler.instanceName"] = config.InstanceName,
+                ["quartz.scheduler.instanceId"] = config.InstanceId,
             };
             return properties;
         }

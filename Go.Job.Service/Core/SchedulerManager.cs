@@ -1,33 +1,55 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Threading;
+using System.Threading.Tasks;
 using Go.Job.Model;
+using Go.Job.Service.Config;
 using Go.Job.Service.Job;
 using Quartz;
+using Quartz.Impl;
 
 namespace Go.Job.Service
 {
-    internal class JobPoolManager : IDisposable
+    /// <summary>
+    /// 调度器管理者
+    /// </summary>
+    internal class SchedulerManager : IDisposable
     {
-        internal static ConcurrentDictionary<int, JobRuntimeInfo> JobRuntimePool = new ConcurrentDictionary<int, JobRuntimeInfo>();
 
+        /// <summary>
+        /// job池
+        /// </summary>
+        internal static ConcurrentDictionary<int, JobRuntimeInfo> JobPool = new ConcurrentDictionary<int, JobRuntimeInfo>();
+
+        /// <summary>
+        /// 调度器
+        /// </summary>
         internal static IScheduler Scheduler;
 
-        internal static JobPoolManager Instance { get; }
+        /// <summary>
+        /// 单例
+        /// </summary>
+        internal static SchedulerManager Instance { get; }
 
+        /// <summary>
+        /// 锁
+        /// </summary>
         private static readonly object _lock = new object();
 
-
-        private JobPoolManager()
+        /// <summary>
+        /// 私有化构造函数
+        /// </summary>
+        private SchedulerManager()
         {
         }
 
-        static JobPoolManager()
+        static SchedulerManager()
         {
-            Instance = new JobPoolManager();
+            Instance = new SchedulerManager();
         }
-
+        
 
         ///// <summary>
         ///// 创建新的应用程序域,job,并开始调度
@@ -37,7 +59,7 @@ namespace Go.Job.Service
         //{
         //    JobRuntimeInfo jobRuntimeInfo = new JobRuntimeInfo();
         //    AppDomain app = Thread.GetDomain();
-        //    jobRuntimeInfo.Job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
+        //    jobRuntimeInfo.Job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassType, out app);
         //    jobRuntimeInfo.JobInfo = jobInfo;
         //    jobRuntimeInfo.AppDomain = app;
         //    //TODO:日志记录
@@ -54,13 +76,13 @@ namespace Go.Job.Service
             lock (_lock)
             {
                 //JobRuntimeInfo jobRuntimeInfo = null;
-                //if (JobRuntimePool.ContainsKey(jobInfo.Id))
+                //if (JobPool.ContainsKey(jobInfo.Id))
                 //{
                 //    jobRuntimeInfo = GetJobFromPool(jobInfo.Id);
                 //    return jobRuntimeInfo;
                 //}
                 AppDomain app = Thread.GetDomain();
-                BaseJob.BaseJob job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassTypePath, out app);
+                BaseJob.BaseJob job = AppDomainLoader.Load(jobInfo.AssemblyPath, jobInfo.ClassType, out app);
                 JobRuntimeInfo jobRuntimeInfo = new JobRuntimeInfo
                 {
                     JobInfo = jobInfo,
@@ -85,7 +107,7 @@ namespace Go.Job.Service
                 try
                 {
                     //如果该job实例添加失败,卸载该job的appdomain,然后返回.
-                    if (!JobRuntimePool.TryAdd(jobRuntimeInfo.JobInfo.Id, jobRuntimeInfo))
+                    if (!JobPool.TryAdd(jobRuntimeInfo.JobInfo.Id, jobRuntimeInfo))
                     {
                         AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                         return false;
@@ -109,7 +131,7 @@ namespace Go.Job.Service
                 {
                     Console.WriteLine(e);
                     //异常了,直接从job池移除该job,不再考虑移除失败的情况.考虑不到那么多了
-                    JobRuntimePool.TryRemove(jobRuntimeInfo.JobInfo.Id, out JobRuntimeInfo jri);
+                    JobPool.TryRemove(jobRuntimeInfo.JobInfo.Id, out JobRuntimeInfo jri);
                     return false;
                 }
             }
@@ -123,19 +145,19 @@ namespace Go.Job.Service
         /// <returns></returns>
         internal JobRuntimeInfo GetJobFromPool(int jobId)
         {
-            if (!JobRuntimePool.ContainsKey(jobId))
+            if (!JobPool.ContainsKey(jobId))
             {
                 return null;
             }
 
             lock (_lock)
             {
-                if (!JobRuntimePool.ContainsKey(jobId))
+                if (!JobPool.ContainsKey(jobId))
                 {
                     return null;
                 }
 
-                JobRuntimePool.TryGetValue(jobId, out JobRuntimeInfo jobRuntimeInfo);
+                JobPool.TryGetValue(jobId, out JobRuntimeInfo jobRuntimeInfo);
                 return jobRuntimeInfo;
             }
         }
@@ -152,13 +174,13 @@ namespace Go.Job.Service
             {
                 return false;
             }
-            if (JobRuntimePool.ContainsKey(jobInfo.Id))
+            if (JobPool.ContainsKey(jobInfo.Id))
             {
                 return true;
             }
             lock (_lock)
             {
-                if (JobRuntimePool.ContainsKey(jobInfo.Id))
+                if (JobPool.ContainsKey(jobInfo.Id))
                 {
                     return true;
                 }
@@ -183,14 +205,14 @@ namespace Go.Job.Service
         /// <param name="jobId"></param>
         internal bool Pause(int jobId)
         {
-            if (!JobRuntimePool.ContainsKey(jobId))
+            if (!JobPool.ContainsKey(jobId))
             {
                 return true;
             }
 
             lock (_lock)
             {
-                if (!JobRuntimePool.ContainsKey(jobId))
+                if (!JobPool.ContainsKey(jobId))
                 {
                     return true;
                 }
@@ -225,7 +247,7 @@ namespace Go.Job.Service
             lock (_lock)
             {
                 JobRuntimeInfo jobRuntimeInfo = null;
-                if (!JobRuntimePool.ContainsKey(jobInfo.Id))
+                if (!JobPool.ContainsKey(jobInfo.Id))
                 {
                     //如果已经调度任务中没有该jobDetail,则直接返回
                     IJobDetail isExistsedJobDetail = Scheduler.GetJobDetail(new JobKey(jobInfo.JobName, jobInfo.JobName)).Result;
@@ -236,7 +258,7 @@ namespace Go.Job.Service
 
                     jobRuntimeInfo = CreateJobRuntimeInfo(jobInfo);
                     //如果该job实例添加失败,卸载appdomain,然后返回.
-                    if (!JobRuntimePool.TryAdd(jobInfo.Id, jobRuntimeInfo))
+                    if (!JobPool.TryAdd(jobInfo.Id, jobRuntimeInfo))
                     {
                         AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                         return false;
@@ -285,18 +307,18 @@ namespace Go.Job.Service
         /// <returns></returns>
         internal bool Remove(int jobId)
         {
-            if (!JobRuntimePool.ContainsKey(jobId))
+            if (!JobPool.ContainsKey(jobId))
             {
                 return false;
             }
             lock (_lock)
             {
-                if (!JobRuntimePool.ContainsKey(jobId))
+                if (!JobPool.ContainsKey(jobId))
                 {
                     return false;
                 }
 
-                JobRuntimePool.TryGetValue(jobId, out JobRuntimeInfo jobRuntimeInfo);
+                JobPool.TryGetValue(jobId, out JobRuntimeInfo jobRuntimeInfo);
                 if (jobRuntimeInfo == null)
                 {
                     return false;
@@ -312,13 +334,13 @@ namespace Go.Job.Service
                 Scheduler.PauseTrigger(triggerKey);
                 Scheduler.UnscheduleJob(triggerKey);
                 Scheduler.DeleteJob(new JobKey(jobRuntimeInfo.JobInfo.JobName, jobRuntimeInfo.JobInfo.JobName));
-                JobRuntimePool.TryRemove(jobId, out jobRuntimeInfo);
+                JobPool.TryRemove(jobId, out jobRuntimeInfo);
                 AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                 return true;
                 //TODO:记录日志
             }
         }
-        
+
 
         /// <summary>
         /// 线程池有job,但是该job的应用程序域已经卸载(一般都是宕机),替换job池中的jobRuntimeInfo,并重新调度该job
@@ -340,9 +362,9 @@ namespace Go.Job.Service
                 //    return true;
                 //}
                 AppDomain app = Thread.GetDomain();
-                jobRuntimeInfo.Job = AppDomainLoader.Load(jobRuntimeInfo.JobInfo.AssemblyPath, jobRuntimeInfo.JobInfo.ClassTypePath, out app);
+                jobRuntimeInfo.Job = AppDomainLoader.Load(jobRuntimeInfo.JobInfo.AssemblyPath, jobRuntimeInfo.JobInfo.ClassType, out app);
                 jobRuntimeInfo.AppDomain = app;
-                JobRuntimePool[jobRuntimeInfo.JobInfo.Id] = jobRuntimeInfo;
+                JobPool[jobRuntimeInfo.JobInfo.Id] = jobRuntimeInfo;
                 //_flag = true;
                 return true;
             }

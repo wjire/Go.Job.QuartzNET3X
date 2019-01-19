@@ -2,25 +2,12 @@
 
 namespace Go.Job.Service.Config
 {
-
+    //TODO:尚未开放远程调度功能,勿用该配置 
     /// <summary>
     /// 远程调度配置
     /// </summary>
     public class RemoteConfig
     {
-        /*
-         *
-         *
-         *            Properties["quartz.scheduler.exporter.type"] = "Quartz.Simpl.RemotingSchedulerExporter, Quartz";
-            Properties["quartz.scheduler.exporter.port"] = "555";
-            Properties["quartz.scheduler.exporter.bindName"] = "QuartzScheduler";
-            Properties["quartz.scheduler.exporter.channelType"] = "tcp";
-            Properties["quartz.scheduler.exporter.channelName"] = "httpQuartz";
-            Properties["quartz.scheduler.exporter.rejectRemoteRequests"] = "true";
-         *
-         *
-         */
-
         public string Type { get; set; } = "Quartz.Simpl.RemotingSchedulerExporter, Quartz";
 
         public string Port { get; set; } = "555";

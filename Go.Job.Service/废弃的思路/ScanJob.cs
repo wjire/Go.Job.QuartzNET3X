@@ -28,18 +28,18 @@
 //                    foreach (JobInfo jobInfo in jobInfoList)
 //                    {
 //                        //只有job池中没有该job,并且该job的状态是 准备中,才将该job添加到job池.
-//                        if (!JobPoolManager.JobRuntimePool.ContainsKey(jobInfo.Id) && jobInfo.State == 1)
+//                        if (!SchedulerManager1.JobPool.ContainsKey(jobInfo.Id) && jobInfo.State == 1)
 //                        {
-//                            JobRuntimeInfo jobRuntimeJob = JobPoolManager.Instance.CreateJobRuntimeInfo(jobInfo);
-//                            JobPoolManager.Instance.Add(jobInfo.Id, jobRuntimeJob);
+//                            JobRuntimeInfo jobRuntimeJob = SchedulerManager1.Instance.CreateJobRuntimeInfo(jobInfo);
+//                            SchedulerManager1.Instance.Add(jobInfo.Id, jobRuntimeJob);
 //                        }
 //                        //如果job池中有该job
-//                        else if (JobPoolManager.JobRuntimePool.ContainsKey(jobInfo.Id))
+//                        else if (SchedulerManager1.JobPool.ContainsKey(jobInfo.Id))
 //                        {
 //                            //如果状态== 0 和 1 
 //                            if (jobInfo.State == 0 || jobInfo.State == 1)
 //                            {
-//                                JobPoolManager.JobRuntimePool.TryRemove(jobInfo.Id, out JobRuntimeInfo jobRuntimeInfo);
+//                                SchedulerManager1.JobPool.TryRemove(jobInfo.Id, out JobRuntimeInfo jobRuntimeInfo);
 //                                if (jobRuntimeInfo != null)
 //                                {
 //                                    try
@@ -50,17 +50,17 @@
 //                                    {
 //                                        Console.WriteLine(e.Message);
 //                                    }
-//                                    JobInfo info = JobPoolManager.Instance.AddJob(jobInfo);
+//                                    JobInfo info = SchedulerManager1.Instance.AddJob(jobInfo);
 //                                    JobInfoDb.UpdateJobState(info);
 //                                }
 //                            }
 //                            if (jobInfo.State == 2)
 //                            {
-//                                JobPoolManager.Instance.Pause(jobInfo.Id);
+//                                SchedulerManager1.Instance.Pause(jobInfo.Id);
 //                            }
 //                            else if (jobInfo.State == 3)
 //                            {
-//                                JobPoolManager.Instance.Remove(jobInfo.Id);
+//                                SchedulerManager1.Instance.Remove(jobInfo.Id);
 //                            }
 //                        }
 //                    }
