@@ -72,5 +72,8 @@ namespace Go.Job.Model
         /// 调度任务名称
         /// </summary>
         public string SchedName { get; set; } = string.Empty;
+
+
+        public string TRIGGER_STATE { get; set; }
     }
 }

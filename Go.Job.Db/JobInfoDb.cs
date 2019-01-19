@@ -1,7 +1,7 @@
-﻿using Go.Job.Model;
-using SqlSugar;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Go.Job.Model;
+using SqlSugar;
 
 namespace Go.Job.Db
 {
@@ -9,11 +9,11 @@ namespace Go.Job.Db
     {
         private static readonly string _connStr = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
 
-        private static ConnectionConfig config;
+        private static readonly ConnectionConfig Config;
 
         static JobInfoDb()
         {
-            config = new ConnectionConfig
+            Config = new ConnectionConfig
             {
                 ConnectionString = _connStr,
                 DbType = DbType.MySql,
@@ -25,10 +25,14 @@ namespace Go.Job.Db
 
         public static List<JobInfo> GetJobInfoList()
         {
+
             List<JobInfo> list = null;
-            using (SqlSugarClient db = new SqlSugarClient(config))
+            string columns = " a.Id,a.JobName,a.JobGroup,a.Cron,a.AssemblyPath,a.ClassType,a.State,a.SchedName,b.TRIGGER_STATE ";
+            using (SqlSugarClient db = new SqlSugarClient(Config))
             {
-                list = db.Queryable<JobInfo>().ToList();
+                //list = db.Queryable<JobInfo>().ToList();
+
+                list = db.SqlQueryable<JobInfo>($"select {columns} from jobinfo as a left join qrtz_triggers as b on a.SchedName=b.SCHED_NAME ").ToList();
             }
             return list;
         }
@@ -37,7 +41,7 @@ namespace Go.Job.Db
         {
             try
             {
-                using (SqlSugarClient db = new SqlSugarClient(config))
+                using (SqlSugarClient db = new SqlSugarClient(Config))
                 {
                     return db.Queryable<JobInfo>().Where(w => w.Id == id).First();
                 }
@@ -51,7 +55,7 @@ namespace Go.Job.Db
         public static int AddJobInfo(JobInfo jobInfo)
         {
             jobInfo.CreateTime = DateTime.Now;
-            using (SqlSugarClient db = new SqlSugarClient(config))
+            using (SqlSugarClient db = new SqlSugarClient(Config))
             {
                 return db.Insertable(jobInfo).ExecuteCommand();
             }
@@ -60,10 +64,10 @@ namespace Go.Job.Db
 
         public static int UpdateJobInfo(JobInfo jobInfo)
         {
-            var res = 0;
+            int res = 0;
             try
             {
-                using (SqlSugarClient db = new SqlSugarClient(config))
+                using (SqlSugarClient db = new SqlSugarClient(Config))
                 {
                     res = db.Updateable(jobInfo).ExecuteCommand();
                 }
@@ -78,10 +82,10 @@ namespace Go.Job.Db
 
         public static int UpdateJobState(JobInfo jobInfo)
         {
-            var res = 0;
+            int res = 0;
             try
             {
-                using (SqlSugarClient db = new SqlSugarClient(config))
+                using (SqlSugarClient db = new SqlSugarClient(Config))
                 {
                     res = db.Updateable(jobInfo).UpdateColumns(s => new { s.State, s.Id })
                         .WhereColumns(w => new { w.Id }).ExecuteCommand();
