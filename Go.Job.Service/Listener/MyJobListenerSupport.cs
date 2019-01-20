@@ -19,10 +19,6 @@ namespace Go.Job.Service.Listener
 
         public override async Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var utc = context.Trigger.GetNextFireTimeUtc();
-            Console.WriteLine(utc.Value.Minute +":"+utc.Value.Second);
-            JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo ?? new JobInfo();
-            Console.WriteLine($"{DateTime.Now} . {jobInfo.SchedName} : {jobInfo.JobName}");
             await base.JobWasExecuted(context, jobException, cancellationToken);
         }
 
