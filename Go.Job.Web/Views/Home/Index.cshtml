@@ -127,12 +127,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group" style="display:none">
-                        <label for="Second" class="col-sm-2 control-label ">执行间隔时间(秒)</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control Second" name="Second" id="Second" />
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label for="AssemblyPath" class="col-sm-2 control-label ">程序集物理路径(含文件名)</label>
@@ -147,12 +141,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group" style="display:none">
-                        <label for="State" class="col-sm-2 control-label ">状态</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control State" name="State" id="State" />
-                        </div>
-                    </div>
 
                     <div class="form-group" style="display:none">
                         <label for="JobGroup" class="col-sm-2 control-label ">作业组</label>
@@ -217,13 +205,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group" style="display:none">
-                        <label for="Second" class="col-sm-2 control-label ">执行间隔时间(秒)</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control Second" name="Second" id="Second" />
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label for="AssemblyPath" class="col-sm-2 control-label ">程序集物理路径(含文件名)</label>
                         <div class="col-sm-10">
@@ -237,12 +218,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group" style="display:none">
-                        <label for="State" class="col-sm-2 control-label ">状态</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control State" name="State" id="State" />
-                        </div>
-                    </div>
 
                     <div class="form-group" style="display:none">
                         <label for="JobGroup" class="col-sm-2 control-label ">作业组</label>
@@ -271,7 +246,6 @@
                 <th>作业名称</th>
                 <th>执行计划</th>
                 <th>程序集物理路径</th>
-                @*<th>状态</th>*@
                 <th>状态</th>
                 <th>开始时间</th>
                 <th>上次执行</th>
@@ -288,23 +262,6 @@
                     <td>@item.JobName</td>
                     <td>@item.Cron</td>
                     <td>@item.AssemblyPath</td>
-                    @*@{
-                        switch (item.State)
-                        {
-                            case 0:
-                                <td>准备中</td>
-                                break;
-                            case 1:
-                                <td>执行中</td>
-                                break;
-                            case 2:
-                                <td>暂停</td>
-                                break;
-                            case 3:
-                                <td>删除</td>
-                                break;
-                        }
-                    }*@
                     <td>@item.TRIGGER_STATE</td>
                     <td>@item.START_TIME</td>
                     <td>@item.PREV_FIRE_TIME</td>
@@ -312,24 +269,24 @@
                     <td>
                         @{
                             @*if (item.State == 0)
-                                {
-                                    <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">启动</a>
-                                    <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
-                                }
-                               else  if (item.State == 1)
-                                {
-                                    <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
-                                }
-                                else if (item.State == 2)
-                                {
-                                    <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
-                                    <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
-                                    <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">删除</a>
-                                }
-                                else if (item.State == 3)
-                                {
-                                    <a id="btnUpgrade" class="btn btn-default" href="#" role="button" onclick="Upgrade(@item.Id)">更换版本</a>
-                                }*@
+                                 {
+                                     <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(@item.Id)">启动</a>
+                                     <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
+                                 }
+                                else  if (item.State == 1)
+                                 {
+                                     <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
+                                 }
+                                 else if (item.State == 2)
+                                 {
+                                     <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
+                                     <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">修改</a>
+                                     <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">删除</a>
+                                 }
+                                 else if (item.State == 3)
+                                 {
+                                     <a id="btnUpgrade" class="btn btn-default" href="#" role="button" onclick="Upgrade(@item.Id)">更换版本</a>
+                                 }*@
 
                             if (string.IsNullOrWhiteSpace(item.TRIGGER_STATE))
                             {
@@ -337,15 +294,16 @@
                                 <a id="btnUpgrade" class="btn btn-default" href="#" role="button" onclick="Upgrade(@item.Id)">修改</a>
                                 <a id="btnDelete" class="btn btn-default" href="#" role="button" onclick="Delete(@item.Id)">删除</a>
                             }
-                            else if (item.TRIGGER_STATE.ToUpper().Equals("ACQUIRED"))
-                            {
-                                <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
-                            }
                             else if (item.TRIGGER_STATE.ToUpper().Equals("PAUSED"))
                             {
                                 <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(@item.Id)">恢复</a>
                                 <a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(@item.Id)">更新</a>
                                 <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(@item.Id)">停止</a>
+                            }
+                            //ACQUIRED
+                            else
+                            {
+                                <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(@item.Id)">暂停</a>
                             }
                         }
                     </td>
