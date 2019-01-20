@@ -2,6 +2,7 @@
 using Go.Job.Db;
 using Go.Job.Model;
 using Go.Job.Web.Helper;
+using Newtonsoft.Json;
 
 namespace Go.Job.Web.Logic
 {
@@ -80,6 +81,10 @@ namespace Go.Job.Web.Logic
                 //if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 1)
                 //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/pause";
+                //string json = HttpWebrequestHelper.PostJson(path, JsonConvert.SerializeObject(jobInfo));
+
+                //var result = JsonConvert.DeserializeObject<Result>(json);
+
                 Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
                 ProcessResult(result);
                 //}
@@ -87,7 +92,6 @@ namespace Go.Job.Web.Logic
             catch (Exception e)
             {
             }
-
             return false;
         }
 

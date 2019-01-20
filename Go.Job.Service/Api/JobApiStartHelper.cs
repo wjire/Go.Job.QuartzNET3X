@@ -22,7 +22,21 @@ namespace Go.Job.Service.api
             {
                 throw new ArgumentNullException("监听地址不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值");
             }
-            WebApp.Start(address);
+
+            using (WebApp.Start(address))
+            {
+                Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {SchedStartHelper.ApiAddress}");
+
+                string userCommand = string.Empty;
+                while (userCommand != "exit")
+                {
+                    if (string.IsNullOrEmpty(userCommand) == false)
+                    {
+                        Console.WriteLine("     非退出指令,自动忽略...");
+                    }
+                    userCommand = Console.ReadLine();
+                }
+            }
         }
 
 

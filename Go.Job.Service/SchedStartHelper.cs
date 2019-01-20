@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.Threading.Tasks;
 using Go.Job.Service.api;
 using Go.Job.Service.Config;
 using Go.Job.Service.Core;
-using Go.Job.Service.Listener;
-using Quartz;
 using Quartz.Impl;
-using Quartz.Impl.Matchers;
 
 namespace Go.Job.Service
 {
@@ -41,28 +37,18 @@ namespace Go.Job.Service
                 //SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport(SchedName), GroupMatcher<JobKey>.GroupEquals(SchedName));
                 if (!SchedulerManager.Scheduler.IsStarted)
                 {
-                    SchedulerManager.Scheduler.Start().Wait();
+                    await SchedulerManager.Scheduler.Start();
                 }
 
                 Console.WriteLine($"作业调度服务已启动! 当前调度任务 : {SchedName}");
                 JobApiStartHelper.Start(ApiAddress);
-                Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {ApiAddress}");
-
-                string userCommand = string.Empty;
-                while (userCommand != "exit")
-                {
-                    if (string.IsNullOrEmpty(userCommand) == false)
-                    {
-                        Console.WriteLine("     非退出指令,自动忽略...");
-                    }
-                    userCommand = Console.ReadLine();
-                }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
+
+            Console.ReadKey();
         }
 
 

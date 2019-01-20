@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Owin;
@@ -20,7 +21,9 @@ namespace Go.Job.Service.api
                 {
                     id = RouteParameter.Optional
                 });
-
+            //将默认xml返回数据格式改为json
+            config.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+            config.Formatters.JsonFormatter.MediaTypeMappings.Add(new QueryStringMapping("datatype", "json", "application/json"));
             app.UseWebApi(config);
         }
     }
