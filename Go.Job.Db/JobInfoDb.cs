@@ -32,19 +32,19 @@ namespace Go.Job.Db
             List<JobPager> list = null;
             try
             {
-                StringBuilder columns = new StringBuilder();
-                columns.Append(" a.Id,a.JobName,a.JobGroup,a.Cron,a.AssemblyPath,a.ClassType,a.State,a.SchedName,a.ProjectTeam,");
-                columns.Append(" b.TRIGGER_STATE,b.NEXT_FIRE_TIME,b.PREV_FIRE_TIME,b.START_TIME ");
-
-                StringBuilder whereSql = new StringBuilder();
+                StringBuilder sqlBuilder = new StringBuilder();
+                sqlBuilder.Append(" select a.Id,a.JobName,a.JobGroup,a.Cron,a.AssemblyPath,a.ClassType,a.SchedName,a.ProjectTeam, ");
+                sqlBuilder.Append(" b.TRIGGER_STATE,b.NEXT_FIRE_TIME,b.PREV_FIRE_TIME,b.START_TIME ");
+                sqlBuilder.Append(" from jobinfo as a left join qrtz_triggers as b on a.SchedName=b.SCHED_NAME and a.JobName = b.JOB_NAME ");
+                sqlBuilder.Append(" where a.IsDeleted = 0 ");
                 if (!string.IsNullOrWhiteSpace(projectTeam))
                 {
-                    whereSql.Append($" where projectTeam = '{projectTeam}' ");
+                    sqlBuilder.Append($" and projectTeam = '{projectTeam}' ");
                 }
 
                 using (SqlSugarClient db = new SqlSugarClient(Config))
                 {
-                    list = db.SqlQueryable<JobPager>($"select {columns} from jobinfo as a left join qrtz_triggers as b on a.SchedName=b.SCHED_NAME ").ToList();
+                    list = db.SqlQueryable<JobPager>(sqlBuilder.ToString()).ToList();
                 }
             }
             catch (Exception e)
@@ -121,14 +121,14 @@ namespace Go.Job.Db
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>
-        public static int UpdateJobState(JobInfo jobInfo)
+        public static int DeleteJobInfo(JobInfo jobInfo)
         {
             int res = 0;
             try
             {
                 using (SqlSugarClient db = new SqlSugarClient(Config))
                 {
-                    res = db.Updateable(jobInfo).UpdateColumns(s => new { s.State, s.Id })
+                    res = db.Updateable(jobInfo).UpdateColumns(s => new { s.IsDeleted, s.Id })
                         .WhereColumns(w => new { w.Id }).ExecuteCommand();
                 }
             }

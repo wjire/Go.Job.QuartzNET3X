@@ -50,18 +50,9 @@ namespace Go.Job.Web.Logic
                 //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/run";
                 Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-                if (result.Code == 200)
-                {
-                    //int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
-                    //if (dbRes > 0)
-                    //{
-                    return true;
-                    //}
-                }
-                else
-                {
-                    throw new Exception(result.Msg);
-                }
+                ProcessResult(result);
+
+
                 //}
             }
             catch (Exception ex)
@@ -90,18 +81,7 @@ namespace Go.Job.Web.Logic
                 //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/pause";
                 Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-                if (result.Code == 200)
-                {
-                    //int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 2, Id = id });
-                    //if (dbRes > 0)
-                    //{
-                    return true;
-                    //}
-                }
-                else
-                {
-                    throw new Exception(result.Msg);
-                }
+                ProcessResult(result);
                 //}
             }
             catch (Exception e)
@@ -131,19 +111,7 @@ namespace Go.Job.Web.Logic
 
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/resume";
                 Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-
-                if (result.Code == 200)
-                {
-                    //int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 1, Id = id });
-                    //if (dbRes > 0)
-                    //{
-                    return true;
-                    //}
-                }
-                else
-                {
-                    throw new Exception(result.Msg);
-                }
+                ProcessResult(result);
                 //}
             }
             catch (Exception e)
@@ -156,7 +124,7 @@ namespace Go.Job.Web.Logic
 
 
         /// <summary>
-        /// 删除
+        /// 停止
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -174,18 +142,7 @@ namespace Go.Job.Web.Logic
                 //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/remove";
                 Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-                if (result.Code == 200)
-                {
-                    //int dbRes = JobInfoDb.UpdateJobState(new JobInfo { State = 3, Id = id });
-                    //if (dbRes > 0)
-                    //{
-                    return true;
-                    //}
-                }
-                else
-                {
-                    throw new Exception(result.Msg);
-                }
+                ProcessResult(result);
                 //}
             }
             catch (Exception e)
@@ -194,6 +151,33 @@ namespace Go.Job.Web.Logic
 
             return false;
         }
+
+
+
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(int id)
+        {
+            try
+            {
+                if (id == 0)
+                {
+                    return false;
+                }
+
+                JobInfoDb.DeleteJobInfo(new JobInfo { IsDeleted = 1, Id = id });
+            }
+            catch (Exception e)
+            {
+            }
+
+            return false;
+        }
+
 
 
         /// <summary>
@@ -209,20 +193,7 @@ namespace Go.Job.Web.Logic
                 //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/update";
                 Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-                if (result.Code == 200)
-                {
-                    ////更新成功后,状态改回来
-                    //jobInfo.State = 1;
-                    //int dbRes = JobInfoDb.UpdateJobInfo(jobInfo);
-                    //if (dbRes > 0)
-                    //{
-                    return true;
-                    //}
-                }
-                else
-                {
-                    throw new Exception(result.Msg);
-                }
+                ProcessResult(result, () => JobInfoDb.UpdateJobInfo(jobInfo));
                 //}
             }
             catch (Exception e)
@@ -247,20 +218,7 @@ namespace Go.Job.Web.Logic
                 //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/upgrade";
                 Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-                if (result.Code == 200)
-                {
-                    //更新成功后,状态改回来
-                    //jobInfo.State = 1;
-                    //int dbRes = JobInfoDb.UpdateJobInfo(jobInfo);
-                    //if (dbRes > 0)
-                    //{
-                    return true;
-                    //}
-                }
-                else
-                {
-                    throw new Exception(result.Msg);
-                }
+                ProcessResult(result, () => JobInfoDb.UpdateJobInfo(jobInfo));
                 //}
             }
             catch (Exception e)
@@ -268,6 +226,25 @@ namespace Go.Job.Web.Logic
 
             }
             return false;
+        }
+
+
+        /// <summary>
+        /// 处理调度服务器返回的结果
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="func"></param>
+        /// <returns></returns>
+        private bool ProcessResult(Result result, Func<int> func = null)
+        {
+            if (result.Code == 200)
+            {
+                if (func == null || func() > 0)
+                {
+                    return true;
+                }
+            }
+            throw new Exception(result.Msg);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Go.Job.Service.Config
         /// <summary>
         /// 线程池线程数量
         /// </summary>
-        public string ThreadCount { get; set; } = "5";
+        public string ThreadCount { get; set; } = "10";
 
         /// <summary>
         /// 优先权
