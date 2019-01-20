@@ -426,13 +426,20 @@ namespace Go.Job.Service.Core
 
             if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
             {
-                tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionFireAndProceed());
+                //错过的不管了，剩下的按正常执行。
+                tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionDoNothing());
+
+                ////错过的合并为一次执行，后续正常执行。
+                //tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionFireAndProceed());
+
+                ////错过的马上执行掉，后续正常执行
+                //tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionIgnoreMisfires());
             }
             else
             {
                 tiggerBuilder.WithSimpleSchedule(simple =>
                 {
-                    simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever().WithMisfireHandlingInstructionIgnoreMisfires();
+                    simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever().WithMisfireHandlingInstructionNextWithExistingCount();
                 });
             }
 
@@ -449,12 +456,21 @@ namespace Go.Job.Service.Core
             return trigger;
         }
 
-
+        /// <summary>
+        /// 获取jobKey
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <returns></returns>
         private JobKey GetJobKey(JobInfo jobInfo)
         {
             return new JobKey(jobInfo.JobName, jobInfo.JobGroup);
         }
 
+        /// <summary>
+        /// 获取triggerKey
+        /// </summary>
+        /// <param name="jobInfo"></param>
+        /// <returns></returns>
         private TriggerKey GetTriggerKey(JobInfo jobInfo)
         {
             return new TriggerKey(jobInfo.JobName, jobInfo.JobGroup);

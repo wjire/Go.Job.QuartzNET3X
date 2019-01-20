@@ -33,7 +33,7 @@ namespace Go.Job.Db
             try
             {
                 StringBuilder sqlBuilder = new StringBuilder();
-                sqlBuilder.Append(" select a.Id,a.JobName,a.JobGroup,a.Cron,a.AssemblyPath,a.ClassType,a.SchedName,a.ProjectTeam, ");
+                sqlBuilder.Append(" select a.Id,a.JobName,a.JobGroup,a.Cron,a.Second,a.AssemblyPath,a.ClassType,a.SchedName,a.ProjectTeam, ");
                 sqlBuilder.Append(" b.TRIGGER_STATE,b.NEXT_FIRE_TIME,b.PREV_FIRE_TIME,b.START_TIME ");
                 sqlBuilder.Append(" from jobinfo as a left join qrtz_triggers as b on a.SchedName=b.SCHED_NAME and a.JobName = b.JOB_NAME ");
                 sqlBuilder.Append(" where a.IsDeleted = 0 order by a.SchedName,a.Id ");

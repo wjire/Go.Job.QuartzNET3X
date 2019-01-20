@@ -11,7 +11,7 @@ namespace Go.Job.Service.Host
         {
             try
             {
-                SchedStartHelper.StartSched();
+                SchedStartHelper.StartSched().Wait();
             }
             catch (Exception e)
             {

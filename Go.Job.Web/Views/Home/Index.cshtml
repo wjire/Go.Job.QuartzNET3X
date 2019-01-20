@@ -51,24 +51,25 @@
                         </div>
                     </div>
 
-                    @*<div class="form-group" style="display:none">
-                            <label for="Second" class="col-sm-2 control-label">执行间隔时间</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="Second" id="Second" placeholder="请输入执行间隔时间"/>
-                            </div>
-                        </div>*@
+                    <div class="form-group">
+                        <label for="Second" class="col-sm-2 control-label">间隔时间(秒)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Second" id="Second" placeholder="间隔时间只有在没有设置执行计划时才会起效,否则会以执行计划为准" />
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="AssemblyPath" class="col-sm-2 control-label">程序集</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="AssemblyPath" id="AssemblyPath"
-                                   placeholder="请输入程序集的物理路径(含文件名)" />
+                                   placeholder="请输入程序集的物理路径(含文件名,扩展名)" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="ClassType" class="col-sm-2 control-label">实体类型</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="ClassType" id="ClassType"
-                                   placeholder="请输入实体类型的完全限定名" />
+                                   placeholder="请输入实体类型的完全限定名(命名空间.类名)" />
                         </div>
                     </div>
 
@@ -89,7 +90,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a id="actionTypeUpdate">
-                    修改作业
+                    更新作业 : 只能更新执行计划或者间隔时间,若要更换版本,请先停止,再修改
                 </a>
             </h4>
         </div>
@@ -124,6 +125,13 @@
                         <label for="Cron" class="col-sm-2 control-label ">执行计划</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control Cron" name="Cron" id="Cron" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Cron" class="col-sm-2 control-label ">间隔时间(秒)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control Second" name="Second" id="Second" />
                         </div>
                     </div>
 
@@ -166,7 +174,7 @@
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a id="actionTypeUpgrade">
-                    更换版本
+                    修改作业
                 </a>
             </h4>
         </div>
@@ -202,6 +210,13 @@
                         <label for="Cron" class="col-sm-2 control-label ">执行计划</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control Cron" name="Cron" id="Cron" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Cron" class="col-sm-2 control-label ">间隔时间(秒)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control Second" name="Second" id="Second" />
                         </div>
                     </div>
 
@@ -245,6 +260,7 @@
                 <th>调度任务名称</th>
                 <th>作业名称</th>
                 <th>执行计划</th>
+                <th>间隔时间</th>
                 <th>程序集物理路径</th>
                 <th>状态</th>
                 <th>开始时间</th>
@@ -261,6 +277,7 @@
                     <td>@item.SchedName</td>
                     <td>@item.JobName</td>
                     <td>@item.Cron</td>
+                    <td>@item.Second</td>
                     <td>@item.AssemblyPath</td>
                     <td>@item.TRIGGER_STATE</td>
                     <td>@item.START_TIME</td>

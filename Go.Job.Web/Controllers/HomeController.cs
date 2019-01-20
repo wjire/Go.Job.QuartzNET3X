@@ -134,7 +134,7 @@ namespace Go.Job.Web.Controllers
 
 
         /// <summary>
-        /// 更新
+        /// 修改
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>

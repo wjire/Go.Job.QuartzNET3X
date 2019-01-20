@@ -38,7 +38,7 @@ namespace Go.Job.Service
             {
                 SchedulerManager.Scheduler = await new StdSchedulerFactory().GetScheduler();
                 SchedName = SchedulerManager.Scheduler.SchedulerName;
-                SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport(SchedName), GroupMatcher<JobKey>.GroupEquals(SchedName));
+                //SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport(SchedName), GroupMatcher<JobKey>.GroupEquals(SchedName));
                 if (!SchedulerManager.Scheduler.IsStarted)
                 {
                     SchedulerManager.Scheduler.Start().Wait();

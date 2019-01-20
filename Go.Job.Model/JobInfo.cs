@@ -31,7 +31,7 @@ namespace Go.Job.Model
 
 
         /// <summary>
-        /// 间隔时间
+        /// 间隔时间,单位:秒
         /// </summary>
         public int Second { get; set; }
 
