@@ -13,40 +13,16 @@ namespace Go.Job.Service.api
     internal class JobApiStartHelper
     {
         /// <summary>
-        /// 调度任务名称
+        /// 开启监听
         /// </summary>
-        internal static readonly string SchedName = AppSettingsConfig.SchedName;
-
-
-        /// <summary>
-        /// 调度任务监听地址
-        /// </summary>
-        internal static readonly string ApiAddress = AppSettingsConfig.ApiAddress;
-
-
-        internal static void Start()
-        {
-            if (string.IsNullOrWhiteSpace(ApiAddress))
-            {
-                throw new ArgumentNullException("监听地址不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值,或者调用该方法的重载版本");
-            }
-
-            Start(ApiAddress);
-        }
-
-
+        /// <param name="address"></param>
         internal static void Start(string address)
         {
             if (string.IsNullOrWhiteSpace(address))
             {
-                throw new ArgumentNullException("监听地址不能为空");
+                throw new ArgumentNullException("监听地址不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值");
             }
-
-            using (WebApp.Start(address))
-            {
-                Console.WriteLine($"调度任务监听已启动! 当前监听地址 : {address}");
-                Console.ReadLine();
-            }
+            WebApp.Start(address);
         }
 
 

@@ -8,7 +8,6 @@ using Go.Job.Service.Listener;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Impl.Matchers;
-using Quartz.Listener;
 
 namespace Go.Job.Service
 {
@@ -18,6 +17,54 @@ namespace Go.Job.Service
     /// </summary>
     public static class SchedStartHelper
     {
+
+        /// <summary>
+        /// 调度任务名称
+        /// </summary>
+        internal static string SchedName;
+
+        /// <summary>
+        /// 调度任务监听地址
+        /// </summary>
+        internal static readonly string ApiAddress = AppSettingsConfig.ApiAddress;
+
+        /// <summary>
+        /// 启动调度器
+        /// </summary>
+        /// <returns></returns>
+        public static async Task StartSched()
+        {
+            try
+            {
+                SchedulerManager.Scheduler = await new StdSchedulerFactory().GetScheduler();
+                SchedName = SchedulerManager.Scheduler.SchedulerName;
+                SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport(SchedName), GroupMatcher<JobKey>.GroupEquals(SchedName));
+                if (!SchedulerManager.Scheduler.IsStarted)
+                {
+                    SchedulerManager.Scheduler.Start().Wait();
+                }
+
+                Console.WriteLine($"作业调度服务已启动! 当前调度任务 : {SchedName}");
+                JobApiStartHelper.Start(ApiAddress);
+                Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {ApiAddress}");
+
+                string userCommand = string.Empty;
+                while (userCommand != "exit")
+                {
+                    if (string.IsNullOrEmpty(userCommand) == false)
+                    {
+                        Console.WriteLine("     非退出指令,自动忽略...");
+                    }
+                    userCommand = Console.ReadLine();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
 
         //public async Task CreateSchedulerAndStart()
         //{
@@ -34,114 +81,5 @@ namespace Go.Job.Service
         //    }
         //}
         //}
-
-        /// <summary>
-        /// 调度任务名称
-        /// </summary>
-        private static readonly string SchedName = AppSettingsConfig.SchedName;
-
-        /// <summary>
-        /// 调度任务监听地址
-        /// </summary>
-        private static readonly string ApiAddress = AppSettingsConfig.ApiAddress;
-
-        /// <summary>
-        /// 启动调度器
-        /// </summary>
-        /// <returns></returns>
-        public static void StartSched()
-        {
-            if (string.IsNullOrWhiteSpace(SchedName))
-            {
-                throw new ArgumentNullException("SchedName 不能为空,请在配置文件<appSettings>节点中设置 key=\"SchedName\" 的值");
-            }
-
-            if (string.IsNullOrWhiteSpace(ApiAddress))
-            {
-                throw new ArgumentNullException("ApiAddress 不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值");
-            }
-
-            if (JobApiStartHelper.PortInUse(ApiAddress))
-            {
-                throw new ArgumentNullException($"{ApiAddress} 已被占用,请在配置文件<appSettings>节点中修改 key=\"ApiAddress\" 的值");
-            }
-
-            StartSched(SchedName, null, null);
-        }
-
-
-        /// <summary>
-        /// 启动调度器
-        /// </summary>
-        /// <param name="schedName">调度器名称</param>
-        /// <param name="poolConfig">线程池配置</param>
-        /// <param name="storeConfig">持久化配置 </param>
-        /// <returns></returns>
-        private static void StartSched(string schedName, ThreadPoolConfig poolConfig = null, JobStoreConfig storeConfig = null)
-        {
-            if (storeConfig == null)
-            {
-                storeConfig = new JobStoreConfig();
-            }
-
-            if (poolConfig == null)
-            {
-                poolConfig = new ThreadPoolConfig();
-            }
-
-            storeConfig.InstanceName = schedName;
-            StartSched(poolConfig, storeConfig).Wait();
-
-            Console.WriteLine($"作业调度服务已启动! 当前调度任务 : {schedName}");
-            string userCommand = string.Empty;
-            while (userCommand != "exit")
-            {
-                if (string.IsNullOrEmpty(userCommand) == false)
-                {
-                    Console.WriteLine("     非退出指令,自动忽略...");
-                }
-
-                JobApiStartHelper.Start();
-                userCommand = Console.ReadLine();
-            }
-        }
-
-
-        /// <summary>
-        /// 启动调度器
-        /// </summary>
-        /// <param name="poolConfig">线程池配置</param>
-        /// <param name="storeConfig">持久化配置 </param>
-        /// <returns></returns>
-        private static async Task StartSched(ThreadPoolConfig poolConfig, JobStoreConfig storeConfig)
-        {
-            NameValueCollection properties = new NameValueCollection { poolConfig, storeConfig };
-            SchedulerManager.Scheduler = await new StdSchedulerFactory(properties).GetScheduler();
-            SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport(SchedName), GroupMatcher<JobKey>.GroupEquals(SchedName));
-            try
-            {
-                if (!SchedulerManager.Scheduler.IsStarted)
-                {
-                    SchedulerManager.Scheduler.Start().Wait();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-
-
-        /// <summary>
-        /// 启动调度器
-        /// </summary>
-        /// <returns></returns>
-        private static async Task Run()
-        {
-            //设置监听器代码
-            //SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job"), GroupMatcher<JobKey>.GroupEquals("Job"));
-            //SchedulerManager.Scheduler.ListenerManager.AddJobListener(new MyJobListenerSupport("Job2"), GroupMatcher<JobKey>.GroupEquals("Job2"));
-        }
     }
 }

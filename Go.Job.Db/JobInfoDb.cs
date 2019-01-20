@@ -64,11 +64,8 @@ namespace Go.Job.Db
         {
             try
             {
-                StringBuilder columns = new StringBuilder();
-                columns.Append(" a.Id,a.JobName,a.JobGroup,a.Cron,a.AssemblyPath,a.ClassType,a.State,a.SchedName,a.ProjectTeam ");
                 using (SqlSugarClient db = new SqlSugarClient(Config))
                 {
-                    //return db.SqlQueryable<JobInfo>($"select {columns} from jobinfo where a.Id = {id}").Single();
                     return db.Queryable<JobInfo>().Where(w => w.Id == id).Single();
                 }
             }
@@ -117,7 +114,7 @@ namespace Go.Job.Db
 
 
         /// <summary>
-        /// 更新状态
+        /// 删除
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>
