@@ -19,8 +19,8 @@ namespace TestJob
             //string name = Thread.GetDomain().FriendlyName;
             //Tools.FileHelper.WriteString(name);
 
-            Thread.Sleep(10000);
-            Console.WriteLine($"{DateTime.Now} : Job Run......");
+            //Thread.Sleep(10000);
+            Console.WriteLine($"{DateTime.Now} : Job123 Run......");
         }
     }
 }

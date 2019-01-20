@@ -3,7 +3,7 @@
 namespace Go.Job.Model
 {
     [Serializable]
-    public class JobInfo
+    public class JobPager
     {
 
         /// <summary>
@@ -58,7 +58,13 @@ namespace Go.Job.Model
         /// 任务状态  0:准备中 1:已启动 2:暂停 3:删除
         /// </summary>
         public int State { get; set; }
-        
+
+
+        /// <summary>
+        /// job创建时间
+        /// </summary>
+        public DateTime CreateTime { get; set; }
+
 
         /// <summary>
         /// 项目组
@@ -73,8 +79,27 @@ namespace Go.Job.Model
 
 
         /// <summary>
-        /// job创建时间
+        /// 持久化状态
         /// </summary>
-        public DateTime CreateTime { get; set; }
+        public string TRIGGER_STATE { get; set; }
+
+
+        /// <summary>
+        /// 下次执行时间
+        /// </summary>
+        public string NEXT_FIRE_TIME { get; set; }
+
+
+        /// <summary>
+        /// 上一次执行时间
+        /// </summary>
+        public string PREV_FIRE_TIME { get; set; }
+
+
+        /// <summary>
+        /// 本次调度开始时间
+        /// </summary>
+        public string START_TIME { get; set; }
+
     }
 }

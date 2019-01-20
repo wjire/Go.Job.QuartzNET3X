@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\HttpClientHelper.cs" />
+    <Compile Include="Api\SchedNameFilter.cs" />
     <Compile Include="Config\AppSettingsConfig.cs" />
     <Compile Include="Config\JobStoreConfig.cs" />
     <Compile Include="Config\RemoteConfig.cs" />

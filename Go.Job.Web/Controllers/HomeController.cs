@@ -12,7 +12,7 @@ namespace Go.Job.Web.Controllers
     {
         public ActionResult Index()
         {
-            List<JobInfo> list = JobInfoDb.GetJobInfoList();
+            List<JobPager> list = JobInfoDb.GetJobPager();
             list.ForEach(f =>
                 {
                     f.NEXT_FIRE_TIME = new DateTime(Convert.ToInt64(f.NEXT_FIRE_TIME)).AddHours(8).ToString();

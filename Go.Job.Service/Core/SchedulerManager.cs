@@ -327,7 +327,7 @@ namespace Go.Job.Service.Core
         /// </summary>
         /// <param name="jobRuntimeInfo"></param>
         /// <returns></returns>
-        internal bool UpdateJobRuntimeInfo(JobRuntimeInfo jobRuntimeInfo)
+        internal bool ReplaceJobRuntimeInfo(JobRuntimeInfo jobRuntimeInfo)
         {
             //TODO:有BUG,没有地方还原 _flag 的值
             //if (_flag)

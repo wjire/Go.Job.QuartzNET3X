@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using Go.Job.Model;
+using Go.Job.Service.Api;
 using Go.Job.Service.Config;
 using Go.Job.Service.Core;
 
@@ -9,12 +10,9 @@ namespace Go.Job.Service.api
     /// <summary>
     /// job控制器
     /// </summary>
+    [SchedNameFilter]
     public class JobController : ApiController
     {
-        /// <summary>
-        /// 调度任务名称
-        /// </summary>
-        private static readonly string SchedName = AppSettingsConfig.SchedName;
 
         /// <summary>
         /// 启动

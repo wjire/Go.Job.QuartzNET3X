@@ -32,7 +32,7 @@ namespace Go.Job.Service.Core
                         {
                             Console.WriteLine(ex);
                             Console.WriteLine("重新创建jobRuntimeInfo,替换job池中的jobRuntimeInfo");
-                            SchedulerManager.Singleton.UpdateJobRuntimeInfo(jobRuntimeInfo);
+                            SchedulerManager.Singleton.ReplaceJobRuntimeInfo(jobRuntimeInfo);
                         }
                     }
                     //如果job池没有该job

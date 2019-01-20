@@ -12,7 +12,17 @@ namespace Go.Job.Service.api
     /// </summary>
     internal class JobApiStartHelper
     {
-        private static readonly string ApiAddress = AppSettingsConfig.ApiAddress;
+        /// <summary>
+        /// 调度任务名称
+        /// </summary>
+        internal static readonly string SchedName = AppSettingsConfig.SchedName;
+
+
+        /// <summary>
+        /// 调度任务监听地址
+        /// </summary>
+        internal static readonly string ApiAddress = AppSettingsConfig.ApiAddress;
+
 
         internal static void Start()
         {
