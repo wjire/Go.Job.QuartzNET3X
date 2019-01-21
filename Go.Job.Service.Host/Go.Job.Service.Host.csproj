@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EastWestWalk.NetFrameWork.Common, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EastWestWalk.NetFrameWork.Common.1.0.0.6\lib\net45\EastWestWalk.NetFrameWork.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="EastWestWalk.NetFrameWork.Enum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EastWestWalk.NetFrameWork.Enum.1.0.0.3\lib\net45\EastWestWalk.NetFrameWork.Enum.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
     </Reference>
@@ -98,6 +104,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyLogWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -106,6 +113,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Go.Job.Model\Go.Job.Model.csproj">
+      <Project>{d47524c9-3f63-40c6-b368-72e3e8d0332d}</Project>
+      <Name>Go.Job.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Go.Job.Service\Go.Job.Service.csproj">
       <Project>{5e9c82f9-2303-4869-8ad9-f40c45d8e0e4}</Project>
       <Name>Go.Job.Service</Name>

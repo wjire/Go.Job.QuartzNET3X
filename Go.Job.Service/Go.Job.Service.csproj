@@ -84,7 +84,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\HttpClientHelper.cs" />
     <Compile Include="Api\SchedNameFilter.cs" />
     <Compile Include="Config\AppSettingsConfig.cs" />
     <Compile Include="Config\JobStoreConfig.cs" />
@@ -96,6 +95,7 @@
     <Compile Include="Log\ILogWriter.cs" />
     <Compile Include="Lib\JobRuntimeInfo.cs" />
     <Compile Include="SchedulerManagerExtensions.cs" />
+    <Compile Include="ServiceInUsed.cs" />
     <Compile Include="废弃的思路\SchedulerConfigExtensions.cs" />
     <Compile Include="Core\AppDomainLoader.cs" />
     <Compile Include="Config\ThreadPoolConfig.cs" />

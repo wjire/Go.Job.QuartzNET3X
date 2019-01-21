@@ -10,7 +10,7 @@ namespace Go.Job.Service.api
     /// <summary>
     /// job控制器
     /// </summary>
-    [SchedNameFilter]
+    //[SchedNameFilter]
     public class JobController : ApiController
     {
         
@@ -29,7 +29,7 @@ namespace Go.Job.Service.api
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ServiceInUsed.LogWriter.WriteException(e, nameof(Run));
                 return GetResult(e.Message);
             }
         }
@@ -49,7 +49,7 @@ namespace Go.Job.Service.api
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ServiceInUsed.LogWriter.WriteException(e, nameof(Pause));
                 return GetResult(e.Message);
             }
         }
@@ -69,13 +69,13 @@ namespace Go.Job.Service.api
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ServiceInUsed.LogWriter.WriteException(e, nameof(Resume));
                 return GetResult(e.Message);
             }
         }
 
         /// <summary>
-        /// 删除
+        /// 停止
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>
@@ -85,12 +85,13 @@ namespace Go.Job.Service.api
         {
             try
             {
+                ServiceInUsed.LogWriter.WriteException(new Exception("111111"), "Remove");
                 bool res = SchedulerManager.Singleton.Remove(jobInfo);
                 return GetResult(res);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ServiceInUsed.LogWriter.WriteException(e, nameof(Remove));
                 return GetResult(e.Message);
             }
         }
@@ -111,7 +112,7 @@ namespace Go.Job.Service.api
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ServiceInUsed.LogWriter.WriteException(e, nameof(Update));
                 return GetResult(e.Message);
             }
         }
@@ -131,7 +132,7 @@ namespace Go.Job.Service.api
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                ServiceInUsed.LogWriter.WriteException(e, nameof(Upgrade));
                 return GetResult(e.Message);
             }
         }

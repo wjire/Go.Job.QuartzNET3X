@@ -8,8 +8,8 @@ namespace Go.Job.Service.Host
         {
             try
             {
+                ServiceContainer.ReplaceService(typeof(ILogWriter), new MyLogWriter());
                 SchedulerManagerFacotry.CreateSchedulerManager().Start().Wait();
-
                 string userCommand = string.Empty;
                 while (userCommand != "exit")
                 {

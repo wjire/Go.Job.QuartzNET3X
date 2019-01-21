@@ -260,12 +260,12 @@ namespace Go.Job.Web.Logic
         }
 
 
-        private static string PostJosn<T>(string path, T value)
+        private static string PostJosn(string path, JobInfo value)
         {
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                HttpResponseMessage response = client.PostAsJsonAsync(path, value).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync<JobInfo>(path, value).Result;
                 var str = response.Content.ReadAsStringAsync().Result;
                 LogService.SaveLog("123", null, str);
                 return str;

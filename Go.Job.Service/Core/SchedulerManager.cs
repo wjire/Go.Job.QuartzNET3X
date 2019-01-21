@@ -108,9 +108,10 @@ namespace Go.Job.Service.Core
                     //TODO:记录日志
                     return true;
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-                    Console.WriteLine(e);
+                    ServiceInUsed.LogWriter.WriteException(ex, nameof(Add));
+
                     //异常了,直接从job池移除该job,不再考虑移除失败的情况.考虑不到那么多了
                     if (JobPool.TryRemove(jobRuntimeInfo.JobInfo.Id, out JobRuntimeInfo jri))
                     {

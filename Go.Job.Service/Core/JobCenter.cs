@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Go.Job.Model;
+﻿using Go.Job.Model;
 using Go.Job.Service.Lib;
 using Quartz;
+using System;
+using System.Threading.Tasks;
 
 namespace Go.Job.Service.Core
 {
@@ -30,8 +30,7 @@ namespace Go.Job.Service.Core
                         }
                         catch (AppDomainUnloadedException ex)
                         {
-                            Console.WriteLine(ex);
-                            Console.WriteLine("重新创建jobRuntimeInfo,替换job池中的jobRuntimeInfo");
+                            ServiceInUsed.LogWriter.WriteException(ex, "appdomain 被卸载,准备重新加载");
                             SchedulerManager.Singleton.ReplaceJobRuntimeInfo(jobRuntimeInfo);
                         }
                     }
@@ -46,14 +45,14 @@ namespace Go.Job.Service.Core
                 catch (Exception ex)
                 {
                     //写日志，job调用失败
-                    Console.WriteLine(ex);
+                    ServiceInUsed.LogWriter.WriteException(ex, nameof(Execute));
                 }
 
             }
             catch (Exception ex)
             {
                 //TODO:调用的时候失败属于系统级错误,非常重要,写日志!
-                Console.WriteLine(ex);
+                ServiceInUsed.LogWriter.WriteException(ex, nameof(Execute));
             }
 
             return Task.FromResult(0);
