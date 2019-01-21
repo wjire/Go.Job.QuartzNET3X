@@ -1,7 +1,7 @@
-﻿using System.Web.Http.Controllers;
+﻿using Go.Job.Model;
+using Go.Job.Service.Core;
+using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
-using Go.Job.Model;
-using Go.Job.Service.api;
 
 namespace Go.Job.Service.Api
 {
@@ -21,7 +21,7 @@ namespace Go.Job.Service.Api
                 throw new System.Exception("入参异常!");
             }
 
-            if (!SchedulerManagerFacotry.SchedName.Equals(jobInfo.SchedName))
+            if (!SchedulerManager.Singleton.Scheduler.SchedulerName.Equals(jobInfo.SchedName))
             {
                 throw new System.Exception($" {SchedulerManagerFacotry.ApiAddress} 没有监听 {jobInfo.SchedName} 调度服务!");
             }

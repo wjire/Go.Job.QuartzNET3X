@@ -8,9 +8,9 @@ namespace Go.Job.Service.Listener
 {
     public abstract class BaseJobListener : JobListenerSupport
     {
-        protected Action<IJobExecutionContext> _startAction;
+        protected Action<IJobExecutionContext> StartAction;
 
-        protected Action<IJobExecutionContext> _endAction;
+        protected Action<IJobExecutionContext> EndAction;
 
         public override string Name { get; }
 
@@ -22,8 +22,8 @@ namespace Go.Job.Service.Listener
         protected BaseJobListener(string name, Action<IJobExecutionContext> startAction, Action<IJobExecutionContext> endAction)
         {
             Name = name;
-            _startAction = startAction;
-            _endAction = endAction;
+            StartAction = startAction;
+            EndAction = endAction;
         }
 
 
@@ -31,13 +31,12 @@ namespace Go.Job.Service.Listener
         {
             try
             {
-                _endAction?.Invoke(context);
+                EndAction?.Invoke(context);
                 await base.JobWasExecuted(context, jobException, cancellationToken);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
         }
 
@@ -50,13 +49,12 @@ namespace Go.Job.Service.Listener
         {
             try
             {
-                _startAction?.Invoke(context);
+                StartAction?.Invoke(context);
                 await base.JobToBeExecuted(context, cancellationToken);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
 
         }

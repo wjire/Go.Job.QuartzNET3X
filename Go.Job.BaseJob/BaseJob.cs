@@ -14,7 +14,7 @@ namespace Go.Job.BaseJob
 
 
         /// <summary>
-        /// 将对象生存期更改为永久,避免被回收.
+        /// 将对象生存期更改为永久,否则默认5分钟不调用,会被回收.
         /// </summary>
         /// <returns></returns>
         public override object InitializeLifetimeService()

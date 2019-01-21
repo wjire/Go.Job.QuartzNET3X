@@ -87,6 +87,8 @@
     <Compile Include="Config\JobStoreConfig.cs" />
     <Compile Include="Config\RemoteConfig.cs" />
     <Compile Include="Listener\BaseJobListener.cs" />
+    <Compile Include="Listener\BaseTriggerListener.cs" />
+    <Compile Include="Listener\DefaultTriggerListener.cs" />
     <Compile Include="Log\DefaultLogWriter.cs" />
     <Compile Include="Log\ILogWriter.cs" />
     <Compile Include="Lib\JobRuntimeInfo.cs" />

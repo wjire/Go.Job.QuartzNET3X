@@ -1,8 +1,7 @@
-﻿using System;
-using Go.Job.Db;
+﻿using Go.Job.Db;
 using Go.Job.Model;
 using Go.Job.Web.Helper;
-using Newtonsoft.Json;
+using System;
 
 namespace Go.Job.Web.Logic
 {
@@ -220,9 +219,10 @@ namespace Go.Job.Web.Logic
             {
                 //if (jobInfo != null && jobInfo.Id > 0 && (jobInfo.State == 0 || jobInfo.State == 3))
                 //{
-                string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/upgrade";
-                Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-                ProcessResult(result, () => JobInfoDb.UpdateJobInfo(jobInfo));
+                //string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/upgrade";
+                //Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
+                //ProcessResult(result, () => JobInfoDb.UpdateJobInfo(jobInfo));
+                JobInfoDb.UpdateJobInfo(jobInfo);
                 //}
             }
             catch (Exception e)

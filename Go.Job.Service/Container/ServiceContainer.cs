@@ -6,7 +6,7 @@ namespace Go.Job.Service
 {
     public static class ServiceContainer
     {
-        private static Dictionary<Type, object> _serviceContainer = new Dictionary<Type, object>();
+        private static readonly Dictionary<Type, object> Container = new Dictionary<Type, object>();
 
         static ServiceContainer()
         {
@@ -21,7 +21,7 @@ namespace Go.Job.Service
 
         public static object GetService(Type serviceType)
         {
-            _serviceContainer.TryGetValue(serviceType, out object service);
+            Container.TryGetValue(serviceType, out object service);
             if (service != null)
             {
                 return service;
@@ -37,13 +37,13 @@ namespace Go.Job.Service
                 throw new ArgumentNullException(nameof(serviceType));
             }
 
-            _serviceContainer[serviceType] = newService;
+            Container[serviceType] = newService;
         }
 
 
         internal static void SetService<T>(T instance) where T : class
         {
-            _serviceContainer[typeof(T)] = instance;
+            Container[typeof(T)] = instance;
         }
     }
 }

@@ -29,7 +29,6 @@ namespace Go.Job.Service.api
             }
             
             WebApp.Start(address);
-            Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {AppSettingsConfig.ApiAddress}");
             //using (WebApp.Start(address))
             //{
             //    Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {SchedulerManagerFacotry.ApiAddress}");

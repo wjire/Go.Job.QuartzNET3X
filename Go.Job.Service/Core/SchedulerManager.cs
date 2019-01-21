@@ -1,13 +1,10 @@
 ﻿using Go.Job.Model;
 using Go.Job.Service.Lib;
 using Quartz;
-using Quartz.Impl.Matchers;
-using Quartz.Listener;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Go.Job.Service.Core
 {
@@ -50,7 +47,7 @@ namespace Go.Job.Service.Core
         {
             Singleton = new SchedulerManager();
         }
-        
+
 
         /// <summary>
         /// 创建新的应用程序域,返回运行时的Job数据
@@ -195,25 +192,20 @@ namespace Go.Job.Service.Core
         /// <param name="jobInfo"></param>
         internal bool Pause(JobInfo jobInfo)
         {
-            if (!JobPool.ContainsKey(jobInfo.Id))
-            {
-                return false;
-            }
-
             lock (Locker)
             {
                 if (!JobPool.ContainsKey(jobInfo.Id))
                 {
-                    return false;
+                    //job池没有该job的话,直接从调度任务中删除该job.因为jobDetail和trigger已经没有存在的意义了.
+                    return Remove(jobInfo);
                 }
 
                 ITrigger trigger = GetTrigger(jobInfo, out TriggerKey triggerKey);
-                if (trigger == null)
+                if (trigger != null)
                 {
-                    return false;
+                    Scheduler.PauseTrigger(triggerKey).Wait();
                 }
-
-                Scheduler.PauseTrigger(triggerKey).Wait();
+                
                 return true;
 
                 //TODO:记录日志
@@ -299,28 +291,22 @@ namespace Go.Job.Service.Core
         /// <returns></returns>
         internal bool Remove(JobInfo jobInfo)
         {
-            if (!JobPool.ContainsKey(jobInfo.Id))
-            {
-                return false;
-            }
             lock (Locker)
             {
-                if (!JobPool.ContainsKey(jobInfo.Id))
-                {
-                    return false;
-                }
-
                 ITrigger trigger = GetTrigger(jobInfo, out TriggerKey triKey);
                 if (trigger == null)
                 {
-                    return false;
+                    return true;
                 }
-
                 Scheduler.PauseTrigger(triKey);
                 Scheduler.UnscheduleJob(triKey);
                 Scheduler.DeleteJob(GetJobKey(jobInfo));
-                JobPool.TryRemove(jobInfo.Id, out JobRuntimeInfo jobRuntimeInfo);
-                AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
+
+                if (JobPool.ContainsKey(jobInfo.Id))
+                {
+                    JobPool.TryRemove(jobInfo.Id, out JobRuntimeInfo jobRuntimeInfo);
+                    AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
+                }
                 return true;
                 //TODO:记录日志
             }

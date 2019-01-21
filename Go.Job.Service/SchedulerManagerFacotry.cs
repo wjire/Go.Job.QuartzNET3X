@@ -18,11 +18,6 @@ namespace Go.Job.Service
     {
 
         /// <summary>
-        /// 调度任务名称
-        /// </summary>
-        internal static string SchedName;
-
-        /// <summary>
         /// 调度任务监听地址
         /// </summary>
         internal static readonly string ApiAddress = AppSettingsConfig.ApiAddress;
