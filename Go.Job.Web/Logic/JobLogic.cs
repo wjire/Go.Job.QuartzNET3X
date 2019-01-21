@@ -1,11 +1,11 @@
-﻿using EastWestWalk.NetFrameWork.Common.Write;
+﻿using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using EastWestWalk.NetFrameWork.Common.Write;
 using Go.Job.Db;
 using Go.Job.Model;
 using Go.Job.Web.Helper;
 using Newtonsoft.Json;
-using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
 
 namespace Go.Job.Web.Logic
 {
@@ -50,16 +50,9 @@ namespace Go.Job.Web.Logic
                 }
 
                 JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
-                //if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 0)
-                //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/run";
-                var res = PostJosn(path, jobInfo);
+                string res = PostJosn(path, jobInfo);
                 return ProcessResult(JsonConvert.DeserializeObject<Result>(res));
-                //Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-                //ProcessResult(result);
-
-
-                //}
             }
             catch (Exception ex)
             {
@@ -85,19 +78,13 @@ namespace Go.Job.Web.Logic
                 }
 
                 JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
-                //if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 1)
-                //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/pause";
-                //string json = HttpWebrequestHelper.PostJson(path, JsonConvert.SerializeObject(jobInfo));
-
-                //var result = JsonConvert.DeserializeObject<Result>(json);
-
-                var res = PostJosn(path, jobInfo);
+                string res = PostJosn(path, jobInfo);
                 return ProcessResult(JsonConvert.DeserializeObject<Result>(res));
-                //}
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                LogService.WriteLog(ex, "Pause job 失败");
             }
             return false;
         }
@@ -117,16 +104,13 @@ namespace Go.Job.Web.Logic
                 }
 
                 JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
-                //if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 2)
-                //{
-
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/resume";
-                var res = PostJosn(path, jobInfo);
+                string res = PostJosn(path, jobInfo);
                 return ProcessResult(JsonConvert.DeserializeObject<Result>(res));
-                //}
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                LogService.WriteLog(ex, "Resume job 失败");
             }
 
             return false;
@@ -149,15 +133,13 @@ namespace Go.Job.Web.Logic
                 }
 
                 JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
-                //if (jobInfo != null && jobInfo.Id == id && jobInfo.State == 2)
-                //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/remove";
-                var res = PostJosn(path, jobInfo);
+                string res = PostJosn(path, jobInfo);
                 return ProcessResult(JsonConvert.DeserializeObject<Result>(res));
-                //}
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                LogService.WriteLog(ex, "Remove job 失败");
             }
 
             return false;
@@ -182,8 +164,9 @@ namespace Go.Job.Web.Logic
 
                 JobInfoDb.DeleteJobInfo(new JobInfo { IsDeleted = 1, Id = id });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                LogService.WriteLog(ex, "Delete job 失败");
             }
 
             return false;
@@ -200,15 +183,13 @@ namespace Go.Job.Web.Logic
         {
             try
             {
-                //if (jobInfo != null && jobInfo.Id > 0 && jobInfo.State == 2)
-                //{
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/update";
-                var res = PostJosn(path, jobInfo);
+                string res = PostJosn(path, jobInfo);
                 return ProcessResult(JsonConvert.DeserializeObject<Result>(res), () => JobInfoDb.UpdateJobInfo(jobInfo));
-                //}
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                LogService.WriteLog(ex, "Update job 失败");
 
             }
             return false;
@@ -225,16 +206,11 @@ namespace Go.Job.Web.Logic
         {
             try
             {
-                //if (jobInfo != null && jobInfo.Id > 0 && (jobInfo.State == 0 || jobInfo.State == 3))
-                //{
-                //string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/upgrade";
-                //Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-                //ProcessResult(result, () => JobInfoDb.UpdateJobInfo(jobInfo));
                 JobInfoDb.UpdateJobInfo(jobInfo);
-                //}
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
+                LogService.WriteLog(ex, "Upgrade job 失败");
 
             }
             return false;
@@ -266,7 +242,7 @@ namespace Go.Job.Web.Logic
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.PostAsJsonAsync<JobInfo>(path, value).Result;
-                var str = response.Content.ReadAsStringAsync().Result;
+                string str = response.Content.ReadAsStringAsync().Result;
                 LogService.SaveLog("123", null, str);
                 return str;
             }

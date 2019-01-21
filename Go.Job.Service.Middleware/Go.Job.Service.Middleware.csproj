@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2E5B47B7-ABF3-4080-BCEB-B56124D890B5}</ProjectGuid>
+    <ProjectGuid>{438EA8CE-DB50-4012-99D9-779D44C2CDE2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Go.Job.Db</RootNamespace>
-    <AssemblyName>Go.Job.Db</AssemblyName>
+    <RootNamespace>Go.Job.Service.Middleware</RootNamespace>
+    <AssemblyName>Go.Job.Service.Middleware</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,20 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EastWestWalk.NetFrameWork.Common, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="EastWestWalk.NetFrameWork.Common">
       <HintPath>..\..\..\0工具类库\EastWestWalk.NetFrameWork.Common.dll</HintPath>
     </Reference>
-    <Reference Include="EastWestWalk.NetFrameWork.Enum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EastWestWalk.NetFrameWork.Enum.1.0.0.3\lib\net45\EastWestWalk.NetFrameWork.Enum.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.8.0.13\lib\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="SqlSugar, Version=4.9.7.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\sqlSugar.4.9.7.5\lib\SqlSugar.dll</HintPath>
+    <Reference Include="EastWestWalk.NetFrameWork.Enum">
+      <HintPath>..\..\..\0工具类库\EastWestWalk.NetFrameWork.Enum.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,18 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JobInfoDb.cs" />
+    <Compile Include="TestLogWriter.cs" />
+    <Compile Include="DefaultLogWriter.cs" />
+    <Compile Include="ILogWriter.cs" />
+    <Compile Include="MidContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Go.Job.Model\Go.Job.Model.csproj">
-      <Project>{D47524C9-3F63-40C6-B368-72E3E8D0332D}</Project>
-      <Name>Go.Job.Model</Name>
-    </ProjectReference>
+    <Compile Include="ServiceInUsed.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

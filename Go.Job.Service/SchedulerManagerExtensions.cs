@@ -1,12 +1,12 @@
-﻿using Go.Job.Service.api;
+﻿using System;
+using System.Threading.Tasks;
+using Go.Job.Service.Api;
 using Go.Job.Service.Config;
-using Go.Job.Service.Core;
 using Go.Job.Service.Listener;
+using Go.Job.Service.Logic;
 using Quartz;
 using Quartz.Impl.Matchers;
 using Quartz.Listener;
-using System;
-using System.Threading.Tasks;
 
 namespace Go.Job.Service
 {

@@ -1,13 +1,14 @@
-﻿using Go.Job.Model;
+﻿using System;
+using Go.Job.Model;
+using Go.Job.Service.Middleware;
 using Quartz;
-using System;
 
 namespace Go.Job.Service.Listener
 {
     internal class DefaultTriggerListener : BaseTriggerListener
     {
 
-        private static readonly ILogWriter LogWrite = (ILogWriter)ServiceContainer.GetService(typeof(ILogWriter));
+        private static readonly ILogWriter LogWrite = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
 
 
         internal DefaultTriggerListener(string name) : base(name, InitFiredAction(), InitCompleteAction(), InitMisFiredAction())
@@ -23,8 +24,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.WriteLogAfterEnd(new JobLog { JobInfo = jobInfo });
-                    //Console.WriteLine($"trigger 监听器 : {DateTime.Now} - {jobInfo.JobName} 开始执行!");
+                    LogWrite.SaveLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 开始点火");
                 }
             };
         }
@@ -37,8 +37,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.WriteLogBeforeStart(new JobLog { JobInfo = jobInfo });
-                    //Console.WriteLine($"trigger 监听器 : {DateTime.Now} - {jobInfo.JobName} 执行结束!");
+                    LogWrite.SaveLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 点火完毕,即将开始执行任务");
                 }
             };
         }
@@ -51,7 +50,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = trigger.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.WriteLogBeforeStart(new JobLog { JobInfo = jobInfo });
+                    LogWrite.SaveLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 哑火");
                 }
             };
         }

@@ -1,13 +1,14 @@
-﻿using Go.Job.Model;
+﻿using System;
+using Go.Job.Model;
+using Go.Job.Service.Middleware;
 using Quartz;
-using System;
 
 namespace Go.Job.Service.Listener
 {
     internal class DefaultJobListener : BaseJobListener
     {
 
-        private static readonly ILogWriter LogWrite = (ILogWriter)ServiceContainer.GetService(typeof(ILogWriter));
+        private static readonly ILogWriter LogWrite = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
 
 
         internal DefaultJobListener(string name) : base(name, InitStartAction(), InitEndAction())
@@ -23,8 +24,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.WriteLogAfterEnd(new JobLog { JobInfo = jobInfo });
-                    //Console.WriteLine($"job 监听器 : {DateTime.Now} - {jobInfo.JobName} 开始执行!");
+                    LogWrite.SaveLog("job开始执行", $"{DateTime.Now} : {jobInfo.JobName} 执行结束");
                 }
             };
         }
@@ -37,8 +37,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.WriteLogBeforeStart(new JobLog { JobInfo = jobInfo });
-                    //Console.WriteLine($"job 监听器 : {DateTime.Now} - {jobInfo.JobName} 执行结束!");
+                    LogWrite.SaveLog("job执行结束", $"{DateTime.Now} : {jobInfo.JobName} 执行结束");
                 }
             };
         }

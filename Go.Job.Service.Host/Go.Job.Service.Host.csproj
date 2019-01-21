@@ -104,7 +104,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyLogWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -116,6 +115,14 @@
     <ProjectReference Include="..\Go.Job.Model\Go.Job.Model.csproj">
       <Project>{d47524c9-3f63-40c6-b368-72e3e8d0332d}</Project>
       <Name>Go.Job.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Go.Job.Service.Logic\Go.Job.Service.Logic.csproj">
+      <Project>{BDF1E8D2-7C18-477E-9091-F6C6E39FF0E4}</Project>
+      <Name>Go.Job.Service.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Go.Job.Service.Middleware\Go.Job.Service.Middleware.csproj">
+      <Project>{438EA8CE-DB50-4012-99D9-779D44C2CDE2}</Project>
+      <Name>Go.Job.Service.Middleware</Name>
     </ProjectReference>
     <ProjectReference Include="..\Go.Job.Service\Go.Job.Service.csproj">
       <Project>{5e9c82f9-2303-4869-8ad9-f40c45d8e0e4}</Project>

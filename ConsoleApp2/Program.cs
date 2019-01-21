@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Go.Job.Service;
 using Go.Job.Service.Middleware;
+using ServiceContainer = System.ComponentModel.Design.ServiceContainer;
 
-namespace Go.Job.Service.Host
+namespace ConsoleApp2
 {
-    internal class Program
+    class Program
     {
-        private static void Main(string[] args)
+        static void Main(string[] args)
         {
             try
             {
@@ -29,6 +35,5 @@ namespace Go.Job.Service.Host
 
             Console.ReadKey();
         }
-
     }
 }

@@ -1,9 +1,9 @@
-﻿using EastWestWalk.NetFrameWork.Common.Write;
-using Go.Job.Model;
-using SqlSugar;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using EastWestWalk.NetFrameWork.Common.Write;
+using Go.Job.Model;
+using SqlSugar;
 
 namespace Go.Job.Db
 {
