@@ -1,28 +1,33 @@
-﻿using System;
+﻿using Go.Job.Model;
+using Go.Job.Service.Lib;
+using Quartz;
+using Quartz.Impl.Matchers;
+using Quartz.Listener;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
-using Go.Job.Model;
-using Go.Job.Service.Lib;
-using Quartz;
+using System.Threading.Tasks;
 
 namespace Go.Job.Service.Core
 {
     /// <summary>
     /// 调度器管理者
     /// </summary>
-    internal class SchedulerManager : IDisposable
+    public class SchedulerManager : IDisposable
     {
+        /// <summary>
+        /// 调度器
+        /// </summary>
+        internal IScheduler Scheduler;
+
 
         /// <summary>
         /// job池
         /// </summary>
         internal static ConcurrentDictionary<int, JobRuntimeInfo> JobPool = new ConcurrentDictionary<int, JobRuntimeInfo>();
 
-        /// <summary>
-        /// 调度器
-        /// </summary>
-        internal static IScheduler Scheduler;
+
 
         /// <summary>
         /// 单例
@@ -45,7 +50,7 @@ namespace Go.Job.Service.Core
         {
             Singleton = new SchedulerManager();
         }
-
+        
 
         /// <summary>
         /// 创建新的应用程序域,返回运行时的Job数据

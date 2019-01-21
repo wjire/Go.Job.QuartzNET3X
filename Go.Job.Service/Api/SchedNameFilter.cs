@@ -21,9 +21,9 @@ namespace Go.Job.Service.Api
                 throw new System.Exception("入参异常!");
             }
 
-            if (!SchedStartHelper.SchedName.Equals(jobInfo.SchedName))
+            if (!SchedulerManagerFacotry.SchedName.Equals(jobInfo.SchedName))
             {
-                throw new System.Exception($" {SchedStartHelper.ApiAddress} 没有监听 {jobInfo.SchedName} 调度服务!");
+                throw new System.Exception($" {SchedulerManagerFacotry.ApiAddress} 没有监听 {jobInfo.SchedName} 调度服务!");
             }
             base.OnActionExecuting(actionContext);
         }

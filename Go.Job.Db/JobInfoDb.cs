@@ -29,7 +29,7 @@ namespace Go.Job.Db
         /// <returns></returns>
         public static List<JobPager> GetJobPager(string projectTeam = null)
         {
-            List<JobPager> list = null;
+            List<JobPager> list = new List<JobPager>();
             try
             {
                 StringBuilder sqlBuilder = new StringBuilder();

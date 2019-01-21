@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Net;
-using System.Net.NetworkInformation;
 
 namespace Go.Job.Service.Host
 {
@@ -11,7 +8,18 @@ namespace Go.Job.Service.Host
         {
             try
             {
-                SchedStartHelper.StartSched().Wait();
+                SchedulerManagerFacotry.CreateSchedulerManager().Start().Wait();
+
+                string userCommand = string.Empty;
+                while (userCommand != "exit")
+                {
+                    if (string.IsNullOrEmpty(userCommand) == false)
+                    {
+                        Console.WriteLine("     非退出指令,自动忽略...");
+                    }
+                    userCommand = Console.ReadLine();
+                }
+
             }
             catch (Exception e)
             {
@@ -20,6 +28,6 @@ namespace Go.Job.Service.Host
 
             Console.ReadKey();
         }
-        
+
     }
 }

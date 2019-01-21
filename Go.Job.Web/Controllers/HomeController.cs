@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
-using Go.Job.Db;
+﻿using Go.Job.Db;
 using Go.Job.Model;
 using Go.Job.Web.Logic;
+using System;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace Go.Job.Web.Controllers
 {
@@ -34,11 +34,8 @@ namespace Go.Job.Web.Controllers
         /// <returns></returns>
         public ActionResult Add(JobInfo jobInfo)
         {
-            if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
-            {
-                jobInfo.JobGroup = jobInfo.SchedName;
-                JobInfoDb.AddJobInfo(jobInfo);
-            }
+            jobInfo.JobGroup = jobInfo.SchedName;
+            JobInfoDb.AddJobInfo(jobInfo);
             return RedirectToAction("Index", "Home");
         }
 
