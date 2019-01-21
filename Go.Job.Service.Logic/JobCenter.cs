@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Go.Job.Model;
-using Go.Job.Service.MiddlewareContainer;
+using Go.Job.Service.Middleware;
 using Quartz;
 
 namespace Go.Job.Service.Logic
@@ -30,7 +30,7 @@ namespace Go.Job.Service.Logic
                         }
                         catch (AppDomainUnloadedException ex)
                         {
-                            ServiceInUsed.LogWriter.WriteException(ex, "appdomain 被卸载,准备重新加载");
+                            MidInUsed.LogWriter.WriteException(ex, "appdomain 被卸载,准备重新加载");
                             SchedulerManager.Singleton.ReplaceJobRuntimeInfo(jobRuntimeInfo);
                         }
                     }
@@ -45,14 +45,14 @@ namespace Go.Job.Service.Logic
                 catch (Exception ex)
                 {
                     //写日志，job调用失败
-                    ServiceInUsed.LogWriter.WriteException(ex, nameof(Execute));
+                    MidInUsed.LogWriter.WriteException(ex, nameof(Execute));
                 }
 
             }
             catch (Exception ex)
             {
                 //TODO:调用的时候失败属于系统级错误,非常重要,写日志!
-                ServiceInUsed.LogWriter.WriteException(ex, nameof(Execute));
+                MidInUsed.LogWriter.WriteException(ex, nameof(Execute));
             }
 
             return Task.FromResult(0);

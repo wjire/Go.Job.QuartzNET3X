@@ -2,7 +2,7 @@
 using System.Web.Http;
 using Go.Job.Model;
 using Go.Job.Service.Logic;
-using Go.Job.Service.MiddlewareContainer;
+using Go.Job.Service.Middleware;
 
 namespace Go.Job.Service.Api
 {
@@ -28,7 +28,7 @@ namespace Go.Job.Service.Api
             }
             catch (Exception e)
             {
-                ServiceInUsed.LogWriter.WriteException(e, nameof(Run));
+                MidInUsed.LogWriter.WriteException(e, nameof(Run));
                 return GetResult(e.Message);
             }
         }
@@ -48,7 +48,7 @@ namespace Go.Job.Service.Api
             }
             catch (Exception e)
             {
-                ServiceInUsed.LogWriter.WriteException(e, nameof(Pause));
+                MidInUsed.LogWriter.WriteException(e, nameof(Pause));
                 return GetResult(e.Message);
             }
         }
@@ -68,7 +68,7 @@ namespace Go.Job.Service.Api
             }
             catch (Exception e)
             {
-                ServiceInUsed.LogWriter.WriteException(e, nameof(Resume));
+                MidInUsed.LogWriter.WriteException(e, nameof(Resume));
                 return GetResult(e.Message);
             }
         }
@@ -84,13 +84,13 @@ namespace Go.Job.Service.Api
         {
             try
             {
-                ServiceInUsed.LogWriter.WriteException(new Exception("111111"), "Remove");
+                MidInUsed.LogWriter.WriteException(new Exception("111111"), "Remove");
                 bool res = SchedulerManager.Singleton.Remove(jobInfo);
                 return GetResult(res);
             }
             catch (Exception e)
             {
-                ServiceInUsed.LogWriter.WriteException(e, nameof(Remove));
+                MidInUsed.LogWriter.WriteException(e, nameof(Remove));
                 return GetResult(e.Message);
             }
         }
@@ -111,7 +111,7 @@ namespace Go.Job.Service.Api
             }
             catch (Exception e)
             {
-                ServiceInUsed.LogWriter.WriteException(e, nameof(Update));
+                MidInUsed.LogWriter.WriteException(e, nameof(Update));
                 return GetResult(e.Message);
             }
         }
@@ -131,7 +131,7 @@ namespace Go.Job.Service.Api
             }
             catch (Exception e)
             {
-                ServiceInUsed.LogWriter.WriteException(e, nameof(Upgrade));
+                MidInUsed.LogWriter.WriteException(e, nameof(Upgrade));
                 return GetResult(e.Message);
             }
         }

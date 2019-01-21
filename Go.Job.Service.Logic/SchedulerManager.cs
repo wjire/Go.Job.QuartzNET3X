@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using Go.Job.Model;
-using Go.Job.Service.MiddlewareContainer;
+using Go.Job.Service.Middleware;
 using Quartz;
 
 namespace Go.Job.Service.Logic
@@ -110,7 +110,7 @@ namespace Go.Job.Service.Logic
                 }
                 catch (Exception ex)
                 {
-                    ServiceInUsed.LogWriter.WriteException(ex, nameof(Add));
+                    MidInUsed.LogWriter.WriteException(ex, nameof(Add));
 
                     //异常了,直接从job池移除该job,不再考虑移除失败的情况.考虑不到那么多了
                     if (JobPool.TryRemove(jobRuntimeInfo.JobInfo.Id, out JobRuntimeInfo jri))

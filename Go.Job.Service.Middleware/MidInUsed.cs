@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Go.Job.Service.Middleware;
 
-namespace Go.Job.Service.MiddlewareContainer
+namespace Go.Job.Service.Middleware
 {
-    public static class ServiceInUsed
+    public class MidInUsed
     {
         public static ILogWriter LogWriter;
 
-        static ServiceInUsed()
+        static MidInUsed()
         {
             LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
         }
