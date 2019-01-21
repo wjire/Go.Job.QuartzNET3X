@@ -121,8 +121,8 @@ namespace Go.Job.Web.Logic
                 //{
 
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/resume";
-                Result result = HttpClientHelper.PostJson<Result>(path, jobInfo);
-                ProcessResult(result);
+                var res = PostJosn(path, jobInfo);
+                return ProcessResult(JsonConvert.DeserializeObject<Result>(res));
                 //}
             }
             catch (Exception e)
