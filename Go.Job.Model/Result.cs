@@ -3,7 +3,6 @@
 namespace Go.Job.Model
 {
 
-    [Serializable]
     public class Result
     {
         public int Code { get; set; }

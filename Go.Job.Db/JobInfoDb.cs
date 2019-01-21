@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using EastWestWalk.NetFrameWork.Common.Write;
 using Go.Job.Model;
 using SqlSugar;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Go.Job.Db
 {
@@ -71,6 +72,7 @@ namespace Go.Job.Db
             }
             catch (Exception ex)
             {
+                LogService.WriteLog(ex, "查询job失败,id=" + id);
                 return null;
             }
         }

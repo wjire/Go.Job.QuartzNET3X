@@ -2,7 +2,6 @@
 
 namespace Go.Job.Model
 {
-    [Serializable]
     public class JobPager
     {
 
