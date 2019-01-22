@@ -65,10 +65,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiConfig.cs" />
     <Compile Include="JobApiStartHelper.cs" />
     <Compile Include="JobController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchedNameFilter.cs" />
+    <Compile Include="SchedulerNameFilter.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

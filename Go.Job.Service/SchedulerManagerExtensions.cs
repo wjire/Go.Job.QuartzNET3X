@@ -45,19 +45,7 @@ namespace Go.Job.Service
             manager.Scheduler.ListenerManager.AddTriggerListener(triListener, GroupMatcher<TriggerKey>.GroupEquals(manager.Scheduler.SchedulerName));
             await manager.Scheduler.Start();
             Console.WriteLine($"作业调度服务已启动! 当前调度任务 : {  manager.Scheduler.SchedulerName}");
-            JobApiStartHelper.Start(AppSettingsConfig.ApiAddress);
+            JobApiStartHelper.Start(AppSettingsConfig.ApiAddress, manager.Scheduler.SchedulerName);
         }
-
-
-
-        //public static IScheduler AddListener(this SchedulerManager manager, JobListenerSupport listener)
-        //{
-        //    if (listener == null)
-        //    {
-        //        throw new ArgumentNullException(nameof(listener));
-        //    }
-        //    manager.Scheduler.ListenerManager.AddJobListener(listener, GroupMatcher<JobKey>.GroupEquals(manager.Scheduler.SchedulerName));
-        //    return manager.Scheduler;
-        //}
     }
 }

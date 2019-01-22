@@ -14,18 +14,27 @@ namespace Go.Job.Service.Api
         /// <summary>
         /// 开启监听
         /// </summary>
-        /// <param name="address"></param>
-        public static void Start(string address)
+        /// <param name="address">api地址</param>
+        /// <param name="schedName">调度任务名称</param>
+        public static void Start(string address,string schedName)
         {
             if (string.IsNullOrWhiteSpace(address))
             {
                 throw new ArgumentNullException("监听地址不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值");
+            }
+            
+            if (string.IsNullOrWhiteSpace(schedName))
+            {
+                throw new ArgumentNullException("调度任务名称不能为空,请前往配置文件修改!");
             }
 
             if (PortInUse(address))
             {
                 throw new ArgumentException($"{address} 该地址已被监听!请更换");
             }
+
+            ApiConfig.ApiAddress = address;
+            ApiConfig.SchedulerName = schedName;
 
             //WebApp.Start(address);
             using (WebApp.Start(address))
