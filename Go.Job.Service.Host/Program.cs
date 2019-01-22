@@ -9,7 +9,7 @@ namespace Go.Job.Service.Host
         {
             try
             {
-                MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
+                //MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
                 SchedulerManagerFacotry.CreateSchedulerManager().UseJobListener(true).UseTriggerListener(false).Start().Wait();
                 string userCommand = string.Empty;
                 while (userCommand != "exit")

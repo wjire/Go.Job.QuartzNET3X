@@ -225,10 +225,6 @@
       <Project>{5e9c82f9-2303-4869-8ad9-f40c45d8e0e4}</Project>
       <Name>Go.Job.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestJob3\TestJob3.csproj">
-      <Project>{8e6d9ba1-9efb-4def-8a27-3d4ee24ea4b0}</Project>
-      <Name>TestJob3</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
