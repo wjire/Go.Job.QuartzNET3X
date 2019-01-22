@@ -4,7 +4,7 @@ using Go.Job.Model;
 namespace Go.Job.Service.Logic
 {
     /// <summary>
-    /// job在内存中的信息
+    /// job运行时信息
     /// </summary>
     public class JobRuntimeInfo
     {

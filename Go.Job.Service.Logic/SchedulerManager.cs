@@ -25,7 +25,7 @@ namespace Go.Job.Service.Logic
         /// </summary>
         public static ConcurrentDictionary<int, JobRuntimeInfo> JobPool = new ConcurrentDictionary<int, JobRuntimeInfo>();
 
-
+        private static readonly ILogWriter LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
 
         /// <summary>
         /// 单例
@@ -111,7 +111,7 @@ namespace Go.Job.Service.Logic
                 }
                 catch (Exception ex)
                 {
-                    MidInUsed.LogWriter.WriteException(ex, nameof(Add));
+                    LogWriter.WriteException(ex, nameof(Add));
 
                     //异常了,直接从job池移除该job,不再考虑移除失败的情况.考虑不到那么多了
                     if (JobPool.TryRemove(jobRuntimeInfo.JobInfo.Id, out JobRuntimeInfo jri))
@@ -124,8 +124,7 @@ namespace Go.Job.Service.Logic
                 }
             }
         }
-
-
+        
 
         /// <summary>
         /// 获取已添加到job池中的job
@@ -154,7 +153,7 @@ namespace Go.Job.Service.Logic
 
         /// <summary>
         /// job池没有该job时,创建 job,并开始调度
-        /// TODO:注意,虽然job池没有该job,但是触发器和jobDetail是有的
+        /// TODO:注意,虽然job池没有该job,但是trigger和jobDetail是有的
         /// </summary>
         /// <param name="jobInfo"></param>
         public bool CreateJob(JobInfo jobInfo)
@@ -280,7 +279,7 @@ namespace Go.Job.Service.Logic
             {
                 TriggerKey triggerKey = GetTriggerKey(jobInfo);
                 ITrigger trigger = CreateTrigger(jobInfo);
-                Scheduler.RescheduleJob(triggerKey, trigger);
+                Scheduler.RescheduleJob(triggerKey, trigger).Wait();
                 return true;
             }
         }

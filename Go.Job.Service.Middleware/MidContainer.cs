@@ -26,7 +26,7 @@ namespace Go.Job.Service.Middleware
                 return service;
             }
 
-            throw new ArgumentException("Not Found");
+            throw new ArgumentException($"{serviceType.FullName} Not Found");
         }
 
         public static void ReplaceService(Type serviceType, object newService)

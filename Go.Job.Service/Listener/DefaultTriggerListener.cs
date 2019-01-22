@@ -8,49 +8,48 @@ namespace Go.Job.Service.Listener
     public class DefaultTriggerListener : BaseTriggerListener
     {
 
-        private static readonly ILogWriter LogWrite = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
-
-
-        internal DefaultTriggerListener(string name) : base(name, InitFiredAction(), InitCompleteAction(), InitMisFiredAction())
+        internal DefaultTriggerListener(string name) : base(name)
         {
-
+            FiredAction = InitFiredAction();
+            CompleteAction = InitCompleteAction();
+            MisFiredAction = InitMisFiredAction();
         }
 
 
-        private static Action<IJobExecutionContext, ITrigger> InitFiredAction()
-        {
-            return (context, trigger) =>
-            {
-                JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
-                if (jobInfo != null)
-                {
-                    LogWrite.SaveLog($"触发器监听 : ", $"{ DateTime.Now} : 触发器 { trigger.Key.Name} 开始点火");
-                }
-            };
-        }
-
-
-        private static Action<IJobExecutionContext, ITrigger> InitCompleteAction()
+        private Action<IJobExecutionContext, ITrigger> InitFiredAction()
         {
             return (context, trigger) =>
             {
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.SaveLog("触发器监听 : ", $"{DateTime.Now} : 触发器 {trigger.Key.Name} 点火完毕");
+                    _logWriter.SaveLog("触发器监听 : ", $"{ DateTime.Now} : 触发器 { trigger.Key.Name} 开始点火");
                 }
             };
         }
 
 
-        private static Action<ITrigger> InitMisFiredAction()
+        private Action<IJobExecutionContext, ITrigger> InitCompleteAction()
+        {
+            return (context, trigger) =>
+            {
+                JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
+                if (jobInfo != null)
+                {
+                    _logWriter.SaveLog("触发器监听 : ", $"{DateTime.Now} : 触发器 {trigger.Key.Name} 点火完毕");
+                }
+            };
+        }
+
+
+        private Action<ITrigger> InitMisFiredAction()
         {
             return (trigger) =>
             {
                 JobInfo jobInfo = trigger.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.SaveLog("触发器监听 : ", $"{DateTime.Now} : 触发器 {trigger.Key.Name} 哑火");
+                    _logWriter.SaveLog("触发器监听 : ", $"{DateTime.Now} : 触发器 {trigger.Key.Name} 哑火");
                 }
             };
         }

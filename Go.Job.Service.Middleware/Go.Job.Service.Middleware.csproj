@@ -50,7 +50,6 @@
     <Compile Include="Log\DefaultLogWriter.cs" />
     <Compile Include="Log\ILogWriter.cs" />
     <Compile Include="MidContainer.cs" />
-    <Compile Include="MidInUsed.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Log\TestLogWriter.cs" />
   </ItemGroup>

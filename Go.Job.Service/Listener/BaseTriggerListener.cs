@@ -12,6 +12,9 @@ namespace Go.Job.Service.Listener
     /// </summary>
     public abstract class BaseTriggerListener : TriggerListenerSupport
     {
+
+        protected readonly ILogWriter _logWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
+
         protected Action<IJobExecutionContext, ITrigger> FiredAction;
 
         protected Action<IJobExecutionContext, ITrigger> CompleteAction;
@@ -22,15 +25,15 @@ namespace Go.Job.Service.Listener
 
         protected BaseTriggerListener(string name) : this(name, null, null, null)
         {
-
+            Name = name;
         }
 
         protected BaseTriggerListener(string name, Action<IJobExecutionContext, ITrigger> firedAction, Action<IJobExecutionContext, ITrigger> completeAction, Action<ITrigger> misFiredAction)
         {
-            Name = name;
-            FiredAction = firedAction;
-            CompleteAction = completeAction;
-            MisFiredAction = misFiredAction;
+         
+            
+            
+            
         }
 
         public override Task TriggerFired(ITrigger trigger, IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
@@ -41,7 +44,7 @@ namespace Go.Job.Service.Listener
             }
             catch (Exception e)
             {
-                MidInUsed.LogWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerFired));
+                _logWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerFired));
             }
             return base.TriggerFired(trigger, context, cancellationToken);
         }
@@ -54,7 +57,7 @@ namespace Go.Job.Service.Listener
             }
             catch (Exception e)
             {
-                MidInUsed.LogWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerComplete));
+                _logWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerComplete));
             }
             return base.TriggerComplete(trigger, context, triggerInstructionCode, cancellationToken);
         }
@@ -67,7 +70,7 @@ namespace Go.Job.Service.Listener
             }
             catch (Exception e)
             {
-                MidInUsed.LogWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerMisfired));
+                _logWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerMisfired));
             }
             return base.TriggerMisfired(trigger, cancellationToken);
         }

@@ -14,6 +14,8 @@ namespace Go.Job.Service.Api
     public class JobController : ApiController
     {
 
+        private static readonly ILogWriter LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
+
         /// <summary>
         /// 启动
         /// </summary>
@@ -98,7 +100,7 @@ namespace Go.Job.Service.Api
             }
             catch (Exception ex)
             {
-                MidInUsed.LogWriter.WriteException(ex, method);
+                LogWriter.WriteException(ex, method);
                 result.Msg = ex.Message;
             }
             return result;

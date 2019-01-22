@@ -12,6 +12,7 @@ namespace Go.Job.Service.Listener
     /// </summary>
     public abstract class BaseJobListener : JobListenerSupport
     {
+        protected readonly ILogWriter _logWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
 
         protected Action<IJobExecutionContext> StartAction;
 
@@ -20,29 +21,22 @@ namespace Go.Job.Service.Listener
 
         public override string Name { get; }
 
-        protected BaseJobListener(string name) : this(name, null, null)
-        {
-
-        }
-
-        protected BaseJobListener(string name, Action<IJobExecutionContext> startAction, Action<IJobExecutionContext> endAction)
+        protected BaseJobListener(string name) 
         {
             Name = name;
-            StartAction = startAction;
-            EndAction = endAction;
         }
-
+        
 
         public override async Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken = default(CancellationToken))
         {
             try
             {
                 EndAction?.Invoke(context);
-                MidInUsed.LogWriter.WriteException(new Exception("测试"), context.JobDetail.Key.Name + ":" + nameof(JobWasExecuted));
+                _logWriter.WriteException(new Exception("测试"), context.JobDetail.Key.Name + ":" + nameof(JobWasExecuted));
             }
             catch (Exception e)
             {
-                MidInUsed.LogWriter.WriteException(e, context.JobDetail.Key.Name +":"+nameof(JobWasExecuted));
+                _logWriter.WriteException(e, context.JobDetail.Key.Name +":"+nameof(JobWasExecuted));
             }
             await base.JobWasExecuted(context, jobException, cancellationToken);
 
@@ -61,7 +55,7 @@ namespace Go.Job.Service.Listener
             }
             catch (Exception e)
             {
-                MidInUsed.LogWriter.WriteException(e, context.JobDetail.Key.Name + ":" + nameof(JobToBeExecuted));
+                _logWriter.WriteException(e, context.JobDetail.Key.Name + ":" + nameof(JobToBeExecuted));
             }
             await base.JobToBeExecuted(context, cancellationToken);
         }
