@@ -8,8 +8,8 @@ namespace Go.Job.Service.Api
 {
     public static class ApiConfig
     {
-        internal static string ApiAddress;
+        public static string ApiAddress;
 
-        internal static string SchedulerName;
+        public static string SchedulerName;
     }
 }

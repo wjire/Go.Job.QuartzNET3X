@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Go.Job.Service.Listener
 {
-    public class BaseTriggerListener : TriggerListenerSupport
+    public abstract class BaseTriggerListener : TriggerListenerSupport
     {
         protected Action<IJobExecutionContext, ITrigger> FiredAction;
 

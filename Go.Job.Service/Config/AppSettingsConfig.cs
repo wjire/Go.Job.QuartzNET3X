@@ -8,9 +8,6 @@ namespace Go.Job.Service.Config
     internal static class AppSettingsConfig
     {
 
-        internal static string SchedName => AppSettingValue();
-
-
         internal static string ApiAddress => AppSettingValue();
             
 

@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\AppSettingsConfig.cs" />
+    <Compile Include="Config\SchedulerConfig.cs" />
     <Compile Include="废弃\JobStoreConfig.cs" />
     <Compile Include="废弃\RemoteConfig.cs" />
     <Compile Include="Listener\BaseJobListener.cs" />

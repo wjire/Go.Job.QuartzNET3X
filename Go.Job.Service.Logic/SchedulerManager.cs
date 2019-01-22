@@ -5,6 +5,7 @@ using System.Threading;
 using Go.Job.Model;
 using Go.Job.Service.Middleware;
 using Quartz;
+using Quartz.Listener;
 
 namespace Go.Job.Service.Logic
 {

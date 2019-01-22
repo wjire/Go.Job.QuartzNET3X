@@ -5,7 +5,7 @@ using System;
 
 namespace Go.Job.Service.Listener
 {
-    internal class DefaultJobListener : BaseJobListener
+    public class DefaultJobListener : BaseJobListener
     {
 
         private static readonly ILogWriter LogWrite = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
