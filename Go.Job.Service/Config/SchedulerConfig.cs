@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,23 +9,37 @@ using Quartz.Listener;
 
 namespace Go.Job.Service.Config
 {
+    /// <summary>
+    /// 调度器配置
+    /// </summary>
     internal class SchedulerConfig
     {
-        internal static string SchedulerName;
+        /// <summary>
+        /// 调度器监听地址
+        /// </summary>
+        internal static string ApiAddress = ConfigurationManager.AppSettings["ApiAddress"];
 
-        internal static JobListenerSupport JobListener { get; set; } = new DefaultJobListener(SchedulerName);
+        /// <summary>
+        /// 调度器名称
+        /// </summary>
+        internal static string SchedulerName{ get; set; }
 
-        internal static TriggerListenerSupport TriggerListener { get; set; } = new DefaultTriggerListener(SchedulerName);
+        /// <summary>
+        /// job监听器
+        /// </summary>
+        internal static JobListenerSupport JobListener { get; set; } 
+
+        /// <summary>
+        /// 触发器监听器 
+        /// </summary>
+        internal static TriggerListenerSupport TriggerListener { get; set; }
 
 
-        private static JobListenerSupport CreateDefaultJobListener()
+        internal static void Init(string name)
         {
-            return new DefaultJobListener(SchedulerName);
-        }
-
-        private static TriggerListenerSupport CreateDefaultTriggerListener()
-        {
-            return new DefaultTriggerListener(SchedulerName);
+            SchedulerName = name;
+            JobListener  = new DefaultJobListener(SchedulerName);
+            TriggerListener  = new DefaultTriggerListener(SchedulerName);
         }
     }
 }

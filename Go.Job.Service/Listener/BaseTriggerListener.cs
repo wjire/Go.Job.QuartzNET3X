@@ -3,9 +3,13 @@ using Quartz.Listener;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Go.Job.Service.Middleware;
 
 namespace Go.Job.Service.Listener
 {
+    /// <summary>
+    /// 触发器监听器基类
+    /// </summary>
     public abstract class BaseTriggerListener : TriggerListenerSupport
     {
         protected Action<IJobExecutionContext, ITrigger> FiredAction;
@@ -33,11 +37,11 @@ namespace Go.Job.Service.Listener
         {
             try
             {
-                FiredAction(context, trigger);
+                FiredAction?.Invoke(context, trigger);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                MidInUsed.LogWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerFired));
             }
             return base.TriggerFired(trigger, context, cancellationToken);
         }
@@ -46,11 +50,11 @@ namespace Go.Job.Service.Listener
         {
             try
             {
-                CompleteAction(context, trigger);
+                CompleteAction?.Invoke(context, trigger);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                MidInUsed.LogWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerComplete));
             }
             return base.TriggerComplete(trigger, context, triggerInstructionCode, cancellationToken);
         }
@@ -63,7 +67,7 @@ namespace Go.Job.Service.Listener
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                MidInUsed.LogWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerMisfired));
             }
             return base.TriggerMisfired(trigger, cancellationToken);
         }

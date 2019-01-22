@@ -10,7 +10,7 @@ namespace Go.Job.Service.Host
             try
             {
                 MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
-                SchedulerManagerFacotry.CreateSchedulerManager().Start().Wait();
+                SchedulerManagerFacotry.CreateSchedulerManager().UseJobListener(false).Start().Wait();
                 string userCommand = string.Empty;
                 while (userCommand != "exit")
                 {

@@ -3,14 +3,20 @@ using Quartz.Listener;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Go.Job.Service.Middleware;
 
 namespace Go.Job.Service.Listener
 {
+    /// <summary>
+    /// job监听器基类
+    /// </summary>
     public abstract class BaseJobListener : JobListenerSupport
     {
+
         protected Action<IJobExecutionContext> StartAction;
 
         protected Action<IJobExecutionContext> EndAction;
+
 
         public override string Name { get; }
 
@@ -32,12 +38,14 @@ namespace Go.Job.Service.Listener
             try
             {
                 EndAction?.Invoke(context);
-                await base.JobWasExecuted(context, jobException, cancellationToken);
+                MidInUsed.LogWriter.WriteException(new Exception("测试"), context.JobDetail.Key.Name + ":" + nameof(JobWasExecuted));
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                MidInUsed.LogWriter.WriteException(e, context.JobDetail.Key.Name +":"+nameof(JobWasExecuted));
             }
+            await base.JobWasExecuted(context, jobException, cancellationToken);
+
         }
 
         public override async Task JobExecutionVetoed(IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
@@ -50,13 +58,12 @@ namespace Go.Job.Service.Listener
             try
             {
                 StartAction?.Invoke(context);
-                await base.JobToBeExecuted(context, cancellationToken);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                MidInUsed.LogWriter.WriteException(e, context.JobDetail.Key.Name + ":" + nameof(JobToBeExecuted));
             }
-
+            await base.JobToBeExecuted(context, cancellationToken);
         }
     }
 }

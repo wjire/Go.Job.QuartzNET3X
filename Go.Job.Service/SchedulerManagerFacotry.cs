@@ -13,10 +13,14 @@ namespace Go.Job.Service
     /// </summary>
     public sealed class SchedulerManagerFacotry
     {
+        /// <summary>
+        /// 创建调度器管理者
+        /// </summary>
+        /// <returns></returns>
         public static SchedulerManager CreateSchedulerManager()
         {
             SchedulerManager.Singleton.Scheduler = new StdSchedulerFactory().GetScheduler().Result;
-            SchedulerConfig.SchedulerName = SchedulerManager.Singleton.Scheduler.SchedulerName;
+            SchedulerConfig.Init(SchedulerManager.Singleton.Scheduler.SchedulerName);
             return SchedulerManager.Singleton;
         }
     }

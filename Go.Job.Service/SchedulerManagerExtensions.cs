@@ -15,22 +15,26 @@ namespace Go.Job.Service
     /// </summary>
     public static class SchedulerManagerExtensions
     {
-
+        /// <summary>
+        /// 启动
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <returns></returns>
         public static async Task Start(this SchedulerManager manager)
         {
 
             if (SchedulerConfig.JobListener!=null)
             {
-                manager.Scheduler.ListenerManager.AddJobListener(SchedulerConfig.JobListener, GroupMatcher<JobKey>.GroupEquals(manager.Scheduler.SchedulerName));
+                manager.Scheduler.ListenerManager.AddJobListener(SchedulerConfig.JobListener, GroupMatcher<JobKey>.GroupEquals(SchedulerConfig.SchedulerName));
             }
 
             if (SchedulerConfig.TriggerListener !=null)
             {
-                manager.Scheduler.ListenerManager.AddTriggerListener(SchedulerConfig.TriggerListener, GroupMatcher<TriggerKey>.GroupEquals(manager.Scheduler.SchedulerName));
+                manager.Scheduler.ListenerManager.AddTriggerListener(SchedulerConfig.TriggerListener, GroupMatcher<TriggerKey>.GroupEquals(SchedulerConfig.SchedulerName));
             }
             await manager.Scheduler.Start();
             Console.WriteLine($"作业调度服务已启动! 当前调度任务 : {  SchedulerConfig.SchedulerName}");
-            JobApiStartHelper.Start(ApiConfig.ApiAddress, SchedulerConfig.SchedulerName);
+            JobApiStartHelper.Start(SchedulerConfig.ApiAddress, SchedulerConfig.SchedulerName);
         }
 
 
@@ -41,14 +45,14 @@ namespace Go.Job.Service
         /// <param name="useJobListener">false:不添加;true:添加</param>
         /// <param name="jobListener"></param>
         /// <returns></returns>
-        public static SchedulerManager AddJobListener(this SchedulerManager manager, bool useJobListener, JobListenerSupport jobListener=null)
+        public static SchedulerManager UseJobListener(this SchedulerManager manager, bool useJobListener, JobListenerSupport jobListener=null)
         {
             if (useJobListener ==false)
             {
                 SchedulerConfig.JobListener = null;
                 return manager;
             }
-                return manager.AddJobListener(jobListener);
+                return manager.UseJobListener(jobListener);
         }
 
 
@@ -58,7 +62,7 @@ namespace Go.Job.Service
         /// <param name="manager"></param>
         /// <param name="jobListener"></param>
         /// <returns></returns>
-        private static SchedulerManager AddJobListener (this SchedulerManager manager, JobListenerSupport jobListener)
+        private static SchedulerManager UseJobListener(this SchedulerManager manager, JobListenerSupport jobListener)
         {
             if (jobListener != null)
             {
@@ -74,14 +78,14 @@ namespace Go.Job.Service
         /// <param name="useTriggerListener">false:不添加;true:添加</param>
         /// <param name="triggerListener"></param>
         /// <returns></returns>
-        public static SchedulerManager AddTriggerListener(this SchedulerManager manager, bool useTriggerListener, TriggerListenerSupport triggerListener =null)
+        public static SchedulerManager UseTriggerListener(this SchedulerManager manager, bool useTriggerListener, TriggerListenerSupport triggerListener =null)
         {
             if (useTriggerListener == false)
             {
                 SchedulerConfig.TriggerListener = null;
                 return manager;
             }
-            return manager.AddTriggerListener(triggerListener);
+            return manager.UseTriggerListener(triggerListener);
         }
 
 
@@ -91,7 +95,7 @@ namespace Go.Job.Service
         /// <param name="manager"></param>
         /// <param name="triggerListener"></param>
         /// <returns></returns>
-        private static SchedulerManager AddTriggerListener(this SchedulerManager manager, TriggerListenerSupport triggerListener)
+        private static SchedulerManager UseTriggerListener(this SchedulerManager manager, TriggerListenerSupport triggerListener)
         {
             if (triggerListener != null)
             {
