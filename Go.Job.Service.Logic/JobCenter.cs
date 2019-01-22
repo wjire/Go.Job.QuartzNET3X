@@ -9,7 +9,7 @@ namespace Go.Job.Service.Logic
     /// <summary>
     /// job中心,所有的job都是从这里开始执行
     /// </summary>
-    [DisallowConcurrentExecution]
+    [DisallowConcurrentExecution]  //TODO:该特性很重要!作用是禁止相同JobDetail同时执行,而不是禁止多个不同JobDetail同时执行.总结一句话:相同的只能串行,不同的可以并行.
     public class JobCenter : IJob
     {
         public Task Execute(IJobExecutionContext context)
@@ -35,7 +35,7 @@ namespace Go.Job.Service.Logic
                         }
                     }
                     //如果job池没有该job
-                    //TODO:注意,虽然job池没有该job,但是触发器和jobDetail是有的,不然也不会进到这个job的 execute 方法
+                    //TODO:注意,逻辑走到这里一般都是宕机了,因为job池是在内存中,所以重启调度服务后,肯定是没有的.而jobDetail和trigger是在数据库中,用的是官方的持久化方案.
                     else
                     {
                         SchedulerManager.Singleton.CreateJob(jobInfo);

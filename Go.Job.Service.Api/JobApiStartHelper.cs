@@ -9,7 +9,7 @@ namespace Go.Job.Service.Api
     /// <summary>
     /// jobApi启动类
     /// </summary>
-    public class JobApiStartHelper
+    public sealed class JobApiStartHelper
     {
         /// <summary>
         /// 开启监听
