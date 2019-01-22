@@ -1,7 +1,7 @@
-﻿using System;
-using Go.Job.Model;
+﻿using Go.Job.Model;
 using Go.Job.Service.Middleware;
 using Quartz;
+using System;
 
 namespace Go.Job.Service.Listener
 {
@@ -24,7 +24,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.SaveLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 开始点火");
+                    LogWrite.SaveLog($"触发器监听 : ", $"{ DateTime.Now} : 触发器 { trigger.Key.Name} 开始点火");
                 }
             };
         }
@@ -37,7 +37,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.SaveLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 点火完毕,即将开始执行任务");
+                    LogWrite.SaveLog("触发器监听 : ", $"{DateTime.Now} : 触发器 {trigger.Key.Name} 点火完毕");
                 }
             };
         }
@@ -50,7 +50,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = trigger.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.SaveLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 哑火");
+                    LogWrite.SaveLog("触发器监听 : ", $"{DateTime.Now} : 触发器 {trigger.Key.Name} 哑火");
                 }
             };
         }

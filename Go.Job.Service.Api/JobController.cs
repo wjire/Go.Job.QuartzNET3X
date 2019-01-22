@@ -1,8 +1,9 @@
-﻿using System;
-using System.Web.Http;
-using Go.Job.Model;
+﻿using Go.Job.Model;
 using Go.Job.Service.Logic;
 using Go.Job.Service.Middleware;
+using System;
+using System.Runtime.CompilerServices;
+using System.Web.Http;
 
 namespace Go.Job.Service.Api
 {
@@ -21,16 +22,7 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Run(JobInfo jobInfo)
         {
-            try
-            {
-                bool res = SchedulerManager.Singleton.CreateJob(jobInfo);
-                return GetResult(res);
-            }
-            catch (Exception e)
-            {
-                MidInUsed.LogWriter.WriteException(e, nameof(Run));
-                return GetResult(e.Message);
-            }
+            return Excute(() => SchedulerManager.Singleton.CreateJob(jobInfo));
         }
 
         /// <summary>
@@ -41,16 +33,7 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Pause(JobInfo jobInfo)
         {
-            try
-            {
-                bool res = SchedulerManager.Singleton.Pause(jobInfo);
-                return GetResult(res);
-            }
-            catch (Exception e)
-            {
-                MidInUsed.LogWriter.WriteException(e, nameof(Pause));
-                return GetResult(e.Message);
-            }
+            return Excute(() => SchedulerManager.Singleton.Pause(jobInfo));
         }
 
         /// <summary>
@@ -61,16 +44,7 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Resume(JobInfo jobInfo)
         {
-            try
-            {
-                bool res = SchedulerManager.Singleton.Resume(jobInfo);
-                return GetResult(res);
-            }
-            catch (Exception e)
-            {
-                MidInUsed.LogWriter.WriteException(e, nameof(Resume));
-                return GetResult(e.Message);
-            }
+            return Excute(() => SchedulerManager.Singleton.Resume(jobInfo));
         }
 
         /// <summary>
@@ -82,17 +56,7 @@ namespace Go.Job.Service.Api
 
         public Result Remove(JobInfo jobInfo)
         {
-            try
-            {
-                MidInUsed.LogWriter.WriteException(new Exception("111111"), "Remove");
-                bool res = SchedulerManager.Singleton.Remove(jobInfo);
-                return GetResult(res);
-            }
-            catch (Exception e)
-            {
-                MidInUsed.LogWriter.WriteException(e, nameof(Remove));
-                return GetResult(e.Message);
-            }
+            return Excute(() => SchedulerManager.Singleton.Remove(jobInfo));
         }
 
 
@@ -104,16 +68,7 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Update(JobInfo jobInfo)
         {
-            try
-            {
-                bool res = SchedulerManager.Singleton.Update(jobInfo);
-                return GetResult(res);
-            }
-            catch (Exception e)
-            {
-                MidInUsed.LogWriter.WriteException(e, nameof(Update));
-                return GetResult(e.Message);
-            }
+            return Excute(() => SchedulerManager.Singleton.Update(jobInfo));
         }
 
         /// <summary>
@@ -124,34 +79,29 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Upgrade(JobInfo jobInfo)
         {
+          return  Excute(() => SchedulerManager.Singleton.Upgrade(jobInfo));
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="func"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        private Result Excute(Func<bool> func,[CallerMemberName] string method = null)
+        {
+            var result = new Result {Code = 200};
             try
             {
-                bool res = SchedulerManager.Singleton.Upgrade(jobInfo);
-                return GetResult(res);
+               result.Code =  func.Invoke()?200:400;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MidInUsed.LogWriter.WriteException(e, nameof(Upgrade));
-                return GetResult(e.Message);
+                MidInUsed.LogWriter.WriteException(ex, method);
+                result.Msg = ex.Message;
             }
-        }
-
-
-        private Result GetResult(bool res)
-        {
-            return new Result
-            {
-                Code = res ? 200 : 400,
-            };
-        }
-
-        private Result GetResult(string exception)
-        {
-            return new Result
-            {
-                Code = 200,
-                Msg = exception
-            };
+            return result;
         }
     }
 }

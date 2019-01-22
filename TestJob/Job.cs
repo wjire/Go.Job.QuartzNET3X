@@ -20,7 +20,7 @@ namespace TestJob
             //Tools.FileHelper.WriteString(name);
 
             //Thread.Sleep(10000);
-            Console.WriteLine($"{DateTime.Now} : Job123 Run......");
+            Console.WriteLine($"{DateTime.Now} : Job Run......");
         }
     }
 }

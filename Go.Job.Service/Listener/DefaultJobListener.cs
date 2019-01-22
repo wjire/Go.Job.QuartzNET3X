@@ -1,7 +1,7 @@
-﻿using System;
-using Go.Job.Model;
+﻿using Go.Job.Model;
 using Go.Job.Service.Middleware;
 using Quartz;
+using System;
 
 namespace Go.Job.Service.Listener
 {
@@ -24,7 +24,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.SaveLog("job开始执行", $"{DateTime.Now} : {jobInfo.JobName} 执行结束");
+                    LogWrite.SaveLog("job监听器 : ", $"{DateTime.Now} : {jobInfo.JobName} 开始执行");
                 }
             };
         }
@@ -37,7 +37,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWrite.SaveLog("job执行结束", $"{DateTime.Now} : {jobInfo.JobName} 执行结束");
+                    LogWrite.SaveLog("job监听器", $"{DateTime.Now} : {jobInfo.JobName} 执行结束");
                 }
             };
         }

@@ -27,21 +27,21 @@ namespace Go.Job.Service.Api
                 throw new ArgumentException($"{address} 该地址已被监听!请更换");
             }
 
-            WebApp.Start(address);
-            //using (WebApp.Start(address))
-            //{
-            //    Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {SchedulerManagerFacotry.ApiAddress}");
+            //WebApp.Start(address);
+            using (WebApp.Start(address))
+            {
+                Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {address}");
 
-            //    string userCommand = string.Empty;
-            //    while (userCommand != "exit")
-            //    {
-            //        if (string.IsNullOrEmpty(userCommand) == false)
-            //        {
-            //            Console.WriteLine("     非退出指令,自动忽略...");
-            //        }
-            //        userCommand = Console.ReadLine();
-            //    }
-            //}
+                string userCommand = string.Empty;
+                while (userCommand != "exit")
+                {
+                    if (string.IsNullOrEmpty(userCommand) == false)
+                    {
+                        Console.WriteLine("     非退出指令,自动忽略...");
+                    }
+                    userCommand = Console.ReadLine();
+                }
+            }
         }
 
 
