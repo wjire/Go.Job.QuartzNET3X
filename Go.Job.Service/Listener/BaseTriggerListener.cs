@@ -23,17 +23,9 @@ namespace Go.Job.Service.Listener
 
         public override string Name { get; }
 
-        protected BaseTriggerListener(string name) : this(name, null, null, null)
+        protected BaseTriggerListener(string name) 
         {
             Name = name;
-        }
-
-        protected BaseTriggerListener(string name, Action<IJobExecutionContext, ITrigger> firedAction, Action<IJobExecutionContext, ITrigger> completeAction, Action<ITrigger> misFiredAction)
-        {
-         
-            
-            
-            
         }
 
         public override Task TriggerFired(ITrigger trigger, IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))

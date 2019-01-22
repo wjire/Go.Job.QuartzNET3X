@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 using EastWestWalk.NetFrameWork.Common.Write;
 using Go.Job.Db;
 using Go.Job.Model;
@@ -38,82 +39,44 @@ namespace Go.Job.Web.Logic
         /// <summary>
         /// 启动
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="jobInfo"></param>
         /// <returns></returns>
-        public bool Run(int id)
+        public Result Run(JobInfo jobInfo)
         {
-            try
+            return Execute(() =>
             {
-                if (id == 0)
-                {
-                    return false;
-                }
-
-                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/run";
-                string res = PostJosn(path, jobInfo);
-                return ProcessResult(JsonConvert.DeserializeObject<Result>(res));
-            }
-            catch (Exception ex)
-            {
-                LogService.WriteLog(ex, "启动 job 失败");
-            }
-            return false;
-
+                return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
+            });
         }
 
 
         /// <summary>
         /// 暂停
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="jobInfo"></param>
         /// <returns></returns>
-        public bool Pause(int id)
+        public Result Pause(JobInfo jobInfo)
         {
-            try
+            return Execute(() =>
             {
-                if (id == 0)
-                {
-                    return false;
-                }
-
-                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/pause";
-                string res = PostJosn(path, jobInfo);
-                return ProcessResult(JsonConvert.DeserializeObject<Result>(res));
-            }
-            catch (Exception ex)
-            {
-                LogService.WriteLog(ex, "Pause job 失败");
-            }
-            return false;
+                return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
+            });
         }
 
         /// <summary>
         /// 恢复
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="jobInfo"></param>
         /// <returns></returns>
-        public bool Resume(int id)
+        public Result Resume(JobInfo jobInfo)
         {
-            try
+            return Execute(() =>
             {
-                if (id == 0)
-                {
-                    return false;
-                }
-
-                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/resume";
-                string res = PostJosn(path, jobInfo);
-                return ProcessResult(JsonConvert.DeserializeObject<Result>(res));
-            }
-            catch (Exception ex)
-            {
-                LogService.WriteLog(ex, "Resume job 失败");
-            }
-
-            return false;
+                return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
+            });
         }
 
 
@@ -121,28 +84,15 @@ namespace Go.Job.Web.Logic
         /// <summary>
         /// 停止
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="jobInfo"></param>
         /// <returns></returns>
-        public bool Remove(int id)
+        public Result Remove(JobInfo jobInfo)
         {
-            try
+            return Execute(() =>
             {
-                if (id == 0)
-                {
-                    return false;
-                }
-
-                JobInfo jobInfo = JobInfoDb.GetJobInfo(id);
                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/remove";
-                string res = PostJosn(path, jobInfo);
-                return ProcessResult(JsonConvert.DeserializeObject<Result>(res));
-            }
-            catch (Exception ex)
-            {
-                LogService.WriteLog(ex, "Remove job 失败");
-            }
-
-            return false;
+                return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
+            });
         }
 
 
@@ -155,21 +105,19 @@ namespace Go.Job.Web.Logic
         /// <returns></returns>
         public bool Delete(int id)
         {
+            bool res = false;
             try
             {
-                if (id == 0)
+                if (id > 0)
                 {
-                    return false;
+                    res = JobInfoDb.DeleteJobInfo(new JobInfo { IsDeleted = 1, Id = id }) > 0;
                 }
-
-                JobInfoDb.DeleteJobInfo(new JobInfo { IsDeleted = 1, Id = id });
             }
             catch (Exception ex)
             {
-                LogService.WriteLog(ex, "Delete job 失败");
+                LogService.WriteLog(ex, "Delete 失败");
             }
-
-            return false;
+            return res;
         }
 
 
@@ -179,20 +127,13 @@ namespace Go.Job.Web.Logic
         /// </summary>
         /// <param name="jobInfo"></param>
         /// <returns></returns>
-        public bool Update(JobInfo jobInfo)
+        public Result Update(JobInfo jobInfo)
         {
-            try
-            {
-                string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/update";
-                string res = PostJosn(path, jobInfo);
-                return ProcessResult(JsonConvert.DeserializeObject<Result>(res), () => JobInfoDb.UpdateJobInfo(jobInfo));
-            }
-            catch (Exception ex)
-            {
-                LogService.WriteLog(ex, "Update job 失败");
-
-            }
-            return false;
+            return Execute(() =>
+             {
+                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/update";
+                 return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
+             });
         }
 
 
@@ -206,12 +147,11 @@ namespace Go.Job.Web.Logic
         {
             try
             {
-                JobInfoDb.UpdateJobInfo(jobInfo);
+                return JobInfoDb.UpdateJobInfo(jobInfo) > 0;
             }
             catch (Exception ex)
             {
-                LogService.WriteLog(ex, "Upgrade job 失败");
-
+                LogService.WriteLog(ex, "Upgrade 失败");
             }
             return false;
         }
@@ -234,17 +174,43 @@ namespace Go.Job.Web.Logic
             }
             throw new Exception(result.Msg);
         }
+        
+
+        /// <summary>
+        /// 执行
+        /// </summary>
+        /// <param name="func"></param>
+        /// <param name="method"></param>
+        /// <returns></returns>
+        public Result Execute(Func<Result> func, [CallerMemberName] string method = null)
+        {
+            Result result = new Result { Code = 200 };
+            try
+            {
+                result = func.Invoke();
+            }
+            catch (Exception ex)
+            {
+                LogService.WriteLog(ex, $"{method} 失败");
+                result.Msg = ex.Message;
+            }
+            return result;
+        }
 
 
+        /// <summary>
+        /// 请求调度器的api地址
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
         private static string PostJosn(string path, JobInfo value)
         {
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage response = client.PostAsJsonAsync<JobInfo>(path, value).Result;
-                string str = response.Content.ReadAsStringAsync().Result;
-                LogService.SaveLog("123", null, str);
-                return str;
+                return response.Content.ReadAsStringAsync().Result;
             }
         }
     }

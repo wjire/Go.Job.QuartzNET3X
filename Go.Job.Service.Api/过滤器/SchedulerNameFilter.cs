@@ -23,7 +23,7 @@ namespace Go.Job.Service.Api
 
             if (!ApiConfig.SchedulerName.Equals(jobInfo.SchedName))
             {
-                throw new System.Exception($" 该服务没有监听 {jobInfo.SchedName} 调度任务");
+                throw new System.Exception($" 该服务没有监听 {jobInfo.SchedName} 调度器");
             }
 
             base.OnActionExecuting(actionContext);

@@ -18,24 +18,25 @@ namespace Go.Job.Service.Logic
         /// 调度器
         /// </summary>
         public IScheduler Scheduler;
-
-
+        
         /// <summary>
         /// job池
         /// </summary>
-        public static ConcurrentDictionary<int, JobRuntimeInfo> JobPool = new ConcurrentDictionary<int, JobRuntimeInfo>();
-
-        private static readonly ILogWriter LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
+        public ConcurrentDictionary<int, JobRuntimeInfo> JobPool = new ConcurrentDictionary<int, JobRuntimeInfo>();
 
         /// <summary>
         /// 单例
         /// </summary>
         public static SchedulerManager Singleton { get; }
+        
 
         /// <summary>
         /// 锁
         /// </summary>
         private static readonly object Locker = new object();
+
+
+        private readonly ILogWriter LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
 
         /// <summary>
         /// 私有化构造函数
@@ -431,6 +432,7 @@ namespace Go.Job.Service.Logic
             {
                 tiggerBuilder.WithSimpleSchedule(simple =>
                 {
+                    //按正常频率执行未执行过的次数
                     simple.WithIntervalInSeconds(jobInfo.Second).RepeatForever().WithMisfireHandlingInstructionNextWithExistingCount();
                 });
             }

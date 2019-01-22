@@ -40,7 +40,7 @@ namespace Go.Job.Model
         /// 程序集物理路径,含文件名,扩展名
         /// </summary>
         public string AssemblyPath { get; set; }
-
+        
 
         /// <summary>
         /// 作业实例完全限定名

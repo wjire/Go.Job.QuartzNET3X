@@ -27,7 +27,7 @@ namespace Go.Job.Web.Helper
             }
 
             string[] arr = addressStr.Split(',');
-            return arr.Length <= 0 ? null : arr.FirstOrDefault(address => PortInUse(address));
+            return arr.Length <= 0 ? null : arr.FirstOrDefault(PortInUse);
         }
 
 

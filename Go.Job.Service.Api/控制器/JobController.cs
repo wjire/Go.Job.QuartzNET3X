@@ -24,7 +24,7 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Run(JobInfo jobInfo)
         {
-            return Excute(() => SchedulerManager.Singleton.CreateJob(jobInfo));
+            return Execute(() => SchedulerManager.Singleton.CreateJob(jobInfo));
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Pause(JobInfo jobInfo)
         {
-            return Excute(() => SchedulerManager.Singleton.Pause(jobInfo));
+            return Execute(() => SchedulerManager.Singleton.Pause(jobInfo));
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Resume(JobInfo jobInfo)
         {
-            return Excute(() => SchedulerManager.Singleton.Resume(jobInfo));
+            return Execute(() => SchedulerManager.Singleton.Resume(jobInfo));
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Go.Job.Service.Api
 
         public Result Remove(JobInfo jobInfo)
         {
-            return Excute(() => SchedulerManager.Singleton.Remove(jobInfo));
+            return Execute(() => SchedulerManager.Singleton.Remove(jobInfo));
         }
 
 
@@ -70,7 +70,7 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Update(JobInfo jobInfo)
         {
-            return Excute(() => SchedulerManager.Singleton.Update(jobInfo));
+            return Execute(() => SchedulerManager.Singleton.Update(jobInfo));
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Go.Job.Service.Api
         [HttpPost]
         public Result Upgrade(JobInfo jobInfo)
         {
-          return  Excute(() => SchedulerManager.Singleton.Upgrade(jobInfo));
+          return  Execute(() => SchedulerManager.Singleton.Upgrade(jobInfo));
         }
 
 
@@ -91,7 +91,7 @@ namespace Go.Job.Service.Api
         /// <param name="func"></param>
         /// <param name="method"></param>
         /// <returns></returns>
-        private Result Excute(Func<bool> func,[CallerMemberName] string method = null)
+        private Result Execute(Func<bool> func,[CallerMemberName] string method = null)
         {
             var result = new Result {Code = 200};
             try

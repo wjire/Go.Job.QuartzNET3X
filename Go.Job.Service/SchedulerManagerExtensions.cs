@@ -22,7 +22,7 @@ namespace Go.Job.Service
         /// <returns></returns>
         public static async Task Start(this SchedulerManager manager)
         {
-
+            
             if (SchedulerConfig.JobListener!=null)
             {
                 manager.Scheduler.ListenerManager.AddJobListener(SchedulerConfig.JobListener, GroupMatcher<JobKey>.GroupEquals(SchedulerConfig.SchedulerName));
