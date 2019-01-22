@@ -184,7 +184,7 @@ namespace Go.Job.Web.Logic
         /// <returns></returns>
         public Result Execute(Func<Result> func, [CallerMemberName] string method = null)
         {
-            Result result = new Result { Code = 200 };
+            Result result = new Result { Code = 400 };
             try
             {
                 result = func.Invoke();
