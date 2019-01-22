@@ -22,7 +22,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    _logWriter.SaveLog("job监听器 : ", $"{DateTime.Now} : {jobInfo.JobName} 开始执行");
+                    LogWriter.SaveLog("job监听器 : ", $"{DateTime.Now} : {jobInfo.JobName} 开始执行");
                 }
             };
         }
@@ -35,7 +35,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    _logWriter.SaveLog("job监听器", $"{DateTime.Now} : {jobInfo.JobName} 执行结束");
+                    LogWriter.SaveLog("job监听器", $"{DateTime.Now} : {jobInfo.JobName} 执行结束");
                 }
             };
         }

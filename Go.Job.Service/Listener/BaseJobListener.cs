@@ -12,7 +12,7 @@ namespace Go.Job.Service.Listener
     /// </summary>
     public abstract class BaseJobListener : JobListenerSupport
     {
-        protected readonly ILogWriter _logWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
+        protected readonly ILogWriter LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
 
         protected Action<IJobExecutionContext> StartAction;
 
@@ -32,11 +32,10 @@ namespace Go.Job.Service.Listener
             try
             {
                 EndAction?.Invoke(context);
-                _logWriter.WriteException(new Exception("测试"), context.JobDetail.Key.Name + ":" + nameof(JobWasExecuted));
             }
             catch (Exception e)
             {
-                _logWriter.WriteException(e, context.JobDetail.Key.Name +":"+nameof(JobWasExecuted));
+                LogWriter.WriteException(e, context.JobDetail.Key.Name +":"+nameof(JobWasExecuted));
             }
             await base.JobWasExecuted(context, jobException, cancellationToken);
 
@@ -55,7 +54,7 @@ namespace Go.Job.Service.Listener
             }
             catch (Exception e)
             {
-                _logWriter.WriteException(e, context.JobDetail.Key.Name + ":" + nameof(JobToBeExecuted));
+                LogWriter.WriteException(e, context.JobDetail.Key.Name + ":" + nameof(JobToBeExecuted));
             }
             await base.JobToBeExecuted(context, cancellationToken);
         }

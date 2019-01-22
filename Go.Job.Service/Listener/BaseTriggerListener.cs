@@ -13,7 +13,7 @@ namespace Go.Job.Service.Listener
     public abstract class BaseTriggerListener : TriggerListenerSupport
     {
 
-        protected readonly ILogWriter _logWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
+        protected readonly ILogWriter LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
 
         protected Action<IJobExecutionContext, ITrigger> FiredAction;
 
@@ -44,7 +44,7 @@ namespace Go.Job.Service.Listener
             }
             catch (Exception e)
             {
-                _logWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerFired));
+                LogWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerFired));
             }
             return base.TriggerFired(trigger, context, cancellationToken);
         }
@@ -57,7 +57,7 @@ namespace Go.Job.Service.Listener
             }
             catch (Exception e)
             {
-                _logWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerComplete));
+                LogWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerComplete));
             }
             return base.TriggerComplete(trigger, context, triggerInstructionCode, cancellationToken);
         }
@@ -70,7 +70,7 @@ namespace Go.Job.Service.Listener
             }
             catch (Exception e)
             {
-                _logWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerMisfired));
+                LogWriter.WriteException(e, trigger.Key.Name + ":" + nameof(TriggerMisfired));
             }
             return base.TriggerMisfired(trigger, cancellationToken);
         }
