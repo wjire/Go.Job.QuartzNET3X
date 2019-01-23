@@ -31,6 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EastWestWalk.NetFrameWork.Common, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EastWestWalk.NetFrameWork.Common.1.0.0.6\lib\net45\EastWestWalk.NetFrameWork.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="EastWestWalk.NetFrameWork.Enum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EastWestWalk.NetFrameWork.Enum.1.0.0.3\lib\net45\EastWestWalk.NetFrameWork.Enum.dll</HintPath>
+    </Reference>
+    <Reference Include="Go.Job.BaseJob, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Go.Job.BaseJob.1.0.0\lib\Go.Job.BaseJob.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -60,10 +69,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Go.Job.BaseJob\Go.Job.BaseJob.csproj">
-      <Project>{e587a17a-a8f3-45d9-8274-57655c7881d5}</Project>
-      <Name>Go.Job.BaseJob</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Go.Job.Model\Go.Job.Model.csproj">
       <Project>{d47524c9-3f63-40c6-b368-72e3e8d0332d}</Project>
       <Name>Go.Job.Model</Name>
