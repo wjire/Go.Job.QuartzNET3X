@@ -29,7 +29,11 @@ namespace Go.Job.Service.Logic
                     {
                         try
                         {
-                            jobRuntimeInfo.Job.Run();
+                           var runRes = jobRuntimeInfo.Job.Run();
+                            if (runRes==false)
+                            {
+                                LogWriter.WriteException(new Exception("作业内部发生异常"), $"作业名称 : {jobInfo.JobName}");
+                            }
                         }
                         //如果因为某种原因 appdomain 被卸载会进入catch块,重新创建 appdomain
                         catch (AppDomainUnloadedException ex)

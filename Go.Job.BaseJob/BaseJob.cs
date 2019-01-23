@@ -1,4 +1,5 @@
 ﻿using System;
+using EastWestWalk.NetFrameWork.Common.Write;
 
 namespace Go.Job.BaseJob
 {
@@ -7,14 +8,35 @@ namespace Go.Job.BaseJob
     /// </summary>
     public abstract class BaseJob : MarshalByRefObject
     {
+
         /// <summary>
-        /// 具体逻辑
+        /// 运行
         /// </summary>
-        public abstract void Run();
+        /// <returns>true:运行成功;false:运行失败</returns>
+        public virtual bool Run()
+        {
+            var res = false;
+            try
+            {
+                Execute();
+                res = true;
+            }
+            catch (Exception ex)
+            {
+                LogService.WriteLog(ex, this.GetType().Name);
+            }
+            return res;
+        }
 
 
         /// <summary>
-        /// 将对象生存期更改为永久,否则默认5分钟不调用,会被回收.
+        /// 具体逻辑.该方法已被父类的 Run() 方法中的 try,catch 包裹,catch 块中执行方法为:LogService.WriteLog(ex, 子类类型的名称);如果想修改,请重写 Run() 方法.
+        /// </summary>
+        protected abstract void Execute();
+        
+
+        /// <summary>
+        /// 将对象生存期更改为永久,因为.NET默认5分钟不调用,会被回收.
         /// </summary>
         /// <returns></returns>
         public override object InitializeLifetimeService()
