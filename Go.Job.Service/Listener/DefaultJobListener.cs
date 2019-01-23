@@ -36,6 +36,7 @@ namespace Go.Job.Service.Listener
                 if (jobInfo != null)
                 {
                     LogWriter.SaveLog("job监听器", $"{DateTime.Now} : {jobInfo.JobName} 执行结束");
+                    Console.WriteLine();
                 }
             };
         }

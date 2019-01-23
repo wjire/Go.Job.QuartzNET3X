@@ -9,7 +9,12 @@ namespace Go.Job.Service.Host
         {
             try
             {
-                MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
+                var logWriter = System.Configuration.ConfigurationManager.AppSettings["LogWriter"];
+                if (Convert.ToInt32(logWriter) == 0)
+                {
+                    MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
+                }
+             
                 SchedulerManagerFacotry.CreateSchedulerManager().UseJobListener(true).UseTriggerListener(false).Start().Wait();
                 string userCommand = string.Empty;
                 while (userCommand != "exit")
