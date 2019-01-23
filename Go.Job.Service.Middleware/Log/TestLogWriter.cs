@@ -4,14 +4,14 @@ namespace Go.Job.Service.Middleware
 {
     public class TestLogWriter : ILogWriter
     {
-        public void SaveLog(string remark, string content)
+        public void WriteLog(string content, string path)
         {
-            Console.WriteLine(remark + " : " + content);
+            Console.WriteLine(content);
         }
 
         public void WriteException(Exception ex, string remark)
         {
-            Console.WriteLine(ex);
+            Console.WriteLine(remark + " : " + ex);
         }
     }
 }

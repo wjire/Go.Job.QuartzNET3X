@@ -5,9 +5,9 @@ namespace Go.Job.Service.Middleware
 {
     public class DefaultLogWriter : ILogWriter
     {
-        public void SaveLog(string remark, string content)
+        public void WriteLog(string content, string path)
         {
-            LogService.SaveLog(remark, content, null);
+            LogService.WriteLog(content, "JobLogs\\"+path);
         }
 
         public void WriteException(Exception ex, string remark)

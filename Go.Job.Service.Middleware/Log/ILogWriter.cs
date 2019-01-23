@@ -4,7 +4,7 @@ namespace Go.Job.Service.Middleware
 {
     public interface ILogWriter
     {
-        void SaveLog(string remark, string content);
+        void WriteLog(string content, string path);
 
         void WriteException(Exception ex, string remark);
     }

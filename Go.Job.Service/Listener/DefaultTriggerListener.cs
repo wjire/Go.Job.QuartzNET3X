@@ -23,7 +23,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWriter.SaveLog("触发器监听 : ", $"{ DateTime.Now} : 触发器 { trigger.Key.Name} 开始点火");
+                    LogWriter.WriteLog($"{ DateTime.Now} : 触发器 { trigger.Key.Name} 开始点火",jobInfo.JobName);
                 }
             };
         }
@@ -36,7 +36,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWriter.SaveLog("触发器监听 : ", $"{DateTime.Now} : 触发器 {trigger.Key.Name} 点火完毕");
+                    LogWriter.WriteLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 点火完毕",jobInfo.JobName);
                 }
             };
         }
@@ -49,7 +49,7 @@ namespace Go.Job.Service.Listener
                 JobInfo jobInfo = trigger.JobDataMap.Get("jobInfo") as JobInfo;
                 if (jobInfo != null)
                 {
-                    LogWriter.SaveLog("触发器监听 : ", $"{DateTime.Now} : 触发器 {trigger.Key.Name} 哑火");
+                    LogWriter.WriteLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 哑火",jobInfo.JobName);
                 }
             };
         }
