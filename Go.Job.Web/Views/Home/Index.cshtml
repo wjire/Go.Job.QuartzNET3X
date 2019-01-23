@@ -319,7 +319,7 @@
                                 <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(this)">停止</a>
                             }
                             //ACQUIRED
-                            else
+                            else if(!item.TRIGGER_STATE.ToUpper().Equals("PAUSED_BLOCKED"))
                             {
                                 <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(this)">暂停</a>
                             }
