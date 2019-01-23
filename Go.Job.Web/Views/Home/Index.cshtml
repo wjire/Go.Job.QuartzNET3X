@@ -307,21 +307,21 @@
 
                             if (string.IsNullOrWhiteSpace(item.TRIGGER_STATE) )
                             {
-                                <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(this)">启动</a>
-                                <a id="btnUpgrade" class="btn btn-default" href="#" role="button" onclick="Upgrade(@item.Id)">修改</a>
-                                <a id="btnDelete" class="btn btn-default" href="#" role="button" onclick="Delete(@item.Id)">删除</a>
+                                <a id="btnRun" class="btn btn-default" href="#" role="button" onclick="Run(this)" style="background:green">启动</a>
+                                <a id="btnUpgrade" class="btn btn-default" href="#" role="button" onclick="Upgrade(@item.Id)" style="background-color:lightsalmon">修改</a>
+                                <a id="btnDelete" class="btn btn-default" href="#" role="button" onclick="Delete(@item.Id)" style="background:gray">删除</a>
                         }
                         //item.TRIGGER_STATE.ToUpper().Equals("PAUSED_BLOCKED") 这个状态表示暂停被阻塞,这时候如果停止,会有BUG,因为我们这个框架跨AppDomain了.
                         else if (item.TRIGGER_STATE.ToUpper().Equals("PAUSED"))
                         {
-                                <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(this)">恢复</a>
+                                <a id="btnResume" class="btn btn-default" href="#" role="button" onclick="Resume(this)" style="background-color:darkseagreen">恢复</a>
                                 @*<a id="btnUpdate" class="btn btn-default" href="#" role="button" onclick="Update(this)">更新</a>*@
-                                <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(this)">停止</a>
+                                <a id="btnRemove" class="btn btn-default" href="#" role="button" onclick="Remove(this)" style="background:red">停止</a>
                             }
                             //ACQUIRED
                             else if(!item.TRIGGER_STATE.Contains("BLOCKED"))
                             {
-                                <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(this)">暂停</a>
+                                <a id="btnPause" class="btn btn-default" href="#" role="button" onclick="Pause(this)" style="background:yellow">暂停</a>
                             }
                         }
                         <input type="hidden" class="jobInfo" value="@JsonConvert.SerializeObject(item)" />
