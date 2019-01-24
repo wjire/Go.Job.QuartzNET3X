@@ -8,7 +8,7 @@ namespace Go.Job.Service.Logic.Listener
     public class DefaultTriggerListener : BaseTriggerListener
     {
 
-        internal DefaultTriggerListener(string name) : base(name)
+        public DefaultTriggerListener(string name) : base(name)
         {
             FiredAction = InitFiredAction();
             CompleteAction = InitCompleteAction();

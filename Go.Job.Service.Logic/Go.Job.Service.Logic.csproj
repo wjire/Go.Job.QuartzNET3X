@@ -64,6 +64,10 @@
     <Compile Include="AppDomainLoader.cs" />
     <Compile Include="JobCenter.cs" />
     <Compile Include="JobRuntimeInfo.cs" />
+    <Compile Include="Listener\BaseJobListener.cs" />
+    <Compile Include="Listener\BaseTriggerListener.cs" />
+    <Compile Include="Listener\DefaultJobListener.cs" />
+    <Compile Include="Listener\DefaultTriggerListener.cs" />
     <Compile Include="SchedulerManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

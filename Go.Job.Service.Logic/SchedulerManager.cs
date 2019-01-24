@@ -97,7 +97,7 @@ namespace Go.Job.Service.Logic
                         return false;
                     }
 
-                    //如果已经调度任务中已经有该jobDetail,则直接删掉
+                    //如果调度任务中已经有该jobDetail,则直接删掉
                     IJobDetail jobDetail = GetJobDetail(jobRuntimeInfo.JobInfo, out JobKey jobKey);
                     if (jobDetail != null)
                     {
@@ -420,10 +420,10 @@ namespace Go.Job.Service.Logic
             if (!string.IsNullOrWhiteSpace(jobInfo.Cron))
             {
                 //错过的不管了，剩下的按正常执行。
-                tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionDoNothing());
+                //tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionDoNothing());
 
                 ////错过的合并为一次执行，后续正常执行。
-                //tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionFireAndProceed());
+                tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionFireAndProceed());
 
                 ////错过的马上执行掉，后续正常执行
                 //tiggerBuilder.WithCronSchedule(jobInfo.Cron, c => c.WithMisfireHandlingInstructionIgnoreMisfires());

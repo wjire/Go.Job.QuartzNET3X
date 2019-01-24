@@ -49,7 +49,13 @@ namespace Go.Job.Service.Logic
                     {
                         try
                         {
-                            SchedulerManager.Singleton.CreateJob(jobInfo);
+                           var creRes = SchedulerManager.Singleton.CreateJob(jobInfo);
+                            //重新创建job成功后,需要手动执行一次.
+                            if (creRes == true)
+                            {
+                                jobRuntimeInfo = SchedulerManager.Singleton.GetJobFromPool(jobInfo.Id);
+                                jobRuntimeInfo.Job.Run();
+                            }
                         }
                         catch (Exception ex)
                         {

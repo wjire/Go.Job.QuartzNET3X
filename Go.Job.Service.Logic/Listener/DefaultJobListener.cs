@@ -8,7 +8,7 @@ namespace Go.Job.Service.Logic.Listener
     public class DefaultJobListener : BaseJobListener
     {
 
-        internal DefaultJobListener(string name) : base(name)
+        public DefaultJobListener(string name) : base(name)
         {
             StartAction = InitStartAction();
             EndAction = InitEndAction();

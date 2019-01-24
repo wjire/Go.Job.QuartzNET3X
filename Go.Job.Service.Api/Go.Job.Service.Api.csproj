@@ -67,9 +67,9 @@
   <ItemGroup>
     <Compile Include="ApiConfig.cs" />
     <Compile Include="JobApiStartHelper.cs" />
-    <Compile Include="控制器\JobController.cs" />
+    <Compile Include="Filter\JobController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="过滤器\SchedulerNameFilter.cs" />
+    <Compile Include="Controller\SchedulerNameFilter.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Go.Job.Service.Listener;
+using Go.Job.Service.Logic.Listener;
 using Quartz.Listener;
 
 namespace Go.Job.Service.Config
