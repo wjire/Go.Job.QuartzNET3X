@@ -22,7 +22,7 @@ namespace Go.Job.Service.Logic
         /// <summary>
         /// job池
         /// </summary>
-        public ConcurrentDictionary<int, JobRuntimeInfo> JobPool = new ConcurrentDictionary<int, JobRuntimeInfo>();
+        public static ConcurrentDictionary<int, JobRuntimeInfo> JobPool = new ConcurrentDictionary<int, JobRuntimeInfo>();
 
         /// <summary>
         /// 单例
