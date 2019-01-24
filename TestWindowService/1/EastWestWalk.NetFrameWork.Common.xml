@@ -1,0 +1,3760 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EastWestWalk.NetFrameWork.Common</name>
+    </assembly>
+    <members>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Cache.Cache">
+            <summary>
+            cache.
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Cache.Cache.Locker">
+            <summary>
+            数据锁，保证线程同步
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Cache.Cache.LockApplyTimeOut">
+            <summary>
+            The lock apply time out.
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.Cache"/> class.
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Cache.Cache.Timeout">
+            <summary>
+            超时时间
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache.IsExpired(System.DateTime)">
+            <summary>
+            检查超时时间
+            </summary>
+            <param name="lastUpdateTime">lastUpdateTime</param>
+            <returns>rel</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache.AcquireWriterLock">
+            <summary>
+            AcquireWriterLock
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache.ReleaseWriterLock">
+            <summary>
+            ReleaseWriterLock
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache.AcquireReaderLock">
+            <summary>
+            AcquireReaderLock
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache.ReleaseReaderLock">
+            <summary>
+            ReleaseReaderLock
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Cache.Cache`1">
+            <summary>
+            Cache
+            </summary>
+            <typeparam name="TValue">TValue</typeparam>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Cache.Cache`1.mvalue">
+            <summary>
+            缓存项
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Cache.Cache`1.Value">
+            <summary>
+            缓存Value
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Cache.Cache`2">
+            <summary>
+            Cache
+            </summary>
+            <typeparam name="TKey">TKey</typeparam>
+            <typeparam name="TValue">TValue</typeparam>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.dataList">
+            <summary>
+            数据列表
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.Cache`2"/> class.
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.Add(`0,`1)">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.AddRange(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <summary>
+            添加缓存
+            </summary>
+            <param name="range">range</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.Refresh(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <summary>
+            刷新缓存
+            </summary>
+            <param name="range">range</param>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.Item(`0)">
+            <summary>
+            缓存值
+            </summary>
+            <param name="key">key</param>
+            <returns>TValue</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.GetValue(`0)">
+            <summary>
+            取出缓存
+            </summary>
+            <param name="key">TValue</param>
+            <returns>TValue</returns>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.Values">
+            <summary>
+            缓存集合
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.Save(`0,System.Func{`1,System.Boolean})">
+            <summary>
+            保存缓存
+            </summary>
+            <param name="key">key</param>
+            <param name="updateFunc">updateFunc</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.Save(`0,System.Func{`1},System.Func{`1,System.Boolean})">
+            <summary>
+            保存缓存
+            </summary>
+            <param name="key">key</param>
+            <param name="insertFunc">insertFunc</param>
+            <param name="updateFunc">updateFunc</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.Save(`0,`1)">
+            <summary>
+            保存
+            </summary>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.Remove(`0)">
+            <summary>
+            删除缓存
+            </summary>
+            <param name="key">key</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.Clear">
+            <summary>
+            清除缓存
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.ClearData">
+            <summary>
+            清除data
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.AddRanges(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <summary>
+            添加
+            </summary>
+            <param name="range">range</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.Cache`2.AddItem(`0,`1)">
+            <summary>
+            添加项
+            </summary>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Cache.CacheItem`1">
+            <summary>
+            CacheItem
+            </summary>
+            <typeparam name="T">T</typeparam>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Cache.CacheItem`1.mvalue">
+            <summary>
+            T
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.CacheItem`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.CacheItem`1"/> class.
+            </summary>
+            <param name="value">
+            The value.
+            </param>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Cache.CacheItem`1.Time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Cache.CacheItem`1.Value">
+            <summary>
+            T
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2">
+            <summary>
+            缓存
+            </summary>
+            <typeparam name="TKey">
+            TKey
+            </typeparam>
+            <typeparam name="TValue">
+            TValue
+            </typeparam>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.DefaultInterval">
+            <summary>
+            刷新时间
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.repository">
+            <summary>
+            IRepository
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.cache">
+            <summary>
+            Cache
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.timer">
+            <summary>
+            Timer
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.#ctor(EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache{`0,`1}.IRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2"/> class.
+            </summary>
+            <param name="repository">
+            The repository.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.#ctor(EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache{`0,`1}.IRepository,EastWestWalk.NetFrameWork.Common.Cache.Cache{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2"/> class.
+            </summary>
+            <param name="repository">
+            The repository.
+            </param>
+            <param name="cache">
+            The cache.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.#ctor(EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache{`0,`1}.IRepository,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2"/> class.
+            </summary>
+            <param name="repository">
+            The repository.
+            </param>
+            <param name="refreshInterval">
+            The refresh interval.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.#ctor(EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache{`0,`1}.IRepository,EastWestWalk.NetFrameWork.Common.Cache.Cache{`0,`1},System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2"/> class.
+            </summary>
+            <param name="repository">
+            The repository.
+            </param>
+            <param name="cache">
+            The cache.
+            </param>
+            <param name="refreshInterval">
+            The refresh interval.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.#ctor(EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache{`0,`1}.IRepository,EastWestWalk.NetFrameWork.Common.Cache.Cache{`0,`1},System.Timers.Timer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2"/> class.
+            </summary>
+            <param name="repository">
+            The repository.
+            </param>
+            <param name="cache">
+            The cache.
+            </param>
+            <param name="timer">
+            The timer.
+            </param>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.Values">
+            <summary>
+            Values
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.Item(`0)">
+            <summary>
+            TValue
+            </summary>
+            <param name="key">
+            TKey
+            </param>
+            <returns>
+            TValue
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.Refresh">
+            <summary>
+            刷新
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.Add(`0,`1)">
+            <summary>
+            添加
+            </summary>
+            <param name="key">
+            key
+            </param>
+            <param name="value">
+            value
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.Add(`1)">
+            <summary>
+            添加
+            </summary>
+            <param name="value">
+            value
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.Update(`0,`1)">
+            <summary>
+            更新
+            </summary>
+            <param name="key">
+            key
+            </param>
+            <param name="value">
+            value
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.Remove(`0)">
+            <summary>
+            删除
+            </summary>
+            <param name="key">
+            key
+            </param>
+            <returns>
+            TValue
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.QueryFromRepository">
+            <summary>
+            QueryFromRepository
+            </summary>
+            <returns>IEnumerable</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.AddModelToRepository(`1)">
+            <summary>
+            AddModelToRepository
+            </summary>
+            <param name="value">
+            value
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.AddModelToRepositoryResult(`1)">
+            <summary>
+            AddModelToRepository
+            </summary>
+            <param name="value">
+            value
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.UpdateModelFromRepository(`1)">
+            <summary>
+            UpdateModelFromRepository
+            </summary>
+            <param name="value">
+            value
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.DeleteModelFromRepository(`1)">
+            <summary>
+            DeleteModelFromRepository
+            </summary>
+            <param name="value">
+            value
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.TimerElapsed(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            事件
+            </summary>
+            <param name="sender">
+            sender
+            </param>
+            <param name="e">
+            e
+            </param>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.IRepository">
+            <summary>
+            IRepository
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.IRepository.Query">
+            <summary>
+            Query
+            </summary>
+            <returns>IEnumerable</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.IRepository.Insert(`1)">
+            <summary>
+            Insert
+            </summary>
+            <param name="value">
+            value
+            </param>
+            <returns>
+            int
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.IRepository.Modify(`1)">
+            <summary>
+            Modify
+            </summary>
+            <param name="value">
+            value
+            </param>
+            <returns>
+            int
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.IRepository.Delete(`1)">
+            <summary>
+            Delete
+            </summary>
+            <param name="value">
+            value
+            </param>
+            <returns>
+            int
+            </returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.IRepositoryExtend">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2.IRepositoryExtend.Query(System.String)">
+            <summary>
+            Query
+            </summary>
+            <returns>IEnumerable</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Cache.IdentityValue">
+            <summary>
+            自动增长Id
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Cache.IdentityValue.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryIdentityCache`2">
+            <summary>
+            兼容自动增长Id
+            </summary>
+            <typeparam name="TKey">key</typeparam>
+            <typeparam name="TValue">value</typeparam>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryIdentityCache`2.#ctor(EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache{`0,`1}.IRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2"/> class.
+            </summary>
+            <param name="repository">
+            The repository.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryIdentityCache`2.#ctor(EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache{`0,`1}.IRepository,EastWestWalk.NetFrameWork.Common.Cache.Cache{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2"/> class.
+            </summary>
+            <param name="repository">
+            The repository.
+            </param>
+            <param name="cache">
+            The cache.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryIdentityCache`2.#ctor(EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache{`0,`1}.IRepository,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2"/> class.
+            </summary>
+            <param name="repository">
+            The repository.
+            </param>
+            <param name="refreshInterval">
+            The refresh interval.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryIdentityCache`2.#ctor(EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache{`0,`1}.IRepository,EastWestWalk.NetFrameWork.Common.Cache.Cache{`0,`1},System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Cache.RepositoryCache`2"/> class.
+            </summary>
+            <param name="repository">
+            The repository.
+            </param>
+            <param name="cache">
+            The cache.
+            </param>
+            <param name="refreshInterval">
+            The refresh interval.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Cache.RepositoryIdentityCache`2.Add(`1)">
+            <summary>
+            添加
+            </summary>
+            <param name="value">
+            value
+            </param>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.AddressHelper">
+            <summary>
+            AddressHelper
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.AddressHelper.GetAddressInfo(System.String)">
+            <summary>
+            获取地址信息
+            </summary>
+            <param name="address">地理位置</param>
+            <returns>百度地图位置坐标</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.AddressInfo">
+            <summary>
+            地址经纬度
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.AddressInfo.IsSuccessed">
+            <summary>
+            是否请求成功
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.AddressInfo.Latitude">
+            <summary>
+            纬度
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.AddressInfo.Longitude">
+            <summary>
+            经度
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.CacheHelper">
+            <summary>
+            CacheHelper
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CacheHelper.GetCache(System.String)">
+            <summary>
+            获取数据缓存
+            </summary>
+            <param name="CacheKey">键</param>
+            <returns>System.Object.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CacheHelper.SetCache(System.String,System.Object)">
+            <summary>
+            设置数据缓存
+            </summary>
+            <param name="CacheKey">cache键名</param>
+            <param name="objObject">缓存对象</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CacheHelper.SetCache(System.String,System.Object,System.TimeSpan)">
+            <summary>
+            设置数据缓存
+            </summary>
+            <param name="CacheKey">cache键值</param>
+            <param name="objObject">缓存对象</param>
+            <param name="Timeout">超时时间</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CacheHelper.SetCache(System.String,System.Object,System.DateTime,System.TimeSpan)">
+            <summary>
+            设置数据缓存
+            </summary>
+            <param name="CacheKey">cache键值</param>
+            <param name="objObject">缓存对象</param>
+            <param name="absoluteExpiration">绝对过期时间，它表示只要时间一到就过期</param>
+            <param name="slidingExpiration">可调过期时间，表示当离最后访问超过某个时间段后就过期</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CacheHelper.RemoveAllCache(System.String)">
+            <summary>
+            移除指定数据缓存
+            </summary>
+            <param name="CacheKey">cache键值</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CacheHelper.RemoveAllCache">
+            <summary>
+            移除全部缓存
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.CardTypeConvert">
+            <summary>
+            证件类型转换 旅游-机票
+            </summary>	
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.DynamicExpression">
+            <summary>
+            动态表达式
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.DynamicExpression.GetDynamicExpression``2(System.Collections.Generic.IEnumerable{``0},``1)">
+            <summary>
+            获取动态表达式
+            </summary>
+            <typeparam name="TResult">表达式数据类型</typeparam>
+            <typeparam name="TCondition">表达式条件类型</typeparam>
+            <param name="data">数据</param>
+            <param name="condtion">条件</param>
+            <returns>表达式</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.DynamicExpressionAttribute">
+            <summary>
+            动态表达式特性
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.DynamicExpressionAttribute.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.DynamicExpressionAttribute.Operator">
+            <summary>
+            运行符号
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.DynamicExpressionAttribute.IsDynamicExpression">
+            <summary>
+            是否参与表达式计算
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.CustomAttributeExtension`1">
+            <summary>
+            获取实体对象的自定义特性
+            </summary>
+            <typeparam name="TAttribute">自定义特性类型</typeparam>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.CustomAttributeExtension`1.Cache">
+            <summary>
+            Cache Data
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CustomAttributeExtension`1.GetCustomAttributeValue(System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            获取CustomAttribute Value
+            </summary>
+            <param name="type">实体对象类型</param>
+            <param name="propertyInfo">实体对象属性信息</param>
+            <returns>返回Attribute的值，没有则返回null</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CustomAttributeExtension`1.GetCustomAttributeValue(System.Type)">
+            <summary>
+            获取CustomAttribute Value
+            </summary>
+            <param name="sourceType">实体对象数据类型</param>
+            <returns>返回Attribute的值，没有则返回null</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CustomAttributeExtension`1.GetClassAttributes(System.Type)">
+            <summary>
+            获取实体类上的特性
+            </summary>
+            <param name="type">实体对象类型</param>
+            <returns>返回Attribute的值，没有则返回null</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CustomAttributeExtension`1.GetPropertyAttributes(System.Reflection.PropertyInfo)">
+            <summary>
+            获取实体属性上的特性
+            </summary>
+            <param name="propertyInfo">属性信息</param>
+            <returns>返回Attribute的值，没有则返回null</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CustomAttributeExtension`1.CacheAttributeValue(System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            缓存Attribute Value
+            <param name="type">实体对象类型</param>
+            <param name="propertyInfo">实体对象属性信息</param>
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CustomAttributeExtension`1.BuildKey(System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            缓存Collection Name Key
+            <param name="type">type</param>
+            <param name="propertyInfo">propertyInfo</param>
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.EncodingHelper">
+            <summary>
+            编码帮助类
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.EncodingHelper.GetEncoding(System.String)">
+            <summary> 
+            给定文件的路径，读取文件的二进制数据，判断文件的编码类型 
+            </summary> 
+            <param name="fileName">文件路径</param> 
+            <returns>文件的编码类型</returns> 
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.EncodingHelper.GetEncoding(System.IO.FileStream)">
+            <summary> 
+            通过给定的文件流，判断文件的编码类型 
+            </summary> 
+            <param name="fs">文件流</param> 
+            <returns>文件的编码类型</returns> 
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.EncodingHelper.IsUTF8Bytes(System.Byte[])">
+            <summary>
+            判断是否是不带 BOM 的 UTF8 格式
+            </summary>
+            <param name="data">The data.</param>
+            <returns><c>true</c> if [is ut f8 bytes] [the specified data]; otherwise, <c>false</c>.</returns>
+            <exception cref="T:System.Exception">非预期的byte格式</exception>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.EncodingHelper.IsUTF8Bytes(System.IO.FileStream)">
+            <summary>
+            判断是否是不带 BOM 的 UTF8 格式
+            </summary>
+            <param name="fs">文件流</param>
+            <returns></returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.FileUploadResult">
+            <summary>
+            FileResult
+            </summary>	
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.FileUploadResult.FileUrl">
+            <summary>
+            原文件地址
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.FileUploadResult.SmallImgUrlList">
+            <summary>
+            图片缩略图地址集合（仅限图片上传）
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.GpsPoint">
+            <summary>
+            GPS坐标点
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.GpsPoint.Longitude">
+            <summary>
+            经度
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.GpsPoint.Latitude">
+            <summary>
+            纬度
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.GZipHelper">
+            <summary>
+            GZipHelper
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.GZipHelper.GZipCompressString(System.String)">
+            <summary>
+            将传入字符串以GZip算法压缩后，返回Base64编码字符
+            </summary>
+            <param name="rawString">需要压缩的字符串</param>
+            <returns>压缩后的Base64编码的字符串</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.GZipHelper.Compress(System.Byte[])">
+            <summary>
+            GZip压缩
+            </summary>
+            <param name="rawData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.GZipHelper.GZipDecompressString(System.String)">
+            <summary>
+            将传入的二进制字符串资料以GZip算法解压缩
+            </summary>
+            <param name="zippedString">经GZip压缩后的二进制字符串</param>
+            <returns>原始未压缩字符串</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.GZipHelper.Decompress(System.Byte[])">
+            <summary>
+            ZIP解压
+            </summary>
+            <param name="zippedData"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Common">
+            <summary>
+            公用类
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Common.CreateRandomSeed">
+            <summary>
+            随机种子
+            </summary>
+            <returns>结构</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Common.Calc(System.DateTime,System.DateTime)">
+            <summary>
+            计算时间相差月份
+            </summary>
+            <param name="d1">d1</param>
+            <param name="d2">d2</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Common.ReplaceSql(System.String)">
+            <summary>
+            替换1=1 And 语句
+            </summary>
+            <param name="sql"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Common.CellphoneMask(System.String)">
+            <summary>
+            手机号打码
+            </summary>
+            <param name="phoneNumber">原手机号</param>
+            <returns>打码后的手机号</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Common.IsCellphone(System.String)">
+            <summary>
+            验证是否手机号
+            </summary>
+            <param name="phoneNumber">手机号</param>
+            <returns>正确的手机号=true</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID">
+            <summary>
+            ComputerOrgID
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.BuilderOrganizationID(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            构建组织架构ID
+            </summary>
+            <param name="zsID">总社ID</param>
+            <param name="fsID">分社ID</param>
+            <param name="mdID">门店ID</param>
+            <param name="llrID">联络人ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.GetOrganizationID(System.UInt64)">
+            <summary>
+            返回直属上级ID 返回字典 key依次为单位类型 value为对应的ID
+            </summary>
+            <param name="orgID">组织架构ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.GetOrganizationIDString(System.UInt64)">
+            <summary>
+            根据组织架构ID得到字符串的组织架构ID 总社ID_分社ID_门店ID_联络人ID
+            </summary>
+            <param name="orgID">The org identifier.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.ConvertFiled(System.String,EastWestWalk.NetFrameWork.Enum.DataAuthorType)">
+            <summary>
+            字段转换
+            </summary>
+            <param name="fildes">原始字段名称</param>
+            <param name="dataAuthor">枚举数据权限</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.ConvertFiled(System.String,EastWestWalk.NetFrameWork.Enum.DataAuthorType,System.UInt64)">
+            <summary>
+            根据权限生成sql语句
+            </summary>
+            <param name="fildes">原始字段名称</param>
+            <param name="dataAuthor">数据权限</param>
+            <param name="orgId">组织ID</param>
+            <returns>sql语句</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.ConvertFiled(System.String,EastWestWalk.NetFrameWork.Enum.CompanyType)">
+            <summary>
+            字段转换 根据待查询的数据 的类型  判断
+            </summary>
+            <param name="fildes">原始字段名称</param>
+            <param name="companyType">枚举查询的公司类型</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.ConvertFiledWithCompanyType(System.String,EastWestWalk.NetFrameWork.Enum.CompanyType)">
+            <summary>
+            根据查询的层级类型 返回数据需要的sql条件结构
+            </summary>
+            <param name="fildes">OrganizationID</param>
+            <param name="companyType">枚举公司类型</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.GetCompanyIDByOrganizationID(System.UInt64,System.Int32@)">
+            <summary>
+            根据组织架构ID计算得到自己的直属 上级公司ID
+            </summary>
+            <param name="organizationID">组织架构ID</param>
+            <param name="retID">返还的公司ID</param>
+            <returns>System.Int32.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.GetCompanyTypeByOrganizationID(System.UInt64)">
+            <summary>
+            根据组织架构获取公司类型
+            </summary>
+            <param name="organizationId">组织架构</param>
+            <returns>Id</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.GetCompanyIdByOrganizationID(System.UInt64)">
+            <summary>
+            根据组织架构获取公司Id
+            </summary>
+            <param name="organizationId">组织架构</param>
+            <returns>Id</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.GetCompanyIdAndTypeByOrganizationID(System.UInt64)">
+            <summary>
+            根据组织架构获取公司Id和公司类型
+            </summary>
+            <param name="organizationId">组织架构</param>
+            <returns>Id</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.QueryOffice(EastWestWalk.NetFrameWork.Enum.CompanyType,System.Int32)">
+            <summary>
+            查询分社 默认只有总社能查询分社数据
+            </summary>
+            <param name="loginUserCompanyType">当前登录用户的类型</param>
+            <param name="loginUserCompanyID">当前登录用户的公司ID</param>
+            <returns>QueryResult&lt;CompanyInfo&gt;.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.QueryShop(EastWestWalk.NetFrameWork.Enum.CompanyType,System.Int32,System.Int32)">
+            <summary>
+            查询门店
+            </summary>
+            <param name="loginUserCompanyType">当前登录用户的类型</param>
+            <param name="loginUserCompanyID">当前登录用户的公司ID</param>
+            <param name="filterOfficeID">选择要筛选的分社ID,不限制则此ID为0,则查询所有门店</param>
+            <returns>QueryResult&lt;CompanyInfo&gt;.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.QueryLiaisons(EastWestWalk.NetFrameWork.Enum.CompanyType,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            查询联络人
+            </summary>
+            <param name="loginUserCompanyType">当前登录用户的类型</param>
+            <param name="loginUserCompanyID">当前登录用户的公司ID</param>
+            <param name="filterOfficeID">选择要筛选的分社ID,不限制则此ID为0,查询直接则此ID为0</param>
+            <param name="filterShopID">选择要筛选的门店ID,不限制则此ID为0,查询直接则此ID为0</param>
+            <returns>QueryResult&lt;CompanyInfo&gt;.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.QueryMerchant(EastWestWalk.NetFrameWork.Enum.CompanyType,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            查询商家
+            </summary>
+            <param name="loginUserCompanyType">当前登录用户的类型</param>
+            <param name="loginUserCompanyID">当前登录用户的公司ID</param>
+            <param name="filterOfficeID">选择要筛选的分社ID,不限制则此ID为0,查询直接则此ID为0</param>
+            <param name="filterShopID">选择要筛选的门店ID,不限制则此ID为0,查询直接则此ID为0</param>
+            <returns>QueryResult&lt;CompanyInfo&gt;.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.QueryMember(EastWestWalk.NetFrameWork.Enum.CompanyType,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            查询会员信息
+            </summary>
+            <param name="loginUserCompanyType">当前登录用户的类型</param>
+            <param name="loginUserCompanyID">当前登录用户的公司ID</param>
+            <param name="filterOfficeID">选择要筛选的分社ID,不限制则此ID为0,查询直接则此ID为0</param>
+            <param name="filterShopID">选择要筛选的门店ID,不限制则此ID为0,查询直接则此ID为0</param>
+            <param name="filterLiaisons">选择要筛选的联络人ID,不限制则此ID为0,查询直接则此ID为0</param>
+            <returns>QueryResult&lt;EmployeeAndVipInfo&gt;.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.QueryEmployee(EastWestWalk.NetFrameWork.Enum.CompanyType,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            查询员工信息
+            </summary>
+            <param name="loginUserCompanyType">登录用户的组织类型 枚举 总社 分社 门店 联络人 商家</param>
+            <param name="loginUserCompanyID">登录用户的UserID</param>
+            <param name="filterOfficeID">筛选的分社ID 不筛选分社ID为0</param>
+            <param name="filterShopID">筛选的门店ID 不筛选门店ID为0</param>
+            <param name="filterLiaisons">选择要筛选的联络人ID,不限制则此ID为0,查询直接则此ID为0</param>
+            <returns>QueryResult&lt;EmployeeAndVipInfo&gt;.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.BuilderSqlWhereBySearchCompany(EastWestWalk.NetFrameWork.Enum.CompanyType,System.Int32,System.Nullable{EastWestWalk.NetFrameWork.Enum.CompanyType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean,System.String)">
+            <summary>
+            构造Sql语句里面的组织架构ID筛选条件
+            </summary>
+            <param name="loginUserCompanyType">登录用户的组织类型 枚举 总社 分社 门店 联络人 商家</param>
+            <param name="loginUserCompanyID">登录用户的UserID</param>
+            <param name="searchCompanyType">待查询的单位类型 枚举 总社 分社 门店 联络人 商家</param>
+            <param name="filterOfficeID">筛选的分社ID 不筛选分社ID为0</param>
+            <param name="filterShopID">筛选的门店ID 不筛选门店ID为0</param>
+            <param name="filterContactID">筛选的联络人ID，用作单位查询</param>
+            <param name="isSearchSelf">是否查询本身</param>
+            <param name="tablePrefix">联表前缀</param>
+            <returns>QueryResult&lt;EmployeeAndVipInfo&gt;.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ComputerOrgID.BuilderSqlWhereBySearchEmployee(EastWestWalk.NetFrameWork.Enum.CompanyType,System.Int32,System.Nullable{EastWestWalk.NetFrameWork.Enum.UserType},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
+            <summary>
+            构造Sql语句里面的组织架构ID筛选条件
+            </summary>
+            <param name="loginUserCompanyType">登录用户的组织类型 枚举 总社 分社 门店 联络人 商家</param>
+            <param name="loginUserCompanyID">登录用户的UserID</param>
+            <param name="searchUserType">待查询的单位类型 枚举 员工 会员</param>
+            <param name="filterOfficeID">筛选的分社ID 不筛选分社ID为0</param>
+            <param name="filterShopID">筛选的门店ID 不筛选门店ID为0</param>
+            <param name="filterLiaisons">筛选的联络人ID 不筛选此联络人ID为0</param>
+            <param name="tablePrefix">联表前缀</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.CompanyIdAndType">
+            <summary>
+            公司Id和公司类型
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.CompanyIdAndType.CompanyId">
+            <summary>
+            公司Id
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.CompanyIdAndType.CompanyType">
+            <summary>
+            公司类型
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper">
+            <summary>
+            ConfigerHelper
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper.GetConfigValue(System.String)">
+            <summary>
+            查询配置，返回值
+            </summary>
+            <param name="key">键名</param>
+            <returns>不会捕获异常</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper.GetConfigToString(System.String)">
+            <summary>
+            查询配置，返回字符串
+            </summary>
+            <param name="key">键名</param>
+            <returns>捕获异常,当未设置key时,返回空字符串</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper.GetConfigToInt(System.String)">
+            <summary>
+            查询配置，返回整数
+            </summary>
+            <param name="key">键名</param>
+            <returns>捕获异常,当未设置key 或key不是数字 时,返回 int 最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper.GetConfigToLong(System.String)">
+            <summary>
+            查询配置，返回长整数
+            </summary>
+            <param name="key">键名</param>
+            <returns>不会捕获异常,当未设置key 或key不是数字 时,返回 长整数 最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper.GetConfigToDateTime(System.String)">
+            <summary>
+            查询配置，返回日期
+            </summary>
+            <param name="key">键名</param>
+            <returns>不会捕获异常</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper.GetConfigToBool(System.String)">
+            <summary>
+            查询配置，返回逻布尔值
+            </summary>
+            <param name="key">键名</param>
+            <returns>不会捕获异常</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper.GetConfigToDecimal(System.String)">
+            <summary>
+            查询配置，返回Decimal
+            </summary>
+            <param name="key">键名</param>
+            <returns>不会捕获异常,当未设置key 或key不是数字 时,返回 长整数 最小值</returns>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper.BaseDirectory">
+            <summary>
+            应用程序当前目录 包含最后一个目录分隔符号
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.ConfigerHelper.TempFilePath">
+            <summary>
+            临时目录（当前程序下的temp子目录） 包含最后一个目录分隔符号
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.ConvertExtension">
+            <summary>
+            类型转化扩展
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConvertExtension.ConvertHelper(System.Object,System.Type)">
+            <summary>
+            The convert helper.
+            </summary>
+            <param name="value">
+            The value.
+            </param>
+            <param name="conversionType">
+            The conversion type.
+            </param>
+            <returns>
+            The <see cref="T:System.Object"/>.
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConvertExtension.ConvertToDecimalNull(System.Object)">
+            <summary>
+            The convert to decimal null.
+            </summary>
+            <param name="targetObj">
+            The target obj.
+            </param>
+            <returns>
+            The <see cref="T:System.Decimal"/>.
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConvertExtension.ConvertToIntNull(System.Object)">
+            <summary>
+            The convert to int null.
+            </summary>
+            <param name="targetObj">
+            The target obj.
+            </param>
+            <returns>
+            The <see cref="T:System.Int32"/>.
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConvertExtension.Toint(System.Object)">
+            <summary>
+            toint 返回0或int值
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConvertExtension.ConvertToString(System.Object)">
+            <summary>
+            The convert to string.
+            </summary>
+            <param name="obj">
+            The obj.
+            </param>
+            <returns>
+            The <see cref="T:System.String"/>.
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConvertExtension.ListToDataTable``1(System.Collections.Generic.List{``0})">
+            <summary>
+            将泛类型集合List类转换成DataTable
+            </summary>
+            <param name="entitys">泛类型集合</param>
+            <typeparam name="T">T</typeparam>
+            <returns>DataTable</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConvertExtension.ConvertBusinessAccountToWalletOutAccount(System.Boolean,System.Boolean,System.Int32,System.Boolean)">
+            <summary>
+            业务系统账号ID转换 适应于资金平台ID规则 只分3总规则 V会员或员工 S商家 Z平台 G供应
+            </summary>
+            <param name="isMemberOrEmployee">是否为会员 或 员工 对应类型V</param>
+            <param name="isSupplier">非会员情况下 是否是商家</param>
+            <param name="accountID">账号ID会员的时候传会员UserID,公司时传CompanyID,商家时传商家ID</param>
+            <param name="isSupply">是否供应商</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ConvertExtension.BuilderOrderID(System.Int32,System.Int32,EastWestWalk.NetFrameWork.Enum.BusinessType,System.String)">
+            <summary>
+            生成订单号 格式 yyyyMMddHHmm机器编号程序编号业务编号自定义编号(8位)6位随机数
+            此方法已作废 请勿调用 新订单号使用OrderHelper生成 24位
+            </summary>
+            <param name="machineNo">机器编号 1-99</param>
+            <param name="projectNo">程序编号 1-99</param>
+            <param name="bussinessType">枚举业务类型</param>
+            <param name="customNo">自定义编号 8位 多余的只取前8位,不足的左边补0</param>
+            <returns>BuilderOrderID.</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.CustomException">
+            <summary>
+            自定义异常
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CustomException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Code.CustomException"/> class.
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CustomException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Code.CustomException"/> class.
+            </summary>
+            <param name="message">
+            The message.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.CustomException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Code.CustomException"/> class.
+            </summary>
+            <param name="message">
+            The message.
+            </param>
+            <param name="inner">
+            The inner.
+            </param>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.DataExtension">
+            <summary>
+            数据扩展
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.DataExtension.ToList``1(System.Data.IDataReader)">
+            <summary>
+            ToList
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="reader">reader</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.DataExtension.ToList``1(System.Data.DataTable)">
+            <summary>
+            ToList
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="dt">dt</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.DataExtension.ToList``1(System.Data.DataSet)">
+            <summary>
+            ToList
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="ds">ds</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.DataExtension.ToList``1(System.Data.DataSet,System.Int32)">
+            <summary>
+            ToList
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="ds">ds</param>
+            <param name="dataTableIndex">dataTableIndex</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.DataExtension.ToModel``1(System.Data.IDataReader)">
+            <summary>
+            ToModel
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="reader">reader</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.DataExtension.ToModel``1(System.Data.DataTable)">
+            <summary>
+            ToModel
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="dt">dt</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.DataExtension.ToModel``1(System.Data.DataSet,System.Int32)">
+            <summary>
+            ToModel
+            </summary>
+            <typeparam name="T">T</typeparam>
+            <param name="ds">ds</param>
+            <param name="dataTableIndex">dataTableIndex</param>
+            <returns>T</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.ImageHelper">
+            <summary>
+            ImageHelper
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ImageHelper.GetReducedImage(System.String,System.Int32,System.String@)">
+            <summary>
+            Gets the reduced image.
+            </summary>
+            <param name="srouceImage">The srouce image.</param>
+            <param name="smallHeight">Height of the small.</param>
+            <param name="retInfo">The ret information.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ImageHelper.GetReducedImage(System.String,System.Collections.Generic.Dictionary{System.String,System.Int32},System.String@)">
+            <summary>
+            生成图片缩略图
+            </summary>
+            <param name="srouceImage">原始图片路径</param>
+            <param name="thumbnailHeight">缩略图自动key 新生成的图片路径后缀 value新图片的高度</param>
+            <param name="retInfo">失败信息</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ImageHelper.GetReducedImageByPercent(System.String,System.Single,System.String@)">
+            <summary>
+            按比例生成缩略图
+            </summary>
+            <param name="srouceImage">原始图片路径 全路径</param>
+            <param name="ThumbnaPercent">缩略图百分比 0.01-1</param>
+            <param name="retInfo">返还信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ImageHelper.ThumbnailCallback">
+            <summary>
+            缩略图回调方法
+            </summary>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.InvokeWebResult`1">
+            <summary>
+            调用web返回属性
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.InvokeWebResult`1.#ctor(`0)">
+            <summary>
+            接口返回对象操作
+            </summary>
+            <param name="data">返回数据类型</param>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.InvokeWebResult`1.IsSucceed">
+            <summary>
+            成功/失败
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.InvokeWebResult`1.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.InvokeWebResult`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.IPHelper">
+            <summary>
+            IPHelper
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.IPHelper.GetLocalHostIP">
+            <summary>
+            获取本机IP地址
+            </summary>
+            <returns>System.String.</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory">
+            <summary>
+            主键工厂类
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.lastIdentity">
+            <summary>
+            Fields
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.lastIdentityTrain">
+            <summary>
+            Fields
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.lockerTrain">
+            <summary>
+            locker
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.locker">
+            <summary>
+            locker
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.NewKeyId">
+            <summary>
+            新的主键ID
+            </summary>
+            <returns>主键ID</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.NewKeyId(System.DateTime)">
+            <summary>
+            新的主键ID
+            </summary>
+            <returns>主键ID</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.NewKeyId(System.String)">
+            <summary>
+            新的主键ID
+            </summary>
+            <param name="code">业务码</param>
+            <returns>主键ID</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.NewKeyId(System.Int32,System.Nullable{System.DateTime})">
+            <summary>
+            新的主键ID
+            </summary>
+            <param name="length">ID长度(不能小于24)</param>
+            <param name="time">创建时间</param>
+            <returns>主键ID</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.NewKeyId(System.String,System.Int32)">
+            <summary>
+            新的主键ID
+            </summary>
+            <param name="code">业务码</param>
+            <param name="length">ID长度(不能小于24)</param>
+            <returns>主键ID</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.KeyIdFactory.NewTrainKeyId(System.Int32,System.Nullable{System.DateTime})">
+            <summary>
+            新的主键ID
+            </summary>
+            <param name="length">ID长度(不能小于24)</param>
+            <param name="time">创建时间</param>
+            <returns>主键ID</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.MapConvert">
+            <summary>
+            地图坐标转换
+            WGS坐标系是国际通用的一种地心坐标系，WGS本身也有多个版本（不赘述了），GCJ-02是国内官方采用的一种坐标系，国内许多坐标系也是基于GCJ-02变种而来的，比如百度坐标系BD-09
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.MapConvert.pi">
+            <summary>
+            圆周率
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.MapConvert.a">
+            <summary>
+            卫星椭球坐标投影到平面地图坐标系的投影因子。
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.MapConvert.ee">
+            <summary>
+            椭球的偏心率。
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.MapConvert.XPi">
+            <summary>
+             圆周率转换量
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MapConvert.Wgs2Bd(System.Double,System.Double)">
+            <summary>
+            wgs坐标转换为百度坐标
+            </summary>
+            <param name="lat"></param>
+            <param name="lon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MapConvert.Gcj2Bd(System.Double,System.Double)">
+            <summary>
+            GCJ坐标转换为百度坐标。
+            </summary>
+            <param name="lat"></param>
+            <param name="lon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MapConvert.Bd2Gcj(System.Double,System.Double)">
+            <summary>
+            百度坐标转换为GCJ坐标。
+            </summary>
+            <param name="lat"></param>
+            <param name="lon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MapConvert.Wgs2Gcj(System.Double,System.Double)">
+            <summary>
+            WGS坐标转换为GCJ坐标。
+            </summary>
+            <param name="lat"></param>
+            <param name="lon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MapConvert.TransformLat(System.Double,System.Double)">
+            <summary>
+            转换方法，比较复杂，不必深究了。输入：横纵坐标，输出：转换后的横坐标
+            </summary>
+            <param name="lat"></param>
+            <param name="lon"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MapConvert.TransformLon(System.Double,System.Double)">
+            <summary>
+            转换方法，同样复杂，自行脑补吧。输入：横纵坐标，输出：转换后的纵坐标。
+            </summary>
+            <param name="lat"></param>
+            <param name="lon"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.MonthlyTable">
+            <summary>
+            按月分表
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MonthlyTable.GetTradeTableDefaultDateTime">
+            <summary>
+            获取交易分表时间
+            </summary>
+            <returns>交易分表时间</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MonthlyTable.GetTableName(System.String,System.String)">
+            <summary>
+            根据外部订单号获取表名
+            </summary>
+            <param name="tableName">原表名（没有进行分表时的表名)</param>
+            <param name="orderNumber">外部订单号</param>
+            <returns>表名后缀</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MonthlyTable.GetTableName(System.String,System.DateTime)">
+            <summary>
+            根据时间获取表名(交易版本)
+            </summary>
+            <param name="tableName">原表名（没有进行分表时的表名)</param>
+            <param name="dateTime">时间</param>
+            <returns>表名后缀</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MonthlyTable.GetTableName(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            根据起止日期,获取分表后的表名列表
+            </summary>
+            <param name="tableName">Name of the table.</param>
+            <param name="start">The start date.</param>
+            <param name="end">The end date.</param>
+            <returns>List&lt;System.String&gt;.</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.MyMath">
+            <summary>
+            MyMath
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MyMath.AvgSplit(System.Decimal,System.UInt32)">
+            <summary>
+            均分总额，若不能均分则将余数加到最后一个上面
+            </summary>
+            <param name="totalSum">总额</param>
+            <param name="count">要均分的份数</param>
+            <returns>均分结果集合</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MyMath.Rounded(System.Decimal,System.Int32)">
+            <summary>
+            四舍五入
+            </summary>
+            <param name="value">值</param>
+            <param name="precision">精度</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MyMath.Floor(System.Decimal,System.Int32)">
+            <summary>
+            全舍
+            </summary>
+            <param name="value">值</param>
+            <param name="precision">精度</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.MyMath.Ceiling(System.Decimal,System.Int32)">
+            <summary>
+            全入
+            </summary>
+            <param name="value">值</param>
+            <param name="precision">精度</param>
+            <returns>结果</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Operational">
+            <summary>
+            操作信息
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Operational.Operator">
+            <summary>
+            操作账号
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Operational.OperatorName">
+            <summary>
+            操作人
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Operational.OperationContent">
+            <summary>
+            操作内容
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Operational.OperationDateTime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany">
+            <summary>
+            操作公司详细信息
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OperatorEmployeesName">
+            <summary>
+            员工名称
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OperatorEmployeesAccount">
+            <summary>
+            操作员工帐号
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OperatorEmployeesId">
+            <summary>
+            操作员工Id
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OperatorCompanyName">
+            <summary>
+            公司名称
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OperatorCompanyAccount">
+            <summary>
+            操作公司帐号
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OperatorCompanyId">
+            <summary>
+            操作人公司Id
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OperationContent">
+            <summary>
+            操作内容
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OperationDateTime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OperationCompanyType">
+            <summary>
+            操作公司类型
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OperationalCompany.OrganizationId">
+            <summary>
+            组织架构ID
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.OrderHelper">
+            <summary>
+            OrderHelper
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.OrderHelper.GetOrderID(System.String,System.String)">
+            <summary>
+            获得订单号 格式 12位时间格式 4位预留编码 2位业务编码 6位随机数
+            yyyyMMddHHmm 4位预留编码 业务编号自定义编号(8位)6位随机数
+            </summary>
+            <param name="businessCode">业务编码 2位数字 0-99  各自约定,避免重复</param>
+            <param name="businessID">业务相关的ID 2位 多余的只取前2位,不足的左边补0,为null时,系统使用随机数</param>
+            <returns>业务类型为空时,返回 string.Empty </returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.OrgModels">
+            <summary>
+            OrgModels
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.OrgModels.companyType">
+            <summary>
+            公司类型 枚举
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.OrgModels.companyUD">
+            <summary>
+            单位ID
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Paging">
+            <summary>
+            分页类
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Paging.pageIndex">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Paging.PageIndex">
+            <summary>
+            页码
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Paging.pageSize">
+            <summary>
+            页大小
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Paging.PageSize">
+            <summary>
+            页大小(默认10页)
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Paging.RowsCount">
+            <summary>
+            总条数
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Paging.pageCount">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Paging.PageCount">
+            <summary>
+            总页数
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Paging.getRowsCount">
+            <summary>
+            是否获取总条数
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Paging.GetRowsCount">
+            <summary>
+            是否获取总条数
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Paging.StratRows">
+            <summary>
+            开始索引
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.QueryResult`1">
+            <summary>
+            The query result.
+            </summary>
+            <typeparam name="T">
+            T
+            </typeparam>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueryResult`1.#ctor(EastWestWalk.NetFrameWork.Common.Code.Paging,System.Collections.Generic.IList{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Code.QueryResult`1"/> class.
+            </summary>
+            <param name="paging">
+            The paging.
+            </param>
+            <param name="data">
+            The data.
+            </param>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.QueryResult`1.Paging">
+            <summary>
+            分页信息
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.QueryResult`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.QueueBase">
+            <summary>
+            队列轮循
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.QueueBase.timer">
+            <summary>
+            时间控件
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Code.QueueBase"/> class.
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.QueueBase.Interval">
+            <summary>
+            时间间隔
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBase.ThreadProc">
+            <summary>
+            轮循的线程函数
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBase.GetProgramName">
+            <summary>
+            获取程序名称
+            </summary>
+            <returns>默认为空</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBase.GetTaskLogPath">
+            <summary>
+            获取调度执行日志地址
+            </summary>
+            <returns>调度执行日志地址</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBase.GetExceptionLogPath">
+            <summary>
+            获取调度异常日志地址
+            </summary>
+            <returns>调度异常日志地址</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBase.Start">
+            <summary>
+            开始函数
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBase.Stop">
+            <summary>
+            停止函数
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBase.timer_Elapsed(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            timer执行事件
+            </summary>
+            <param name="sender">sender</param>
+            <param name="e">e</param>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.QueueBaseWhile">
+            <summary>
+            队列轮循(while方式)
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.QueueBaseWhile.Interval">
+            <summary>
+            时间间隔
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBaseWhile.ThreadProc">
+            <summary>
+            轮循的线程函数
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBaseWhile.GetProgramName">
+            <summary>
+            获取程序名称
+            </summary>
+            <returns>默认为空</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBaseWhile.GetTaskLogPath">
+            <summary>
+            获取调度执行日志地址
+            </summary>
+            <returns>调度执行日志地址</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBaseWhile.GetExceptionLogPath">
+            <summary>
+            获取调度异常日志地址
+            </summary>
+            <returns>调度异常日志地址</returns>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.QueueBaseWhile.IsStop">
+            <summary>
+            是否停止
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBaseWhile.Start">
+            <summary>
+            开始函数
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.QueueBaseWhile.Stop">
+            <summary>
+            停止函数
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.RandomHelper">
+            <summary>
+            RandomHelper
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.RandomHelper.rnd">
+            <summary>
+            初始化全局唯一随机数种子
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.RandomHelper.Next(System.Int32,System.Int32)">
+            <summary>
+            获取一个随机数
+            </summary>
+            <param name="min">最小值</param>
+            <param name="max">最大值</param>
+            <returns>随机数</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.RandomHelper.Next">
+            <summary>
+            获取一个随机数
+            </summary>
+            <returns>随机数</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Range`1">
+            <summary>
+            区间
+            </summary>
+            <typeparam name="T">区间类型</typeparam>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Range`1.Lower">
+            <summary>
+            下限(时间开始)
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Range`1.Upper">
+            <summary>
+            上限(时间结束)
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Result">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Result.IsSucceed">
+            <summary>
+            成功/失败
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Result.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Result`1">
+            <summary>
+            处理结果
+            </summary>
+            <typeparam name="T">扩展数据</typeparam>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Result`1.Data">
+            <summary>
+            扩展数据
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.ServiceCharge">
+            <summary>
+            ServiceCharge
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.ServiceCharge.WeiXinRate">
+            <summary>
+            微信手续费费率
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.ServiceCharge.AlipayRate">
+            <summary>
+            支付宝手续费费率
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ServiceCharge.CalculateWeiXinPayRate(System.Decimal)">
+            <summary>
+            // 计算第三方手续费  四舍五入保留2为小数
+            </summary>
+            <param name="amount">订单金额</param>
+            <returns>手续费</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ServiceCharge.CalculateAlipayRate(System.Decimal)">
+            <summary>
+            </summary>
+            <param name="amount">订单金额</param>
+            <returns>手续费</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.ServiceCharge.GetThirdParyPoundage(EastWestWalk.NetFrameWork.Enum.PayType,System.Decimal)">
+            <summary>
+            计算第三方手续费
+            </summary>
+            <param name="type">第三方类型</param>
+            <param name="payMoney">支付总金额</param>
+            <returns>第三方手续费(已经向上取整)</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.CompareHelper">
+            <summary>
+            针对于引用类型的多属性比较器。
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.CompareHelper.CompareValue(System.Object,System.Object)">
+            <summary>
+            比较两个值。
+            </summary>
+            <param name="val1">第一个Object对象</param>
+            <param name="val2">第二个Object对象</param>
+            <returns>如果 val1 小于 val2 返回负数；val1 等于 val2，返回 0；val1 大于 val2，返回正数。</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.CompareHelper.Compare(System.Object,System.Object,System.String)">
+            <summary>
+            按指定的属性比较两个对象[即比较指定的属性]。
+            </summary>
+            <param name="obj1">用于比较的第一个对象。</param>
+            <param name="obj2">用于比较的第二个对象。</param>
+            <param name="prop">属性导航路径。(如 xx.yy.zz,则表示对象的xx属性的yy属性的zz属性。如要访问索引器，请指定属性为Item[index]，其中index为索引)</param>
+            <returns></returns>
+            <remarks>如果参数 prop 为 null 或空字符串，直接比较 obj1 和 obj2</remarks>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.CompareHelper.Compare(System.Object,System.Object,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            按指定的一系列属性比较两个对象[即比较指定的属性]。
+            </summary>
+            <param name="obj1">第一个Object对象</param>
+            <param name="obj2">第二个Object对象</param>
+            <param name="props">实现了IEnumerable接口的集合</param>
+            <returns></returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.CannotCompareException">
+            <summary>
+            自定义的比较异常类
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindDescription">
+            <summary>
+            定义查找描述结构。
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindDescription.#ctor(System.String,System.Object,EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchPredication)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="property">属性</param>
+            <param name="value">值</param>
+            <param name="predication">匹配选项的枚举值，允许组合方式</param>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindDescription.Property">
+            <summary>
+            对象用于查找的属性。(为null或空字符串则使用对象本身)
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindDescription.Value">
+            <summary>
+            要在 Property 中查找的值。
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindDescription.Predication">
+            <summary>
+            查找谓词。(可组合)
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindHelper">
+            <summary>
+            查找辅助类
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindHelper.FindFirst(System.Collections.IEnumerable,EastWestWalk.NetFrameWork.Common.Code.Ticket.FindDescription)">
+            <summary>
+             从实现IEnumerable接口的Object类型集合中查找第一个元素
+            </summary>
+            <param name="obj">实现IEnumerable接口的待查找的Object类型</param>
+            <param name="fd">查找描述结构</param>
+            <returns>返回复核条件的第一个Object对象元素</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindHelper.FindFirst(System.Collections.IEnumerable,System.Collections.Generic.IEnumerable{EastWestWalk.NetFrameWork.Common.Code.Ticket.FindDescription})">
+            <summary>
+            从实现IEnumerable接口的Object类型集合中查找第一个元素
+            </summary>
+            <param name="obj">实现IEnumerable接口的待查找的Object类型元素</param>
+            <param name="fds">查找描述结构体集合（集合实现了IEnumerable接口）</param>
+            <returns>返回复核条件的第一个Object对象元素</returns>
+        </member>
+        <!-- 对于成员“M:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindHelper.Find``1(System.Collections.Generic.IEnumerable{``0},EastWestWalk.NetFrameWork.Common.Code.Ticket.FindDescription)”忽略有格式错误的 XML 注释 -->
+        <!-- 对于成员“M:EastWestWalk.NetFrameWork.Common.Code.Ticket.FindHelper.Find``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{EastWestWalk.NetFrameWork.Common.Code.Ticket.FindDescription})”忽略有格式错误的 XML 注释 -->
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchPredication">
+            <summary>
+            用于设置匹配选项的枚举值
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchPredication.None">
+            <summary>
+            无相关匹配
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchPredication.Equal">
+            <summary>
+            相等
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchPredication.Include">
+            <summary>
+            包含
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchPredication.Exclude">
+            <summary>
+            排除
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchPredication.GreaterThan">
+            <summary>
+            大于
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchPredication.LessThan">
+            <summary>
+            小于
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.IMatchor">
+            <summary>
+            匹配接口
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.Matchor">
+            <summary>
+            匹配器
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.EqualMatchor">
+            <summary>
+            相等匹配器
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.IncludeMatchor">
+            <summary>
+            包含匹配器
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.ExcludeMatchor">
+            <summary>
+            排除匹配器
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.GreaterThanMatchor">
+            <summary>
+            大于匹配器
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.LessThanMatchor">
+            <summary>
+            小于匹配器
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchorFactory">
+            <summary>
+            匹配器工厂
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.MatchHelper">
+            <summary>
+            匹配工具类
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.CannotMatchException">
+            <summary>
+            自定义的匹配异常类
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyDescript">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyDescript.#ctor(System.String,System.Reflection.BindingFlags)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+            <param name="flags"></param>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyDescript.Default">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyDescript.Name">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyDescript.Flags">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyDescript.Indexes">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.ReflectHelper">
+            <summary>
+            反射帮助类
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.ReflectHelper.ExtractProperty(System.Object,System.String)">
+            <summary>
+            按指定导航路径提取对象属性值。
+            </summary>
+            <param name="obj">要提取属性值的对象。</param>
+            <param name="path">属性导航路径。</param>
+            <returns>返回提取到的属性值。</returns>
+            <exception cref="!:" ></exception>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.ReflectHelper.GetProperty(System.Object,System.String,System.Boolean)">
+            <summary>
+            获取对象属性值。
+            </summary>
+            <param name="obj">要获取属性值的对象。</param>
+            <param name="propName">属性名称。</param>
+            <returns>返回获取到的属性值。</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyNotFoundException">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyNotFoundException.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyNotFoundException.#ctor(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="type"></param>
+            <param name="prop"></param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyNotFoundException.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyNotFoundException.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="message"></param>
+            <param name="inner"></param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.Ticket.PropertyNotFoundException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Code.VarHelper">
+            <summary>
+            VarHelper
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.VarHelper.GetAttName(System.Linq.Expressions.Expression{System.Func{System.String,System.String}})">
+            <summary>
+            获取属性名称,根据 linq 得到,使用强类别，避免代码里面字符串写变量. 
+            读取xml里面属性名称,有配置信息的则使用xml的属性名替换
+            </summary>
+            <param name="exp">The exp.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.VarHelper.GetAttNameByInt(System.Linq.Expressions.Expression{System.Func{System.String,System.Int32}})">
+            <summary>
+            获取属性名称,根据 linq 得到,使用强类别，避免代码里面字符串写变量. 
+            读取xml里面属性名称,有配置信息的则使用xml的属性名替换
+            </summary>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.VarHelper.GetAttNameByTime(System.Linq.Expressions.Expression{System.Func{System.String,System.DateTime}})">
+            <summary>
+            获取属性名称,根据 linq 得到,使用强类别，避免代码里面字符串写变量. 
+            读取xml里面属性名称,有配置信息的则使用xml的属性名替换
+            </summary>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Code.VarHelper.GetAttNameByT``1(System.Linq.Expressions.Expression{System.Func{System.String,``0}})">
+            <summary>
+            获取属性名称,根据 linq 得到,使用强类别，避免代码里面字符串写变量.
+            读取xml里面属性名称,有配置信息的则使用xml的属性名替换
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="exp">The exp.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Encrypt.AES">
+            <summary>
+            AES
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.AES.Encrypt(System.String,System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="toEncrypt">数据字符</param>
+            <param name="key">key</param>
+            <returns>密文</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.AES.Decrypt(System.String,System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="toDecrypt">密文</param>
+            <param name="key">key</param>
+            <returns>结果</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Encrypt.Custom">
+            <summary>
+            CustomEncrypt
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.Custom.GetDecrypt(System.String,System.String)">
+            <summary>
+            Gets the decrypt.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="key">The key.</param>
+            <returns>System.String.</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Encrypt.Des">
+            <summary>
+            Des加密解密类
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Encrypt.Des.KEY">
+            <summary>
+            Key
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Encrypt.Des.IV">
+            <summary>
+            IV
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.Des.Encrypt(System.String,System.String)">
+            <summary>
+            DES加密方法
+            </summary>
+            <param name="source">原文</param>
+            <param name="key">key</param>
+            <returns>密文</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.Des.Decrypt(System.String,System.String)">
+            <summary>
+            进行DES解密。
+            </summary>
+            <param name="key">key</param>
+            <param name="source">要解密的base64串</param>
+            <returns>已解密的字符串。</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Encrypt.GZipString">
+            <summary>
+            GZipString
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.GZipString.GZipCompressString(System.String)">
+            <summary>
+            将传入字符串以GZip算法压缩后，返回Base64编码字符
+            </summary>
+            <param name="rawString">需要压缩的字符串</param>
+            <returns>压缩后的Base64编码的字符串</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.GZipString.Compress(System.Byte[])">
+            <summary>
+            GZip压缩
+            </summary>
+            <param name="rawData">数据包</param>
+            <returns>压缩数据包</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.GZipString.GZipDecompressString(System.String)">
+            <summary>
+            将传入的二进制字符串资料以GZip算法解压缩
+            </summary>
+            <param name="gzipString">经GZip压缩后的二进制字符串</param>
+            <returns>原始未压缩字符串</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.GZipString.Decompress(System.Byte[])">
+            <summary>
+            GZIP解压
+            </summary>
+            <param name="gzipData">数据包</param>
+            <returns>解压数据包</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Encrypt.Md5">
+            <summary>
+            Md5
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.Md5.Encrypt32(System.String)">
+            <summary>
+            加密32
+            </summary>
+            <param name="source">数据</param>
+            <returns>密文</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.Md5.Encrypt16(System.String)">
+            <summary>
+            加密16
+            </summary>
+            <param name="source">数据</param>
+            <returns>密文</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.Md5.MD5Encoding(System.String)">
+            <summary>  
+            MD5 加密字符串  
+            </summary>  
+            <param name="rawPass">源字符串</param>  
+            <returns>加密后字符串</returns>  
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.Md5.MD5Encoding(System.String,System.Object)">
+            <summary>  
+            MD5盐值加密  
+            </summary>  
+            <param name="rawPass">源字符串</param>  
+            <param name="salt">盐值</param>  
+            <returns>加密后字符串</returns>  
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Encrypt.RSA">
+            <summary>
+            RSA
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.RSACheckContent(System.String,System.String,System.String)">
+            <summary>
+            检查RSA签名内容是否正确
+            </summary>
+            <param name="signContent">原始内容</param>
+            <param name="sign">签名后的字符串(base64转换后的值)</param>
+            <param name="publicKeyXml">签名私钥所对应的公钥</param>
+            <returns>验签结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.RSACheckContent(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)">
+            <summary>
+            检查签名内容是否正确
+            </summary>
+            <param name="paramDic">参数信息</param>
+            <param name="sign">签名后的字符串(base64转换后的值)</param>
+            <param name="publicKeyXml">签名私钥所对应的公钥</param>
+            <returns>验签结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.RSACheckContent``1(``0,System.String,System.String)">
+            <summary>
+            检查签名内容是否正确
+            </summary>
+            <param name="paramModel">参数信息</param>
+            <param name="sign">签名后的字符串(base64转换后的值)</param>
+            <param name="publicKeyXml">签名私钥所对应的公钥</param>
+            <returns>验签结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.GetSignContent(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            GetSignContent
+            </summary>
+            <param name="parameters">parameters</param>
+            <returns>string</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.RSASign(System.String,System.String)">
+            <summary>
+            RSA签名
+            </summary>
+            <param name="content">参数</param>
+            <param name="privateKeyXml">私钥</param>
+            <returns>签名内容(base64转换后的值)</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.RSASign(System.Collections.Generic.IDictionary{System.String,System.String},System.String)">
+            <summary>
+            RSA签名
+            </summary>
+            <param name="paramDic">参数</param>
+            <param name="privateKeyXml">私钥</param>
+            <returns>签名内容(base64转换后的值)</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.RSASign``1(``0,System.String)">
+            <summary>
+            RSA签名
+            </summary>
+            <param name="paramModel">参数</param>
+            <param name="privateKeyXml">私钥</param>
+            <returns>签名内容(base64转换后的值)</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.CreateRSAKey">
+            <summary>
+            生成RSA公钥、私钥
+            </summary>
+            <returns>参数1=公钥，参数2=私钥</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.Encrypt(System.String,System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="content">加密内容</param>
+            <param name="publicKeyXml">key</param>
+            <returns>加密结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.RSA.Decrypt(System.String,System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="privatekey">key</param>
+            <param name="content">解密内容</param>
+            <returns>解密结果</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Encrypt.SHA1">
+            <summary>
+            SHA1
+            </summary>	
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Encrypt.SHA1.Encrypt(System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="source">数据</param>
+            <returns>密文</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Extension.ExceptionExtension">
+            <summary>
+            异常扩展类
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.ExceptionExtension.TryExecute``1(System.Func{``0},System.Func{System.Exception,``0})">
+            <summary>
+            尝试执行函数，并捕获异常，发生异常后返回默认值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="func"></param>
+            <param name="errorCallback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.ExceptionExtension.TryExecute(System.Action,System.Action{System.Exception})">
+            <summary>
+            尝试执行函数，并捕获异常，发生异常后返回默认值
+            </summary>
+            <param name="func"></param>
+            <param name="errorCallback"></param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.ExceptionExtension.TryExecuteAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.Func{System.Exception,``0})">
+            <summary>
+            尝试异步执行函数，并捕获异常，发生异常后返回默认值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="func"></param>
+            <param name="errorCallback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.ExceptionExtension.TryExecute``1(System.Func{EastWestWalk.NetFrameWork.Common.Code.Result{``0}},System.Func{System.Exception,EastWestWalk.NetFrameWork.Common.Code.Result{``0}})">
+            <summary>
+            尝试执行函数，并捕获异常，发生异常后返回默认值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="func"></param>
+            <param name="errorCallback"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension">
+            <summary>
+            Linq扩展
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Join(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            根据字符串拆分数组
+            </summary>
+            <param name="source">
+            要拆分的数组
+            </param>
+            <param name="separator">
+            拆分符
+            </param>
+            <returns>
+            字符串
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Join``1(System.Collections.Generic.IEnumerable{``0},System.String,System.Func{``0,System.String})">
+            <summary>
+            根据字符串拆分数组
+            </summary>
+            <typeparam name="TSource">类型</typeparam>
+            <param name="soucre"> 要拆分的数组</param>
+            <param name="separator">拆分符</param>
+            <param name="map">拆分条件</param>
+            <returns>字符串 <see cref="T:System.String"/></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sort``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.KeyValuePair{System.Boolean,System.Func{``0,System.Object}}[])">
+            <summary>
+            多条件排序扩展方法
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="sources">sources</param>
+            <param name="keySelector">keySelector</param>
+            <returns>排序结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.OrderBy``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})">
+            <summary>
+            升序
+            </summary>
+            <typeparam name="TSource">数据源类型</typeparam>
+            <typeparam name="TKey">排序字段类型</typeparam>
+            <param name="sources">数据</param>
+            <param name="predicate">条件</param>
+            <param name="keySelector">排序条件</param>
+            <returns>最终数据</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.OrderByDescending``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,``1})">
+            <summary>
+            降序
+            </summary>
+            <typeparam name="TSource">数据源类型</typeparam>
+            <typeparam name="TKey">排序字段类型</typeparam>
+            <param name="sources">数据</param>
+            <param name="predicate">条件</param>
+            <param name="keySelector">排序条件</param>
+            <returns>最终数据</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.OrderBy``1(System.Linq.IQueryable{``0},System.String,System.Boolean)">
+            <summary>
+            扩展Linq的OrderBy方法，实现根据属性和顺序(倒序)进行排序，调用和linq的方法一致
+            </summary>
+            <typeparam name="TEntity">需要排序的实体对象</typeparam>
+            <param name="source">结果集信息</param>
+            <param name="propertyStr">动态排序的属性名(从前台获取)</param>
+            <param name="isDesc">排序方式，不传递表示顺序，默认true，false表示倒序</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.MaxElement``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+             获取最大值的当前对象
+            </summary>
+            <typeparam name="TElement">TElement</typeparam>
+            <typeparam name="TData">TData</typeparam>
+            <param name="source">source</param>
+            <param name="selector">selector</param>
+            <returns>MaxValue</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.MinElement``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+             获取最小值的当前对象
+            </summary>
+            <typeparam name="TElement">TElement</typeparam>
+            <typeparam name="TData">TData</typeparam>
+            <param name="source">source</param>
+            <param name="selector">selector</param>
+            <returns>MaxValue</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Decimal})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Double})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Int32})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Int64})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Single})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Decimal}})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Double}})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Int32}})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Int64}})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Max``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Single}})">
+            <summary>
+            求最大值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最大值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Decimal})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Double})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Int32})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Int64})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Single})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Decimal}})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Double}})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Int32}})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Int64}})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Min``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Single}})">
+            <summary>
+            求最小值
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>最小值</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Decimal})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Double})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Int32})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Int64})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Single})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Decimal}})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Double}})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Int32}})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Int64}})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Sum``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean},System.Func{``0,System.Nullable{System.Single}})">
+            <summary>
+            求和
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <param name="selector">selector</param>
+            <returns>和</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Repeat``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            是否存在重复
+            </summary>
+            <typeparam name="TSource">TSource</typeparam>
+            <param name="source">source</param>
+            <param name="predicate">predicate</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Repeat``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            根据某个字段获取重复数据
+            </summary>
+            <typeparam name="TSource">数据类型</typeparam>
+            <typeparam name="Tkey">字段类型</typeparam>
+            <param name="source">数据源</param>
+            <param name="predicate">表达式</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.AllRepeat``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+            所有的数据是否都是重复的
+            </summary>
+            <typeparam name="TSource">数据类型</typeparam>
+            <typeparam name="Tkey">字段类型</typeparam>
+            <param name="source">数据源</param>
+            <param name="predicate">表达式</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.Comparer``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            比较
+            </summary>
+            <typeparam name="TSource">数据源</typeparam>
+            <param name="first">第一个</param>
+            <param name="second">第二个</param>
+            <param name="comparer">比较器</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.ComparableElement``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1},System.Boolean)">
+            <summary>
+             获取最大or最小值的当前对象
+            </summary>
+            <typeparam name="TElement">TElement</typeparam>
+            <typeparam name="TData">TData</typeparam>
+            <param name="source">source</param>
+            <param name="selector">selector</param>
+            <param name="isMax">最大还是最小</param>
+            <returns>MaxValue</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.IEnumerableExtension.AnyNull(System.Linq.IQueryable)">
+            <summary>
+            Any
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Extension.SerializerExtension">
+            <summary>
+            序列化
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.SerializerExtension.SerializeObject(System.Object)">
+            <summary>
+            JSON序列化
+            </summary>
+            <param name="obj">对象</param>
+            <returns>JSON字符串</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.SerializerExtension.DeserializeObject``1(System.String)">
+            <summary>
+            反序列化
+            </summary>
+            <typeparam name="T">对象</typeparam>
+            <param name="json">JSON字符串</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.SerializerExtension.DeserializeObject(System.String)">
+            <summary>
+            反序列化
+            </summary>
+            <param name="json">JSON字符串</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.SerializerExtension.DeepCopy``1(``0)">
+            <summary>
+            XML序列化方式深复制
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <param name="obj">对象</param>
+            <returns>复制对象</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.SerializerExtension.CopyToModel``2(``0)">
+            <summary>
+            将一个实体对象转换为另一个实体对象
+            </summary>
+            <typeparam name="T1">第一个实体对象</typeparam>
+            <typeparam name="T2">第二个实体对象</typeparam>
+            <param name="source">转换的实体对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.SerializerExtension.CopyToModel``2(System.Collections.Generic.List{``0})">
+            <summary>
+            将一个实体对象转换为另一个实体对象
+            </summary>
+            <typeparam name="T1">第一个实体对象</typeparam>
+            <typeparam name="T2">第二个实体对象</typeparam>
+            <param name="source">转换的实体对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.SerializerExtension.ToSortedJson``1(``0,System.String[])">
+            <summary>
+            JSON序列化(按key排序)
+            </summary>
+            <param name="obj">要序列化的model</param>
+            <param name="keysFilter">需要过滤的keys（小写）</param>
+            <returns>JSON字符串</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Extension.PropertySortResolver">
+            <summary>
+            输出到json字符串时，属性名称按照字典顺序排序输出
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.PropertySortResolver.CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization)">
+            <summary>
+            属性名称按照字典顺序排序输出
+            </summary>
+            <param name="type"></param>
+            <param name="memberSerialization"></param>
+            <returns></returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Extension.StringExtension">
+            <summary>
+            字符串扩展类
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Extension.StringExtension.IsNullOrEmpty(System.String)">
+            <summary>
+            判断字符串是否为空
+            </summary>
+            <param name="val">要判断得字符串</param>
+            <returns></returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility">
+            <summary>
+            HttpClientUtility
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.ToMap``1(``0)">
+            <summary>
+            将对象属性转换为key-value对
+            </summary>
+            <param name="obj">对象</param>
+            <returns>字典</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.PostFormUrl``2(System.String,``0)">
+            <summary>
+            POST请求(FormUrlEncodedContent)
+            </summary>
+            <typeparam name="T">请求参数类型</typeparam>
+            <typeparam name="V">返回结果类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="t">请求参数</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.PostDictionary``1(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            POST请求(FormUrlEncodedContent)
+            </summary>
+            <typeparam name="V">返回结果类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="parameters">请求参数</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.PostFormUrl``1(System.String,``0)">
+            <summary>
+            POST请求(FormUrlEncodedContent)
+            </summary>
+            <typeparam name="T">请求参数类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="t">请求参数</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.PostByte``2(System.String,``0)">
+            <summary>
+            POST请求(ByteArrayContent)
+            </summary>
+            <typeparam name="T">请求参数类型</typeparam>
+            <typeparam name="V">返回结果类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="t">请求参数</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.PostByte``1(System.String,``0)">
+            <summary>
+            POST请求(ByteArrayContent)
+            </summary>
+            <typeparam name="T">请求参数类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="t">请求参数</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.Post(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Byte[])">
+            <summary>
+            POST请求
+            </summary>
+            <param name="url">url</param>
+            <param name="parameters">请求参数</param>
+            <param name="datas">请求参数</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.GetHttpContent(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            获取参数
+            </summary>
+            <param name="parameters">parameters</param>
+            <returns>HttpContent</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.GetHttpContent(System.Byte[])">
+            <summary>
+            获取参数
+            </summary>
+            <param name="datas">datas</param>
+            <returns>HttpContent</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.GetString``1(System.String,``0)">
+            <summary>
+            Get请求
+            </summary>
+            <typeparam name="T">请求参数类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="t">请求参数</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.GetModel``2(System.String,``0)">
+            <summary>
+            Get请求
+            </summary>
+            <typeparam name="T">请求参数类型</typeparam>
+            <typeparam name="V">返回结果类型</typeparam>
+            <param name="url">请求Url</param>
+            <param name="t">请求参数</param>
+            <returns>返回结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.Get(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            GET请求
+            </summary>
+            <param name="url">url</param>
+            <param name="parameters">请求参数</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpClientUtility.GteParameters(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            GteParameters
+            </summary>
+            <param name="parameters">parameters</param>
+            <returns>string</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper">
+            <summary>InnerException
+            HTTP请求帮助类
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.index">
+            <summary>
+            索引
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.KeepAlive">
+            <summary>
+            获取或设置一个值，该值指示是否与 Internet 资源建立持久性连接。
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.Expect100Continue">
+            <summary>
+            获取或设置一个 System.Boolean 值，该值确定是否使用 100-Continue 行为。
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.UserAgent">
+            <summary>
+            UserAgent
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.AcceptLanguage">
+            <summary>
+            AcceptLanguage
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.Accept">
+            <summary>
+            Accept
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.AcceptEncoding">
+            <summary>
+            AcceptEncoding
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.AcceptCharset">
+            <summary>
+            AcceptCharset
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.ContentType">
+            <summary>
+            ContentType
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.Cookie">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.#ctor">
+            <summary>
+            实例化
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.#ctor(System.Net.CookieContainer)">
+            <summary>
+            实例化
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.HttpGet(System.String,System.String,System.Text.Encoding,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            使用get方式访问目标网页，返回html页面
+            </summary>
+            <param name="targetURL">请求地址</param>
+            <param name="referer">获取或设置值的引用页HTTP头</param>
+            <param name="encoding">encoding</param>
+            <param name="requestClientIp">是否使用IP欺骗</param>
+            <param name="isUseProxyIP">是否使用代理IP</param>
+            <param name="timeout">超时时间 单位毫秒</param>
+            <returns>html</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.HttpXMLGet(System.String,System.String,System.Text.Encoding,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            使用get方式访问目标网页，返回html页面
+            </summary>
+            <param name="targetURL">url</param>
+            <param name="referer">referer</param>
+            <param name="encoding">encoding</param>
+            <param name="requestClientIp">是否使用IP欺骗</param>
+            <param name="isUseProxyIP">是否使用代理IP</param>
+            <param name="timeout">超时时间</param>
+            <returns>html</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.HttpByteGet(System.String,System.String,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            使用get方式访问目标网页，返回图片字节数组
+            </summary>
+            <param name="targetURL">url</param>
+            <param name="referer">referer</param>
+            <param name="requestClientIp">是否使用IP欺骗</param>
+            <param name="isUseProxyIP">是否使用代理IP</param>
+            <param name="timeout">超时时间</param>
+            <returns>html</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.HttpBitmapGet(System.String,System.String,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            使用get方式访问目标网页，返回图片
+            </summary>
+            <param name="targetURL">url</param>
+            <param name="referer">referer</param>
+            <param name="requestClientIp">是否使用IP欺骗</param>
+            <param name="isUseProxyIP">是否使用代理IP</param>
+            <param name="timeout">超时时间</param>
+            <returns>html</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.HttpPost(System.String,System.String,System.String,System.Text.Encoding,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            使用post方式访问目标网页，返回html页面
+            </summary>
+            <param name="targetURL">url</param>
+            <param name="referer">referer</param>
+            <param name="parametrs">parametrs</param>
+            <param name="encoding">encoding</param>
+            <param name="requestClientIp">是否使用Ip欺骗</param>
+            <param name="isUseProxyIP">是否使用代理IP</param>
+            <param name="timeout">超时时间</param>
+            <returns>html</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.HttpXMLPost(System.String,System.String,System.String,System.Text.Encoding,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            使用XML post方式访问目标网页，返回html页面
+            </summary>
+            <param name="targetURL">url</param>
+            <param name="referer">referer</param>
+            <param name="parametrs">parametrs</param>
+            <param name="encoding">encoding</param>
+            <param name="requestClientIp">是否使用Ip欺骗</param>
+            <param name="isUseProxyIP">是否使用代理IP</param>
+            <param name="timeout">超时时间</param>
+            <returns>html</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.GetUseAgent">
+            <summary>
+            获取 UseAgent
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.RandomUserAgent">
+            <summary>
+            随机产生头信息并随机产生版本
+            </summary>
+            <returns>返回头信息</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.RandomBrowserMark(System.Boolean)">
+            <summary>
+            随机产生两个字母
+            </summary>
+            <param name="isUorL">需要大写形式还是小写形式（true为大写）</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.GetRequestIP">
+            <summary>
+            获取一个请求IP（随机生成C类IP地址：192.168.0.0到192.168.255.255 ）
+            </summary>
+            <returns>C类IP地址</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.GetRandom(System.Int32,System.Int32)">
+            <summary>
+            获得一个随机数
+            </summary>
+            <param name="minValue">随机数最小值</param>
+            <param name="maxValue">随机数最大值</param>
+            <returns>随机数</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.GetCookieContainer(System.Collections.Generic.List{System.Net.Cookie})">
+            <summary>
+            根据cookie获取CookieContainer
+            </summary>
+            <param name="cookieList">cookieList</param>
+            <returns>CookieContainer</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.GetAllCookies(System.Net.CookieContainer)">
+            <summary>
+            获取所有cookie
+            </summary>
+            <param name="cc">CookieContainer</param>
+            <returns>CookieList</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.Chaos_GetRandomSeed">
+            <summary>
+            加密随机数生成器，生成随机种子
+            </summary>
+            <returns>随机种子</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.RandomHeadersInfo(EastWestWalk.NetFrameWork.Common.Utility.HttpHelper)">
+            <summary>
+            随机头信息选择器（仅限国航上使用）
+            </summary>
+            <param name="helper">helper</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.RandomStrNum">
+            <summary>
+            随机数字产生
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.HttpHelper.UrlEncode(System.String)">
+            <summary>
+            转换成URL格式
+            </summary>
+            <param name="value">value</param>
+            <returns>value</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Utility.LatLonUtil">
+            <summary>
+            LatLonUtil
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.LatLonUtil.GetAround(System.Double,System.Double,System.Int32)">
+            <summary>
+            根据提供的经度和纬度、以及半径，取得此半径内的最大最小经纬度
+            </summary>
+            <param name="lat">纬度</param>
+            <param name="lon">经度</param>
+            <param name="raidus">半径(米)</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.LatLonUtil.GetDistance(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            根据提供的两个经纬度计算距离(米)
+            </summary>
+            <param name="lng1">经度1</param>
+            <param name="lat1">纬度1</param>
+            <param name="lng2">经度2</param>
+            <param name="lat2">纬度2</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.LatLonUtil.GetCenterPos(System.Collections.Generic.IList{EastWestWalk.NetFrameWork.Common.Code.GpsPoint})">
+            <summary>
+            计算经纬度区域的中心点
+            </summary>
+            <param name="pointsList">经纬度集合</param>
+            <returns>中心点的经纬度</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Utility.Parse64Util">
+            <summary>
+            64进制编码辅助类
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Utility.Parse64Util.rDigits">
+            <summary>
+            偏移量
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.Parse64Util.Parse64Encode(System.Int32)">
+            <summary>
+            long转64进制
+            </summary>
+            <param name="value">value</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.Parse64Util.Parse64Decode(System.String)">
+            <summary>
+            64进制转long
+            </summary>
+            <param name="value">value</param>
+            <returns>结果</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Utility.MixUtil">
+            <summary>
+            混淆加密辅助类
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.MixUtil.Encrypt(System.String)">
+            <summary>
+            加密
+            </summary>
+            <param name="str">源字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.MixUtil.Decrypt(System.String)">
+            <summary>
+            解密
+            </summary>
+            <param name="ciphertext">The ciphertext.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.MixUtil.GetKey">
+             <summary>
+            获取加密key
+             </summary>
+             <returns></returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Utility.ValidateCode">
+            <summary>
+            生成验证码的类
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Utility.ValidateCode.MaxLength">
+            <summary>
+            验证码的最大长度
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Utility.ValidateCode.MinLength">
+            <summary>
+            验证码的最小长度
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Utility.ValidateCode.length">
+            <summary>
+            验证码长度
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.ValidateCode.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="length">验证码长度</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.ValidateCode.CreateValidateCode">
+            <summary>
+            生成验证码
+            </summary>
+            <returns>验证码</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Utility.ValidateCode.CreateValidateGraphic(System.String)">
+            <summary>
+            创建验证码的图片
+            </summary>
+            <param name="validateCode">验证码</param>
+            <returns>数组</returns>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.ValidateCode.ImageWidth">
+            <summary>
+            设置或获取验证码图片的长度
+            //return (int)(validateNumLength * 12.0);
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Utility.ValidateCode.ImageHeight">
+            <summary>
+            设置或获取验证码的高度
+             return 22.5;
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Write.LogHelper">
+            <summary>
+            Log日志编写类
+            </summary>	
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Write.LogHelper.LogFilePath">
+            <summary>
+            日志文件路径，默认为当前应用程序下log子目录,包含路径结束符号
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Write.LogHelper.LogWriteLevel">
+            <summary>
+            写日志等级 默认写所有日志
+            </summary>
+            <value>The log write level.</value>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Write.LogHelper.LogFileNameBegin">
+            <summary>
+            日志文件前缀
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Write.LogHelper.LogFileNameExtenDays">
+            <summary>
+            日志文件 日期标识 如 yyyyMMdd  值必须满足DateTime.ToString()的格式。
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogHelper.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogHelper.Write(System.String,EastWestWalk.NetFrameWork.Enum.LogLevel)">
+            <summary>
+            写日志文件
+            </summary>
+            <param name="logLevel">日志等级</param>
+            <param name="message">日志内容</param>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Write.LogService">
+            <summary>
+            写入文本日志
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Write.LogService._logWriteLevel">
+            <summary>
+            写日志的等级 默认int最小值
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Write.LogService.obj">
+            <summary>
+            The obj.
+            </summary>
+        </member>
+        <member name="P:EastWestWalk.NetFrameWork.Common.Write.LogService.LogWriteLevel">
+            <summary>
+            写日志等级设置，默认只写全部日志
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.WriteLog(System.Exception,System.String)">
+            <summary>
+            记录异常文本日志
+            </summary>
+            <param name="ex">异常</param>
+            <param name="remark">备注</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.WriteLog(System.Exception,System.String,EastWestWalk.NetFrameWork.Enum.LogLevel)">
+            <summary>
+            Writes the log.
+            </summary>
+            <param name="ex">The ex.</param>
+            <param name="remark">The remark.</param>
+            <param name="logLevel">The log level.</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.WriteLog(System.Exception,System.String,System.String)">
+            <summary>
+            记录异常文本日志
+            </summary>
+            <param name="ex">异常</param>
+            <param name="path">日志路径</param>
+            <param name="remark">备注</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.WriteLog(System.String,System.Exception,System.String,System.String)">
+            <summary>
+            记录异常文本日志
+            </summary>
+            <param name="describe">错误描述</param>
+            <param name="ex">异常</param>
+            <param name="path">日志路径</param>
+            <param name="remark">备注</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.CreateErrorMessage(System.Exception,System.String)">
+            <summary>
+            创建异常消息
+            </summary>
+            <param name="ex">异常信息</param>
+            <param name="remark">备注</param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.WriteLog(System.String,EastWestWalk.NetFrameWork.Enum.LogLevel)">
+            <summary>
+            记录文本日志
+            </summary>
+            <param name="content">日志内容</param>
+            <param name="logLevel">The log level.</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.WriteLog(System.String,System.String)">
+            <summary>
+            记录文本日志
+            </summary>
+            <param name="content">日志内容</param>
+            <param name="path">日志路径</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.WriteLog(System.String,System.String,EastWestWalk.NetFrameWork.Enum.LogLevel)">
+            <summary>
+            记录文本日志 大于等于配置的等级 才写日志
+            </summary>
+            <param name="content">日志内容</param>
+            <param name="path">日志路径</param>
+            <param name="logLevel">写日志的等级</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.SaveLog(System.String,System.Object,System.Object,System.String)">
+            <summary>
+            记录日志
+            </summary>
+            <param name="method">调用方法(必填)</param>
+            <param name="request">请求参数</param>
+            <param name="response">输出参数</param>
+            <param name="saveFolder">保存文件夹，默认为CallLog</param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.Log(System.String,System.String)">
+            <summary>
+            The log.
+            </summary>
+            <param name="content">
+            The content.
+            </param>
+            <param name="path">
+            The path.
+            </param>
+            <returns>
+            The 
+            </returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.LogService.GetLogPath">
+            <summary>
+            获取日志路径
+            </summary>
+            <returns>路径</returns>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Common.Write.TextWriter">
+            <summary>
+            写入文本
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Common.Write.TextWriter.fileName">
+            <summary>
+            写入文件路径
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.TextWriter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Write.TextWriter"/> class.
+            </summary>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.TextWriter.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EastWestWalk.NetFrameWork.Common.Write.TextWriter"/> class.
+            </summary>
+            <param name="fileName">
+            The file name.
+            </param>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.TextWriter.WriteLog(System.String)">
+            <summary>
+            写入日志
+            </summary>
+            <param name="logInfo">内容 </param>
+            <returns>结果</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.TextWriter.GetFileMainPath(System.DateTime)">
+            <summary>
+            获取文件路径
+            </summary>
+            <param name="timeStamp">timeStamp</param>
+            <returns>path</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.TextWriter.GetLastAccessFile(System.String,System.DateTime)">
+            <summary>
+            获取最后写入日志的文件
+            </summary>
+            <param name="path">路径</param>
+            <param name="timeStamp">timeStamp</param>
+            <returns>FileInfo</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.TextWriter.GetFileStream(System.IO.FileInfo,System.String,System.DateTime)">
+            <summary>
+            获取文件流
+            </summary>
+            <param name="fileInfo">lastFile</param>
+            <param name="path">path</param>
+            <param name="timeStamp">timeStamp</param>
+            <returns>FileStream</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.TextWriter.CreateFile(System.String,System.String)">
+            <summary>
+            创建文件
+            </summary>
+            <param name="path">路径</param>
+            <param name="fileName1">名称</param>
+            <returns>FileStream</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.TextWriter.GetFileMainName(System.DateTime)">
+            <summary>
+            获取文件名称
+            </summary>
+            <param name="timeStamp">timeStamp</param>
+            <returns>HHmmssfff</returns>
+        </member>
+        <member name="M:EastWestWalk.NetFrameWork.Common.Write.TextWriter.IsOutOfTimeMaxLength(System.DateTime,System.DateTime)">
+            <summary>
+            IsOutOfTimeMaxLength
+            </summary>
+            <param name="creationTime">creationTime</param>
+            <param name="timeStamp">timeStamp</param>
+            <returns>bool</returns>
+        </member>
+    </members>
+</doc>

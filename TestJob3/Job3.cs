@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Go.Job.BaseJob;
 using Quartz;
 
 namespace TestJob3
 {
-    public class Job3 : IJob
+    public class Job3 : BaseJob
     {
         public Task Execute(IJobExecutionContext context)
         {
@@ -17,9 +18,13 @@ namespace TestJob3
             //}
 
             //return Task.FromResult(0);
-
-            Console.WriteLine($"{DateTime.Now} : Job3 Run......");
+            throw new Exception("测试抛异常");
             return Task.FromResult(0);
+        }
+
+        protected override void Execute()
+        {
+            throw new Exception("测试抛异常");
         }
     }
 }

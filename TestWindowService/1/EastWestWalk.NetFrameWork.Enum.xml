@@ -1,0 +1,2993 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EastWestWalk.NetFrameWork.Enum</name>
+    </assembly>
+    <members>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.Const">
+            <summary>
+            常量
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.DefaultPageSize">
+            <summary>
+            分页大小
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.UserSessionKey">
+            <summary>
+            用户SessionKey
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.CompanySessionKey">
+            <summary>
+            用户SessionKey
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.MenuSessionKey">
+            <summary>
+            菜单SessionKey
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.SupplierSessionKey">
+            <summary>
+            商家SessionKey
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.SupplySessionKey">
+            <summary>
+            供应商SessionKey
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.LoginValidateCodeSessionKey">
+            <summary>
+            登录验证码SessionKey
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.RegistValidateCodeSessionKey">
+            <summary>
+            注册验证码SessionKey
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.System">
+            <summary>
+            系统
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.TicketFlightQueryPolicyFailureTimeKey">
+            <summary>
+            航班查询政策失效时间key(单位分钟)
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.TicketOrderPayOverdueTimeKey">
+            <summary>
+            机票订单支付失效时间key(单位分钟)
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Const.TikcetFlightQueryDataCacheTimeKey">
+            <summary>
+            航班查询数据缓存时间key (单位分钟)
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.BusinessType">
+            <summary>
+            业务类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BusinessType.机票">
+            <summary>
+            The 机票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BusinessType.生活服务">
+            <summary>
+            The 生活服务
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BusinessType.旅游">
+            <summary>
+            The 旅游
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BusinessType.酒店">
+            <summary>
+            The 酒店
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BusinessType.火车票">
+            <summary>
+            The 火车票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BusinessType.用户中心">
+            <summary>
+            The 用户中心
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.PassengerType">
+            <summary>
+            客人类型
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PassengerType.成人">
+            <summary>
+            成人
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PassengerType.儿童">
+            <summary>
+            儿童
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PassengerType.婴儿">
+            <summary>
+            婴儿
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.CardType">
+            <summary>
+            证件类型
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CardType.身份证">
+            <summary>
+            身份证
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CardType.护照">
+            <summary>
+            护照
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CardType.军人证">
+            <summary>
+            军人证
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CardType.回乡证">
+            <summary>
+            回乡证
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CardType.台胞证">
+            <summary>
+            台胞证
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CardType.港澳通行证">
+            <summary>
+            港澳通行证
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CardType.户口本">
+            <summary>
+            户口本
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CardType.出生证明">
+            <summary>
+            出生证明
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CardType.其他">
+            <summary>
+            其他
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.InOrOut">
+            <summary>
+            收支类型
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.InOrOut.收">
+            <summary>
+            收
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.InOrOut.支">
+            <summary>
+            支
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.OrderPayStatus">
+            <summary>
+            订单支付状态
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.OrderPayStatus.未支付">
+            <summary>
+            未支付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.OrderPayStatus.已支付">
+            <summary>
+            已支付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.OrderPayStatus.已分润">
+            <summary>
+            已分润
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.PayType">
+            <summary>
+            支付方式
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PayType.支付宝">
+            <summary>
+            支付宝
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PayType.支付宝Wap">
+            <summary>
+            支付宝Wap
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PayType.微信">
+            <summary>
+            微信
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PayType.未知">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PayType.钱包">
+            <summary>
+            The 钱包
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PayType.线下支付">
+            <summary>
+            The 线下支付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PayType.微信Wap">
+            <summary>
+            微信Wap
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PayType.支付宝PC">
+            <summary>
+            支付宝PC支付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PayType.微信公众号Wap">
+            <summary>
+            微信公众号Wap
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.Gender">
+            <summary>
+            性别
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Gender.男">
+            <summary>
+            男
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Gender.女">
+            <summary>
+            女
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.Gender.未知">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.DataAuthorType">
+            <summary>
+            查询数据权限
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.DataAuthorType.查询本联络人数据">
+            <summary>
+            查询本人数据
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.DataAuthorType.查询本门店数据">
+            <summary>
+            查询本门店数据
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.DataAuthorType.查询本分社数据">
+            <summary>
+            查询本分社数据
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.DataAuthorType.查询本总社数据">
+            <summary>
+            查询本总社数据
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LogLevel">
+            <summary>
+            系统日志等级，按照Syslog的标准，将日志等级分为八个等级
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogLevel.A系统不可用">
+            <summary>
+            A系统不可用
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogLevel.B紧急事件">
+            <summary>
+            B紧急事件
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogLevel.C关键事件">
+            <summary>
+            C关键事件
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogLevel.D错误事件">
+            <summary>
+            D错误事件
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogLevel.E警告事件">
+            <summary>
+            E警告事件
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogLevel.F重要事件">
+            <summary>
+            F重要事件
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogLevel.G有用信息">
+            <summary>
+            G有用信息
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogLevel.H调试信息">
+            <summary>
+            H调试信息
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.SecretKeyType">
+            <summary>
+            秘钥 加密串 类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.商户私钥">
+            <summary>
+            The 商户私钥
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.商户公钥">
+            <summary>
+            The 商户公钥
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.支付宝公钥">
+            <summary>
+            The 支付宝公钥
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.平台利润支付宝账号">
+            <summary>
+            The 平台利润支付宝账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.平台基金支付宝账号">
+            <summary>
+            The 平台基金支付宝账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.平台代收支付宝账号">
+            <summary>
+            The 平台代收支付宝账号 如商家未绑定支付宝,平台代收
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.平台返现代收支付宝账号">
+            <summary>
+            The 平台返现代收支付宝账号 给会员返现,钱在平台代收账号上
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.平台利润微信账号">
+            <summary>
+            The 平台利润微信账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.平台基金微信账号">
+            <summary>
+            The 平台基金微信账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.平台代收微信账号">
+            <summary>
+            The 平台代收微信账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.平台返现代收微信账号">
+            <summary>
+            The 平台返现代收微信账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.AliPayPid">
+            <summary>
+            Pid：支付宝Pid
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.AliPayKey">
+            <summary>
+            Key：支付宝加密Key
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.AliPayAppId">
+            <summary>
+            Appid：应用ID
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WeiXinAppID">
+            <summary>
+            The wei xin application identifier
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WeiXinPid">
+            <summary>
+            The wei xin pid
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WeiXinKey">
+            <summary>
+            The wei xin key
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinPid">
+            <summary>
+            公众号pid
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinAppid">
+            <summary>
+            公众号appid
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinKey">
+            <summary>
+            公众号key
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinAppSecret">
+            <summary>
+            WapWeiXinAppSecret
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinLMQPid">
+            <summary>
+            东走西走联盟圈公众号pid
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinLMQAppid">
+            <summary>
+            东走西走联盟圈公众号appid
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinLMQKey">
+            <summary>
+            东走西走联盟圈公众号key
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinLMQAppSecret">
+            <summary>
+            东走西走联盟圈WapWeiXinAppSecret
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinPID_DZXZLMQSCX">
+            <summary>
+            微信PID_四川东走西走联盟圈四川行
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinAppID_DZXZLMQSCX">
+            <summary>
+            微信AppID_四川东走西走联盟圈四川行
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinKey_DZXZLMQSCX">
+            <summary>
+            微信Key_四川东走西走联盟圈四川行
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.WapWeiXinAppSecret_DZXZLMQSCX">
+            <summary>
+            微信AppSecret_四川东走西走联盟圈四川行
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.东走西走联盟圈退款证书路径">
+            <summary>
+            东走西走联盟圈退款证书路径
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.东走西走联盟圈转账证书路径">
+            <summary>
+            东走西走联盟圈转账证书路径
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.东走西走联盟圈转账查询证书路径">
+            <summary>
+            东走西走联盟圈转账查询证书路径
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.YopRecharge_MerchantNo">
+            <summary>
+            易宝充值专用商编
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.YopRecharge_ParentMerchantNo">
+            <summary>
+            易宝充值专用父商编
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.YopRecharge_AppKey">
+            <summary>
+            易宝充值专用AppKey
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.YopRecharge_PrivateKey">
+            <summary>
+            易宝充值专用Rsa私钥
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretKeyType.YopRecharge_PublicKey">
+            <summary>
+            易宝充值专用Rsa公钥
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.SecretAccountType">
+            <summary>
+            商户账号类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretAccountType.默认空">
+            <summary>
+            The 默认空
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretAccountType.支付">
+            <summary>
+            The 支付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretAccountType.提现">
+            <summary>
+            The 提现
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretAccountType.转账分润">
+            <summary>
+            The 提现
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretAccountType.东走西走联盟圈公众号">
+            <summary>
+            东走西走联盟圈公众号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretAccountType.东走西走公众号">
+            <summary>
+            东走西走公众号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SecretAccountType.东走西走联盟圈四川行">
+            <summary>
+            东走西走联盟圈四川行 公众号
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.BelongSystem">
+            <summary>
+            所属系统
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BelongSystem.生活服务">
+            <summary>
+            生活服务
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BelongSystem.机票">
+            <summary>
+            机票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BelongSystem.旅游">
+            <summary>
+            机票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BelongSystem.酒店">
+            <summary>
+            机票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BelongSystem.火车票">
+            <summary>
+            机票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.BelongSystem.钱包">
+            <summary>
+            机票
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum">
+            <summary>
+            生活服务相关枚举
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderStatus">
+            <summary>
+            生活服务 产品订单类型枚举 重新下单，修改订单 会将之前的订单信息处理为无效
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderStatus.未完成">
+            <summary>
+            The 未完成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderStatus.已完成">
+            <summary>
+            The 已完成
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderGoStatus">
+            <summary>
+            订单状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderGoStatus.待确认">
+            <summary>
+            The 待确认
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderGoStatus.待支付">
+            <summary>
+            The 待支付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderGoStatus.已拒绝">
+            <summary>
+            The 待消费
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderGoStatus.已完成">
+            <summary>
+            The 已完成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderGoStatus.已取消">
+            <summary>
+            The 已取消
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderReStatus">
+            <summary>
+            订单反向流程
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderReStatus.无">
+            <summary>
+            The 无
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderReStatus.已取消">
+            <summary>
+            The 已取消
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderReStatus.已退款">
+            <summary>
+            The 已退款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.OrderReStatus.已结束">
+            <summary>
+            The 已结束
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.ExpenseStatus">
+            <summary>
+            消费状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.ExpenseStatus.未消费">
+            <summary>
+            The 未消费
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.ExpenseStatus.已消费">
+            <summary>
+            The 已消费
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.ProductType">
+            <summary>
+            产品类型 美食 影视 等
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.ProductType.默认产品">
+            <summary>
+            The 默认产品
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.ProductType.美食">
+            <summary>
+            The 美食
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.ProductType.影视">
+            <summary>
+            The 影视
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.ProductType.KTV">
+            <summary>
+            The KTV
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.SplitStatusType">
+            <summary>
+            Enum SplitStatusType
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.SplitStatusType.未达到分佣条件">
+            <summary>
+            The 未达到分佣条件
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.SplitStatusType.开始分佣">
+            <summary>
+            The 开始分佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.SplitStatusType.分佣成功">
+            <summary>
+            The 分佣成功
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.SplitStatusType.分拥失败">
+            <summary>
+            The 分拥失败
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.SplitStatusType.部分分拥成功">
+            <summary>
+            The 部分分拥成功
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.FlowStatus">
+            <summary>
+            流水状态 记录 和资金平台交易的状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.FlowStatus.成功">
+            <summary>
+            The 成功
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.FlowStatus.失败">
+            <summary>
+            The 失败
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.FlowStatus.待分润">
+            <summary>
+            The 待分润
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.IsCheckFirst">
+            <summary>
+            是否已判断首单 逻辑
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.IsCheckFirst.已分析">
+            <summary>
+            The 已分析 是否为首单
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.IsCheckFirst.未分析">
+            <summary>
+            The 未分析 是否为首单
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.IsCheckFirst.已完成返佣">
+            <summary>
+            The 已完成返佣 已完成返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.IsCheckFirst.已分析非首单">
+            <summary>
+            The 非首单跳过
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.PlatDetaultAccountType">
+            <summary>
+            平台默认账号类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.PlatDetaultAccountType.结算平台">
+            <summary>
+            The 手续费账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.PlatDetaultAccountType.利润账号">
+            <summary>
+            The 利润账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.PlatDetaultAccountType.手续费账号">
+            <summary>
+            The 手续费账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.PlatDetaultAccountType.基金账号">
+            <summary>
+            The 基金账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.PlatDetaultAccountType.平台代收账号">
+            <summary>
+            The 平台代收账号
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.PlatDetaultAccountType.平台返现中转账号">
+            <summary>
+            The 平台返现中转账号 平台支付宝收钱,返现到其他人的钱包
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.FundType">
+            <summary>
+            资金状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.FundType.结算款">
+            <summary>
+            The 结算款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.FundType.商品款">
+            <summary>
+            The 商品款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.FundType.分润">
+            <summary>
+            The 分润
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.FundType.基金">
+            <summary>
+            The 基金
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.FundType.手续费">
+            <summary>
+            The 手续费
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace">
+            <summary>
+            是否未为总社代收
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.会员分社">
+            <summary>
+             分社提成（会员）
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.商家分社">
+            <summary>
+            分社提成（商家）
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.会员门店">
+            <summary>
+            门店提成（会员）
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.商家门店">
+            <summary>
+            门店提成（商家）
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.联络人提成">
+            <summary>
+            联络人提成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.商家提成">
+            <summary>
+            商家提成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.商家员工提成">
+            <summary>
+            商家员工提成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.会员基金">
+            <summary>
+            会员基金
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.商家应收">
+            <summary>
+            商家应收
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.EIsReplace.会员返佣">
+            <summary>
+            会员返佣
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeEnum.DateRange">
+            <summary>
+            生活消费统计查询日期范围
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.DateRange.一天">
+            <summary>
+            The 一天
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.DateRange.一周">
+            <summary>
+            The 一周
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.DateRange.一月">
+            <summary>
+            The 一月
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeEnum.DateRange.一年">
+            <summary>
+            The 一年
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum">
+            <summary>
+            TicketEnum
+            </summary>	
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketPolicyType">
+            <summary>
+            机票政策类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketPolicyType.B2B">
+            <summary>
+            B2B
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketPolicyType.BSP">
+            <summary>
+            BSP
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.TripType">
+            <summary>
+            行程类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TripType.单程">
+            <summary>
+            单程
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TripType.往返">
+            <summary>
+            往返
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TripType.联程">
+            <summary>
+            联程
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.AuditStatus">
+            <summary>
+            审核状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.AuditStatus.待审">
+            <summary>
+            待审
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.AuditStatus.已审">
+            <summary>
+            已审
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.HeadAuditStatus">
+            <summary>
+            总社审核状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.HeadAuditStatus.待审">
+            <summary>
+            待审
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.HeadAuditStatus.已审">
+            <summary>
+            已审
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.PolicyPassengerType">
+            <summary>
+            政策乘客类型
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PolicyPassengerType.成人">
+            <summary>
+            成人
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PolicyPassengerType.儿童">
+            <summary>
+            儿童
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PolicyPassengerType.婴儿">
+            <summary>
+            婴儿
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.PolicySources">
+            <summary>
+            政策来源
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PolicySources.未知">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PolicySources.政策发布">
+            <summary>
+            儿童
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PolicySources.系统导入">
+            <summary>
+            系统导入
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.BuyersType">
+            <summary>
+            买家类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.BuyersType.会员">
+            <summary>
+            会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.BuyersType.门店">
+            <summary>
+            门店 
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayStatus">
+            <summary>
+            支付状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayStatus.等待支付">
+            <summary>
+            等待支付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayStatus.支付成功">
+            <summary>
+            支付成功
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayStatus.分润成功">
+            <summary>
+            分润成功
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayStatus.退分润成功">
+            <summary>
+            退分润成功
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayStatus.退交易成功">
+            <summary>
+            退交易成功
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.TotalOrderOrderFlag">
+            <summary>
+            总订单标记
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TotalOrderOrderFlag.机票">
+            <summary>
+            机票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TotalOrderOrderFlag.保险">
+            <summary>
+            保险
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TotalOrderOrderFlag.休息室">
+            <summary>
+            休息室
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TotalOrderOrderFlag.接送机">
+            <summary>
+            接送机
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource">
+            <summary>
+            机票订单来源
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.东走西走">
+            <summary>
+            东走西走
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource._720u">
+            <summary>
+            _720u
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource._517na">
+            <summary>
+            _517na
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource._8000yi">
+            <summary>
+            _8000yi
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource._51book">
+            <summary>
+            _51book
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.就旅行">
+            <summary>
+            就旅行
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.今日">
+            <summary>
+            今日
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.Baituo">
+            <summary>
+            Baituo
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.票盟">
+            <summary>
+            票盟
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.联合800">
+            <summary>
+            联合800
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.易行">
+            <summary>
+            携程
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.携程">
+            <summary>
+            携程
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.淘宝">
+            <summary>
+            淘宝
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.去哪儿">
+            <summary>
+            去哪儿
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderSource.线下">
+            <summary>
+            线下
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderStatus">
+            <summary>
+            机票订单状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderStatus.等待支付">
+            <summary>
+            等待支付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderStatus.已支付待出票">
+            <summary>
+            已支付待出票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderStatus.已出票交易结束">
+            <summary>
+            已出票交易结束
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderStatus.已取消待退款">
+            <summary>
+            已取消待退款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderStatus.已取消已退款交易结束">
+            <summary>
+            已取消已退款交易结束
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderStatus.已取消">
+            <summary>
+            已取消
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderFlag">
+            <summary>
+            机票订单标记
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketOrderFlag.Default">
+            <summary>
+            暂无标记
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketType">
+            <summary>
+            机票类型
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketType.预定">
+            <summary>
+            预定
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketType.退票">
+            <summary>
+            退票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketType.废票">
+            <summary>
+            废票
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType">
+            <summary>
+            交易角色类型
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.支付机票款">
+            <summary>
+            支付机票款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.支付保险款">
+            <summary>
+            支付保险款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.支付休息室款">
+            <summary>
+            供应货款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.支付接送机款">
+            <summary>
+            支付接送机款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.总社提成">
+            <summary>
+            总社提成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.总社手续费">
+            <summary>
+            总社手续费
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.分社提成">
+            <summary>
+            分社提成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.分社手续费">
+            <summary>
+            分社手续费
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.供应货款">
+            <summary>
+            供应货款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.供应手续费">
+            <summary>
+            供应手续费
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.门店提成">
+            <summary>
+            门店提成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PayRoleType.门店手续费">
+            <summary>
+            门店手续费
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.TradeStatus">
+            <summary>
+            交易状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TradeStatus.未收">
+            <summary>
+            未收
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TradeStatus.已收">
+            <summary>
+            已收
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TradeStatus.未付">
+            <summary>
+            未付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TradeStatus.已付">
+            <summary>
+            已付
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.DistributeStatus">
+            <summary>
+            分润状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.DistributeStatus.分润成功">
+            <summary>
+            分润成功
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.DistributeStatus.分润失败">
+            <summary>
+            分润失败
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketParamType">
+            <summary>
+            机票参数类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketParamType.WorkingDayOutTicketTime">
+            <summary>
+            工作日出废票时间
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketParamType.WeekendDayOutTicketTime">
+            <summary>
+            周末出废票时间
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketParamType.LatestInvalidTime">
+            <summary>
+            当日最晚废票时间
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketParamType.PolicyAuditStatus">
+             <summary>
+            供应商添加政策审核状态 
+             </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketParamType.HeadPolicyAuditStatus">
+             <summary>
+            总社添加政策审核状态 
+             </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.TicketParamType.IsOpenSubtractPointSet">
+             <summary>
+            是否开启扣点设置
+             </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.FinancesPayStatus">
+            <summary>
+            资金状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.FinancesPayStatus.未收">
+            <summary>
+            未收
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.FinancesPayStatus.未付">
+            <summary>
+            未付
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.FinancesPayStatus.已收">
+            <summary>
+            已收
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.FinancesPayStatus.已付">
+            <summary>
+            已付
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.OperatorRole">
+            <summary>
+            操作角色
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.OperatorRole.系统">
+            <summary>
+            系统
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.OperatorRole.会员">
+            <summary>
+            会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.OperatorRole.供应">
+            <summary>
+            供应
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.OperatorRole.总社">
+            <summary>
+            总社
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.VisibleRole">
+            <summary>
+            可见角色
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.VisibleRole.会员">
+            <summary>
+            会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.VisibleRole.供应">
+            <summary>
+            供应
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.VisibleRole.分社">
+            <summary>
+            总社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.VisibleRole.总社">
+            <summary>
+            总社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.VisibleRole.门店">
+            <summary>
+            门店
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.PnrStatus">
+            <summary>
+            编码状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PnrStatus.需要取消">
+            <summary>
+            需要取消编码
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PnrStatus.不需要取消">
+            <summary>
+            不需要取消
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PnrStatus.取消成功">
+            <summary>
+            取消成功
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.PnrStatus.取消失败">
+            <summary>
+            取消失败
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TicketEnum.MemberCompanyType">
+            <summary>
+            扣点成员所属单位类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.MemberCompanyType.会员">
+            <summary>
+            会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.MemberCompanyType.总社">
+            <summary>
+            总社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.MemberCompanyType.分社">
+            <summary>
+            分社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TicketEnum.MemberCompanyType.门店">
+            <summary>
+            门店
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum">
+            <summary>
+            旅游相关枚举
+            </summary>	
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.Available">
+            <summary>
+            旅游删除状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Available.全部">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Available.使用">
+            <summary>
+            使用
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Available.删除">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.Status">
+            <summary>
+            旅游基础表状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Status.全部">
+            <summary>
+            The 全部
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Status.待审核">
+            <summary>
+            The 待审核
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Status.审核通过">
+            <summary>
+            The 审核通过
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Status.审核未通过">
+            <summary>
+            The 审核未通过
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.ScenicareaType">
+            <summary>
+            旅游基础表状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ScenicareaType.全部">
+            <summary>
+            The 全部
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ScenicareaType.景点">
+            <summary>
+            The 景点
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ScenicareaType.娱乐">
+            <summary>
+            The 娱乐
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductType">
+            <summary>
+            旅游产品类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductType.全部">
+            <summary>
+            The 全部
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductType.跟团">
+            <summary>
+            The 跟团
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductType.自由行">
+            <summary>
+            The 自由行
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.SpecalLineType">
+             <summary>
+            产品线路类型 1.周边短线 2,国内长线 3.出境线路
+             </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.SpecalLineType.全部">
+            <summary>
+            The 全部
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.SpecalLineType.周边短线">
+            <summary>
+            The 周边短线
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.SpecalLineType.国内长线">
+            <summary>
+            The 国内长线
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.SpecalLineType.出境线路">
+            <summary>
+            The 出境线路
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductStatus">
+            <summary>
+            旅游产品状态枚举
+            1 ：待上架  2：销售中 3： 手工下架  4：过期下架  5： 售空下架
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductStatus.全部">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductStatus.待上架">
+            <summary>
+            待上架
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductStatus.销售中">
+            <summary>
+            销售中
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductStatus.手工下架">
+            <summary>
+            手工下架
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductStatus.过期下架">
+            <summary>
+            过期下架
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductStatus.售空下架">
+            <summary>
+            售空下架
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductStatus.待完善">
+            <summary>
+            待完善
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductCategory">
+            <summary>
+            旅游产品产品分类
+            1.出发地参团、2.目的地参团、3.组合产品
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductCategory.出发地参团">
+            <summary>
+            1.出发地参团
+            </summary> 
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductCategory.目的地参团">
+            <summary>
+            目的地参团
+            </summary> 
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductCategory.组合产品">
+            <summary>
+            组合产品
+            </summary>  
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTransportation">
+            <summary>
+            旅游交通工具
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTransportation.飞机">
+            <summary>
+            飞机
+            </summary>     
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTransportation.火车">
+            <summary>
+            火车
+            </summary>     
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTransportation.大巴">
+            <summary>
+            大巴
+            </summary>    
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTransportation.轮船">
+            <summary>
+            轮船
+            </summary>   
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTransportation.动车">
+            <summary>
+            动车
+            </summary>  
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductShow">
+            <summary>
+            旅游产品展示类型
+            1.普通(web) 2.App 3.全部
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductShow.默认值">
+            <summary>
+            默认值
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductShow.普通WEB">
+            <summary>
+            普通(web)
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductShow.APP">
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductShow.全部">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType">
+            <summary>
+            旅游产品日志枚举
+            1.新增 2.编辑 3.删除 4.上架 5.下架 6. 审核 7.产品复制
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.新增">
+            <summary>
+            新增
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.编辑">
+            <summary>
+            编辑
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.删除">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.上架">
+            <summary>
+            上架
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.下架">
+            <summary>
+            下架
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.审核">
+            <summary>
+            审核
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.产品复制">
+            <summary>
+            产品复制
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.产品价格">
+            <summary>
+            产品价格
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.产品行程">
+            <summary>
+            产品行程
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductLogOperatType.产品详情">
+            <summary>
+            产品详情
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.UplodFileState">
+            <summary>
+            旅游文件库状态
+            状态,0上传中,1上传完成,2同步完成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.UplodFileState.上传中">
+            <summary>
+            0上传中
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.UplodFileState.上传完成">
+            <summary>
+            1上传完成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.UplodFileState.同步完成">
+            <summary>
+            2同步完成
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.FareUnit">
+            <summary>
+            加价单位
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.FareUnit.全部">
+            <summary>
+            The 全部
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.FareUnit.百分比">
+            <summary>
+            The 百分比
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.FareUnit.具体金额">
+            <summary>
+            The 具体金额
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTypeBox">
+            <summary>
+            旅游产品类型选择框
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTypeBox.未设置">
+            <summary>
+            The 未设置
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTypeBox.出发地参团">
+            <summary>
+            The 出发地参团
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTypeBox.目的地参团">
+            <summary>
+            The 目的地参团
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ProductTypeBox.全部">
+            <summary>
+            The 全部
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.Look">
+            <summary>
+            旅游允许查看信息
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Look.未设置">
+            <summary>
+            The 未设置
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Look.采购商联系">
+            <summary>
+            The 采购商联系
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Look.供应商联系">
+            <summary>
+            The 供应商联系
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.Look.全部">
+            <summary>
+            The 全部
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.AccountType">
+            <summary>
+            分账模式
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.AccountType.一次到账">
+            <summary>
+            The 一次到账
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.AccountType.分批到帐">
+            <summary>
+            The  分批到帐
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.AccountType.分批解冻">
+            <summary>
+            The  分批解冻
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.AccountCount">
+            <summary>
+            分账次数
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.AccountCount.一次到账">
+            <summary>
+            The 一次到账
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.AccountCount.两次到账">
+            <summary>
+            The  两次到账
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.AccountCount.三次到账">
+            <summary>
+            The  三次到账
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.ScaleType">
+            <summary>
+            订单状态 
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ScaleType.默认值">
+            <summary>
+            The 默认值
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ScaleType.发团前">
+            <summary>
+            The 发团前
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ScaleType.发团后">
+            <summary>
+            The  发团后
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ScaleType.回团前">
+            <summary>
+            The  回团前
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.ScaleType.回团后">
+            <summary>
+            The  回团后
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.LogType">
+            <summary>
+            日志类型 
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.LogType.基础">
+            <summary>
+            The 基础
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.LogType.分账">
+            <summary>
+            The  分账
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.LogType.返佣">
+            <summary>
+            The  返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.LogType.专线">
+            <summary>
+            The  专线
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.EContractStatus">
+            <summary>
+            合同状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.EContractStatus.待分配">
+            <summary>
+            待分配
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.EContractStatus.待使用">
+            <summary>
+            待使用
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.EContractStatus.已备案">
+            <summary>
+            已备案
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.EContractStatus.已回收">
+            <summary>
+            已回收
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.EContractStatus.已作废">
+            <summary>
+            已作废
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TripEnum.EOrderSource">
+            <summary>
+            订单来源
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.EOrderSource.B端">
+            <summary>
+            B端
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TripEnum.EOrderSource.App">
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.CompanyType">
+            <summary>
+            公司类型 1-5 1-4存储于CompanyInfo表,5存储于商家表 用于区分 6单位 存储于公司信息表
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.无">
+            <summary>
+            无
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.总社">
+            <summary>
+            总社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.分社">
+            <summary>
+            分社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.门店">
+            <summary>
+            门店
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.联络人">
+            <summary>
+            联络人
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.商家">
+            <summary>
+            商家 商家信息存储于表 Suppliermanager
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.单位">
+            <summary>
+            The 单位
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.供应商">
+            <summary>
+            供应商
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.分销商">
+            <summary>
+            分销商
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.店铺商家">
+            <summary>
+            店铺商家
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyType.实体商家">
+            <summary>
+            实体商家
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType">
+            <summary>
+            生活服务返佣设置比例 类型 和公司大部分对象
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.无">
+            <summary>
+            无
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.总社">
+            <summary>
+            总社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.会员基金">
+            <summary>
+            会员基金
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.会员分社">
+            <summary>
+            会员分社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.招商分社">
+            <summary>
+            招商分社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.会员门店">
+            <summary>
+            会员门店
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.招商门店">
+            <summary>
+            招商门店
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.联络人">
+            <summary>
+            联络人
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.手续费">
+            <summary>
+            The 手续费
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.商家收钱">
+            <summary>
+            The 商家收钱
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.会员">
+            <summary>
+            The 会员 作为交易中的 付款方存在
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.会员首单返现">
+            <summary>
+            The 会员首单返现
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.平台利润">
+            <summary>
+            平台利润方
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.商家返佣">
+            <summary>
+            商家返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.商家员工返佣">
+            <summary>
+            商家员工返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.单位签约返佣">
+            <summary>
+            The 单位签约返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.会员签约返佣">
+            <summary>
+            The 会员签约返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.推荐会员签约返佣">
+            <summary>
+            会员消费后给推荐人返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.直属会员商家返佣">
+            <summary>
+            直属会员商家返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LifeServiceRebateType.直属商家的推荐商家返佣">
+            <summary>
+            直属会员商家的推荐商家返佣
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.MemberRecommendRateType">
+            <summary>
+            会员推荐返佣类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MemberRecommendRateType.分社返佣">
+            <summary>
+            The 分社返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MemberRecommendRateType.门店返佣">
+            <summary>
+            The 门店返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MemberRecommendRateType.联络人返佣">
+            <summary>
+            The 联络人返佣
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MemberRecommendRateType.会员">
+            <summary>
+            The 会员
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.CompanyOpenStatus">
+            <summary>
+            开通状态
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyOpenStatus.未开通">
+            <summary>
+            未开通
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyOpenStatus.已开通">
+            <summary>
+            已开通
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.CompanyOpenStatus.已禁用">
+            <summary>
+            已禁用
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.SupplierType">
+            <summary>
+            商家类型
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierType.非商家">
+            <summary>
+            非商家
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierType.普通商家">
+            <summary>
+            未开通
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierType.单位签约商家">
+            <summary>
+            已开通
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierType.签约商家">
+            <summary>
+            已禁用
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.UserType">
+            <summary>
+            用户类型 员工 和 会员 商家账号也叫员工
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.UserType.员工">
+            <summary>
+            员工 指
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.UserType.会员">
+            <summary>
+            会员     
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.MemberType">
+            <summary>
+            会员类型 普通 Vip 签约
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MemberType.非会员">
+            <summary>
+            The 非会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MemberType.普通会员">
+            <summary>
+            The 普通会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MemberType.Vip会员">
+            <summary>
+            The vip会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MemberType.签约会员">
+            <summary>
+            The 签约会员
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.UserStatus">
+            <summary>
+            用户状态
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.UserStatus.禁用">
+            <summary>
+            禁用  
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.UserStatus.启用">
+            <summary>
+            正常  
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.UserStatus.待开通">
+            <summary>
+            锁定  
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.SupplierStatus">
+            <summary>
+            商家状态
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierStatus.禁用">
+            <summary>
+            禁用  
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierStatus.启用">
+            <summary>
+            正常  
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierStatus.待审核">
+            <summary>
+            待审核  
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierStatus.审核不通过">
+            <summary>
+            审核不通过  
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.VipSource">
+            <summary>
+            会员来源
+            </summary>	
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.VipSource.网上注册">
+            <summary>
+            线上注册  
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.VipSource.上级开通">
+            <summary>
+            联络人发展  
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.VipSource.消费升级">
+            <summary>
+            消费升级  
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.MembershipCardStatus">
+            <summary>
+            会员卡状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MembershipCardStatus.未发放">
+            <summary>
+            未发放
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MembershipCardStatus.已发分社">
+            <summary>
+            已发分社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MembershipCardStatus.已发门店">
+            <summary>
+            已发门店
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MembershipCardStatus.已发联络人">
+            <summary>
+            已发联络人
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MembershipCardStatus.已开通">
+            <summary>
+            已开通
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MembershipCardStatus.已作废">
+            <summary>
+            已作废
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MembershipCardStatus.已发商家">
+            <summary>
+            已发商家
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.AuthorityCardStatus">
+            <summary>
+            授权牌状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AuthorityCardStatus.未发放">
+            <summary>
+            未发放
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AuthorityCardStatus.已发分社">
+            <summary>
+            已发分社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AuthorityCardStatus.已发门店">
+            <summary>
+            已发门店
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AuthorityCardStatus.已开通">
+            <summary>
+            已开通
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AuthorityCardStatus.已作废">
+            <summary>
+            已作废
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LogOutType">
+            <summary>
+            token的注销状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogOutType.未注销">
+            <summary>
+            The 未注销
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LogOutType.已注销">
+            <summary>
+            The 已注销
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.OperType">
+            <summary>
+            日志操作类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.OperType.添加">
+            <summary>
+            添加
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.OperType.修改">
+            <summary>
+            修改
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.OperType.删除">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.AccountType">
+            <summary>
+            账号类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AccountType.总社">
+            <summary>
+            总社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AccountType.分社">
+            <summary>
+            分社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AccountType.门店">
+            <summary>
+            门店
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AccountType.联络人">
+            <summary>
+            联络人
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AccountType.单位联络人">
+            <summary>
+            单位联络人
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AccountType.商家">
+            <summary>
+            商家
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AccountType.会员">
+            <summary>
+            会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AccountType.Vip会员">
+            <summary>
+             Vip会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AccountType.签约会员">
+            <summary>
+              签约会员
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.LowerType">
+            <summary>
+            下级类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LowerType.分社">
+            <summary>
+            分社
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LowerType.门店">
+            <summary>
+            门店
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LowerType.联络人">
+            <summary>
+            联络人
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LowerType.商家">
+            <summary>
+            商家
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.LowerType.会员">
+            <summary>
+            会员
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.PromotionMissionStatus">
+            <summary>
+            推广任务状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PromotionMissionStatus.推展中">
+            <summary>
+            推展中
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PromotionMissionStatus.已完成">
+            <summary>
+            已完成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PromotionMissionStatus.超时完成">
+            <summary>
+            超时完成
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.PromotionMissionStatus.未完成">
+            <summary>
+            未完成
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.StationMessageIsReadStatus">
+            <summary>
+            站内信息是否已读
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.StationMessageIsReadStatus.未读">
+            <summary>
+            未读
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.StationMessageIsReadStatus.已读">
+            <summary>
+            已读
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.StationMessageIsImportantStatus">
+            <summary>
+            站内信息是否重要
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.StationMessageIsImportantStatus.不重要">
+            <summary>
+            不重要
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.StationMessageIsImportantStatus.重要">
+            <summary>
+            重要
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.StationMessageType">
+            <summary>
+            消息类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.StationMessageType.促销消息">
+            <summary>
+            促销消息
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.StationMessageType.公告信息">
+            <summary>
+            公告信息
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.StationMessageType.订单提醒消息">
+            <summary>
+            订单提醒消息
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.TransmissionRange">
+            <summary>
+            发给的用户
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TransmissionRange.所有会员">
+            <summary>
+            所有会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TransmissionRange.同城会员">
+            <summary>
+            同城会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.TransmissionRange.所有商家">
+            <summary>
+            所有商家
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.MessageStatus">
+            <summary>
+            信息状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MessageStatus.待审核">
+            <summary>
+            待审核
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MessageStatus.正常">
+            <summary>
+            正常
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MessageStatus.禁用">
+            <summary>
+            禁用
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MessageStatus.删除">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.MessageOperationType">
+            <summary>
+            信息操作类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MessageOperationType.重要">
+            <summary>
+            重要
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MessageOperationType.删除">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MessageOperationType.已读">
+            <summary>
+            已读
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MessageOperationType.禁用">
+            <summary>
+            禁用
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MessageOperationType.启用">
+            <summary>
+            启用
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.UpVipStatus">
+            <summary>
+            Enum UpVipStatus
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.UpVipStatus.待确认">
+            <summary>
+            待确认
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.UpVipStatus.成功">
+            <summary>
+            The 成功
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.UpVipStatus.失败">
+            <summary>
+            The 失败
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.AnalysisReStatus">
+            <summary>
+            推荐关系分析状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AnalysisReStatus.无推荐关系">
+            <summary>
+            无推荐关系
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AnalysisReStatus.推荐未返现">
+            <summary>
+            The 推荐未返现
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AnalysisReStatus.推荐返现成功">
+            <summary>
+            The 推荐返现成功
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.AnalysisReStatus.推荐返现失败">
+            <summary>
+            The 推荐返现失败
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.SupplierAppleForRegistStatus">
+            <summary>
+            注册商家状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierAppleForRegistStatus.新增">
+            <summary>
+            新增
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierAppleForRegistStatus.已签约">
+            <summary>
+            已签约
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplierAppleForRegistStatus.已拒绝">
+            <summary>
+            已拒绝
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.RegisterTpye">
+            <summary>
+            二维码注册类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.RegisterTpye.会员">
+            <summary>
+            会员
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.RegisterTpye.商家">
+            <summary>
+            商家
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.MenuType">
+            <summary>
+            菜单类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.公用">
+            <summary>
+            公用
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.生活服务">
+            <summary>
+            生活服务
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.机票">
+            <summary>
+            公用
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.旅游">
+            <summary>
+            旅游
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.酒店">
+            <summary>
+            酒店
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.火车票">
+            <summary>
+            火车票
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.钱包">
+            <summary>
+            钱包
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.爆款">
+            <summary>
+            爆款
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.预约">
+            <summary>
+            预约
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.超市">
+            <summary>
+            超市
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.酒店招募令">
+            <summary>
+            酒店招募令
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.旅游精品">
+            <summary>
+            旅游精品
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.洗车养护">
+            <summary>
+            洗车养护
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.MenuType.新微商城">
+            <summary>
+            新微商城
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.SupplyType">
+            <summary>
+            供应商类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplyType.机票供应">
+            <summary>
+            机票供应
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplyType.旅游供应">
+            <summary>
+            旅游供应
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplyType.酒店供应">
+            <summary>
+            酒店供应
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplyType.火车票供应">
+            <summary>
+            火车票供应
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplyType.酒店招募令">
+            <summary>
+            酒店招募令
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.SupplyOpenStatus">
+            <summary>
+            供应商状态
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplyOpenStatus.禁用">
+            <summary>
+            禁用
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplyOpenStatus.启用">
+            <summary>
+            启用
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplyOpenStatus.待审核">
+            <summary>
+            待审核
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplyOpenStatus.已驳回">
+            <summary>
+            待审核
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.SupplySource">
+            <summary>
+            供应商来源
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplySource.上级开通">
+            <summary>
+            上级开通
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SupplySource.推荐开通">
+            <summary>
+            推荐开通
+            </summary>
+        </member>
+        <member name="T:EastWestWalk.NetFrameWork.Enum.SmsType">
+            <summary>
+            短信验证码类型
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SmsType.注册或登录">
+            <summary>
+            注册_登录
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SmsType.修改密码">
+            <summary>
+            修改密码
+            </summary>
+        </member>
+        <member name="F:EastWestWalk.NetFrameWork.Enum.SmsType.修改绑定手机号">
+            <summary>
+            修改绑定手机号
+            </summary>
+        </member>
+    </members>
+</doc>

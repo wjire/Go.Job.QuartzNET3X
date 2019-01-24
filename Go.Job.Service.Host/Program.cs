@@ -3,9 +3,9 @@ using Go.Job.Service.Middleware;
 
 namespace Go.Job.Service.Host
 {
-    internal class Program
+    public class Program
     {
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
             try
             {

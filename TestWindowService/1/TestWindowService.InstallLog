@@ -1,0 +1,6 @@
+﻿正在卸载程序集“E:\gongwei\my\Go.Job\TestWindowService\1\TestWindowService.exe”。
+受影响的参数是:
+   logtoconsole = 
+   assemblypath = E:\gongwei\my\Go.Job\TestWindowService\1\TestWindowService.exe
+   logfile = E:\gongwei\my\Go.Job\TestWindowService\1\TestWindowService.InstallLog
+没有 RunInstallerAttribute.Yes 的公共安装程序。在 E:\gongwei\my\Go.Job\TestWindowService\1\TestWindowService.exe 程序集中应该可以找到“Yes”特性。
