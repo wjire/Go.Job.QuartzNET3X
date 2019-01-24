@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,7 +79,13 @@ namespace TestWindowService
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                //string path1 = @"C:\Users\Administrator\Desktop\exception.txt";
+                string path1 = @"C:\Users\gongwei.LONG\Desktop\exception.txt";
+                using (FileStream fs = new FileStream(path1, FileMode.Append, FileAccess.Write))
+                {
+                    byte[] bytes = Encoding.Default.GetBytes(DateTime.Now + Environment.NewLine);
+                    fs.Write(bytes, 0, bytes.Length);
+                }
             }
 
             //Console.ReadKey();

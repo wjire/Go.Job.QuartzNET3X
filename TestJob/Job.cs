@@ -14,8 +14,8 @@ namespace TestJob
             //Console.WriteLine($"{DateTime.Now} : Job2 Run......");
 
 
-            string path1 = @"C:\Users\Administrator\Desktop\Job.txt";
-            //string path1 = @"C:\Users\gongwei.LONG\Desktop\Job2.txt";
+            //string path1 = @"C:\Users\Administrator\Desktop\Job.txt";
+            string path1 = @"C:\Users\gongwei.LONG\Desktop\testwindowservice.txt";
             using (FileStream fs = new FileStream(path1, FileMode.Append, FileAccess.Write))
             {
                 byte[] bytes = Encoding.Default.GetBytes(DateTime.Now + Environment.NewLine);

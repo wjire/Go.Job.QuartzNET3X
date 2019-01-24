@@ -38,6 +38,7 @@ namespace Go.Job.Service.Api
             ApiConfig.SchedulerName = schedName;
 
             WebApp.Start(address);
+            Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {address}");
             //using (WebApp.Start(address))
             //{
             //    Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {address}");
