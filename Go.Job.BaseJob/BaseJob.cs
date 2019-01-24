@@ -30,13 +30,13 @@ namespace Go.Job.BaseJob
 
 
         /// <summary>
-        /// 具体逻辑.该方法已被父类的 Run() 方法中的 try,catch 包裹,catch 块中执行方法为:LogService.WriteLog(ex, 子类类型的名称);如果想修改,请重写 Run() 方法.
+        /// 具体逻辑
         /// </summary>
         protected abstract void Execute();
         
 
         /// <summary>
-        /// 将对象生存期更改为永久,因为.NET默认5分钟不调用,会被回收.
+        /// 将对象生存期更改为永久,因为C#默认5分钟不调用,会被回收.
         /// </summary>
         /// <returns></returns>
         public override object InitializeLifetimeService()
