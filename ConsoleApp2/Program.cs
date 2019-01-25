@@ -15,17 +15,30 @@ namespace ConsoleApp2
         {
             try
             {
-                MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
-                SchedulerManagerFacotry.CreateSchedulerManager().Start().Wait();
-                string userCommand = string.Empty;
-                while (userCommand != "exit")
+                //MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
+                //SchedulerManagerFacotry.CreateSchedulerManager().Start().Wait();
+                //string userCommand = string.Empty;
+                //while (userCommand != "exit")
+                //{
+                //    if (string.IsNullOrEmpty(userCommand) == false)
+                //    {
+                //        Console.WriteLine("     非退出指令,自动忽略...");
+                //    }
+                //    userCommand = Console.ReadLine();
+                //}
+
+
+                Task.Factory.StartNew(() =>
                 {
-                    if (string.IsNullOrEmpty(userCommand) == false)
+                    try
                     {
-                        Console.WriteLine("     非退出指令,自动忽略...");
+                        throw new Exception("测试异步异常");
                     }
-                    userCommand = Console.ReadLine();
-                }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                });
 
             }
             catch (Exception e)
