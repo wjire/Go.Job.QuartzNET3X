@@ -6,6 +6,7 @@ using Go.Job.Model;
 using Go.Job.Service.Middleware;
 using Quartz;
 using Quartz.Listener;
+using Quartz.Logging;
 
 namespace Go.Job.Service.Logic
 {

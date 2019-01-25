@@ -51,12 +51,7 @@ namespace Go.Job.Model
         /// job开始时间
         /// </summary>
         public DateTime StartTime { get; set; }
-
-
-        /// <summary>
-        /// 任务状态  0:准备中 1:已启动 2:暂停 3:删除
-        /// </summary>
-        public int State { get; set; }
+        
 
 
         /// <summary>

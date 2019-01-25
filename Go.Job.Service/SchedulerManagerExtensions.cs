@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Go.Job.Service.Api;
-using Go.Job.Service.Config;
 using Go.Job.Service.Logic;
+using Go.Job.Service.Logic.Listener;
+using Go.Job.Service.Middleware;
 using Quartz;
 using Quartz.Impl.Matchers;
 using Quartz.Listener;
@@ -19,88 +20,127 @@ namespace Go.Job.Service
         /// </summary>
         /// <param name="manager"></param>
         /// <returns></returns>
-        public static async Task Start(this SchedulerManager manager)
+        public static void Start(this SchedulerManager manager)
         {
-            
-            if (SchedulerConfig.JobListener!=null)
+            try
             {
-                manager.Scheduler.ListenerManager.AddJobListener(SchedulerConfig.JobListener, GroupMatcher<JobKey>.GroupEquals(SchedulerConfig.SchedulerName));
+                if (string.IsNullOrWhiteSpace(manager.Scheduler.SchedulerName))
+                {
+                    throw new ArgumentNullException("调度任务名称不能为空,请前往配置文件修改!");
+                }
+                string logWriter = System.Configuration.ConfigurationManager.AppSettings["LogWriter"];
+                if (!string.IsNullOrWhiteSpace(logWriter) && Convert.ToInt32(logWriter) == 0)
+                {
+                    MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
+                }
+                if (!manager.Scheduler.IsStarted)
+                {
+                    manager.Scheduler.Start().Wait();
+                }
+                Console.WriteLine($"作业调度服务已启动! 当前调度任务 : { manager.Scheduler.SchedulerName}");
+                JobApiStartHelper.Start(manager.Scheduler.SchedulerName);
+                Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {ApiConfig.ApiAddress}");
+                string userCommand = string.Empty;
+                while (userCommand != "exit")
+                {
+                    if (string.IsNullOrEmpty(userCommand) == false)
+                    {
+                        Console.WriteLine("     非退出指令,自动忽略...");
+                    }
+                    userCommand = Console.ReadLine();
+                }
             }
-
-            if (SchedulerConfig.TriggerListener !=null)
+            catch (Exception e)
             {
-                manager.Scheduler.ListenerManager.AddTriggerListener(SchedulerConfig.TriggerListener, GroupMatcher<TriggerKey>.GroupEquals(SchedulerConfig.SchedulerName));
+                Console.WriteLine(e);
             }
-            await manager.Scheduler.Start();
-            Console.WriteLine($"作业调度服务已启动! 当前调度任务 : {  SchedulerConfig.SchedulerName}");
-            JobApiStartHelper.Start(SchedulerConfig.ApiAddress, SchedulerConfig.SchedulerName);
+            Console.ReadKey();
         }
 
 
         /// <summary>
-        /// 添加job监听器
-        /// </summary>
-        /// <param name="manager"></param>
-        /// <param name="useJobListener">false:不添加;true:添加</param>
-        /// <param name="jobListener"></param>
-        /// <returns></returns>
-        public static SchedulerManager UseJobListener(this SchedulerManager manager, bool useJobListener, JobListenerSupport jobListener=null)
-        {
-            if (useJobListener ==false)
-            {
-                SchedulerConfig.JobListener = null;
-                return manager;
-            }
-                return manager.UseJobListener(jobListener);
-        }
-
-
-        /// <summary>
-        /// 添加job监听器
+        /// 添加 job 监听器
         /// </summary>
         /// <param name="manager"></param>
         /// <param name="jobListener"></param>
         /// <returns></returns>
-        private static SchedulerManager UseJobListener(this SchedulerManager manager, JobListenerSupport jobListener)
+        public static SchedulerManager AddJobListener(this SchedulerManager manager, JobListenerSupport jobListener)
         {
             if (jobListener != null)
             {
-                SchedulerConfig.JobListener = jobListener;
+                manager.Scheduler.ListenerManager.AddJobListener(jobListener, GroupMatcher<JobKey>.GroupEquals(manager.Scheduler.SchedulerName));
             }
             return manager;
         }
 
+
         /// <summary>
-        /// 添加触发器监听器
+        /// 使用默认job监听器
         /// </summary>
         /// <param name="manager"></param>
-        /// <param name="useTriggerListener">false:不添加;true:添加</param>
-        /// <param name="triggerListener"></param>
+        /// <param name="jobToBeExecutedAction">Job执行前</param>
+        /// <param name="jobWasExecutedAction">Job执行后</param>
+        /// <param name="jobExecutionVetoedAction">Job被拒绝时</param>
         /// <returns></returns>
-        public static SchedulerManager UseTriggerListener(this SchedulerManager manager, bool useTriggerListener, TriggerListenerSupport triggerListener =null)
+        public static SchedulerManager UseDefaultJobListener(this SchedulerManager manager, Action<IJobExecutionContext> jobToBeExecutedAction = null, Action<IJobExecutionContext> jobWasExecutedAction = null, Action<IJobExecutionContext> jobExecutionVetoedAction = null)
         {
-            if (useTriggerListener == false)
+            DefaultJobListener listener = new DefaultJobListener
             {
-                SchedulerConfig.TriggerListener = null;
-                return manager;
-            }
-            return manager.UseTriggerListener(triggerListener);
+                JobExecutionVetoedAction = jobExecutionVetoedAction,
+                JobToBeExecutedAction = jobToBeExecutedAction,
+                JobWasExecutedAction = jobWasExecutedAction,
+            };
+            manager.Scheduler.ListenerManager.AddJobListener(listener, GroupMatcher<JobKey>.GroupEquals(manager.Scheduler.SchedulerName));
+            return manager;
         }
 
 
         /// <summary>
-        /// 添加触发器监听器
+        /// 添加 trigger 监听器
         /// </summary>
         /// <param name="manager"></param>
         /// <param name="triggerListener"></param>
         /// <returns></returns>
-        private static SchedulerManager UseTriggerListener(this SchedulerManager manager, TriggerListenerSupport triggerListener)
+        public static SchedulerManager AddTriggerListener(this SchedulerManager manager, TriggerListenerSupport triggerListener)
         {
             if (triggerListener != null)
             {
-                SchedulerConfig.TriggerListener = triggerListener;
+                manager.Scheduler.ListenerManager.AddTriggerListener(triggerListener, GroupMatcher<TriggerKey>.GroupEquals(manager.Scheduler.SchedulerName));
             }
             return manager;
+        }
+
+        /// <summary>
+        /// 使用默认trigger监听器
+        /// </summary>
+        /// <param name="manager"></param>
+        /// <param name="firedAction">点火开始</param>
+        /// <param name="completeAction">点火完成</param>
+        /// <param name="misFiredAction">哑火</param>
+        /// <param name="vetoJobAction">Job拒绝时</param>
+        /// <returns></returns>
+        public static SchedulerManager UseDefaultTriggerListener(this SchedulerManager manager, Action<IJobExecutionContext, ITrigger> firedAction = null, Action<IJobExecutionContext, ITrigger> completeAction = null, Action<ITrigger> misFiredAction = null, Action<ITrigger> vetoJobAction = null)
+        {
+            DefaultTriggerListener listener = new DefaultTriggerListener
+            {
+                CompleteAction = completeAction,
+                FiredAction = firedAction,
+                MisFiredAction = misFiredAction,
+                VetoJobAction = vetoJobAction
+            };
+            manager.Scheduler.ListenerManager.AddTriggerListener(listener, GroupMatcher<TriggerKey>.GroupEquals(manager.Scheduler.SchedulerName));
+            return manager;
+        }
+
+
+        /// <summary>
+        /// 启动调度器
+        /// </summary>
+        /// <param name="scheduler"></param>
+        /// <returns></returns>
+        private static async Task Start(IScheduler scheduler)
+        {
+
         }
     }
 }

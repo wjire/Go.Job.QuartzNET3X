@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{438EA8CE-DB50-4012-99D9-779D44C2CDE2}</ProjectGuid>
+    <ProjectGuid>{73B6E07A-113B-4B3D-A0C6-80099E0152A2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Go.Job.Service.Middleware</RootNamespace>
-    <AssemblyName>Go.Job.Service.Middleware</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>TestJob1</RootNamespace>
+    <AssemblyName>TestJob1</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EastWestWalk.NetFrameWork.Common, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\0工具类库\EastWestWalk.NetFrameWork.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="EastWestWalk.NetFrameWork.Enum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\0工具类库\EastWestWalk.NetFrameWork.Enum.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -50,15 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Log\DefaultLogWriter.cs" />
-    <Compile Include="Log\ILogWriter.cs" />
-    <Compile Include="MidContainer.cs" />
+    <Compile Include="Job1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Log\TestLogWriter.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Go.Job.BaseJob\Go.Job.BaseJob.csproj">
+      <Project>{E587A17A-A8F3-45D9-8274-57655C7881D5}</Project>
+      <Name>Go.Job.BaseJob</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

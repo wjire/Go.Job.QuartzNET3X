@@ -1,57 +1,57 @@
-﻿using Go.Job.Model;
-using Go.Job.Service.Middleware;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Quartz;
-using System;
+using Quartz.Listener;
 
 namespace Go.Job.Service.Logic.Listener
 {
-    public class DefaultTriggerListener : BaseTriggerListener
+    /// <summary>
+    /// 触发器监听器基类
+    /// </summary>
+    public sealed class DefaultTriggerListener : TriggerListenerSupport
     {
 
-        public DefaultTriggerListener(string name) : base(name)
+        public Action<IJobExecutionContext, ITrigger> FiredAction;
+
+        public Action<IJobExecutionContext, ITrigger> CompleteAction;
+
+        public Action<ITrigger> MisFiredAction;
+
+        public Action<ITrigger> VetoJobAction;
+
+        public override string Name { get; } = "Default";
+
+
+        public override Task TriggerFired(ITrigger trigger, IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
-            FiredAction = InitFiredAction();
-            CompleteAction = InitCompleteAction();
-            MisFiredAction = InitMisFiredAction();
+
+            FiredAction?.Invoke(context, trigger);
+            return base.TriggerFired(trigger, context, cancellationToken);
         }
 
-
-        private Action<IJobExecutionContext, ITrigger> InitFiredAction()
+        public override Task TriggerComplete(ITrigger trigger, IJobExecutionContext context, SchedulerInstruction triggerInstructionCode, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return (context, trigger) =>
-            {
-                JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
-                if (jobInfo != null)
-                {
-                    LogWriter.WriteLog($"{ DateTime.Now} : 触发器 { trigger.Key.Name} 开始点火",jobInfo.JobName);
-                }
-            };
+
+            CompleteAction?.Invoke(context, trigger);
+
+            return base.TriggerComplete(trigger, context, triggerInstructionCode, cancellationToken);
         }
 
-
-        private Action<IJobExecutionContext, ITrigger> InitCompleteAction()
+        public override Task TriggerMisfired(ITrigger trigger, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return (context, trigger) =>
-            {
-                JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
-                if (jobInfo != null)
-                {
-                    LogWriter.WriteLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 点火完毕",jobInfo.JobName);
-                }
-            };
+
+            MisFiredAction?.Invoke(trigger);
+
+            return base.TriggerMisfired(trigger, cancellationToken);
         }
 
-
-        private Action<ITrigger> InitMisFiredAction()
+        public override Task<bool> VetoJobExecution(ITrigger trigger, IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return (trigger) =>
-            {
-                JobInfo jobInfo = trigger.JobDataMap.Get("jobInfo") as JobInfo;
-                if (jobInfo != null)
-                {
-                    LogWriter.WriteLog($"{DateTime.Now} : 触发器 {trigger.Key.Name} 哑火",jobInfo.JobName);
-                }
-            };
+
+            VetoJobAction?.Invoke(trigger);
+
+            return base.VetoJobExecution(trigger, context, cancellationToken);
         }
     }
 }

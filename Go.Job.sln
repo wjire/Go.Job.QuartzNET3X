@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.Job.Service.Logic", "Go.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Go.Job.Service.Middleware", "Go.Job.Service.Middleware\Go.Job.Service.Middleware.csproj", "{438EA8CE-DB50-4012-99D9-779D44C2CDE2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestJob1", "TestJob1\TestJob1.csproj", "{73B6E07A-113B-4B3D-A0C6-80099E0152A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{438EA8CE-DB50-4012-99D9-779D44C2CDE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{438EA8CE-DB50-4012-99D9-779D44C2CDE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{438EA8CE-DB50-4012-99D9-779D44C2CDE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73B6E07A-113B-4B3D-A0C6-80099E0152A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73B6E07A-113B-4B3D-A0C6-80099E0152A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73B6E07A-113B-4B3D-A0C6-80099E0152A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73B6E07A-113B-4B3D-A0C6-80099E0152A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{2D230C2D-CF6D-422C-852C-3B04FB40D642} = {0CB302E9-5D75-4972-BCF0-83A9CDCE1B8E}
 		{BDF1E8D2-7C18-477E-9091-F6C6E39FF0E4} = {0CB302E9-5D75-4972-BCF0-83A9CDCE1B8E}
 		{438EA8CE-DB50-4012-99D9-779D44C2CDE2} = {0CB302E9-5D75-4972-BCF0-83A9CDCE1B8E}
+		{73B6E07A-113B-4B3D-A0C6-80099E0152A2} = {4ED5334C-F84C-4373-B869-4E99E691A208}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F2CD3421-F470-45B9-9869-2FAADB09189D}

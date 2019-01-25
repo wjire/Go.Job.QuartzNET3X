@@ -1,43 +1,43 @@
-﻿using Go.Job.Model;
-using Go.Job.Service.Middleware;
+﻿using System;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using Quartz;
-using System;
+using Quartz.Listener;
 
 namespace Go.Job.Service.Logic.Listener
 {
-    public class DefaultJobListener : BaseJobListener
+    /// <summary>
+    /// job监听器基类
+    /// </summary>
+    public sealed class DefaultJobListener : JobListenerSupport
     {
+        public Action<IJobExecutionContext> JobToBeExecutedAction;
 
-        public DefaultJobListener(string name) : base(name)
+        public Action<IJobExecutionContext> JobWasExecutedAction;
+
+        public Action<IJobExecutionContext> JobExecutionVetoedAction;
+
+
+        public override string Name { get; } = "Default";
+
+
+        public override async Task JobWasExecuted(IJobExecutionContext context, JobExecutionException jobException, CancellationToken cancellationToken = default(CancellationToken))
         {
-            StartAction = InitStartAction();
-            EndAction = InitEndAction();
+            JobWasExecutedAction?.Invoke(context);
+            await base.JobWasExecuted(context, jobException, cancellationToken);
         }
 
-
-        private Action<IJobExecutionContext> InitStartAction()
+        public override async Task JobExecutionVetoed(IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return context =>
-            {
-                JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
-                if (jobInfo != null)
-                {
-                    LogWriter.WriteLog($"{DateTime.Now} : 作业 {jobInfo.JobName} 开始执行",jobInfo.JobName);
-                }
-            };
+            JobExecutionVetoedAction?.Invoke(context);
+            await base.JobExecutionVetoed(context, cancellationToken);
         }
 
-
-        private Action<IJobExecutionContext> InitEndAction()
+        public override async Task JobToBeExecuted(IJobExecutionContext context, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return context =>
-            {
-                JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo;
-                if (jobInfo != null)
-                {
-                    LogWriter.WriteLog($"{DateTime.Now} : 作业 {jobInfo.JobName} 执行结束",jobInfo.JobName);
-                }
-            };
+            JobToBeExecutedAction?.Invoke(context);
+            await base.JobToBeExecuted(context, cancellationToken);
         }
     }
 }

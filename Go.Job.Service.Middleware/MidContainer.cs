@@ -15,7 +15,6 @@ namespace Go.Job.Service.Middleware
         internal static void Init()
         {
             SetService<ILogWriter>(new DefaultLogWriter());
-
         }
 
         public static object GetService(Type serviceType)

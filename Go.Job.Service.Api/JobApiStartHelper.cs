@@ -15,44 +15,21 @@ namespace Go.Job.Service.Api
         /// <summary>
         /// 开启监听
         /// </summary>
-        /// <param name="address">api地址</param>
-        /// <param name="schedName">调度任务名称</param>
-        public static void Start(string address,string schedName)
+        /// <param name="schedulerName">调度器名称</param>
+        public static void Start(string schedulerName)
         {
-            if (string.IsNullOrWhiteSpace(address))
+            if (string.IsNullOrWhiteSpace(ApiConfig.ApiAddress))
             {
                 throw new ArgumentNullException("监听地址不能为空,请在配置文件<appSettings>节点中设置 key=\"ApiAddress\" 的值");
             }
-            
-            if (string.IsNullOrWhiteSpace(schedName))
+
+            if (PortInUse(ApiConfig.ApiAddress))
             {
-                throw new ArgumentNullException("调度任务名称不能为空,请前往配置文件修改!");
+                throw new ArgumentException($"{ApiConfig.ApiAddress} 该地址已被监听!请更换");
             }
 
-            if (PortInUse(address))
-            {
-                throw new ArgumentException($"{address} 该地址已被监听!请更换");
-            }
-
-            ApiConfig.ApiAddress = address;
-            ApiConfig.SchedulerName = schedName;
-
-            WebApp.Start(address);
-            Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {address}");
-            //using (WebApp.Start(address))
-            //{
-            //    Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {address}");
-
-            //    string userCommand = string.Empty;
-            //    while (userCommand != "exit")
-            //    {
-            //        if (string.IsNullOrEmpty(userCommand) == false)
-            //        {
-            //            Console.WriteLine("     非退出指令,自动忽略...");
-            //        }
-            //        userCommand = Console.ReadLine();
-            //    }
-            //}
+            ApiConfig.SchedulerName = schedulerName;
+            WebApp.Start(ApiConfig.ApiAddress);
         }
 
 

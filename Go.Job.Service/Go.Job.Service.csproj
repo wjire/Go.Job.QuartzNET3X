@@ -63,7 +63,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SchedulerConfig.cs" />
     <Compile Include="废弃\JobStoreConfig.cs" />
     <Compile Include="废弃\RemoteConfig.cs" />
     <Compile Include="SchedulerManagerExtensions.cs" />
@@ -91,6 +90,10 @@
     <ProjectReference Include="..\Go.Job.Service.Logic\Go.Job.Service.Logic.csproj">
       <Project>{bdf1e8d2-7c18-477e-9091-f6c6e39ff0e4}</Project>
       <Name>Go.Job.Service.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Go.Job.Service.Middleware\Go.Job.Service.Middleware.csproj">
+      <Project>{438ea8ce-db50-4012-99d9-779d44c2cde2}</Project>
+      <Name>Go.Job.Service.Middleware</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
