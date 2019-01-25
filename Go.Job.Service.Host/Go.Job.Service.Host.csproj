@@ -107,7 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Go.Job.Service.Logic\Go.Job.Service.Logic.csproj">
-      <Project>{BDF1E8D2-7C18-477E-9091-F6C6E39FF0E4}</Project>
+      <Project>{bdf1e8d2-7c18-477e-9091-f6c6e39ff0e4}</Project>
       <Name>Go.Job.Service.Logic</Name>
     </ProjectReference>
     <ProjectReference Include="..\Go.Job.Service.Middleware\Go.Job.Service.Middleware.csproj">

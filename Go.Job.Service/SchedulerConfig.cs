@@ -35,6 +35,10 @@ namespace Go.Job.Service.Config
         internal static TriggerListenerSupport TriggerListener { get; set; }
 
 
+        /// <summary>
+        /// 初始化调度器配置
+        /// </summary>
+        /// <param name="name"></param>
         internal static void Init(string name)
         {
             SchedulerName = name;

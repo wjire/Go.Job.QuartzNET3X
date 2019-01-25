@@ -1,6 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<configuration>
-
+﻿<configuration>
   <configSections>
     <section name="quartz" type=" System.Configuration.NameValueSectionHandler" />
   </configSections>
@@ -54,31 +52,8 @@
   <appSettings>
     <!--配置api地址-->
     <add key="ApiAddress" value="http://localhost:25250" />
-    <!--0:控制台;1:文本-->
+    <!--日志记录方式 0:控制台;1:文本-->
     <add key="LogWriter" value="1" /> 
   </appSettings>
 
-  <startup>
-    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2" />
-  </startup>
-  <runtime>
-    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
-      <dependentAssembly>
-        <assemblyIdentity name="MySql.Data" publicKeyToken="c5687fc88969c44d" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-8.0.13.0" newVersion="8.0.13.0" />
-      </dependentAssembly>
-      <dependentAssembly>
-        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-12.0.0.0" newVersion="12.0.0.0" />
-      </dependentAssembly>
-      <dependentAssembly>
-        <assemblyIdentity name="Microsoft.Owin" publicKeyToken="31bf3856ad364e35" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
-      </dependentAssembly>
-      <dependentAssembly>
-        <assemblyIdentity name="System.Web.Cors" publicKeyToken="31bf3856ad364e35" culture="neutral" />
-        <bindingRedirect oldVersion="0.0.0.0-5.2.7.0" newVersion="5.2.7.0" />
-      </dependentAssembly>
-    </assemblyBinding>
-  </runtime>
 </configuration>

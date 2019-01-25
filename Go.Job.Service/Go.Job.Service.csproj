@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\SchedulerConfig.cs" />
+    <Compile Include="SchedulerConfig.cs" />
     <Compile Include="废弃\JobStoreConfig.cs" />
     <Compile Include="废弃\RemoteConfig.cs" />
     <Compile Include="SchedulerManagerExtensions.cs" />
@@ -92,6 +92,9 @@
       <Project>{bdf1e8d2-7c18-477e-9091-f6c6e39ff0e4}</Project>
       <Name>Go.Job.Service.Logic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="quartz.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

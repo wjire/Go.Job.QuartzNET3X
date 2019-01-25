@@ -12,7 +12,7 @@ namespace Go.Job.Service.Config
         /// <summary>
         /// 序列化类型
         /// </summary>
-        public string SerializerType { get; set; } = "binary";
+        public string SerializerType { get; set; } = "json";
 
         /// <summary>
         /// 持久化类型
@@ -37,7 +37,7 @@ namespace Go.Job.Service.Config
         /// <summary>
         /// 连接字符串
         /// </summary>
-        public string ConnectionString { get; set; } = "server=localhost;database=myquartz;user=root";
+        public string ConnectionString { get; set; } = "server=localhost;database=myquartz;user=root;pwd=admin";
 
         /// <summary>
         /// 数据库
