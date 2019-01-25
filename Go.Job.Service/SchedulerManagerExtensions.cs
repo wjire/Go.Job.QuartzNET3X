@@ -28,11 +28,11 @@ namespace Go.Job.Service
                 {
                     throw new ArgumentNullException("调度任务名称不能为空,请前往配置文件修改!");
                 }
-                string logWriter = System.Configuration.ConfigurationManager.AppSettings["LogWriter"];
-                if (!string.IsNullOrWhiteSpace(logWriter) && Convert.ToInt32(logWriter) == 0)
-                {
-                    MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
-                }
+                //string logWriter = System.Configuration.ConfigurationManager.AppSettings["LogWriter"];
+                //if (!string.IsNullOrWhiteSpace(logWriter) && Convert.ToInt32(logWriter) == 0)
+                //{
+                //    MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
+                //}
                 if (!manager.Scheduler.IsStarted)
                 {
                     manager.Scheduler.Start().Wait();
