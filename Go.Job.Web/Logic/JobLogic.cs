@@ -44,7 +44,7 @@ namespace Go.Job.Web.Logic
         {
             return Execute(() =>
             {
-                string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/run";
+                string path = ApiAddressCache.GetApiAddress(jobInfo.SchedName) + "/api/job/run";
                 return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
             });
         }
@@ -59,7 +59,7 @@ namespace Go.Job.Web.Logic
         {
             return Execute(() =>
             {
-                string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/pause";
+                string path = ApiAddressCache.GetApiAddress(jobInfo.SchedName) + "/api/job/pause";
                 return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
             });
         }
@@ -73,7 +73,7 @@ namespace Go.Job.Web.Logic
         {
             return Execute(() =>
             {
-                string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/resume";
+                string path = ApiAddressCache.GetApiAddress(jobInfo.SchedName) + "/api/job/resume";
                 return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
             });
         }
@@ -89,7 +89,7 @@ namespace Go.Job.Web.Logic
         {
             return Execute(() =>
             {
-                string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/remove";
+                string path = ApiAddressCache.GetApiAddress(jobInfo.SchedName) + "/api/job/remove";
                 return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
             });
         }
@@ -130,7 +130,7 @@ namespace Go.Job.Web.Logic
         {
             return Execute(() =>
              {
-                 string path = ApiAddressHelper.GetApiAddress(jobInfo.SchedName) + "/api/job/update";
+                 string path = ApiAddressCache.GetApiAddress(jobInfo.SchedName) + "/api/job/update";
                  return JsonConvert.DeserializeObject<Result>(PostJosn(path, jobInfo));
              });
         }
