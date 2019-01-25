@@ -32,7 +32,7 @@ namespace Go.Job.Web.Helper
 
 
         /// <summary>
-        /// 从缓存中获取地址
+        /// 获取可用的api地址
         /// </summary>
         /// <param name="schedName"></param>
         /// <returns></returns>
