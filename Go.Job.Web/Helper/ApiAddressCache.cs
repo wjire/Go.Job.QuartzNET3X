@@ -27,7 +27,7 @@ namespace Go.Job.Web.Helper
                 return apiAddress;
             }
 
-            return GetCache(schedName);
+            return GetAvailableAddress(schedName);
         }
 
 
@@ -36,7 +36,7 @@ namespace Go.Job.Web.Helper
         /// </summary>
         /// <param name="schedName"></param>
         /// <returns></returns>
-        private static string GetCache(string schedName)
+        private static string GetAvailableAddress(string schedName)
         {
             string apiAddressStr = System.Configuration.ConfigurationManager.AppSettings[schedName];
             if (string.IsNullOrWhiteSpace(apiAddressStr))
