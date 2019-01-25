@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Runtime.CompilerServices;
 using EastWestWalk.NetFrameWork.Common.Write;
-using Go.Job.Db;
 using Go.Job.Model;
 using Go.Job.Web.Helper;
 using Newtonsoft.Json;

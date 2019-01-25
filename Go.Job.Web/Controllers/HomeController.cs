@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Go.Job.Db;
 using Go.Job.Model;
 using Go.Job.Web.Logic;
 

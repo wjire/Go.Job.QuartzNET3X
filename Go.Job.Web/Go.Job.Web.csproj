@@ -60,6 +60,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SqlSugar, Version=4.9.8.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\sqlSugar.4.9.8.1\lib\SqlSugar.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.Configuration.Install" />
@@ -153,6 +156,7 @@
     </Compile>
     <Compile Include="Helper\ApiAddressHelper.cs" />
     <Compile Include="Helper\CacheHelper.cs" />
+    <Compile Include="Db\JobInfoDb.cs" />
     <Compile Include="Logic\JobLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -212,17 +216,9 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Go.Job.Db\Go.Job.Db.csproj">
-      <Project>{2e5b47b7-abf3-4080-bceb-b56124d890b5}</Project>
-      <Name>Go.Job.Db</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Go.Job.Model\Go.Job.Model.csproj">
       <Project>{d47524c9-3f63-40c6-b368-72e3e8d0332d}</Project>
       <Name>Go.Job.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Go.Job.Service\Go.Job.Service.csproj">
-      <Project>{5e9c82f9-2303-4869-8ad9-f40c45d8e0e4}</Project>
-      <Name>Go.Job.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
