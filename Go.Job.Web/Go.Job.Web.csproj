@@ -153,9 +153,7 @@
     </Compile>
     <Compile Include="Helper\ApiAddressHelper.cs" />
     <Compile Include="Helper\CacheHelper.cs" />
-    <Compile Include="Helper\HttpWebrequestHelper.cs" />
     <Compile Include="Logic\JobLogic.cs" />
-    <Compile Include="Models\QuartzApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
