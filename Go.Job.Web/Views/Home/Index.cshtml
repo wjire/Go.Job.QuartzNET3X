@@ -44,17 +44,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="Cron" class="col-sm-2 control-label">执行计划</label>
+                        <label for="Cron" class="col-sm-2 control-label">时间表达式</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="Cron" id="Cron"
-                                   placeholder="请输入执行计划" />
+                                   placeholder="请输入时间表达式" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="Second" class="col-sm-2 control-label">间隔时间(秒)</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="Second" id="Second" placeholder="间隔时间只有在没有设置执行计划时才会起效,否则会以执行计划为准" />
+                            <input type="text" class="form-control" name="Second" id="Second" placeholder="间隔时间只有在没有设置时间表达式时才会起效,否则会以时间表达式时为准" />
                         </div>
                     </div>
 
@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="Cron" class="col-sm-2 control-label ">执行计划</label>
+                        <label for="Cron" class="col-sm-2 control-label ">时间表达式</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control Cron" name="Cron" id="Cron" />
                         </div>
@@ -207,7 +207,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="Cron" class="col-sm-2 control-label ">执行计划</label>
+                        <label for="Cron" class="col-sm-2 control-label ">时间表达式</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control Cron" name="Cron" id="Cron" />
                         </div>
@@ -259,7 +259,7 @@
         <th>编号</th>
         <th>调度器名称</th>
         <th>作业名称</th>
-        <th>执行计划</th>
+        <th>时间表达式</th>
         <th>间隔时间(秒)</th>
         <th>程序集</th>
         <th>状态</th>
@@ -334,7 +334,7 @@
 
 <div>
     <span style="font-size: 18px">
-        &nbsp;&nbsp;&nbsp;   执行计划(时间表达式)示例<br /><br />
+        &nbsp;&nbsp;&nbsp;   时间表达式示例<br /><br />
         &nbsp;&nbsp;&nbsp;   标准格式为六位：从左至右依次为“秒 分 时 日 月 周” (中间均为1个空格)<br /><br />
         &nbsp;&nbsp;&nbsp;   0/5 * * * * ? * &nbsp;&nbsp;&nbsp; 每分钟的0秒,5秒,10秒...55秒执行. <br /><br />
 

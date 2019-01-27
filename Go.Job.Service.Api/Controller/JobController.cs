@@ -10,7 +10,7 @@ namespace Go.Job.Service.Api
     /// <summary>
     /// job控制器
     /// </summary>
-    [SchedulerNameFilter]
+    [SchedulerFilter]
     public class JobController : ApiController
     {
 

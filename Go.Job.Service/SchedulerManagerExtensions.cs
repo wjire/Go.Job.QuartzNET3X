@@ -33,6 +33,7 @@ namespace Go.Job.Service
                 //{
                 //    MidContainer.ReplaceService(typeof(ILogWriter), new TestLogWriter());
                 //}
+                
                 if (!manager.Scheduler.IsStarted)
                 {
                     manager.Scheduler.Start().Wait();
@@ -130,17 +131,6 @@ namespace Go.Job.Service
             };
             manager.Scheduler.ListenerManager.AddTriggerListener(listener, GroupMatcher<TriggerKey>.GroupEquals(manager.Scheduler.SchedulerName));
             return manager;
-        }
-
-
-        /// <summary>
-        /// 启动调度器
-        /// </summary>
-        /// <param name="scheduler"></param>
-        /// <returns></returns>
-        private static async Task Start(IScheduler scheduler)
-        {
-
         }
     }
 }

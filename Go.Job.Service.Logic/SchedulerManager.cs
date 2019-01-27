@@ -3,10 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 using Go.Job.Model;
-using Go.Job.Service.Middleware;
 using Quartz;
-using Quartz.Listener;
-using Quartz.Logging;
 
 namespace Go.Job.Service.Logic
 {
@@ -19,7 +16,7 @@ namespace Go.Job.Service.Logic
         /// 调度器
         /// </summary>
         public IScheduler Scheduler;
-        
+
         /// <summary>
         /// job池
         /// </summary>
@@ -29,7 +26,7 @@ namespace Go.Job.Service.Logic
         /// 单例
         /// </summary>
         public static SchedulerManager Singleton { get; }
-        
+
 
         /// <summary>
         /// 锁
@@ -37,7 +34,7 @@ namespace Go.Job.Service.Logic
         private static readonly object Locker = new object();
 
 
-        private readonly ILogWriter LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
+        public static bool _schedulerIsWorking = false;
 
         /// <summary>
         /// 私有化构造函数
@@ -113,20 +110,17 @@ namespace Go.Job.Service.Logic
                 }
                 catch (Exception ex)
                 {
-                    LogWriter.WriteException(ex, nameof(Add));
-
                     //异常了,直接从job池移除该job,不再考虑移除失败的情况.考虑不到那么多了
                     if (JobPool.TryRemove(jobRuntimeInfo.JobInfo.Id, out JobRuntimeInfo jri))
                     {
                         //成功移除后,再卸载掉应用程序域,失败则不移除,保留.
                         AppDomainLoader.UnLoad(jobRuntimeInfo.AppDomain);
                     }
-
-                    return false;
+                    throw ex;
                 }
             }
         }
-        
+
 
         /// <summary>
         /// 获取已添加到job池中的job

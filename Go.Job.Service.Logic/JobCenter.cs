@@ -14,13 +14,13 @@ namespace Go.Job.Service.Logic
     public class JobCenter : IJob
     {
         private static readonly ILogWriter LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
-
+        
         public Task Execute(IJobExecutionContext context)
         {
             try
             {
                 JobInfo jobInfo = context.JobDetail.JobDataMap.Get("jobInfo") as JobInfo ?? new JobInfo();
-                //从作业调度容器里查找，如果找到，则运行
+                //从job池中查找逻辑job
                 JobRuntimeInfo jobRuntimeInfo = SchedulerManager.Singleton.GetJobFromPool(jobInfo.Id);
 
                 try
@@ -29,10 +29,10 @@ namespace Go.Job.Service.Logic
                     {
                         try
                         {
-                           var runRes = jobRuntimeInfo.Job.Run();
-                            if (runRes==false)
+                            bool runRes = jobRuntimeInfo.Job.Run();
+                            if (runRes == false)
                             {
-                                var ex = new Exception("作业内部发生异常");
+                                Exception ex = new Exception("作业内部发生异常");
                                 LogWriter.WriteException(ex, $"作业名称 : {jobInfo.JobName}");
                             }
                         }
@@ -49,7 +49,7 @@ namespace Go.Job.Service.Logic
                     {
                         try
                         {
-                           var creRes = SchedulerManager.Singleton.CreateJob(jobInfo);
+                            bool creRes = SchedulerManager.Singleton.CreateJob(jobInfo);
                             //重新创建job成功后,需要手动执行一次.
                             if (creRes == true)
                             {

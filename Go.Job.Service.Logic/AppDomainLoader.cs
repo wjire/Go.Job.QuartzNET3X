@@ -5,7 +5,7 @@ namespace Go.Job.Service.Logic
     /// <summary>
     /// 这是一个核心类,非常核心
     /// </summary>
-    public class AppDomainLoader
+    public static class AppDomainLoader
     {
         /// <summary>
         /// 加载应用程序，获取作业实例
@@ -24,6 +24,10 @@ namespace Go.Job.Service.Logic
             setup.ShadowCopyFiles = "true";
             setup.ApplicationBase = System.IO.Path.GetDirectoryName(assemblyPath);
             string appDomainName = System.IO.Path.GetFileName(assemblyPath);
+            if (string.IsNullOrWhiteSpace(appDomainName))
+            {
+                throw new ArgumentNullException($"应用程序域名称为空,assemblyPath : {assemblyPath}");
+            }
             appDomain = AppDomain.CreateDomain(appDomainName, null, setup);
             AppDomain.MonitoringIsEnabled = true;
             BaseJob.BaseJob obj = (BaseJob.BaseJob)appDomain.CreateInstanceFromAndUnwrap(assemblyPath, classType);
