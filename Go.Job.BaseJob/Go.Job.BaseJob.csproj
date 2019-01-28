@@ -57,11 +57,5 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Go.Job.Service.Middleware\Go.Job.Service.Middleware.csproj">
-      <Project>{438ea8ce-db50-4012-99d9-779d44c2cde2}</Project>
-      <Name>Go.Job.Service.Middleware</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
