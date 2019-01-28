@@ -73,6 +73,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="quartz.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Go.Job.BaseJob\Go.Job.BaseJob.csproj">
@@ -95,9 +98,6 @@
       <Project>{438ea8ce-db50-4012-99d9-779d44c2cde2}</Project>
       <Name>Go.Job.Service.Middleware</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="quartz.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

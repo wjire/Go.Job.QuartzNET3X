@@ -104,18 +104,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="quartz.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Go.Job.Service.Logic\Go.Job.Service.Logic.csproj">
       <Project>{bdf1e8d2-7c18-477e-9091-f6c6e39ff0e4}</Project>
       <Name>Go.Job.Service.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Go.Job.Service.Middleware\Go.Job.Service.Middleware.csproj">
-      <Project>{438EA8CE-DB50-4012-99D9-779D44C2CDE2}</Project>
-      <Name>Go.Job.Service.Middleware</Name>
     </ProjectReference>
     <ProjectReference Include="..\Go.Job.Service\Go.Job.Service.csproj">
       <Project>{5e9c82f9-2303-4869-8ad9-f40c45d8e0e4}</Project>

@@ -25,7 +25,6 @@ namespace Go.Job.BaseJob
                 Execute();
                 sw.Stop();
                 LogService.WriteLog($"{DateTime.Now} : 执行结束\r\n");
-                //LogService.WriteLog($"本次执行耗时 {sw.ElapsedMilliseconds} 毫秒\r\n");
                 res = true;
             }
             catch (Exception ex)

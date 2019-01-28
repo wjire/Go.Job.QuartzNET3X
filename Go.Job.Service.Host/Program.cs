@@ -1,5 +1,4 @@
 ﻿using System;
-using Go.Job.Service.Middleware;
 
 namespace Go.Job.Service.Host
 {
