@@ -8,7 +8,6 @@ namespace TestJob1
     //    protected override void Execute()
     //    {
     //        Console.WriteLine($"{DateTime.Now} : Job1");
-
     //        Assembly assembly = Assembly.LoadFile("程序集物理路径");
     //        Type type = assembly.GetType("类型完全限定名");
     //    }

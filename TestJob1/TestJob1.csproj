@@ -54,7 +54,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Go.Job.BaseJob\Go.Job.BaseJob.csproj">
