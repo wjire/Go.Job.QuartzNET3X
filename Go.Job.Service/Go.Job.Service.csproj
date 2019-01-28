@@ -63,12 +63,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="废弃\JobStoreConfig.cs" />
-    <Compile Include="废弃\RemoteConfig.cs" />
-    <Compile Include="SchedulerManagerExtensions.cs" />
-    <Compile Include="废弃\ThreadPoolConfig.cs" />
+    <Compile Include="JobService\BaseJobService.cs" />
+    <Compile Include="JobService\IJobService.cs" />
+    <Compile Include="JobService\ProduceJobService.cs" />
+    <Compile Include="JobServiceBuilder.cs" />
+    <Compile Include="JobService\TestJobService.cs" />
+    <Compile Include="测试用\JobStoreConfig.cs" />
+    <Compile Include="测试用\RemoteConfig.cs" />
+    <Compile Include="测试用\ThreadPoolConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchedulerManagerFacotry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
