@@ -19,10 +19,7 @@ namespace Go.Job.BaseJob
             try
             {
                 LogService.WriteLog($"{DateTime.Now} : 开始执行");
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
                 Execute();
-                sw.Stop();
                 LogService.WriteLog($"{DateTime.Now} : 执行结束\r\n");
                 res = true;
             }
