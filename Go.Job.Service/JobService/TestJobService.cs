@@ -13,7 +13,7 @@ using Quartz.Impl;
 namespace Go.Job.Service
 {
     /// <summary>
-    /// 测试
+    /// 测试调度服务
     /// </summary>
     public class TestJobService: BaseJobService
     {

@@ -12,6 +12,9 @@ using Quartz.Listener;
 
 namespace Go.Job.Service
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IJobService
     {
 

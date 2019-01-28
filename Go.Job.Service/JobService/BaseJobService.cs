@@ -13,7 +13,7 @@ using Quartz.Listener;
 namespace Go.Job.Service
 {
     /// <summary>
-    /// 
+    /// 调度服务基类
     /// </summary>
     public abstract class BaseJobService :IJobService
     {

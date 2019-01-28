@@ -9,6 +9,9 @@ using Quartz.Listener;
 
 namespace Go.Job.Service
 {
+    /// <summary>
+    /// 生成环境调度服务
+    /// </summary>
     public class ProduceJobService : BaseJobService
     {
         /// <summary>
