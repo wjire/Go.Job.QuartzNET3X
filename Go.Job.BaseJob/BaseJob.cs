@@ -42,7 +42,7 @@ namespace Go.Job.BaseJob
 
 
         /// <summary>
-        /// 将对象生存期更改为永久,因为C#默认5分钟不调用,会被回收.
+        /// 将对象生存期更改为永久,因为CLR默认5分钟内没有通过代理发出调用,对象会实效,下次垃圾回收会释放它的内存.
         /// </summary>
         /// <returns></returns>
         public override object InitializeLifetimeService()
