@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using EastWestWalk.NetFrameWork.Common.Write;
+using Go.Job.Service.Middleware;
 
 namespace Go.Job.BaseJob
 {
@@ -9,6 +11,7 @@ namespace Go.Job.BaseJob
     /// </summary>
     public abstract class BaseJob : MarshalByRefObject
     {
+        protected readonly ILogWriter LogWriter = (ILogWriter)MidContainer.GetService(typeof(ILogWriter));
 
         /// <summary>
         /// 运行
@@ -19,17 +22,17 @@ namespace Go.Job.BaseJob
             bool res = false;
             try
             {
-                LogService.WriteLog($"{DateTime.Now} : 开始执行");
+                LogWriter.WriteLog($"{DateTime.Now} : 开始执行");
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
                 Execute();
                 sw.Stop();
-                LogService.WriteLog($"{DateTime.Now} : 执行结束\r\n");
+                LogWriter.WriteLog($"{DateTime.Now} : 执行结束\r\n");
                 res = true;
             }
             catch (Exception ex)
             {
-                LogService.WriteLog(ex, GetType().Name);
+                LogWriter.WriteLog(ex, GetType().Name);
             }
             return res;
         }

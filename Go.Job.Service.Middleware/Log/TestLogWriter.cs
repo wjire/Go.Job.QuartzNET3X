@@ -9,7 +9,7 @@ namespace Go.Job.Service.Middleware
             Console.WriteLine(content);
         }
 
-        public void WriteException(Exception ex, string remark)
+        public void WriteLog(Exception ex, string remark)
         {
             Console.WriteLine(remark + " : " + ex);
         }

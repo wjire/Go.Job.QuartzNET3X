@@ -7,6 +7,6 @@ namespace Go.Job.Service.Middleware
         void WriteLog(string content, string path = null);
 
 
-        void WriteException(Exception ex, string remark);
+        void WriteLog(Exception ex, string remark);
     }
 }

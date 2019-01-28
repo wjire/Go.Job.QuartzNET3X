@@ -33,13 +33,13 @@ namespace Go.Job.Service.Logic
                             if (runRes == false)
                             {
                                 Exception ex = new Exception("作业内部发生异常");
-                                LogWriter.WriteException(ex, $"作业名称 : {jobInfo.JobName}");
+                                LogWriter.WriteLog(ex, $"作业名称 : {jobInfo.JobName}");
                             }
                         }
                         //如果因为某种原因 appdomain 被卸载会进入catch块,重新创建 appdomain
                         catch (AppDomainUnloadedException ex)
                         {
-                            LogWriter.WriteException(ex, "appdomain 被卸载,准备重新加载");
+                            LogWriter.WriteLog(ex, "appdomain 被卸载,准备重新加载");
                             SchedulerManager.Singleton.ReplaceJobRuntimeInfo(jobRuntimeInfo);
                         }
                     }
@@ -59,7 +59,7 @@ namespace Go.Job.Service.Logic
                         }
                         catch (Exception ex)
                         {
-                            LogWriter.WriteException(ex, $"重新创建job失败:{JsonConvert.SerializeObject(jobInfo)}");
+                            LogWriter.WriteLog(ex, $"重新创建job失败:{JsonConvert.SerializeObject(jobInfo)}");
                         }
                     }
 
@@ -67,14 +67,14 @@ namespace Go.Job.Service.Logic
                 catch (Exception ex)
                 {
                     //写日志，job调用失败,或者job执行的wcf程序抛出异常
-                    LogWriter.WriteException(ex, $"job执行失败 : {JsonConvert.SerializeObject(jobInfo)}");
+                    LogWriter.WriteLog(ex, $"job执行失败 : {JsonConvert.SerializeObject(jobInfo)}");
                 }
 
             }
             catch (Exception ex)
             {
                 //TODO:调用的时候失败属于系统级错误,非常重要,写日志!
-                LogWriter.WriteException(ex, $"系统级错误,{nameof(Execute)}");
+                LogWriter.WriteLog(ex, $"系统级错误,{nameof(Execute)}");
             }
 
             return Task.FromResult(0);

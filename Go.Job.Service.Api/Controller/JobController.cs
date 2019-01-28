@@ -100,7 +100,7 @@ namespace Go.Job.Service.Api
             }
             catch (Exception ex)
             {
-                LogWriter.WriteException(ex, method);
+                LogWriter.WriteLog(ex, method);
                 result.Msg = ex.Message;
             }
             return result;

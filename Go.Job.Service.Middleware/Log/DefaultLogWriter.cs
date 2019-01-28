@@ -10,7 +10,7 @@ namespace Go.Job.Service.Middleware
             LogService.WriteLog(content, "Logs\\" + path ?? string.Empty);
         }
 
-        public void WriteException(Exception ex, string remark)
+        public void WriteLog(Exception ex, string remark)
         {
             LogService.WriteLog(ex, remark);
         }
