@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Go.Job.BaseJob, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Go.Job.BaseJob.1.0.0\lib\Go.Job.BaseJob.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,10 +48,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Go.Job.BaseJob\Go.Job.BaseJob.csproj">
-      <Project>{e587a17a-a8f3-45d9-8274-57655c7881d5}</Project>
-      <Name>Go.Job.BaseJob</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

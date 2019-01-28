@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using EastWestWalk.NetFrameWork.Common.Write;
-using Go.Job.Service.Middleware;
 
 namespace Go.Job.BaseJob
 {
