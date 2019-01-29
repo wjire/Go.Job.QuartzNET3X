@@ -4,16 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5E9C82F9-2303-4869-8AD9-F40C45D8E0E4}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Go.Job.Service</RootNamespace>
-    <AssemblyName>Go.Job.Service</AssemblyName>
+    <ProjectGuid>{5F049E7A-4D05-4B80-9C1C-11B47A7BEFF9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Test3</RootNamespace>
+    <AssemblyName>Test3</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -31,8 +33,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    <Reference Include="EastWestWalk.NetFrameWork.Common, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EastWestWalk.NetFrameWork.Common.1.0.0.6\lib\net45\EastWestWalk.NetFrameWork.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="EastWestWalk.NetFrameWork.Enum, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EastWestWalk.NetFrameWork.Enum.1.0.0.3\lib\net45\EastWestWalk.NetFrameWork.Enum.dll</HintPath>
+    </Reference>
+    <Reference Include="Go.Job.BaseJob, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Go.Job.BaseJob.1.0.1\lib\Go.Job.BaseJob.dll</HintPath>
+    </Reference>
+    <Reference Include="Go.Job.Model, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Go.Job.Service.Core.1.0.0\lib\Go.Job.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="Go.Job.Service, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Go.Job.Service.Core.1.0.0\lib\Go.Job.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="Go.Job.Service.Logic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Go.Job.Service.Core.1.0.0\lib\Go.Job.Service.Logic.dll</HintPath>
+    </Reference>
+    <Reference Include="Go.Job.Service.Middleware, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Go.Job.Service.Core.1.0.0\lib\Go.Job.Service.Middleware.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -44,17 +64,9 @@
       <HintPath>..\packages\Quartz.Serialization.Json.3.0.7\lib\net452\Quartz.Serialization.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Drawing.Design" />
-    <Reference Include="System.Management" />
     <Reference Include="System.Runtime.Remoting" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,36 +75,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="JobService\BaseJobService.cs" />
-    <Compile Include="JobService\IJobService.cs" />
-    <Compile Include="JobService\ProduceJobService.cs" />
-    <Compile Include="JobServiceBuilder.cs" />
-    <Compile Include="JobService\TestJobService.cs" />
-    <Compile Include="测试用\JobStoreConfig.cs" />
-    <Compile Include="测试用\RemoteConfig.cs" />
-    <Compile Include="测试用\ThreadPoolConfig.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="App.config" />
     <None Include="packages.config" />
-    <None Include="quartz.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Go.Job.BaseJob\Go.Job.BaseJob.csproj">
-      <Project>{e587a17a-a8f3-45d9-8274-57655c7881d5}</Project>
-      <Name>Go.Job.BaseJob</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Go.Job.Model\Go.Job.Model.csproj">
-      <Project>{d47524c9-3f63-40c6-b368-72e3e8d0332d}</Project>
-      <Name>Go.Job.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Go.Job.Service.Logic\Go.Job.Service.Logic.csproj">
-      <Project>{bdf1e8d2-7c18-477e-9091-f6c6e39ff0e4}</Project>
-      <Name>Go.Job.Service.Logic</Name>
-    </ProjectReference>
+    <None Include="quartz.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme.txt" />
