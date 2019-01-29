@@ -29,7 +29,19 @@ namespace Go.Job.Service.Api
             }
 
             ApiConfig.SchedulerName = schedulerName;
-            WebApp.Start(ApiConfig.ApiAddress);
+            using (WebApp.Start(ApiConfig.ApiAddress))
+            {
+                Console.WriteLine($"调度服务监听已启动! 当前监听地址 : {ApiConfig.ApiAddress}");
+                string userCommand = string.Empty;
+                while (userCommand != "exit")
+                {
+                    if (string.IsNullOrEmpty(userCommand) == false)
+                    {
+                        Console.WriteLine("     非退出指令,自动忽略...");
+                    }
+                    userCommand = Console.ReadLine();
+                }
+            }
         }
 
 

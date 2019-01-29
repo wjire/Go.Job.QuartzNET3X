@@ -18,7 +18,7 @@ namespace Go.Job.Service
     public interface IJobService
     {
 
-        void Start();
+        string Start();
         void Start(JobInfo jobInfo);
 
         /// <summary>

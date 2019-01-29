@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Go.Job.Model;
-using Go.Job.Service.Api;
+﻿using Go.Job.Model;
 using Go.Job.Service.Config;
 using Go.Job.Service.Logic;
-using Quartz;
 using Quartz.Impl;
+using System;
 
 namespace Go.Job.Service
 {
     /// <summary>
     /// 测试调度服务
     /// </summary>
-    public class TestJobService: BaseJobService
+    public class TestJobService : BaseJobService
     {
-       
+
         /// <summary>
         /// 
         /// </summary>
@@ -26,11 +20,11 @@ namespace Go.Job.Service
             Manager = SchedulerManager.Singleton;
             Manager.Scheduler = new StdSchedulerFactory(new ThreadPoolConfig()).GetScheduler().Result;
         }
-        
+
         /// <summary>
         /// 启动
         /// </summary>
-        public  override void Start()
+        public override string Start()
         {
             try
             {
@@ -38,22 +32,15 @@ namespace Go.Job.Service
                 {
                     Manager.Scheduler.Start().Wait();
                 }
-                Console.WriteLine($"作业调度服务已启动! 当前调度任务 : {Manager. Scheduler.SchedulerName}");
-                string userCommand = string.Empty;
-                while (userCommand != "exit")
-                {
-                    if (string.IsNullOrEmpty(userCommand) == false)
-                    {
-                        Console.WriteLine("     非退出指令,自动忽略...");
-                    }
-                    userCommand = Console.ReadLine();
-                }
+                Console.WriteLine($"作业调度服务已启动! 当前调度为 : {Manager.Scheduler.SchedulerName}");
+                return Manager.Scheduler.SchedulerName;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            Console.ReadKey();
+
+            return null;
         }
 
 
@@ -64,7 +51,7 @@ namespace Go.Job.Service
         {
             try
             {
-                if (jobInfo == null )
+                if (jobInfo == null)
                 {
                     throw new ArgumentNullException(nameof(jobInfo));
                 }
@@ -79,7 +66,7 @@ namespace Go.Job.Service
                     throw new ArgumentNullException("命名空间不能为空");
                 }
 
-                if (string.IsNullOrWhiteSpace(jobInfo.Cron) && jobInfo.Second<=0)
+                if (string.IsNullOrWhiteSpace(jobInfo.Cron) && jobInfo.Second <= 0)
                 {
                     throw new ArgumentNullException("Cron 和 Second 不能同时为空");
                 }

@@ -19,7 +19,7 @@ namespace Go.Job.Service
     {
         public SchedulerManager Manager { get; set; }
 
-        public abstract void Start();
+        public abstract string Start();
 
         public virtual void Start(JobInfo jobInfo)
         {

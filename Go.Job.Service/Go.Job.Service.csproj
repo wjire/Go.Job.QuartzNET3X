@@ -89,17 +89,9 @@
       <Project>{d47524c9-3f63-40c6-b368-72e3e8d0332d}</Project>
       <Name>Go.Job.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Go.Job.Service.Api\Go.Job.Service.Api.csproj">
-      <Project>{2d230c2d-cf6d-422c-852c-3b04fb40d642}</Project>
-      <Name>Go.Job.Service.Api</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Go.Job.Service.Logic\Go.Job.Service.Logic.csproj">
       <Project>{bdf1e8d2-7c18-477e-9091-f6c6e39ff0e4}</Project>
       <Name>Go.Job.Service.Logic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Go.Job.Service.Middleware\Go.Job.Service.Middleware.csproj">
-      <Project>{438ea8ce-db50-4012-99d9-779d44c2cde2}</Project>
-      <Name>Go.Job.Service.Middleware</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
